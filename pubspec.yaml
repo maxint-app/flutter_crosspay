@@ -1,0 +1,29 @@
+name: flutter_crosspay
+description: Cross platform in app purchase plugin. Supports all flutter platforms. Desktop and web are supported through Stripe. Developed by Maxint Inc.
+version: 0.1.0
+homepage: https://github.com/maxint-app/crosspay
+
+environment:
+  sdk: ^3.6.1
+  flutter: ">=1.17.0"
+
+dependencies:
+  alfred: ^1.1.2+1
+  collection: ^1.19.0
+  dio: ^5.8.0+1
+  flutter:
+    sdk: flutter
+  freezed_annotation: ^2.4.4
+  in_app_purchase: ^3.2.2
+  in_app_purchase_android: ^0.4.0+3
+  in_app_purchase_storekit: ^0.4.3
+  json_annotation: ^4.9.0
+  url_launcher: ^6.3.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+  freezed: ^2.5.8
+  json_serializable: ^6.9.3
+  build_runner: ^2.4.14
