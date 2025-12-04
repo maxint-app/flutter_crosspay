@@ -17,8 +17,8 @@ class InAppPurchaseSubscriptionStore extends Store {
 
   InAppPurchaseSubscriptionStore({
     required super.dio,
-    required super.endpoints,
     required super.streamController,
+    required super.environment,
   }) {
     if (kIsMobile || kIsMacOS) {
       _finishAppStorePendingTransactions();
@@ -85,18 +85,15 @@ class InAppPurchaseSubscriptionStore extends Store {
   Future<List<ProductDetails>> _queryPlatformProducts(
     List<CrosspayEntitlement> entitlements,
   ) async {
-    final productIds = entitlements
-        .expand((s) {
-          if (kIsAndroid) {
-            return s.products.playStore;
-          } else if (kIsMacOS || kIsIOS) {
-            return s.products.appStore;
-          } else {
-            return s.products.stripe;
-          }
-        })
-        .map((p) => p.id)
-        .toSet();
+    final productIds = entitlements.map((s) {
+      if (kIsAndroid) {
+        return s.products.playStore.id;
+      } else if (kIsMacOS || kIsIOS) {
+        return s.products.appStore.id;
+      } else {
+        return s.products.stripe.id;
+      }
+    }).toSet();
 
     _platformProducts ??= await InAppPurchase.instance
         .queryProductDetails(productIds)
@@ -115,31 +112,17 @@ class InAppPurchaseSubscriptionStore extends Store {
     final platformProducts = await _queryPlatformProducts(entitlements);
 
     _storeProducts = platformProducts.map((platformProduct) {
-      late CrosspayProduct productDeclaration;
-      late String accessLevel;
-
-      for (final entitlement in entitlements) {
+      final entitlement = entitlements.firstWhere((e) {
         if (kIsAndroid) {
-          final declaration = entitlement.products.playStore
-              .firstWhereOrNull((element) => element.id == platformProduct.id);
-          if (declaration != null) {
-            productDeclaration = declaration;
-            accessLevel = entitlement.name;
-          }
-        } else {
-          final declaration = entitlement.products.appStore
-              .firstWhereOrNull((element) => element.id == platformProduct.id);
-          if (declaration != null) {
-            productDeclaration = declaration;
-            accessLevel = entitlement.name;
-          }
+          return e.products.playStore.productId == platformProduct.id;
         }
-      }
+        return e.products.appStore.productId == platformProduct.id;
+      });
 
       return SubscriptionStoreProduct(
         id: platformProduct.id,
         name: platformProduct.title,
-        accessLevel: accessLevel,
+        accessLevel: entitlement.name,
         currencyCode: platformProduct.currencyCode,
         description: platformProduct.description,
         formattedPrice: platformProduct.price,
@@ -147,7 +130,7 @@ class InAppPurchaseSubscriptionStore extends Store {
         store: kIsAndroid
             ? SubscriptionStore.playStore
             : SubscriptionStore.appStore,
-        subscriptionRecurrenceDays: productDeclaration.recurringPeriod.inDays,
+        subscriptionRecurrenceDays: entitlement.period.inDays,
       );
     }).toList();
 

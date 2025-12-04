@@ -44,41 +44,41 @@ const _$SubscriptionStoreEnumMap = {
 _$CrosspayEntitlementImpl _$$CrosspayEntitlementImplFromJson(
         Map<String, dynamic> json) =>
     _$CrosspayEntitlementImpl(
+      id: json['id'] as String,
       name: json['name'] as String,
-      description: json['description'] as String,
+      period: _durationFromMillis(json['period_ms']),
+      description: json['description'] as String?,
+      metadata: json['metadata'] as Map<String, dynamic>?,
       products:
           CrosspayProducts.fromJson(json['products'] as Map<String, dynamic>),
-      tier: (json['tier'] as num).toInt(),
     );
 
 Map<String, dynamic> _$$CrosspayEntitlementImplToJson(
         _$CrosspayEntitlementImpl instance) =>
     <String, dynamic>{
+      'id': instance.id,
       'name': instance.name,
+      'period_ms': _durationToMillis(instance.period),
       'description': instance.description,
+      'metadata': instance.metadata,
       'products': instance.products,
-      'tier': instance.tier,
     };
 
 _$CrosspayProductsImpl _$$CrosspayProductsImplFromJson(
         Map<String, dynamic> json) =>
     _$CrosspayProductsImpl(
-      playStore: (json['playStore'] as List<dynamic>)
-          .map((e) => CrosspayProduct.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      appStore: (json['appStore'] as List<dynamic>)
-          .map((e) => CrosspayProduct.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      stripe: (json['stripe'] as List<dynamic>)
-          .map((e) => CrosspayProduct.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      playStore:
+          CrosspayProduct.fromJson(json['playstore'] as Map<String, dynamic>),
+      appStore:
+          CrosspayProduct.fromJson(json['appstore'] as Map<String, dynamic>),
+      stripe: CrosspayProduct.fromJson(json['stripe'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$CrosspayProductsImplToJson(
         _$CrosspayProductsImpl instance) =>
     <String, dynamic>{
-      'playStore': instance.playStore,
-      'appStore': instance.appStore,
+      'playstore': instance.playStore,
+      'appstore': instance.appStore,
       'stripe': instance.stripe,
     };
 
@@ -86,14 +86,20 @@ _$CrosspayProductImpl _$$CrosspayProductImplFromJson(
         Map<String, dynamic> json) =>
     _$CrosspayProductImpl(
       id: json['id'] as String,
-      recurringPeriod: _durationFromDays(json['recurringPeriodDays']),
+      productId: json['product_id'] as String,
+      name: json['name'] as String,
+      description: json['description'] as String?,
+      metadata: json['metadata'] as Map<String, dynamic>?,
     );
 
 Map<String, dynamic> _$$CrosspayProductImplToJson(
         _$CrosspayProductImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'recurringPeriodDays': _durationToDays(instance.recurringPeriod),
+      'product_id': instance.productId,
+      'name': instance.name,
+      'description': instance.description,
+      'metadata': instance.metadata,
     };
 
 _$SubscriptionStripeProductImpl _$$SubscriptionStripeProductImplFromJson(

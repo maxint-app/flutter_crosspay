@@ -1,9 +1,11 @@
-import 'dart:async';
+import 'dart:convert';
 
+import 'package:example/env.dart';
 import 'package:flutter/material.dart';
-import 'package:in_app_purchase/in_app_purchase.dart';
+import 'package:flutter_crosspay/flutter_crosspay.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MainApp());
 }
 
@@ -15,52 +17,31 @@ class MainApp extends StatefulWidget {
 }
 
 class _MainAppState extends State<MainApp> {
-  late StreamSubscription<List<PurchaseDetails>> _subscription;
+  late final FlutterCrosspay crosspay;
 
   @override
   void initState() {
-    final purchaseUpdated = InAppPurchase.instance.purchaseStream;
-    _subscription = purchaseUpdated.listen(
-      (purchaseDetailsList) {
-        _listenToPurchaseUpdated(purchaseDetailsList);
-      },
-      onDone: () {
-        _subscription.cancel();
-      },
-      onError: (error) {
-        // handle error here.
-      },
+    crosspay = FlutterCrosspay(
+      publicKey: Env.crosspayPublicKey,
+      environment: CrosspayEnvironment.sandbox,
+      baseUrl: Env.crosspayApiUrl,
     );
+
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      final entitlements = await crosspay.listEntitlements();
+
+      debugPrint("Entitlements: ${jsonEncode(entitlements)}");
+
+      final products = await crosspay.queryProducts();
+
+      debugPrint("Products: ${jsonEncode(products)}");
+    });
     super.initState();
   }
 
   @override
   void dispose() {
-    _subscription.cancel();
     super.dispose();
-  }
-
-  Future<void> _listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList) async {
-    for (final purchaseDetails in purchaseDetailsList) {
-      if (purchaseDetails.status == PurchaseStatus.pending) {
-        // _showPendingUI();
-      } else {
-        if (purchaseDetails.status == PurchaseStatus.error) {
-          // _handleError(purchaseDetails.error!);
-        } else if (purchaseDetails.status == PurchaseStatus.purchased ||
-            purchaseDetails.status == PurchaseStatus.restored) {
-          // bool valid = await _verifyPurchase(purchaseDetails);
-          // if (valid) {
-          //   _deliverProduct(purchaseDetails);
-          // } else {
-          //   _handleInvalidPurchase(purchaseDetails);
-          // }
-        }
-        if (purchaseDetails.pendingCompletePurchase) {
-          await InAppPurchase.instance.completePurchase(purchaseDetails);
-        }
-      }
-    }
   }
 
   @override

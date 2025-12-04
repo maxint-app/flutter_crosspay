@@ -8,16 +8,26 @@ import 'package:in_app_purchase_android/billing_client_wrappers.dart';
 import '../crosspay.dart';
 import '../models/models.dart';
 
+const endpoints = CrosspayEndpoints(
+  entitlements: "/entitlements",
+  verifyPurchase: "/verify",
+  activeProduct: "/active",
+  stripeListProduct: "/stripe/products",
+  stripeCheckoutSession: "/stripe/checkout",
+  stripeCancelSubscription: "/stripe/cancel",
+);
+
 abstract class Store {
+  final CrosspayEnvironment environment;
   final Dio dio;
-  final CrosspayEndpoints endpoints;
+
   List<CrosspayEntitlement>? _entitlements;
   @protected
   final StreamController<PurchaseEvent> streamController;
 
   Store({
     required this.dio,
-    required this.endpoints,
+    required this.environment,
     required this.streamController,
   });
 
@@ -35,8 +45,8 @@ abstract class Store {
       return _entitlements!;
     }
 
-    final res = await dio.get<List>(
-      endpoints.entitlements,
+    final res = await dio.get<Map>(
+      "${endpoints.entitlements}/${environment.label}",
       options: Options(
         responseType: ResponseType.json,
       ),
@@ -46,8 +56,9 @@ abstract class Store {
       return [];
     }
 
-    _entitlements =
-        (res.data as List).map((e) => CrosspayEntitlement.fromJson(e)).toList();
+    _entitlements = ((res.data as Map)["data"] as List)
+        .map((e) => CrosspayEntitlement.fromJson(e))
+        .toList();
 
     return _entitlements!;
   }
@@ -101,8 +112,7 @@ abstract class Store {
     final entitlements = await listEntitlements();
 
     return entitlements.firstWhereOrNull(
-      (e) => e.products[subscription.source]
-          .any((p) => p.id == subscription.productId),
+      (e) => e.products[subscription.source].id == subscription.productId,
     );
   }
 }

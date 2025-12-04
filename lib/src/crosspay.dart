@@ -16,7 +16,7 @@ class CrosspayEndpoints {
   final String stripeCheckoutSession;
   final String stripeCancelSubscription;
 
-  CrosspayEndpoints({
+  const CrosspayEndpoints({
     required this.entitlements,
     required this.verifyPurchase,
     required this.activeProduct,
@@ -26,14 +26,12 @@ class CrosspayEndpoints {
   });
 }
 
-class CrosspayOptions {
-  final CrosspayEndpoints endpoints;
-  final BaseOptions dioOptions;
+enum CrosspayEnvironment {
+  production("prod"),
+  sandbox("sandbox");
 
-  CrosspayOptions({
-    required this.endpoints,
-    required this.dioOptions,
-  });
+  final String label;
+  const CrosspayEnvironment(this.label);
 }
 
 class FlutterCrosspay {
@@ -42,8 +40,9 @@ class FlutterCrosspay {
 
   late final InAppPurchaseSubscriptionStore _iapStore;
   late final StripeSubscriptionStore _stripeStore;
-  final CrosspayOptions options;
   final Dio dio;
+
+  final String publicKey;
 
   /// Create a new instance of FlutterCrosspay.
   ///
@@ -52,20 +51,24 @@ class FlutterCrosspay {
   /// You can call [identify] and [logout] to set and unset the user id later.
   /// But this must be set (if not set) before calling [purchase].
   FlutterCrosspay({
-    required this.options,
+    required this.publicKey,
+    required CrosspayEnvironment environment,
+    String baseUrl = "https://api.crosspy.dev/v1/tenant",
     String? appUserId,
-  })  : dio = Dio(options.dioOptions),
+  })  : dio = Dio(BaseOptions(baseUrl: baseUrl, headers: {
+          "api-key": publicKey,
+        })),
         _appUserId = appUserId,
         _streamController = StreamController<PurchaseEvent>.broadcast() {
     _iapStore = InAppPurchaseSubscriptionStore(
       dio: dio,
-      endpoints: options.endpoints,
       streamController: _streamController,
+      environment: environment,
     );
     _stripeStore = StripeSubscriptionStore(
       dio: dio,
-      endpoints: options.endpoints,
       streamController: _streamController,
+      environment: environment,
     );
   }
 

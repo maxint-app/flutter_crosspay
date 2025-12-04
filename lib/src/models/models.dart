@@ -11,5 +11,5 @@ part 'product.dart';
 part 'stripe_product.dart';
 part 'subscription.dart';
 
-Duration _durationFromDays(days) => Duration(days: days);
-int _durationToDays(Duration duration) => duration.inDays;
+Duration _durationFromMillis(ms) => Duration(milliseconds: ms);
+int _durationToMillis(Duration duration) => duration.inMilliseconds;

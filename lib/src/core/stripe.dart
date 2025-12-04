@@ -2,7 +2,6 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:alfred/alfred.dart';
-import 'package:collection/collection.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:in_app_purchase_android/billing_client_wrappers.dart';
@@ -18,30 +17,24 @@ class StripeSubscriptionStore extends Store {
 
   StripeSubscriptionStore({
     required super.dio,
-    required super.endpoints,
     required super.streamController,
+    required super.environment,
   });
 
-  Future<List<SubscriptionStripeProduct>> _queryStoreProducts(
-    List<CrosspayEntitlement> entitlements,
-  ) async {
+  Future<List<SubscriptionStripeProduct>> _queryStoreProducts() async {
     if (_storeProducts?.isNotEmpty == true) {
       return _storeProducts!;
     }
 
-    final stripeProductsIds =
-        entitlements.expand((e) => e.products.stripe).map((e) => e.id).toList();
-
-    final res = await dio.post<List>(
-      endpoints.stripeListProduct,
-      data: {"productIds": stripeProductsIds},
+    final res = await dio.get<Map>(
+      "${endpoints.stripeListProduct}/${environment.label}",
       options: Options(
         responseType: ResponseType.json,
       ),
     );
 
     _storeProducts =
-        res.data!.map((e) => SubscriptionStripeProduct.fromJson(e)).toList();
+        (res.data!["data"] as List).map((e) => SubscriptionStripeProduct.fromJson(e)).toList();
 
     return _storeProducts!;
   }
@@ -54,30 +47,22 @@ class StripeSubscriptionStore extends Store {
 
     final entitlements = await listEntitlements();
 
-    final storeProducts = await _queryStoreProducts(entitlements);
+    final storeProducts = await _queryStoreProducts();
 
     _platformProducts = storeProducts.map((storeProduct) {
-      late CrosspayProduct productDeclaration;
-      late String accessLevel;
+      final entitlement = entitlements
+          .firstWhere((e) => e.products.stripe.productId == storeProduct.id);
 
-      for (final entitlement in entitlements) {
-        final declaration = entitlement.products.stripe
-            .firstWhereOrNull((element) => element.id == storeProduct.id);
-        if (declaration != null) {
-          productDeclaration = declaration;
-          accessLevel = entitlement.name;
-        }
-      }
       return SubscriptionStoreProduct(
         id: storeProduct.id,
         name: storeProduct.name,
-        accessLevel: accessLevel,
+        accessLevel: entitlement.name,
         currencyCode: storeProduct.price.currency,
         description: storeProduct.description ?? "",
         formattedPrice: storeProduct.price.formattedPrice,
         price: storeProduct.price.price / 100,
         store: SubscriptionStore.stripe,
-        subscriptionRecurrenceDays: productDeclaration.recurringPeriod.inDays,
+        subscriptionRecurrenceDays: entitlement.period.inDays,
       );
     }).toList();
 

@@ -356,10 +356,16 @@ CrosspayEntitlement _$CrosspayEntitlementFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$CrosspayEntitlement {
+  String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  String get description => throw _privateConstructorUsedError;
+  @JsonKey(
+      name: "period_ms",
+      fromJson: _durationFromMillis,
+      toJson: _durationToMillis)
+  Duration get period => throw _privateConstructorUsedError;
+  String? get description => throw _privateConstructorUsedError;
+  Map<String, dynamic>? get metadata => throw _privateConstructorUsedError;
   CrosspayProducts get products => throw _privateConstructorUsedError;
-  int get tier => throw _privateConstructorUsedError;
 
   /// Serializes this CrosspayEntitlement to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -378,7 +384,16 @@ abstract class $CrosspayEntitlementCopyWith<$Res> {
       _$CrosspayEntitlementCopyWithImpl<$Res, CrosspayEntitlement>;
   @useResult
   $Res call(
-      {String name, String description, CrosspayProducts products, int tier});
+      {String id,
+      String name,
+      @JsonKey(
+          name: "period_ms",
+          fromJson: _durationFromMillis,
+          toJson: _durationToMillis)
+      Duration period,
+      String? description,
+      Map<String, dynamic>? metadata,
+      CrosspayProducts products});
 
   $CrosspayProductsCopyWith<$Res> get products;
 }
@@ -398,28 +413,38 @@ class _$CrosspayEntitlementCopyWithImpl<$Res, $Val extends CrosspayEntitlement>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? name = null,
-    Object? description = null,
+    Object? period = null,
+    Object? description = freezed,
+    Object? metadata = freezed,
     Object? products = null,
-    Object? tier = null,
   }) {
     return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      description: null == description
+      period: null == period
+          ? _value.period
+          : period // ignore: cast_nullable_to_non_nullable
+              as Duration,
+      description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
+      metadata: freezed == metadata
+          ? _value.metadata
+          : metadata // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
       products: null == products
           ? _value.products
           : products // ignore: cast_nullable_to_non_nullable
               as CrosspayProducts,
-      tier: null == tier
-          ? _value.tier
-          : tier // ignore: cast_nullable_to_non_nullable
-              as int,
     ) as $Val);
   }
 
@@ -443,7 +468,16 @@ abstract class _$$CrosspayEntitlementImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String name, String description, CrosspayProducts products, int tier});
+      {String id,
+      String name,
+      @JsonKey(
+          name: "period_ms",
+          fromJson: _durationFromMillis,
+          toJson: _durationToMillis)
+      Duration period,
+      String? description,
+      Map<String, dynamic>? metadata,
+      CrosspayProducts products});
 
   @override
   $CrosspayProductsCopyWith<$Res> get products;
@@ -462,28 +496,38 @@ class __$$CrosspayEntitlementImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? name = null,
-    Object? description = null,
+    Object? period = null,
+    Object? description = freezed,
+    Object? metadata = freezed,
     Object? products = null,
-    Object? tier = null,
   }) {
     return _then(_$CrosspayEntitlementImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      description: null == description
+      period: null == period
+          ? _value.period
+          : period // ignore: cast_nullable_to_non_nullable
+              as Duration,
+      description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
+      metadata: freezed == metadata
+          ? _value._metadata
+          : metadata // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
       products: null == products
           ? _value.products
           : products // ignore: cast_nullable_to_non_nullable
               as CrosspayProducts,
-      tier: null == tier
-          ? _value.tier
-          : tier // ignore: cast_nullable_to_non_nullable
-              as int,
     ));
   }
 }
@@ -492,26 +536,49 @@ class __$$CrosspayEntitlementImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$CrosspayEntitlementImpl implements _CrosspayEntitlement {
   _$CrosspayEntitlementImpl(
-      {required this.name,
-      required this.description,
-      required this.products,
-      required this.tier});
+      {required this.id,
+      required this.name,
+      @JsonKey(
+          name: "period_ms",
+          fromJson: _durationFromMillis,
+          toJson: _durationToMillis)
+      required this.period,
+      this.description,
+      final Map<String, dynamic>? metadata,
+      required this.products})
+      : _metadata = metadata;
 
   factory _$CrosspayEntitlementImpl.fromJson(Map<String, dynamic> json) =>
       _$$CrosspayEntitlementImplFromJson(json);
 
   @override
+  final String id;
+  @override
   final String name;
   @override
-  final String description;
+  @JsonKey(
+      name: "period_ms",
+      fromJson: _durationFromMillis,
+      toJson: _durationToMillis)
+  final Duration period;
+  @override
+  final String? description;
+  final Map<String, dynamic>? _metadata;
+  @override
+  Map<String, dynamic>? get metadata {
+    final value = _metadata;
+    if (value == null) return null;
+    if (_metadata is EqualUnmodifiableMapView) return _metadata;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(value);
+  }
+
   @override
   final CrosspayProducts products;
-  @override
-  final int tier;
 
   @override
   String toString() {
-    return 'CrosspayEntitlement(name: $name, description: $description, products: $products, tier: $tier)';
+    return 'CrosspayEntitlement(id: $id, name: $name, period: $period, description: $description, metadata: $metadata, products: $products)';
   }
 
   @override
@@ -519,18 +586,20 @@ class _$CrosspayEntitlementImpl implements _CrosspayEntitlement {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CrosspayEntitlementImpl &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
+            (identical(other.period, period) || other.period == period) &&
             (identical(other.description, description) ||
                 other.description == description) &&
+            const DeepCollectionEquality().equals(other._metadata, _metadata) &&
             (identical(other.products, products) ||
-                other.products == products) &&
-            (identical(other.tier, tier) || other.tier == tier));
+                other.products == products));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, name, description, products, tier);
+  int get hashCode => Object.hash(runtimeType, id, name, period, description,
+      const DeepCollectionEquality().hash(_metadata), products);
 
   /// Create a copy of CrosspayEntitlement
   /// with the given fields replaced by the non-null parameter values.
@@ -551,22 +620,36 @@ class _$CrosspayEntitlementImpl implements _CrosspayEntitlement {
 
 abstract class _CrosspayEntitlement implements CrosspayEntitlement {
   factory _CrosspayEntitlement(
-      {required final String name,
-      required final String description,
-      required final CrosspayProducts products,
-      required final int tier}) = _$CrosspayEntitlementImpl;
+      {required final String id,
+      required final String name,
+      @JsonKey(
+          name: "period_ms",
+          fromJson: _durationFromMillis,
+          toJson: _durationToMillis)
+      required final Duration period,
+      final String? description,
+      final Map<String, dynamic>? metadata,
+      required final CrosspayProducts products}) = _$CrosspayEntitlementImpl;
 
   factory _CrosspayEntitlement.fromJson(Map<String, dynamic> json) =
       _$CrosspayEntitlementImpl.fromJson;
 
   @override
+  String get id;
+  @override
   String get name;
   @override
-  String get description;
+  @JsonKey(
+      name: "period_ms",
+      fromJson: _durationFromMillis,
+      toJson: _durationToMillis)
+  Duration get period;
+  @override
+  String? get description;
+  @override
+  Map<String, dynamic>? get metadata;
   @override
   CrosspayProducts get products;
-  @override
-  int get tier;
 
   /// Create a copy of CrosspayEntitlement
   /// with the given fields replaced by the non-null parameter values.
@@ -582,9 +665,11 @@ CrosspayProducts _$CrosspayProductsFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$CrosspayProducts {
-  List<CrosspayProduct> get playStore => throw _privateConstructorUsedError;
-  List<CrosspayProduct> get appStore => throw _privateConstructorUsedError;
-  List<CrosspayProduct> get stripe => throw _privateConstructorUsedError;
+  @JsonKey(name: "playstore")
+  CrosspayProduct get playStore => throw _privateConstructorUsedError;
+  @JsonKey(name: "appstore")
+  CrosspayProduct get appStore => throw _privateConstructorUsedError;
+  CrosspayProduct get stripe => throw _privateConstructorUsedError;
 
   /// Serializes this CrosspayProducts to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -603,9 +688,13 @@ abstract class $CrosspayProductsCopyWith<$Res> {
       _$CrosspayProductsCopyWithImpl<$Res, CrosspayProducts>;
   @useResult
   $Res call(
-      {List<CrosspayProduct> playStore,
-      List<CrosspayProduct> appStore,
-      List<CrosspayProduct> stripe});
+      {@JsonKey(name: "playstore") CrosspayProduct playStore,
+      @JsonKey(name: "appstore") CrosspayProduct appStore,
+      CrosspayProduct stripe});
+
+  $CrosspayProductCopyWith<$Res> get playStore;
+  $CrosspayProductCopyWith<$Res> get appStore;
+  $CrosspayProductCopyWith<$Res> get stripe;
 }
 
 /// @nodoc
@@ -631,16 +720,46 @@ class _$CrosspayProductsCopyWithImpl<$Res, $Val extends CrosspayProducts>
       playStore: null == playStore
           ? _value.playStore
           : playStore // ignore: cast_nullable_to_non_nullable
-              as List<CrosspayProduct>,
+              as CrosspayProduct,
       appStore: null == appStore
           ? _value.appStore
           : appStore // ignore: cast_nullable_to_non_nullable
-              as List<CrosspayProduct>,
+              as CrosspayProduct,
       stripe: null == stripe
           ? _value.stripe
           : stripe // ignore: cast_nullable_to_non_nullable
-              as List<CrosspayProduct>,
+              as CrosspayProduct,
     ) as $Val);
+  }
+
+  /// Create a copy of CrosspayProducts
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $CrosspayProductCopyWith<$Res> get playStore {
+    return $CrosspayProductCopyWith<$Res>(_value.playStore, (value) {
+      return _then(_value.copyWith(playStore: value) as $Val);
+    });
+  }
+
+  /// Create a copy of CrosspayProducts
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $CrosspayProductCopyWith<$Res> get appStore {
+    return $CrosspayProductCopyWith<$Res>(_value.appStore, (value) {
+      return _then(_value.copyWith(appStore: value) as $Val);
+    });
+  }
+
+  /// Create a copy of CrosspayProducts
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $CrosspayProductCopyWith<$Res> get stripe {
+    return $CrosspayProductCopyWith<$Res>(_value.stripe, (value) {
+      return _then(_value.copyWith(stripe: value) as $Val);
+    });
   }
 }
 
@@ -653,9 +772,16 @@ abstract class _$$CrosspayProductsImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {List<CrosspayProduct> playStore,
-      List<CrosspayProduct> appStore,
-      List<CrosspayProduct> stripe});
+      {@JsonKey(name: "playstore") CrosspayProduct playStore,
+      @JsonKey(name: "appstore") CrosspayProduct appStore,
+      CrosspayProduct stripe});
+
+  @override
+  $CrosspayProductCopyWith<$Res> get playStore;
+  @override
+  $CrosspayProductCopyWith<$Res> get appStore;
+  @override
+  $CrosspayProductCopyWith<$Res> get stripe;
 }
 
 /// @nodoc
@@ -677,17 +803,17 @@ class __$$CrosspayProductsImplCopyWithImpl<$Res>
   }) {
     return _then(_$CrosspayProductsImpl(
       playStore: null == playStore
-          ? _value._playStore
+          ? _value.playStore
           : playStore // ignore: cast_nullable_to_non_nullable
-              as List<CrosspayProduct>,
+              as CrosspayProduct,
       appStore: null == appStore
-          ? _value._appStore
+          ? _value.appStore
           : appStore // ignore: cast_nullable_to_non_nullable
-              as List<CrosspayProduct>,
+              as CrosspayProduct,
       stripe: null == stripe
-          ? _value._stripe
+          ? _value.stripe
           : stripe // ignore: cast_nullable_to_non_nullable
-              as List<CrosspayProduct>,
+              as CrosspayProduct,
     ));
   }
 }
@@ -696,40 +822,22 @@ class __$$CrosspayProductsImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$CrosspayProductsImpl extends _CrosspayProducts {
   _$CrosspayProductsImpl(
-      {required final List<CrosspayProduct> playStore,
-      required final List<CrosspayProduct> appStore,
-      required final List<CrosspayProduct> stripe})
-      : _playStore = playStore,
-        _appStore = appStore,
-        _stripe = stripe,
-        super._();
+      {@JsonKey(name: "playstore") required this.playStore,
+      @JsonKey(name: "appstore") required this.appStore,
+      required this.stripe})
+      : super._();
 
   factory _$CrosspayProductsImpl.fromJson(Map<String, dynamic> json) =>
       _$$CrosspayProductsImplFromJson(json);
 
-  final List<CrosspayProduct> _playStore;
   @override
-  List<CrosspayProduct> get playStore {
-    if (_playStore is EqualUnmodifiableListView) return _playStore;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_playStore);
-  }
-
-  final List<CrosspayProduct> _appStore;
+  @JsonKey(name: "playstore")
+  final CrosspayProduct playStore;
   @override
-  List<CrosspayProduct> get appStore {
-    if (_appStore is EqualUnmodifiableListView) return _appStore;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_appStore);
-  }
-
-  final List<CrosspayProduct> _stripe;
+  @JsonKey(name: "appstore")
+  final CrosspayProduct appStore;
   @override
-  List<CrosspayProduct> get stripe {
-    if (_stripe is EqualUnmodifiableListView) return _stripe;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_stripe);
-  }
+  final CrosspayProduct stripe;
 
   @override
   String toString() {
@@ -741,19 +849,16 @@ class _$CrosspayProductsImpl extends _CrosspayProducts {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CrosspayProductsImpl &&
-            const DeepCollectionEquality()
-                .equals(other._playStore, _playStore) &&
-            const DeepCollectionEquality().equals(other._appStore, _appStore) &&
-            const DeepCollectionEquality().equals(other._stripe, _stripe));
+            (identical(other.playStore, playStore) ||
+                other.playStore == playStore) &&
+            (identical(other.appStore, appStore) ||
+                other.appStore == appStore) &&
+            (identical(other.stripe, stripe) || other.stripe == stripe));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(_playStore),
-      const DeepCollectionEquality().hash(_appStore),
-      const DeepCollectionEquality().hash(_stripe));
+  int get hashCode => Object.hash(runtimeType, playStore, appStore, stripe);
 
   /// Create a copy of CrosspayProducts
   /// with the given fields replaced by the non-null parameter values.
@@ -774,20 +879,22 @@ class _$CrosspayProductsImpl extends _CrosspayProducts {
 
 abstract class _CrosspayProducts extends CrosspayProducts {
   factory _CrosspayProducts(
-      {required final List<CrosspayProduct> playStore,
-      required final List<CrosspayProduct> appStore,
-      required final List<CrosspayProduct> stripe}) = _$CrosspayProductsImpl;
+      {@JsonKey(name: "playstore") required final CrosspayProduct playStore,
+      @JsonKey(name: "appstore") required final CrosspayProduct appStore,
+      required final CrosspayProduct stripe}) = _$CrosspayProductsImpl;
   _CrosspayProducts._() : super._();
 
   factory _CrosspayProducts.fromJson(Map<String, dynamic> json) =
       _$CrosspayProductsImpl.fromJson;
 
   @override
-  List<CrosspayProduct> get playStore;
+  @JsonKey(name: "playstore")
+  CrosspayProduct get playStore;
   @override
-  List<CrosspayProduct> get appStore;
+  @JsonKey(name: "appstore")
+  CrosspayProduct get appStore;
   @override
-  List<CrosspayProduct> get stripe;
+  CrosspayProduct get stripe;
 
   /// Create a copy of CrosspayProducts
   /// with the given fields replaced by the non-null parameter values.
@@ -804,11 +911,11 @@ CrosspayProduct _$CrosspayProductFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$CrosspayProduct {
   String get id => throw _privateConstructorUsedError;
-  @JsonKey(
-      name: 'recurringPeriodDays',
-      fromJson: _durationFromDays,
-      toJson: _durationToDays)
-  Duration get recurringPeriod => throw _privateConstructorUsedError;
+  @JsonKey(name: "product_id")
+  String get productId => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
+  String? get description => throw _privateConstructorUsedError;
+  Map<String, dynamic>? get metadata => throw _privateConstructorUsedError;
 
   /// Serializes this CrosspayProduct to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -828,11 +935,10 @@ abstract class $CrosspayProductCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
-      @JsonKey(
-          name: 'recurringPeriodDays',
-          fromJson: _durationFromDays,
-          toJson: _durationToDays)
-      Duration recurringPeriod});
+      @JsonKey(name: "product_id") String productId,
+      String name,
+      String? description,
+      Map<String, dynamic>? metadata});
 }
 
 /// @nodoc
@@ -851,17 +957,32 @@ class _$CrosspayProductCopyWithImpl<$Res, $Val extends CrosspayProduct>
   @override
   $Res call({
     Object? id = null,
-    Object? recurringPeriod = null,
+    Object? productId = null,
+    Object? name = null,
+    Object? description = freezed,
+    Object? metadata = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      recurringPeriod: null == recurringPeriod
-          ? _value.recurringPeriod
-          : recurringPeriod // ignore: cast_nullable_to_non_nullable
-              as Duration,
+      productId: null == productId
+          ? _value.productId
+          : productId // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      metadata: freezed == metadata
+          ? _value.metadata
+          : metadata // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
     ) as $Val);
   }
 }
@@ -876,11 +997,10 @@ abstract class _$$CrosspayProductImplCopyWith<$Res>
   @useResult
   $Res call(
       {String id,
-      @JsonKey(
-          name: 'recurringPeriodDays',
-          fromJson: _durationFromDays,
-          toJson: _durationToDays)
-      Duration recurringPeriod});
+      @JsonKey(name: "product_id") String productId,
+      String name,
+      String? description,
+      Map<String, dynamic>? metadata});
 }
 
 /// @nodoc
@@ -897,17 +1017,32 @@ class __$$CrosspayProductImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? recurringPeriod = null,
+    Object? productId = null,
+    Object? name = null,
+    Object? description = freezed,
+    Object? metadata = freezed,
   }) {
     return _then(_$CrosspayProductImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      recurringPeriod: null == recurringPeriod
-          ? _value.recurringPeriod
-          : recurringPeriod // ignore: cast_nullable_to_non_nullable
-              as Duration,
+      productId: null == productId
+          ? _value.productId
+          : productId // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      metadata: freezed == metadata
+          ? _value._metadata
+          : metadata // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
     ));
   }
 }
@@ -917,11 +1052,11 @@ class __$$CrosspayProductImplCopyWithImpl<$Res>
 class _$CrosspayProductImpl implements _CrosspayProduct {
   _$CrosspayProductImpl(
       {required this.id,
-      @JsonKey(
-          name: 'recurringPeriodDays',
-          fromJson: _durationFromDays,
-          toJson: _durationToDays)
-      required this.recurringPeriod});
+      @JsonKey(name: "product_id") required this.productId,
+      required this.name,
+      this.description,
+      final Map<String, dynamic>? metadata})
+      : _metadata = metadata;
 
   factory _$CrosspayProductImpl.fromJson(Map<String, dynamic> json) =>
       _$$CrosspayProductImplFromJson(json);
@@ -929,15 +1064,25 @@ class _$CrosspayProductImpl implements _CrosspayProduct {
   @override
   final String id;
   @override
-  @JsonKey(
-      name: 'recurringPeriodDays',
-      fromJson: _durationFromDays,
-      toJson: _durationToDays)
-  final Duration recurringPeriod;
+  @JsonKey(name: "product_id")
+  final String productId;
+  @override
+  final String name;
+  @override
+  final String? description;
+  final Map<String, dynamic>? _metadata;
+  @override
+  Map<String, dynamic>? get metadata {
+    final value = _metadata;
+    if (value == null) return null;
+    if (_metadata is EqualUnmodifiableMapView) return _metadata;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(value);
+  }
 
   @override
   String toString() {
-    return 'CrosspayProduct(id: $id, recurringPeriod: $recurringPeriod)';
+    return 'CrosspayProduct(id: $id, productId: $productId, name: $name, description: $description, metadata: $metadata)';
   }
 
   @override
@@ -946,13 +1091,18 @@ class _$CrosspayProductImpl implements _CrosspayProduct {
         (other.runtimeType == runtimeType &&
             other is _$CrosspayProductImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.recurringPeriod, recurringPeriod) ||
-                other.recurringPeriod == recurringPeriod));
+            (identical(other.productId, productId) ||
+                other.productId == productId) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            const DeepCollectionEquality().equals(other._metadata, _metadata));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, recurringPeriod);
+  int get hashCode => Object.hash(runtimeType, id, productId, name, description,
+      const DeepCollectionEquality().hash(_metadata));
 
   /// Create a copy of CrosspayProduct
   /// with the given fields replaced by the non-null parameter values.
@@ -974,11 +1124,10 @@ class _$CrosspayProductImpl implements _CrosspayProduct {
 abstract class _CrosspayProduct implements CrosspayProduct {
   factory _CrosspayProduct(
       {required final String id,
-      @JsonKey(
-          name: 'recurringPeriodDays',
-          fromJson: _durationFromDays,
-          toJson: _durationToDays)
-      required final Duration recurringPeriod}) = _$CrosspayProductImpl;
+      @JsonKey(name: "product_id") required final String productId,
+      required final String name,
+      final String? description,
+      final Map<String, dynamic>? metadata}) = _$CrosspayProductImpl;
 
   factory _CrosspayProduct.fromJson(Map<String, dynamic> json) =
       _$CrosspayProductImpl.fromJson;
@@ -986,11 +1135,14 @@ abstract class _CrosspayProduct implements CrosspayProduct {
   @override
   String get id;
   @override
-  @JsonKey(
-      name: 'recurringPeriodDays',
-      fromJson: _durationFromDays,
-      toJson: _durationToDays)
-  Duration get recurringPeriod;
+  @JsonKey(name: "product_id")
+  String get productId;
+  @override
+  String get name;
+  @override
+  String? get description;
+  @override
+  Map<String, dynamic>? get metadata;
 
   /// Create a copy of CrosspayProduct
   /// with the given fields replaced by the non-null parameter values.

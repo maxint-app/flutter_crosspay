@@ -23,10 +23,13 @@ class SubscriptionStoreProduct with _$SubscriptionStoreProduct {
 @freezed
 class CrosspayEntitlement with _$CrosspayEntitlement {
   factory CrosspayEntitlement({
+    required String id,
     required String name,
-    required String description,
+    @JsonKey(name: "period_ms", fromJson: _durationFromMillis, toJson: _durationToMillis)
+    required Duration period,
+    String? description,
+    Map<String, dynamic>? metadata,
     required CrosspayProducts products,
-    required int tier,
   }) = _CrosspayEntitlement;
 
   factory CrosspayEntitlement.fromJson(Map<String, dynamic> json) =>
@@ -38,15 +41,17 @@ class CrosspayProducts with _$CrosspayProducts {
   CrosspayProducts._();
   
   factory CrosspayProducts({
-    required List<CrosspayProduct> playStore,
-    required List<CrosspayProduct> appStore,
-    required List<CrosspayProduct> stripe,
+    @JsonKey(name: "playstore")
+    required CrosspayProduct playStore,
+    @JsonKey(name: "appstore")
+    required CrosspayProduct appStore,
+    required CrosspayProduct stripe,
   }) = _CrosspayProducts;
 
   factory CrosspayProducts.fromJson(Map<String, dynamic> json) =>
       _$CrosspayProductsFromJson(json);
 
-  List<CrosspayProduct> operator [](SubscriptionStore store) {
+  CrosspayProduct operator [](SubscriptionStore store) {
     switch (store) {
       case SubscriptionStore.appStore:
         return appStore;
@@ -62,12 +67,11 @@ class CrosspayProducts with _$CrosspayProducts {
 class CrosspayProduct with _$CrosspayProduct {
   factory CrosspayProduct({
     required String id,
-    @JsonKey(
-      name: 'recurringPeriodDays',
-      fromJson: _durationFromDays,
-      toJson: _durationToDays,
-    )
-    required Duration recurringPeriod,
+    @JsonKey(name: "product_id")
+    required String productId,
+    required String name,
+    String? description,
+    Map<String, dynamic>? metadata,
   }) = _CrosspayProduct;
 
   factory CrosspayProduct.fromJson(Map<String, dynamic> json) =>
