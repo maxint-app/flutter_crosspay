@@ -175,7 +175,7 @@ _$StorableSubscriptionImpl _$$StorableSubscriptionImplFromJson(
       transactionId: json['transactionId'] as String,
       productId: json['productId'] as String,
       source: $enumDecode(_$SubscriptionStoreEnumMap, json['source']),
-      appUserId: json['appUserId'] as String,
+      customerEmail: json['customerEmail'] as String,
       expiresAt: DateTime.parse(json['expiresAt'] as String),
       purchaseDate: DateTime.parse(json['purchaseDate'] as String),
       renewalStatus: $enumDecode(
@@ -190,7 +190,7 @@ Map<String, dynamic> _$$StorableSubscriptionImplToJson(
       'transactionId': instance.transactionId,
       'productId': instance.productId,
       'source': _$SubscriptionStoreEnumMap[instance.source]!,
-      'appUserId': instance.appUserId,
+      'customerEmail': instance.customerEmail,
       'expiresAt': instance.expiresAt.toIso8601String(),
       'purchaseDate': instance.purchaseDate.toIso8601String(),
       'renewalStatus':

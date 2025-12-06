@@ -35,7 +35,7 @@ enum CrosspayEnvironment {
 }
 
 class FlutterCrosspay {
-  String? _appUserId;
+  String? _customerEmail;
   final StreamController<PurchaseEvent> _streamController;
 
   late final InAppPurchaseSubscriptionStore _iapStore;
@@ -46,7 +46,7 @@ class FlutterCrosspay {
 
   /// Create a new instance of FlutterCrosspay.
   ///
-  /// [appUserId] is the user id to use for purchases.
+  /// [customerEmail] is the user id to use for purchases.
   /// This is to identify the user in the server and grant access accordingly.
   /// You can call [identify] and [logout] to set and unset the user id later.
   /// But this must be set (if not set) before calling [purchase].
@@ -54,11 +54,11 @@ class FlutterCrosspay {
     required this.publicKey,
     required CrosspayEnvironment environment,
     String baseUrl = "https://api.crosspy.dev/v1/tenant",
-    String? appUserId,
+    String? customerEmail,
   })  : dio = Dio(BaseOptions(baseUrl: baseUrl, headers: {
           "api-key": publicKey,
         })),
-        _appUserId = appUserId,
+        _customerEmail = customerEmail,
         _streamController = StreamController<PurchaseEvent>.broadcast() {
     _iapStore = InAppPurchaseSubscriptionStore(
       dio: dio,
@@ -74,12 +74,12 @@ class FlutterCrosspay {
 
   Stream<PurchaseEvent> get purchaseEvents => _streamController.stream;
 
-  void identify(String appUserId) {
-    _appUserId = appUserId;
+  void identify(String customerEmail) {
+    _customerEmail = customerEmail;
   }
 
   void logout() {
-    _appUserId = null;
+    _customerEmail = null;
   }
 
   Future<List<SubscriptionStoreProduct>> queryProducts() async {
@@ -96,14 +96,14 @@ class FlutterCrosspay {
     required String failureRedirectUrl,
     ReplacementMode replacementMode = ReplacementMode.withTimeProration,
   }) async {
-    if (_appUserId == null) {
-      throw Exception('appUserId is not set');
+    if (_customerEmail == null) {
+      throw Exception('customer email is not set');
     }
 
     if (kIsMobile || kIsMacOS) {
       return _iapStore.purchase(
         product,
-        _appUserId!,
+        _customerEmail!,
         redirectUrl: redirectUrl,
         failureRedirectUrl: failureRedirectUrl,
         replacementMode: replacementMode,
@@ -111,7 +111,7 @@ class FlutterCrosspay {
     } else {
       return _stripeStore.purchase(
         product,
-        _appUserId!,
+        _customerEmail!,
         redirectUrl: redirectUrl,
         failureRedirectUrl: failureRedirectUrl,
         replacementMode: replacementMode,

@@ -2058,7 +2058,7 @@ mixin _$StorableSubscription {
 
   /// The unique user id provided in the app to identify the user. This should be
   /// linked to the user table in your database.
-  String get appUserId => throw _privateConstructorUsedError;
+  String get customerEmail => throw _privateConstructorUsedError;
 
   /// The time the subscription will expire.
   DateTime get expiresAt => throw _privateConstructorUsedError;
@@ -2095,7 +2095,7 @@ abstract class $StorableSubscriptionCopyWith<$Res> {
       String transactionId,
       String productId,
       SubscriptionStore source,
-      String appUserId,
+      String customerEmail,
       DateTime expiresAt,
       DateTime purchaseDate,
       SubscriptionRenewalStatus renewalStatus,
@@ -2122,7 +2122,7 @@ class _$StorableSubscriptionCopyWithImpl<$Res,
     Object? transactionId = null,
     Object? productId = null,
     Object? source = null,
-    Object? appUserId = null,
+    Object? customerEmail = null,
     Object? expiresAt = null,
     Object? purchaseDate = null,
     Object? renewalStatus = null,
@@ -2145,9 +2145,9 @@ class _$StorableSubscriptionCopyWithImpl<$Res,
           ? _value.source
           : source // ignore: cast_nullable_to_non_nullable
               as SubscriptionStore,
-      appUserId: null == appUserId
-          ? _value.appUserId
-          : appUserId // ignore: cast_nullable_to_non_nullable
+      customerEmail: null == customerEmail
+          ? _value.customerEmail
+          : customerEmail // ignore: cast_nullable_to_non_nullable
               as String,
       expiresAt: null == expiresAt
           ? _value.expiresAt
@@ -2182,7 +2182,7 @@ abstract class _$$StorableSubscriptionImplCopyWith<$Res>
       String transactionId,
       String productId,
       SubscriptionStore source,
-      String appUserId,
+      String customerEmail,
       DateTime expiresAt,
       DateTime purchaseDate,
       SubscriptionRenewalStatus renewalStatus,
@@ -2206,7 +2206,7 @@ class __$$StorableSubscriptionImplCopyWithImpl<$Res>
     Object? transactionId = null,
     Object? productId = null,
     Object? source = null,
-    Object? appUserId = null,
+    Object? customerEmail = null,
     Object? expiresAt = null,
     Object? purchaseDate = null,
     Object? renewalStatus = null,
@@ -2229,9 +2229,9 @@ class __$$StorableSubscriptionImplCopyWithImpl<$Res>
           ? _value.source
           : source // ignore: cast_nullable_to_non_nullable
               as SubscriptionStore,
-      appUserId: null == appUserId
-          ? _value.appUserId
-          : appUserId // ignore: cast_nullable_to_non_nullable
+      customerEmail: null == customerEmail
+          ? _value.customerEmail
+          : customerEmail // ignore: cast_nullable_to_non_nullable
               as String,
       expiresAt: null == expiresAt
           ? _value.expiresAt
@@ -2261,7 +2261,7 @@ class _$StorableSubscriptionImpl implements _StorableSubscription {
       required this.transactionId,
       required this.productId,
       required this.source,
-      required this.appUserId,
+      required this.customerEmail,
       required this.expiresAt,
       required this.purchaseDate,
       required this.renewalStatus,
@@ -2290,7 +2290,7 @@ class _$StorableSubscriptionImpl implements _StorableSubscription {
   /// The unique user id provided in the app to identify the user. This should be
   /// linked to the user table in your database.
   @override
-  final String appUserId;
+  final String customerEmail;
 
   /// The time the subscription will expire.
   @override
@@ -2311,7 +2311,7 @@ class _$StorableSubscriptionImpl implements _StorableSubscription {
 
   @override
   String toString() {
-    return 'StorableSubscription(id: $id, transactionId: $transactionId, productId: $productId, source: $source, appUserId: $appUserId, expiresAt: $expiresAt, purchaseDate: $purchaseDate, renewalStatus: $renewalStatus, status: $status)';
+    return 'StorableSubscription(id: $id, transactionId: $transactionId, productId: $productId, source: $source, customerEmail: $customerEmail, expiresAt: $expiresAt, purchaseDate: $purchaseDate, renewalStatus: $renewalStatus, status: $status)';
   }
 
   @override
@@ -2325,8 +2325,8 @@ class _$StorableSubscriptionImpl implements _StorableSubscription {
             (identical(other.productId, productId) ||
                 other.productId == productId) &&
             (identical(other.source, source) || other.source == source) &&
-            (identical(other.appUserId, appUserId) ||
-                other.appUserId == appUserId) &&
+            (identical(other.customerEmail, customerEmail) ||
+                other.customerEmail == customerEmail) &&
             (identical(other.expiresAt, expiresAt) ||
                 other.expiresAt == expiresAt) &&
             (identical(other.purchaseDate, purchaseDate) ||
@@ -2339,7 +2339,7 @@ class _$StorableSubscriptionImpl implements _StorableSubscription {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, transactionId, productId,
-      source, appUserId, expiresAt, purchaseDate, renewalStatus, status);
+      source, customerEmail, expiresAt, purchaseDate, renewalStatus, status);
 
   /// Create a copy of StorableSubscription
   /// with the given fields replaced by the non-null parameter values.
@@ -2365,7 +2365,7 @@ abstract class _StorableSubscription implements StorableSubscription {
       required final String transactionId,
       required final String productId,
       required final SubscriptionStore source,
-      required final String appUserId,
+      required final String customerEmail,
       required final DateTime expiresAt,
       required final DateTime purchaseDate,
       required final SubscriptionRenewalStatus renewalStatus,
@@ -2394,7 +2394,7 @@ abstract class _StorableSubscription implements StorableSubscription {
   /// The unique user id provided in the app to identify the user. This should be
   /// linked to the user table in your database.
   @override
-  String get appUserId;
+  String get customerEmail;
 
   /// The time the subscription will expire.
   @override

@@ -140,7 +140,7 @@ class InAppPurchaseSubscriptionStore extends Store {
   @override
   Future<void> purchase(
     SubscriptionStoreProduct product,
-    String appUserId, {
+    String customerEmail, {
     required String redirectUrl,
     required String failureRedirectUrl,
     ReplacementMode replacementMode = ReplacementMode.withTimeProration,
@@ -155,7 +155,7 @@ class InAppPurchaseSubscriptionStore extends Store {
 
     final purchaseParam = PurchaseParam(
       productDetails: platformProduct,
-      applicationUserName: appUserId,
+      applicationUserName: customerEmail,
     );
 
     final activeSubscription = await getActiveSubscription();
@@ -182,7 +182,7 @@ class InAppPurchaseSubscriptionStore extends Store {
       final billingClient = InAppPurchase.instance
           .getPlatformAddition<InAppPurchaseAndroidPlatformAddition>();
       final oldPurchaseDetails = await billingClient.queryPastPurchases(
-        applicationUserName: appUserId,
+        applicationUserName: customerEmail,
       );
 
       if (oldPurchaseDetails.error != null) {

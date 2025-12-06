@@ -26,7 +26,7 @@ class StorableSubscription with _$StorableSubscription {
 
     /// The unique user id provided in the app to identify the user. This should be
     /// linked to the user table in your database.
-    required String appUserId,
+    required String customerEmail,
 
     /// The time the subscription will expire.
     required DateTime expiresAt,

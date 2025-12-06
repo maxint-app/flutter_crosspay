@@ -72,7 +72,7 @@ class StripeSubscriptionStore extends Store {
   @override
   Future<void> purchase(
     SubscriptionStoreProduct product,
-    String appUserId, {
+    String customerEmail, {
     required String redirectUrl,
     required String failureRedirectUrl,
     ReplacementMode replacementMode = ReplacementMode.withTimeProration,
@@ -96,12 +96,12 @@ class StripeSubscriptionStore extends Store {
 
     final port = Random().nextInt(1000) + 8000;
     final res = await dio.post<Map>(
-      endpoints.stripeCheckoutSession,
+      "${endpoints.stripeCheckoutSession}/${environment.label}",
       data: {
-        "productId": product.id,
-        "appUserId": appUserId,
-        "redirectUrl": kIsWeb ? redirectUrl : "http://localhost:$port/success",
-        "failureRedirectUrl":
+        "product_id": product.id,
+        "customer_email": customerEmail,
+        "redirect_url": kIsWeb ? redirectUrl : "http://localhost:$port/success",
+        "failure_redirect_url":
             kIsWeb ? failureRedirectUrl : "http://localhost:$port/failure",
       },
     );

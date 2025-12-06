@@ -34,7 +34,7 @@ abstract class Store {
   Future<List<SubscriptionStoreProduct>> queryProducts();
   Future<void> purchase(
     SubscriptionStoreProduct product,
-    String appUserId, {
+    String customerEmail, {
     required String redirectUrl,
     required String failureRedirectUrl,
     ReplacementMode replacementMode = ReplacementMode.withTimeProration,
