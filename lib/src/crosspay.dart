@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_crosspay/src/core/gocardless.dart';
 import './core/iap.dart';
 import './core/stripe.dart';
 import './models/models.dart';
@@ -13,8 +14,10 @@ class CrosspayEndpoints {
   final String verifyPurchase;
   final String activeProduct;
   final String stripeListProduct;
+  final String gocardlessListProduct;
   final String stripeCheckoutSession;
   final String stripeCancelSubscription;
+  final String gocardlessCancelSubscription;
 
   const CrosspayEndpoints({
     required this.entitlements,
@@ -23,6 +26,8 @@ class CrosspayEndpoints {
     required this.stripeListProduct,
     required this.stripeCheckoutSession,
     required this.stripeCancelSubscription,
+    required this.gocardlessListProduct,
+    required this.gocardlessCancelSubscription,
   });
 }
 
@@ -40,6 +45,7 @@ class FlutterCrosspay {
 
   late final InAppPurchaseSubscriptionStore _iapStore;
   late final StripeSubscriptionStore _stripeStore;
+  late final GocardlessSubscriptionStore _gocardlessStore;
   final Dio dio;
 
   final String publicKey;
@@ -70,6 +76,11 @@ class FlutterCrosspay {
       streamController: _streamController,
       environment: environment,
     );
+    _gocardlessStore = GocardlessSubscriptionStore(
+      dio: dio,
+      streamController: _streamController,
+      environment: environment,
+    );
   }
 
   Stream<PurchaseEvent> get purchaseEvents => _streamController.stream;
@@ -82,16 +93,21 @@ class FlutterCrosspay {
     _customerEmail = null;
   }
 
-  Future<List<SubscriptionStoreProduct>> queryProducts() async {
+  Future<List<SubscriptionStoreProduct>> queryProducts(
+      ExternalStore externalStore) async {
     if (kIsMobile || kIsMacOS) {
       return _iapStore.queryProducts();
     } else {
-      return _stripeStore.queryProducts();
+      return switch (externalStore) {
+        ExternalStore.stripe => _stripeStore.queryProducts(),
+        ExternalStore.gocardless => _gocardlessStore.queryProducts(),
+      };
     }
   }
 
   Future<void> purchase(
     SubscriptionStoreProduct product, {
+    required ExternalStore externalStore,
     required String redirectUrl,
     required String failureRedirectUrl,
     ReplacementMode replacementMode = ReplacementMode.withTimeProration,
@@ -109,13 +125,22 @@ class FlutterCrosspay {
         replacementMode: replacementMode,
       );
     } else {
-      return _stripeStore.purchase(
-        product,
-        _customerEmail!,
-        redirectUrl: redirectUrl,
-        failureRedirectUrl: failureRedirectUrl,
-        replacementMode: replacementMode,
-      );
+      return switch (externalStore) {
+        ExternalStore.stripe => _stripeStore.purchase(
+            product,
+            _customerEmail!,
+            redirectUrl: redirectUrl,
+            failureRedirectUrl: failureRedirectUrl,
+            replacementMode: replacementMode,
+          ),
+        ExternalStore.gocardless => _gocardlessStore.purchase(
+            product,
+            _customerEmail!,
+            redirectUrl: redirectUrl,
+            failureRedirectUrl: failureRedirectUrl,
+            replacementMode: replacementMode,
+          ),
+      };
     }
   }
 
@@ -123,46 +148,68 @@ class FlutterCrosspay {
   ///
   /// This gives the active subscription stored in DB. This is usually not used
   /// that much but it has receipts and expiration details.
-  Future<StorableSubscription?> getActiveSubscription() async {
+  Future<StorableSubscription?> getActiveSubscription(
+      ExternalStore externalStore) async {
     if (kIsMobile || kIsMacOS) {
       return _iapStore.getActiveSubscription();
     } else {
-      return _stripeStore.getActiveSubscription();
+      return switch (externalStore) {
+        ExternalStore.stripe => _stripeStore.getActiveSubscription(),
+        ExternalStore.gocardless => _gocardlessStore.getActiveSubscription(),
+      };
     }
   }
 
   /// Get the active [SubscriptionStoreProduct]
-  Future<SubscriptionStoreProduct?> activeProduct() async {
+  Future<SubscriptionStoreProduct?> activeProduct(
+      ExternalStore externalStore) async {
     if (kIsMobile || kIsMacOS) {
       return _iapStore.activeProduct();
     } else {
-      return _stripeStore.activeProduct();
+      return switch (externalStore) {
+        ExternalStore.stripe => _stripeStore.activeProduct(),
+        ExternalStore.gocardless => _gocardlessStore.activeProduct(),
+      };
     }
   }
 
-  Future<List<CrosspayEntitlement>> listEntitlements() async {
+  Future<List<CrosspayEntitlement>> listEntitlements(
+      ExternalStore externalStore) async {
     if (kIsMobile || kIsMacOS) {
       return _iapStore.listEntitlements();
     } else {
-      return _stripeStore.listEntitlements();
+      return switch (externalStore) {
+        ExternalStore.stripe => _stripeStore.listEntitlements(),
+        ExternalStore.gocardless => _gocardlessStore.listEntitlements(),
+      };
     }
   }
 
-  Future<CrosspayEntitlement?> activeEntitlement() async {
+  Future<CrosspayEntitlement?> activeEntitlement(
+      ExternalStore externalStore) async {
     if (kIsMobile || kIsMacOS) {
       return _iapStore.activeEntitlement();
     } else {
-      return _stripeStore.activeEntitlement();
+      return switch (externalStore) {
+        ExternalStore.stripe => _stripeStore.activeEntitlement(),
+        ExternalStore.gocardless => _gocardlessStore.activeEntitlement(),
+      };
     }
   }
 
-  Future<void> cancelStripe() async {
+  Future<void> cancelSubscription(ExternalStore externalStore) async {
     final active = await _stripeStore.getActiveSubscription();
     if (kIsLinux ||
         kIsWindows ||
         kIsWeb ||
-        active?.source == SubscriptionStore.stripe) {
-      await _stripeStore.cancel();
+        active?.source == SubscriptionStore.stripe ||
+        active?.source == SubscriptionStore.gocardless) {
+      switch (externalStore) {
+        case ExternalStore.stripe:
+          await _stripeStore.cancel();
+        case ExternalStore.gocardless:
+          await _gocardlessStore.cancel();
+      }
     }
   }
 

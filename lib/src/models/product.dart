@@ -1,6 +1,7 @@
 part of 'models.dart';
 
-enum SubscriptionStore { appStore, playStore, stripe }
+enum SubscriptionStore { appStore, playStore, stripe, gocardless }
+enum ExternalStore { stripe, gocardless }
 
 @freezed
 class SubscriptionStoreProduct with _$SubscriptionStoreProduct {
@@ -46,6 +47,7 @@ class CrosspayProducts with _$CrosspayProducts {
     @JsonKey(name: "appstore")
     required CrosspayProduct appStore,
     required CrosspayProduct stripe,
+    required CrosspayProduct gocardless,
   }) = _CrosspayProducts;
 
   factory CrosspayProducts.fromJson(Map<String, dynamic> json) =>
@@ -59,6 +61,8 @@ class CrosspayProducts with _$CrosspayProducts {
         return playStore;
       case SubscriptionStore.stripe:
         return stripe;
+      case SubscriptionStore.gocardless:
+        return gocardless;
     }
   }
 }

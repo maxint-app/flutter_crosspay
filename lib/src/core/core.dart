@@ -15,6 +15,8 @@ const endpoints = CrosspayEndpoints(
   stripeListProduct: "/stripe/products",
   stripeCheckoutSession: "/stripe/checkout",
   stripeCancelSubscription: "/stripe/cancel",
+  gocardlessListProduct: "/gocardless/products",
+  gocardlessCancelSubscription: "/gocardless/cancel",
 );
 
 abstract class Store {

@@ -670,6 +670,7 @@ mixin _$CrosspayProducts {
   @JsonKey(name: "appstore")
   CrosspayProduct get appStore => throw _privateConstructorUsedError;
   CrosspayProduct get stripe => throw _privateConstructorUsedError;
+  CrosspayProduct get gocardless => throw _privateConstructorUsedError;
 
   /// Serializes this CrosspayProducts to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -690,11 +691,13 @@ abstract class $CrosspayProductsCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: "playstore") CrosspayProduct playStore,
       @JsonKey(name: "appstore") CrosspayProduct appStore,
-      CrosspayProduct stripe});
+      CrosspayProduct stripe,
+      CrosspayProduct gocardless});
 
   $CrosspayProductCopyWith<$Res> get playStore;
   $CrosspayProductCopyWith<$Res> get appStore;
   $CrosspayProductCopyWith<$Res> get stripe;
+  $CrosspayProductCopyWith<$Res> get gocardless;
 }
 
 /// @nodoc
@@ -715,6 +718,7 @@ class _$CrosspayProductsCopyWithImpl<$Res, $Val extends CrosspayProducts>
     Object? playStore = null,
     Object? appStore = null,
     Object? stripe = null,
+    Object? gocardless = null,
   }) {
     return _then(_value.copyWith(
       playStore: null == playStore
@@ -728,6 +732,10 @@ class _$CrosspayProductsCopyWithImpl<$Res, $Val extends CrosspayProducts>
       stripe: null == stripe
           ? _value.stripe
           : stripe // ignore: cast_nullable_to_non_nullable
+              as CrosspayProduct,
+      gocardless: null == gocardless
+          ? _value.gocardless
+          : gocardless // ignore: cast_nullable_to_non_nullable
               as CrosspayProduct,
     ) as $Val);
   }
@@ -761,6 +769,16 @@ class _$CrosspayProductsCopyWithImpl<$Res, $Val extends CrosspayProducts>
       return _then(_value.copyWith(stripe: value) as $Val);
     });
   }
+
+  /// Create a copy of CrosspayProducts
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $CrosspayProductCopyWith<$Res> get gocardless {
+    return $CrosspayProductCopyWith<$Res>(_value.gocardless, (value) {
+      return _then(_value.copyWith(gocardless: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -774,7 +792,8 @@ abstract class _$$CrosspayProductsImplCopyWith<$Res>
   $Res call(
       {@JsonKey(name: "playstore") CrosspayProduct playStore,
       @JsonKey(name: "appstore") CrosspayProduct appStore,
-      CrosspayProduct stripe});
+      CrosspayProduct stripe,
+      CrosspayProduct gocardless});
 
   @override
   $CrosspayProductCopyWith<$Res> get playStore;
@@ -782,6 +801,8 @@ abstract class _$$CrosspayProductsImplCopyWith<$Res>
   $CrosspayProductCopyWith<$Res> get appStore;
   @override
   $CrosspayProductCopyWith<$Res> get stripe;
+  @override
+  $CrosspayProductCopyWith<$Res> get gocardless;
 }
 
 /// @nodoc
@@ -800,6 +821,7 @@ class __$$CrosspayProductsImplCopyWithImpl<$Res>
     Object? playStore = null,
     Object? appStore = null,
     Object? stripe = null,
+    Object? gocardless = null,
   }) {
     return _then(_$CrosspayProductsImpl(
       playStore: null == playStore
@@ -814,6 +836,10 @@ class __$$CrosspayProductsImplCopyWithImpl<$Res>
           ? _value.stripe
           : stripe // ignore: cast_nullable_to_non_nullable
               as CrosspayProduct,
+      gocardless: null == gocardless
+          ? _value.gocardless
+          : gocardless // ignore: cast_nullable_to_non_nullable
+              as CrosspayProduct,
     ));
   }
 }
@@ -824,7 +850,8 @@ class _$CrosspayProductsImpl extends _CrosspayProducts {
   _$CrosspayProductsImpl(
       {@JsonKey(name: "playstore") required this.playStore,
       @JsonKey(name: "appstore") required this.appStore,
-      required this.stripe})
+      required this.stripe,
+      required this.gocardless})
       : super._();
 
   factory _$CrosspayProductsImpl.fromJson(Map<String, dynamic> json) =>
@@ -838,10 +865,12 @@ class _$CrosspayProductsImpl extends _CrosspayProducts {
   final CrosspayProduct appStore;
   @override
   final CrosspayProduct stripe;
+  @override
+  final CrosspayProduct gocardless;
 
   @override
   String toString() {
-    return 'CrosspayProducts(playStore: $playStore, appStore: $appStore, stripe: $stripe)';
+    return 'CrosspayProducts(playStore: $playStore, appStore: $appStore, stripe: $stripe, gocardless: $gocardless)';
   }
 
   @override
@@ -853,12 +882,15 @@ class _$CrosspayProductsImpl extends _CrosspayProducts {
                 other.playStore == playStore) &&
             (identical(other.appStore, appStore) ||
                 other.appStore == appStore) &&
-            (identical(other.stripe, stripe) || other.stripe == stripe));
+            (identical(other.stripe, stripe) || other.stripe == stripe) &&
+            (identical(other.gocardless, gocardless) ||
+                other.gocardless == gocardless));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, playStore, appStore, stripe);
+  int get hashCode =>
+      Object.hash(runtimeType, playStore, appStore, stripe, gocardless);
 
   /// Create a copy of CrosspayProducts
   /// with the given fields replaced by the non-null parameter values.
@@ -881,7 +913,8 @@ abstract class _CrosspayProducts extends CrosspayProducts {
   factory _CrosspayProducts(
       {@JsonKey(name: "playstore") required final CrosspayProduct playStore,
       @JsonKey(name: "appstore") required final CrosspayProduct appStore,
-      required final CrosspayProduct stripe}) = _$CrosspayProductsImpl;
+      required final CrosspayProduct stripe,
+      required final CrosspayProduct gocardless}) = _$CrosspayProductsImpl;
   _CrosspayProducts._() : super._();
 
   factory _CrosspayProducts.fromJson(Map<String, dynamic> json) =
@@ -895,6 +928,8 @@ abstract class _CrosspayProducts extends CrosspayProducts {
   CrosspayProduct get appStore;
   @override
   CrosspayProduct get stripe;
+  @override
+  CrosspayProduct get gocardless;
 
   /// Create a copy of CrosspayProducts
   /// with the given fields replaced by the non-null parameter values.
@@ -1150,6 +1185,304 @@ abstract class _CrosspayProduct implements CrosspayProduct {
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CrosspayProductImplCopyWith<_$CrosspayProductImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+SubscriptionGocardlessProduct _$SubscriptionGocardlessProductFromJson(
+    Map<String, dynamic> json) {
+  return _SubscriptionGocardlessProduct.fromJson(json);
+}
+
+/// @nodoc
+mixin _$SubscriptionGocardlessProduct {
+  String get id => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
+  String? get description => throw _privateConstructorUsedError;
+  @JsonKey(name: "formatted_price")
+  String get formattedPrice => throw _privateConstructorUsedError;
+  int get price => throw _privateConstructorUsedError;
+  String get currency => throw _privateConstructorUsedError;
+  @JsonKey(name: "checkout_url")
+  String get checkoutUrl => throw _privateConstructorUsedError;
+
+  /// Serializes this SubscriptionGocardlessProduct to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of SubscriptionGocardlessProduct
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $SubscriptionGocardlessProductCopyWith<SubscriptionGocardlessProduct>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $SubscriptionGocardlessProductCopyWith<$Res> {
+  factory $SubscriptionGocardlessProductCopyWith(
+          SubscriptionGocardlessProduct value,
+          $Res Function(SubscriptionGocardlessProduct) then) =
+      _$SubscriptionGocardlessProductCopyWithImpl<$Res,
+          SubscriptionGocardlessProduct>;
+  @useResult
+  $Res call(
+      {String id,
+      String name,
+      String? description,
+      @JsonKey(name: "formatted_price") String formattedPrice,
+      int price,
+      String currency,
+      @JsonKey(name: "checkout_url") String checkoutUrl});
+}
+
+/// @nodoc
+class _$SubscriptionGocardlessProductCopyWithImpl<$Res,
+        $Val extends SubscriptionGocardlessProduct>
+    implements $SubscriptionGocardlessProductCopyWith<$Res> {
+  _$SubscriptionGocardlessProductCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of SubscriptionGocardlessProduct
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? name = null,
+    Object? description = freezed,
+    Object? formattedPrice = null,
+    Object? price = null,
+    Object? currency = null,
+    Object? checkoutUrl = null,
+  }) {
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      formattedPrice: null == formattedPrice
+          ? _value.formattedPrice
+          : formattedPrice // ignore: cast_nullable_to_non_nullable
+              as String,
+      price: null == price
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as int,
+      currency: null == currency
+          ? _value.currency
+          : currency // ignore: cast_nullable_to_non_nullable
+              as String,
+      checkoutUrl: null == checkoutUrl
+          ? _value.checkoutUrl
+          : checkoutUrl // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$SubscriptionGocardlessProductImplCopyWith<$Res>
+    implements $SubscriptionGocardlessProductCopyWith<$Res> {
+  factory _$$SubscriptionGocardlessProductImplCopyWith(
+          _$SubscriptionGocardlessProductImpl value,
+          $Res Function(_$SubscriptionGocardlessProductImpl) then) =
+      __$$SubscriptionGocardlessProductImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {String id,
+      String name,
+      String? description,
+      @JsonKey(name: "formatted_price") String formattedPrice,
+      int price,
+      String currency,
+      @JsonKey(name: "checkout_url") String checkoutUrl});
+}
+
+/// @nodoc
+class __$$SubscriptionGocardlessProductImplCopyWithImpl<$Res>
+    extends _$SubscriptionGocardlessProductCopyWithImpl<$Res,
+        _$SubscriptionGocardlessProductImpl>
+    implements _$$SubscriptionGocardlessProductImplCopyWith<$Res> {
+  __$$SubscriptionGocardlessProductImplCopyWithImpl(
+      _$SubscriptionGocardlessProductImpl _value,
+      $Res Function(_$SubscriptionGocardlessProductImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of SubscriptionGocardlessProduct
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? name = null,
+    Object? description = freezed,
+    Object? formattedPrice = null,
+    Object? price = null,
+    Object? currency = null,
+    Object? checkoutUrl = null,
+  }) {
+    return _then(_$SubscriptionGocardlessProductImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      formattedPrice: null == formattedPrice
+          ? _value.formattedPrice
+          : formattedPrice // ignore: cast_nullable_to_non_nullable
+              as String,
+      price: null == price
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as int,
+      currency: null == currency
+          ? _value.currency
+          : currency // ignore: cast_nullable_to_non_nullable
+              as String,
+      checkoutUrl: null == checkoutUrl
+          ? _value.checkoutUrl
+          : checkoutUrl // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$SubscriptionGocardlessProductImpl
+    implements _SubscriptionGocardlessProduct {
+  _$SubscriptionGocardlessProductImpl(
+      {required this.id,
+      required this.name,
+      this.description,
+      @JsonKey(name: "formatted_price") required this.formattedPrice,
+      required this.price,
+      required this.currency,
+      @JsonKey(name: "checkout_url") required this.checkoutUrl});
+
+  factory _$SubscriptionGocardlessProductImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$SubscriptionGocardlessProductImplFromJson(json);
+
+  @override
+  final String id;
+  @override
+  final String name;
+  @override
+  final String? description;
+  @override
+  @JsonKey(name: "formatted_price")
+  final String formattedPrice;
+  @override
+  final int price;
+  @override
+  final String currency;
+  @override
+  @JsonKey(name: "checkout_url")
+  final String checkoutUrl;
+
+  @override
+  String toString() {
+    return 'SubscriptionGocardlessProduct(id: $id, name: $name, description: $description, formattedPrice: $formattedPrice, price: $price, currency: $currency, checkoutUrl: $checkoutUrl)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SubscriptionGocardlessProductImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            (identical(other.formattedPrice, formattedPrice) ||
+                other.formattedPrice == formattedPrice) &&
+            (identical(other.price, price) || other.price == price) &&
+            (identical(other.currency, currency) ||
+                other.currency == currency) &&
+            (identical(other.checkoutUrl, checkoutUrl) ||
+                other.checkoutUrl == checkoutUrl));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, id, name, description,
+      formattedPrice, price, currency, checkoutUrl);
+
+  /// Create a copy of SubscriptionGocardlessProduct
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SubscriptionGocardlessProductImplCopyWith<
+          _$SubscriptionGocardlessProductImpl>
+      get copyWith => __$$SubscriptionGocardlessProductImplCopyWithImpl<
+          _$SubscriptionGocardlessProductImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$SubscriptionGocardlessProductImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _SubscriptionGocardlessProduct
+    implements SubscriptionGocardlessProduct {
+  factory _SubscriptionGocardlessProduct(
+      {required final String id,
+      required final String name,
+      final String? description,
+      @JsonKey(name: "formatted_price") required final String formattedPrice,
+      required final int price,
+      required final String currency,
+      @JsonKey(name: "checkout_url")
+      required final String checkoutUrl}) = _$SubscriptionGocardlessProductImpl;
+
+  factory _SubscriptionGocardlessProduct.fromJson(Map<String, dynamic> json) =
+      _$SubscriptionGocardlessProductImpl.fromJson;
+
+  @override
+  String get id;
+  @override
+  String get name;
+  @override
+  String? get description;
+  @override
+  @JsonKey(name: "formatted_price")
+  String get formattedPrice;
+  @override
+  int get price;
+  @override
+  String get currency;
+  @override
+  @JsonKey(name: "checkout_url")
+  String get checkoutUrl;
+
+  /// Create a copy of SubscriptionGocardlessProduct
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$SubscriptionGocardlessProductImplCopyWith<
+          _$SubscriptionGocardlessProductImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 SubscriptionStripeProduct _$SubscriptionStripeProductFromJson(

@@ -14,6 +14,8 @@ export 'src/models/models.dart'
         SubscriptionStoreProduct,
         SubscriptionStripePrice,
         SubscriptionStripeProduct,
+        SubscriptionGocardlessProduct,
         SubscriptionRenewalStatus,
         SubscriptionStatus,
-        SubscriptionStore;
+        SubscriptionStore,
+        ExternalStore;

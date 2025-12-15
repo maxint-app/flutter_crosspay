@@ -39,6 +39,7 @@ const _$SubscriptionStoreEnumMap = {
   SubscriptionStore.appStore: 'appStore',
   SubscriptionStore.playStore: 'playStore',
   SubscriptionStore.stripe: 'stripe',
+  SubscriptionStore.gocardless: 'gocardless',
 };
 
 _$CrosspayEntitlementImpl _$$CrosspayEntitlementImplFromJson(
@@ -72,6 +73,8 @@ _$CrosspayProductsImpl _$$CrosspayProductsImplFromJson(
       appStore:
           CrosspayProduct.fromJson(json['appstore'] as Map<String, dynamic>),
       stripe: CrosspayProduct.fromJson(json['stripe'] as Map<String, dynamic>),
+      gocardless:
+          CrosspayProduct.fromJson(json['gocardless'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$CrosspayProductsImplToJson(
@@ -80,6 +83,7 @@ Map<String, dynamic> _$$CrosspayProductsImplToJson(
       'playstore': instance.playStore,
       'appstore': instance.appStore,
       'stripe': instance.stripe,
+      'gocardless': instance.gocardless,
     };
 
 _$CrosspayProductImpl _$$CrosspayProductImplFromJson(
@@ -100,6 +104,30 @@ Map<String, dynamic> _$$CrosspayProductImplToJson(
       'name': instance.name,
       'description': instance.description,
       'metadata': instance.metadata,
+    };
+
+_$SubscriptionGocardlessProductImpl
+    _$$SubscriptionGocardlessProductImplFromJson(Map<String, dynamic> json) =>
+        _$SubscriptionGocardlessProductImpl(
+          id: json['id'] as String,
+          name: json['name'] as String,
+          description: json['description'] as String?,
+          formattedPrice: json['formatted_price'] as String,
+          price: (json['price'] as num).toInt(),
+          currency: json['currency'] as String,
+          checkoutUrl: json['checkout_url'] as String,
+        );
+
+Map<String, dynamic> _$$SubscriptionGocardlessProductImplToJson(
+        _$SubscriptionGocardlessProductImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+      'description': instance.description,
+      'formatted_price': instance.formattedPrice,
+      'price': instance.price,
+      'currency': instance.currency,
+      'checkout_url': instance.checkoutUrl,
     };
 
 _$SubscriptionStripeProductImpl _$$SubscriptionStripeProductImplFromJson(

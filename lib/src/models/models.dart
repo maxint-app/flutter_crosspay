@@ -8,6 +8,7 @@ part 'models.g.dart';
 part 'exception.dart';
 part 'purchase_event.dart';
 part 'product.dart';
+part 'gocardless_product.dart';
 part 'stripe_product.dart';
 part 'subscription.dart';
 

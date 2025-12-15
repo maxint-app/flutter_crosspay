@@ -28,11 +28,11 @@ class _MainAppState extends State<MainApp> {
     );
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      final entitlements = await crosspay.listEntitlements();
+      final entitlements = await crosspay.listEntitlements(ExternalStore.stripe);
 
       debugPrint("Entitlements: ${jsonEncode(entitlements)}");
 
-      final products = await crosspay.queryProducts();
+      final products = await crosspay.queryProducts(ExternalStore.stripe);
 
       debugPrint("Products: ${jsonEncode(products)}");
     });
