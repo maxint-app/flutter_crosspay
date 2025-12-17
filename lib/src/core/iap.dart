@@ -85,15 +85,18 @@ class InAppPurchaseSubscriptionStore extends Store {
   Future<List<ProductDetails>> _queryPlatformProducts(
     List<CrosspayEntitlement> entitlements,
   ) async {
-    final productIds = entitlements.map((s) {
-      if (kIsAndroid) {
-        return s.products.playStore.id;
-      } else if (kIsMacOS || kIsIOS) {
-        return s.products.appStore.id;
-      } else {
-        return s.products.stripe.id;
-      }
-    }).toSet();
+    final productIds = entitlements
+        .map((s) {
+          if (kIsAndroid) {
+            return s.products.playStore?.id;
+          } else if (kIsMacOS || kIsIOS) {
+            return s.products.appStore?.id;
+          } else {
+            return s.products.stripe?.id ?? s.products.gocardless?.id;
+          }
+        })
+        .nonNulls
+        .toSet();
 
     _platformProducts ??= await InAppPurchase.instance
         .queryProductDetails(productIds)
@@ -114,9 +117,9 @@ class InAppPurchaseSubscriptionStore extends Store {
     _storeProducts = platformProducts.map((platformProduct) {
       final entitlement = entitlements.firstWhere((e) {
         if (kIsAndroid) {
-          return e.products.playStore.productId == platformProduct.id;
+          return e.products.playStore?.productId == platformProduct.id;
         }
-        return e.products.appStore.productId == platformProduct.id;
+        return e.products.appStore?.productId == platformProduct.id;
       });
 
       return SubscriptionStoreProduct(

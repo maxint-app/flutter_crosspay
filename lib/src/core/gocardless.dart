@@ -46,7 +46,7 @@ class GocardlessSubscriptionStore extends Store {
 
     _platformProducts = storeProducts.map((storeProduct) {
       final entitlement = entitlements
-          .firstWhere((e) => e.products.stripe.productId == storeProduct.id);
+          .firstWhere((e) => e.products.gocardless?.productId == storeProduct.id);
 
       return SubscriptionStoreProduct(
         id: storeProduct.id,
@@ -82,7 +82,7 @@ class GocardlessSubscriptionStore extends Store {
         "User can not be allowed to purchase the same product again",
       );
     } else if (activeSubscription != null &&
-        activeSubscription.source != SubscriptionStore.stripe) {
+        activeSubscription.source != SubscriptionStore.gocardless) {
       throw CrosspayException.crossUpgradeDowngrade(
         "User is already subscribed this product on a different platform ${activeSubscription.source}. "
         "User have to manage subscription on the same platform",

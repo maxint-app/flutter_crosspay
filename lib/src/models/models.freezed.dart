@@ -666,11 +666,11 @@ CrosspayProducts _$CrosspayProductsFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$CrosspayProducts {
   @JsonKey(name: "playstore")
-  CrosspayProduct get playStore => throw _privateConstructorUsedError;
+  CrosspayProduct? get playStore => throw _privateConstructorUsedError;
   @JsonKey(name: "appstore")
-  CrosspayProduct get appStore => throw _privateConstructorUsedError;
-  CrosspayProduct get stripe => throw _privateConstructorUsedError;
-  CrosspayProduct get gocardless => throw _privateConstructorUsedError;
+  CrosspayProduct? get appStore => throw _privateConstructorUsedError;
+  CrosspayProduct? get stripe => throw _privateConstructorUsedError;
+  CrosspayProduct? get gocardless => throw _privateConstructorUsedError;
 
   /// Serializes this CrosspayProducts to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -689,15 +689,15 @@ abstract class $CrosspayProductsCopyWith<$Res> {
       _$CrosspayProductsCopyWithImpl<$Res, CrosspayProducts>;
   @useResult
   $Res call(
-      {@JsonKey(name: "playstore") CrosspayProduct playStore,
-      @JsonKey(name: "appstore") CrosspayProduct appStore,
-      CrosspayProduct stripe,
-      CrosspayProduct gocardless});
+      {@JsonKey(name: "playstore") CrosspayProduct? playStore,
+      @JsonKey(name: "appstore") CrosspayProduct? appStore,
+      CrosspayProduct? stripe,
+      CrosspayProduct? gocardless});
 
-  $CrosspayProductCopyWith<$Res> get playStore;
-  $CrosspayProductCopyWith<$Res> get appStore;
-  $CrosspayProductCopyWith<$Res> get stripe;
-  $CrosspayProductCopyWith<$Res> get gocardless;
+  $CrosspayProductCopyWith<$Res>? get playStore;
+  $CrosspayProductCopyWith<$Res>? get appStore;
+  $CrosspayProductCopyWith<$Res>? get stripe;
+  $CrosspayProductCopyWith<$Res>? get gocardless;
 }
 
 /// @nodoc
@@ -715,28 +715,28 @@ class _$CrosspayProductsCopyWithImpl<$Res, $Val extends CrosspayProducts>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? playStore = null,
-    Object? appStore = null,
-    Object? stripe = null,
-    Object? gocardless = null,
+    Object? playStore = freezed,
+    Object? appStore = freezed,
+    Object? stripe = freezed,
+    Object? gocardless = freezed,
   }) {
     return _then(_value.copyWith(
-      playStore: null == playStore
+      playStore: freezed == playStore
           ? _value.playStore
           : playStore // ignore: cast_nullable_to_non_nullable
-              as CrosspayProduct,
-      appStore: null == appStore
+              as CrosspayProduct?,
+      appStore: freezed == appStore
           ? _value.appStore
           : appStore // ignore: cast_nullable_to_non_nullable
-              as CrosspayProduct,
-      stripe: null == stripe
+              as CrosspayProduct?,
+      stripe: freezed == stripe
           ? _value.stripe
           : stripe // ignore: cast_nullable_to_non_nullable
-              as CrosspayProduct,
-      gocardless: null == gocardless
+              as CrosspayProduct?,
+      gocardless: freezed == gocardless
           ? _value.gocardless
           : gocardless // ignore: cast_nullable_to_non_nullable
-              as CrosspayProduct,
+              as CrosspayProduct?,
     ) as $Val);
   }
 
@@ -744,8 +744,12 @@ class _$CrosspayProductsCopyWithImpl<$Res, $Val extends CrosspayProducts>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $CrosspayProductCopyWith<$Res> get playStore {
-    return $CrosspayProductCopyWith<$Res>(_value.playStore, (value) {
+  $CrosspayProductCopyWith<$Res>? get playStore {
+    if (_value.playStore == null) {
+      return null;
+    }
+
+    return $CrosspayProductCopyWith<$Res>(_value.playStore!, (value) {
       return _then(_value.copyWith(playStore: value) as $Val);
     });
   }
@@ -754,8 +758,12 @@ class _$CrosspayProductsCopyWithImpl<$Res, $Val extends CrosspayProducts>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $CrosspayProductCopyWith<$Res> get appStore {
-    return $CrosspayProductCopyWith<$Res>(_value.appStore, (value) {
+  $CrosspayProductCopyWith<$Res>? get appStore {
+    if (_value.appStore == null) {
+      return null;
+    }
+
+    return $CrosspayProductCopyWith<$Res>(_value.appStore!, (value) {
       return _then(_value.copyWith(appStore: value) as $Val);
     });
   }
@@ -764,8 +772,12 @@ class _$CrosspayProductsCopyWithImpl<$Res, $Val extends CrosspayProducts>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $CrosspayProductCopyWith<$Res> get stripe {
-    return $CrosspayProductCopyWith<$Res>(_value.stripe, (value) {
+  $CrosspayProductCopyWith<$Res>? get stripe {
+    if (_value.stripe == null) {
+      return null;
+    }
+
+    return $CrosspayProductCopyWith<$Res>(_value.stripe!, (value) {
       return _then(_value.copyWith(stripe: value) as $Val);
     });
   }
@@ -774,8 +786,12 @@ class _$CrosspayProductsCopyWithImpl<$Res, $Val extends CrosspayProducts>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $CrosspayProductCopyWith<$Res> get gocardless {
-    return $CrosspayProductCopyWith<$Res>(_value.gocardless, (value) {
+  $CrosspayProductCopyWith<$Res>? get gocardless {
+    if (_value.gocardless == null) {
+      return null;
+    }
+
+    return $CrosspayProductCopyWith<$Res>(_value.gocardless!, (value) {
       return _then(_value.copyWith(gocardless: value) as $Val);
     });
   }
@@ -790,19 +806,19 @@ abstract class _$$CrosspayProductsImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: "playstore") CrosspayProduct playStore,
-      @JsonKey(name: "appstore") CrosspayProduct appStore,
-      CrosspayProduct stripe,
-      CrosspayProduct gocardless});
+      {@JsonKey(name: "playstore") CrosspayProduct? playStore,
+      @JsonKey(name: "appstore") CrosspayProduct? appStore,
+      CrosspayProduct? stripe,
+      CrosspayProduct? gocardless});
 
   @override
-  $CrosspayProductCopyWith<$Res> get playStore;
+  $CrosspayProductCopyWith<$Res>? get playStore;
   @override
-  $CrosspayProductCopyWith<$Res> get appStore;
+  $CrosspayProductCopyWith<$Res>? get appStore;
   @override
-  $CrosspayProductCopyWith<$Res> get stripe;
+  $CrosspayProductCopyWith<$Res>? get stripe;
   @override
-  $CrosspayProductCopyWith<$Res> get gocardless;
+  $CrosspayProductCopyWith<$Res>? get gocardless;
 }
 
 /// @nodoc
@@ -818,28 +834,28 @@ class __$$CrosspayProductsImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? playStore = null,
-    Object? appStore = null,
-    Object? stripe = null,
-    Object? gocardless = null,
+    Object? playStore = freezed,
+    Object? appStore = freezed,
+    Object? stripe = freezed,
+    Object? gocardless = freezed,
   }) {
     return _then(_$CrosspayProductsImpl(
-      playStore: null == playStore
+      playStore: freezed == playStore
           ? _value.playStore
           : playStore // ignore: cast_nullable_to_non_nullable
-              as CrosspayProduct,
-      appStore: null == appStore
+              as CrosspayProduct?,
+      appStore: freezed == appStore
           ? _value.appStore
           : appStore // ignore: cast_nullable_to_non_nullable
-              as CrosspayProduct,
-      stripe: null == stripe
+              as CrosspayProduct?,
+      stripe: freezed == stripe
           ? _value.stripe
           : stripe // ignore: cast_nullable_to_non_nullable
-              as CrosspayProduct,
-      gocardless: null == gocardless
+              as CrosspayProduct?,
+      gocardless: freezed == gocardless
           ? _value.gocardless
           : gocardless // ignore: cast_nullable_to_non_nullable
-              as CrosspayProduct,
+              as CrosspayProduct?,
     ));
   }
 }
@@ -848,10 +864,10 @@ class __$$CrosspayProductsImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$CrosspayProductsImpl extends _CrosspayProducts {
   _$CrosspayProductsImpl(
-      {@JsonKey(name: "playstore") required this.playStore,
-      @JsonKey(name: "appstore") required this.appStore,
-      required this.stripe,
-      required this.gocardless})
+      {@JsonKey(name: "playstore") this.playStore,
+      @JsonKey(name: "appstore") this.appStore,
+      this.stripe,
+      this.gocardless})
       : super._();
 
   factory _$CrosspayProductsImpl.fromJson(Map<String, dynamic> json) =>
@@ -859,14 +875,14 @@ class _$CrosspayProductsImpl extends _CrosspayProducts {
 
   @override
   @JsonKey(name: "playstore")
-  final CrosspayProduct playStore;
+  final CrosspayProduct? playStore;
   @override
   @JsonKey(name: "appstore")
-  final CrosspayProduct appStore;
+  final CrosspayProduct? appStore;
   @override
-  final CrosspayProduct stripe;
+  final CrosspayProduct? stripe;
   @override
-  final CrosspayProduct gocardless;
+  final CrosspayProduct? gocardless;
 
   @override
   String toString() {
@@ -911,10 +927,10 @@ class _$CrosspayProductsImpl extends _CrosspayProducts {
 
 abstract class _CrosspayProducts extends CrosspayProducts {
   factory _CrosspayProducts(
-      {@JsonKey(name: "playstore") required final CrosspayProduct playStore,
-      @JsonKey(name: "appstore") required final CrosspayProduct appStore,
-      required final CrosspayProduct stripe,
-      required final CrosspayProduct gocardless}) = _$CrosspayProductsImpl;
+      {@JsonKey(name: "playstore") final CrosspayProduct? playStore,
+      @JsonKey(name: "appstore") final CrosspayProduct? appStore,
+      final CrosspayProduct? stripe,
+      final CrosspayProduct? gocardless}) = _$CrosspayProductsImpl;
   _CrosspayProducts._() : super._();
 
   factory _CrosspayProducts.fromJson(Map<String, dynamic> json) =
@@ -922,14 +938,14 @@ abstract class _CrosspayProducts extends CrosspayProducts {
 
   @override
   @JsonKey(name: "playstore")
-  CrosspayProduct get playStore;
+  CrosspayProduct? get playStore;
   @override
   @JsonKey(name: "appstore")
-  CrosspayProduct get appStore;
+  CrosspayProduct? get appStore;
   @override
-  CrosspayProduct get stripe;
+  CrosspayProduct? get stripe;
   @override
-  CrosspayProduct get gocardless;
+  CrosspayProduct? get gocardless;
 
   /// Create a copy of CrosspayProducts
   /// with the given fields replaced by the non-null parameter values.

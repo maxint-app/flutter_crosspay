@@ -43,17 +43,17 @@ class CrosspayProducts with _$CrosspayProducts {
   
   factory CrosspayProducts({
     @JsonKey(name: "playstore")
-    required CrosspayProduct playStore,
+    CrosspayProduct? playStore,
     @JsonKey(name: "appstore")
-    required CrosspayProduct appStore,
-    required CrosspayProduct stripe,
-    required CrosspayProduct gocardless,
+    CrosspayProduct? appStore,
+    CrosspayProduct? stripe,
+    CrosspayProduct? gocardless,
   }) = _CrosspayProducts;
 
   factory CrosspayProducts.fromJson(Map<String, dynamic> json) =>
       _$CrosspayProductsFromJson(json);
 
-  CrosspayProduct operator [](SubscriptionStore store) {
+  CrosspayProduct? operator [](SubscriptionStore store) {
     switch (store) {
       case SubscriptionStore.appStore:
         return appStore;

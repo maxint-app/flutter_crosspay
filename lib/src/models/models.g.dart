@@ -68,13 +68,19 @@ Map<String, dynamic> _$$CrosspayEntitlementImplToJson(
 _$CrosspayProductsImpl _$$CrosspayProductsImplFromJson(
         Map<String, dynamic> json) =>
     _$CrosspayProductsImpl(
-      playStore:
-          CrosspayProduct.fromJson(json['playstore'] as Map<String, dynamic>),
-      appStore:
-          CrosspayProduct.fromJson(json['appstore'] as Map<String, dynamic>),
-      stripe: CrosspayProduct.fromJson(json['stripe'] as Map<String, dynamic>),
-      gocardless:
-          CrosspayProduct.fromJson(json['gocardless'] as Map<String, dynamic>),
+      playStore: json['playstore'] == null
+          ? null
+          : CrosspayProduct.fromJson(json['playstore'] as Map<String, dynamic>),
+      appStore: json['appstore'] == null
+          ? null
+          : CrosspayProduct.fromJson(json['appstore'] as Map<String, dynamic>),
+      stripe: json['stripe'] == null
+          ? null
+          : CrosspayProduct.fromJson(json['stripe'] as Map<String, dynamic>),
+      gocardless: json['gocardless'] == null
+          ? null
+          : CrosspayProduct.fromJson(
+              json['gocardless'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$CrosspayProductsImplToJson(

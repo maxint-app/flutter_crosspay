@@ -114,7 +114,7 @@ abstract class Store {
     final entitlements = await listEntitlements();
 
     return entitlements.firstWhereOrNull(
-      (e) => e.products[subscription.source].id == subscription.productId,
+      (e) => e.products[subscription.source]?.id == subscription.productId,
     );
   }
 }

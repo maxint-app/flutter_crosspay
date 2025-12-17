@@ -51,7 +51,7 @@ class StripeSubscriptionStore extends Store {
 
     _platformProducts = storeProducts.map((storeProduct) {
       final entitlement = entitlements
-          .firstWhere((e) => e.products.stripe.productId == storeProduct.id);
+          .firstWhere((e) => e.products.stripe?.productId == storeProduct.id);
 
       return SubscriptionStoreProduct(
         id: storeProduct.id,
