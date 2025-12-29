@@ -161,7 +161,7 @@ class InAppPurchaseSubscriptionStore extends Store {
       applicationUserName: customerEmail,
     );
 
-    final activeSubscription = await getActiveSubscription();
+    final activeSubscription = await getActiveSubscription(customerEmail);
 
     if (activeSubscription != null &&
         activeSubscription.productId == product.id) {
@@ -171,11 +171,11 @@ class InAppPurchaseSubscriptionStore extends Store {
       );
     } else if (activeSubscription != null &&
         (kIsAndroid &&
-                activeSubscription.source != SubscriptionStore.playStore ||
+                activeSubscription.store != SubscriptionStore.playStore ||
             (kIsIOS || kIsMacOS) &&
-                activeSubscription.source != SubscriptionStore.appStore)) {
+                activeSubscription.store != SubscriptionStore.appStore)) {
       throw CrosspayException.crossUpgradeDowngrade(
-        "User is already subscribed this product on a different platform ${activeSubscription.source}. "
+        "User is already subscribed this product on a different platform ${activeSubscription.store}. "
         "User have to manage subscription on the same platform",
       );
     }

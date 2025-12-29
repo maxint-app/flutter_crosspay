@@ -25,7 +25,7 @@ class _MainAppState extends State<MainApp> {
       publicKey: Env.crosspayPublicKey,
       environment: CrosspayEnvironment.sandbox,
       baseUrl: Env.crosspayApiUrl,
-    );
+    )..identify("predrag.cvetkovski@maxint.com");
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       final entitlements = await crosspay.listEntitlements(ExternalStore.stripe);
@@ -35,6 +35,10 @@ class _MainAppState extends State<MainApp> {
       final products = await crosspay.queryProducts(ExternalStore.stripe);
 
       debugPrint("Products: ${jsonEncode(products)}");
+
+      final activeSubscription = await crosspay.activeEntitlement(ExternalStore.stripe);
+
+      debugPrint("Active Subscription: ${jsonEncode(activeSubscription)}");
     });
     super.initState();
   }

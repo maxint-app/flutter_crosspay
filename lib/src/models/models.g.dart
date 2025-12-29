@@ -36,8 +36,8 @@ Map<String, dynamic> _$$SubscriptionStoreProductImplToJson(
     };
 
 const _$SubscriptionStoreEnumMap = {
-  SubscriptionStore.appStore: 'appStore',
-  SubscriptionStore.playStore: 'playStore',
+  SubscriptionStore.appStore: 'appstore',
+  SubscriptionStore.playStore: 'playstore',
   SubscriptionStore.stripe: 'stripe',
   SubscriptionStore.gocardless: 'gocardless',
 };
@@ -206,39 +206,36 @@ _$StorableSubscriptionImpl _$$StorableSubscriptionImplFromJson(
         Map<String, dynamic> json) =>
     _$StorableSubscriptionImpl(
       id: json['id'] as String,
-      transactionId: json['transactionId'] as String,
-      productId: json['productId'] as String,
-      source: $enumDecode(_$SubscriptionStoreEnumMap, json['source']),
-      customerEmail: json['customerEmail'] as String,
-      expiresAt: DateTime.parse(json['expiresAt'] as String),
-      purchaseDate: DateTime.parse(json['purchaseDate'] as String),
-      renewalStatus: $enumDecode(
-          _$SubscriptionRenewalStatusEnumMap, json['renewalStatus']),
+      productId: json['product_id'] as String,
+      expiresAt: DateTime.fromMillisecondsSinceEpoch(
+          (json['expires_at'] as num).toInt()),
+      store: $enumDecode(_$SubscriptionStoreEnumMap, json['store']),
       status: $enumDecode(_$SubscriptionStatusEnumMap, json['status']),
+      renewalStatus: $enumDecode(
+          _$SubscriptionRenewalStatusEnumMap, json['renewal_status']),
     );
 
 Map<String, dynamic> _$$StorableSubscriptionImplToJson(
         _$StorableSubscriptionImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'transactionId': instance.transactionId,
-      'productId': instance.productId,
-      'source': _$SubscriptionStoreEnumMap[instance.source]!,
-      'customerEmail': instance.customerEmail,
-      'expiresAt': instance.expiresAt.toIso8601String(),
-      'purchaseDate': instance.purchaseDate.toIso8601String(),
-      'renewalStatus':
-          _$SubscriptionRenewalStatusEnumMap[instance.renewalStatus]!,
+      'product_id': instance.productId,
+      'expires_at': _dateToEpochMilliseconds(instance.expiresAt),
+      'store': _$SubscriptionStoreEnumMap[instance.store]!,
       'status': _$SubscriptionStatusEnumMap[instance.status]!,
+      'renewal_status':
+          _$SubscriptionRenewalStatusEnumMap[instance.renewalStatus]!,
     };
-
-const _$SubscriptionRenewalStatusEnumMap = {
-  SubscriptionRenewalStatus.autoRenew: 'auto-renew',
-  SubscriptionRenewalStatus.canceled: 'canceled',
-};
 
 const _$SubscriptionStatusEnumMap = {
   SubscriptionStatus.active: 'active',
+  SubscriptionStatus.onHold: 'on_hold',
+  SubscriptionStatus.gracePeriod: 'grace_period',
+  SubscriptionStatus.trialing: 'trialing',
   SubscriptionStatus.expired: 'expired',
-  SubscriptionStatus.pending: 'pending',
+};
+
+const _$SubscriptionRenewalStatusEnumMap = {
+  SubscriptionRenewalStatus.autoRenew: 'auto_renew',
+  SubscriptionRenewalStatus.canceled: 'canceled',
 };

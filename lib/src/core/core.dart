@@ -11,7 +11,7 @@ import '../models/models.dart';
 const endpoints = CrosspayEndpoints(
   entitlements: "/entitlements",
   verifyPurchase: "/verify",
-  activeProduct: "/active",
+  activeSubscription: "/subscriptions/active",
   stripeListProduct: "/stripe/products",
   stripeCheckoutSession: "/stripe/checkout",
   stripeCancelSubscription: "/stripe/cancel",
@@ -69,19 +69,22 @@ abstract class Store {
   ///
   /// This gives the active subscription stored in DB. This is usually not used
   /// that much but it has receipts and expiration details.
-  Future<StorableSubscription?> getActiveSubscription() async {
-    final res = await dio.get<Map<String, dynamic>?>(
-      endpoints.activeProduct,
+  Future<StorableSubscription?> getActiveSubscription(String customerEmail) async {
+    final res = await dio.post<Map<String, dynamic>?>(
+      endpoints.activeSubscription,
       options: Options(
         responseType: ResponseType.json,
       ),
+      data: {
+        "customer_email": customerEmail,
+      }
     );
 
-    if (res.data == null) {
+    if (res.data?["data"] == null) {
       return null;
     }
 
-    return StorableSubscription.fromJson(res.data!);
+    return StorableSubscription.fromJson(res.data?["data"]);
   }
 
   /// Get the active [SubscriptionStoreProduct]
@@ -90,8 +93,8 @@ abstract class Store {
   ///
   /// It'll return null even if there is an active subscription but the product
   /// is from a different store
-  Future<SubscriptionStoreProduct?> activeProduct() async {
-    final storableSubscription = await getActiveSubscription();
+  Future<SubscriptionStoreProduct?> activeProduct(String customerEmail) async {
+    final storableSubscription = await getActiveSubscription(customerEmail);
 
     if (storableSubscription == null) {
       return null;
@@ -104,8 +107,8 @@ abstract class Store {
     );
   }
 
-  Future<CrosspayEntitlement?> activeEntitlement() async {
-    final subscription = await getActiveSubscription();
+  Future<CrosspayEntitlement?> activeEntitlement(String customerEmail) async {
+    final subscription = await getActiveSubscription(customerEmail);
 
     if (subscription == null) {
       return null;
@@ -114,7 +117,7 @@ abstract class Store {
     final entitlements = await listEntitlements();
 
     return entitlements.firstWhereOrNull(
-      (e) => e.products[subscription.source]?.id == subscription.productId,
+      (e) => e.products[subscription.store]?.productId == subscription.productId,
     );
   }
 }

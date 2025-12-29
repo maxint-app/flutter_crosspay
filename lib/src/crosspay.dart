@@ -12,7 +12,7 @@ import 'package:in_app_purchase_android/billing_client_wrappers.dart';
 class CrosspayEndpoints {
   final String entitlements;
   final String verifyPurchase;
-  final String activeProduct;
+  final String activeSubscription;
   final String stripeListProduct;
   final String gocardlessListProduct;
   final String stripeCheckoutSession;
@@ -22,7 +22,7 @@ class CrosspayEndpoints {
   const CrosspayEndpoints({
     required this.entitlements,
     required this.verifyPurchase,
-    required this.activeProduct,
+    required this.activeSubscription,
     required this.stripeListProduct,
     required this.stripeCheckoutSession,
     required this.stripeCancelSubscription,
@@ -150,12 +150,18 @@ class FlutterCrosspay {
   /// that much but it has receipts and expiration details.
   Future<StorableSubscription?> getActiveSubscription(
       ExternalStore externalStore) async {
+    assert(
+      _customerEmail != null,
+      "Customer email is not set. Please call identify() to set the customer email before calling getActiveSubscription().",
+    );
     if (kIsMobile || kIsMacOS) {
-      return _iapStore.getActiveSubscription();
+      return _iapStore.getActiveSubscription(_customerEmail!);
     } else {
       return switch (externalStore) {
-        ExternalStore.stripe => _stripeStore.getActiveSubscription(),
-        ExternalStore.gocardless => _gocardlessStore.getActiveSubscription(),
+        ExternalStore.stripe =>
+          _stripeStore.getActiveSubscription(_customerEmail!),
+        ExternalStore.gocardless =>
+          _gocardlessStore.getActiveSubscription(_customerEmail!),
       };
     }
   }
@@ -163,12 +169,18 @@ class FlutterCrosspay {
   /// Get the active [SubscriptionStoreProduct]
   Future<SubscriptionStoreProduct?> activeProduct(
       ExternalStore externalStore) async {
+    assert(
+      _customerEmail != null,
+      "Customer email is not set. Please call identify() to set the customer email before calling activeProduct().",
+    );
+
     if (kIsMobile || kIsMacOS) {
-      return _iapStore.activeProduct();
+      return _iapStore.activeProduct(_customerEmail!);
     } else {
       return switch (externalStore) {
-        ExternalStore.stripe => _stripeStore.activeProduct(),
-        ExternalStore.gocardless => _gocardlessStore.activeProduct(),
+        ExternalStore.stripe => _stripeStore.activeProduct(_customerEmail!),
+        ExternalStore.gocardless =>
+          _gocardlessStore.activeProduct(_customerEmail!),
       };
     }
   }
@@ -186,24 +198,34 @@ class FlutterCrosspay {
   }
 
   Future<CrosspayEntitlement?> activeEntitlement(
-      ExternalStore externalStore) async {
+    ExternalStore externalStore,
+  ) async {
+    assert(
+      _customerEmail != null,
+      "Customer email is not set. Please call identify() to set the customer email before calling activeEntitlement().",
+    );
     if (kIsMobile || kIsMacOS) {
-      return _iapStore.activeEntitlement();
+      return _iapStore.activeEntitlement(_customerEmail!);
     } else {
       return switch (externalStore) {
-        ExternalStore.stripe => _stripeStore.activeEntitlement(),
-        ExternalStore.gocardless => _gocardlessStore.activeEntitlement(),
+        ExternalStore.stripe => _stripeStore.activeEntitlement(_customerEmail!),
+        ExternalStore.gocardless =>
+          _gocardlessStore.activeEntitlement(_customerEmail!),
       };
     }
   }
 
   Future<void> cancelSubscription(ExternalStore externalStore) async {
-    final active = await _stripeStore.getActiveSubscription();
+    assert(
+      _customerEmail != null,
+      "Customer email is not set. Please call identify() to set the customer email before calling cancelSubscription().",
+    );
+    final active = await _stripeStore.getActiveSubscription(_customerEmail!);
     if (kIsLinux ||
         kIsWindows ||
         kIsWeb ||
-        active?.source == SubscriptionStore.stripe ||
-        active?.source == SubscriptionStore.gocardless) {
+        active?.store == SubscriptionStore.stripe ||
+        active?.store == SubscriptionStore.gocardless) {
       switch (externalStore) {
         case ExternalStore.stripe:
           await _stripeStore.cancel();

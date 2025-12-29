@@ -74,7 +74,7 @@ class GocardlessSubscriptionStore extends Store {
     String? successHtml,
     String? failureHtml,
   }) async {
-    final activeSubscription = await getActiveSubscription();
+    final activeSubscription = await getActiveSubscription(customerEmail);
 
     if (activeSubscription?.productId == product.id) {
       throw CrosspayException.alreadyActive(
@@ -82,9 +82,9 @@ class GocardlessSubscriptionStore extends Store {
         "User can not be allowed to purchase the same product again",
       );
     } else if (activeSubscription != null &&
-        activeSubscription.source != SubscriptionStore.gocardless) {
+        activeSubscription.store != SubscriptionStore.gocardless) {
       throw CrosspayException.crossUpgradeDowngrade(
-        "User is already subscribed this product on a different platform ${activeSubscription.source}. "
+        "User is already subscribed this product on a different platform ${activeSubscription.store}. "
         "User have to manage subscription on the same platform",
       );
     }

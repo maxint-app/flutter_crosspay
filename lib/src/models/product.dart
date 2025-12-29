@@ -1,6 +1,14 @@
 part of 'models.dart';
 
-enum SubscriptionStore { appStore, playStore, stripe, gocardless }
+enum SubscriptionStore {
+  @JsonValue("appstore")
+  appStore,
+  @JsonValue("playstore")
+  playStore,
+  stripe,
+  gocardless
+}
+
 enum ExternalStore { stripe, gocardless }
 
 @freezed
@@ -26,7 +34,10 @@ class CrosspayEntitlement with _$CrosspayEntitlement {
   factory CrosspayEntitlement({
     required String id,
     required String name,
-    @JsonKey(name: "period_ms", fromJson: _durationFromMillis, toJson: _durationToMillis)
+    @JsonKey(
+        name: "period_ms",
+        fromJson: _durationFromMillis,
+        toJson: _durationToMillis)
     required Duration period,
     String? description,
     Map<String, dynamic>? metadata,
@@ -40,12 +51,10 @@ class CrosspayEntitlement with _$CrosspayEntitlement {
 @freezed
 class CrosspayProducts with _$CrosspayProducts {
   CrosspayProducts._();
-  
+
   factory CrosspayProducts({
-    @JsonKey(name: "playstore")
-    CrosspayProduct? playStore,
-    @JsonKey(name: "appstore")
-    CrosspayProduct? appStore,
+    @JsonKey(name: "playstore") CrosspayProduct? playStore,
+    @JsonKey(name: "appstore") CrosspayProduct? appStore,
     CrosspayProduct? stripe,
     CrosspayProduct? gocardless,
   }) = _CrosspayProducts;
@@ -71,8 +80,7 @@ class CrosspayProducts with _$CrosspayProducts {
 class CrosspayProduct with _$CrosspayProduct {
   factory CrosspayProduct({
     required String id,
-    @JsonKey(name: "product_id")
-    required String productId,
+    @JsonKey(name: "product_id") required String productId,
     required String name,
     String? description,
     Map<String, dynamic>? metadata,
