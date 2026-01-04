@@ -17,6 +17,7 @@ const endpoints = CrosspayEndpoints(
   stripeCancelSubscription: "/stripe/cancel",
   gocardlessListProduct: "/gocardless/products",
   gocardlessCancelSubscription: "/gocardless/cancel",
+  purchasesStream: "/purchases-stream",
 );
 
 abstract class Store {
@@ -69,16 +70,17 @@ abstract class Store {
   ///
   /// This gives the active subscription stored in DB. This is usually not used
   /// that much but it has receipts and expiration details.
-  Future<StorableSubscription?> getActiveSubscription(String customerEmail) async {
-    final res = await dio.post<Map<String, dynamic>?>(
-      endpoints.activeSubscription,
-      options: Options(
-        responseType: ResponseType.json,
-      ),
-      data: {
-        "customer_email": customerEmail,
-      }
-    );
+  Future<StorableSubscription?> getActiveSubscription(
+    String customerEmail,
+  ) async {
+    final res =
+        await dio.post<Map<String, dynamic>?>(endpoints.activeSubscription,
+            options: Options(
+              responseType: ResponseType.json,
+            ),
+            data: {
+          "customer_email": customerEmail,
+        });
 
     if (res.data?["data"] == null) {
       return null;
@@ -94,30 +96,39 @@ abstract class Store {
   /// It'll return null even if there is an active subscription but the product
   /// is from a different store
   Future<SubscriptionStoreProduct?> activeProduct(String customerEmail) async {
-    final storableSubscription = await getActiveSubscription(customerEmail);
+    final subscription = await getActiveSubscription(customerEmail);
 
-    if (storableSubscription == null) {
+    if (subscription == null ||
+        const [
+          SubscriptionStatus.onHold,
+          SubscriptionStatus.expired,
+        ].contains(subscription.status)) {
       return null;
     }
 
     final product = await queryProducts();
 
     return product.firstWhereOrNull(
-      (p) => p.id == storableSubscription.productId,
+      (p) => p.id == subscription.productId,
     );
   }
 
   Future<CrosspayEntitlement?> activeEntitlement(String customerEmail) async {
     final subscription = await getActiveSubscription(customerEmail);
 
-    if (subscription == null) {
+    if (subscription == null ||
+        const [
+          SubscriptionStatus.onHold,
+          SubscriptionStatus.expired,
+        ].contains(subscription.status)) {
       return null;
     }
 
     final entitlements = await listEntitlements();
 
     return entitlements.firstWhereOrNull(
-      (e) => e.products[subscription.store]?.productId == subscription.productId,
+      (e) =>
+          e.products[subscription.store]?.productId == subscription.productId,
     );
   }
 }

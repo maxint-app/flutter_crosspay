@@ -1,7 +1,11 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_client_sse/constants/sse_request_type_enum.dart';
+import 'package:flutter_client_sse/flutter_client_sse.dart';
+import 'package:flutter_crosspay/src/core/core.dart';
 import 'package:flutter_crosspay/src/core/gocardless.dart';
 import './core/iap.dart';
 import './core/stripe.dart';
@@ -18,6 +22,7 @@ class CrosspayEndpoints {
   final String stripeCheckoutSession;
   final String stripeCancelSubscription;
   final String gocardlessCancelSubscription;
+  final String purchasesStream;
 
   const CrosspayEndpoints({
     required this.entitlements,
@@ -28,6 +33,7 @@ class CrosspayEndpoints {
     required this.stripeCancelSubscription,
     required this.gocardlessListProduct,
     required this.gocardlessCancelSubscription,
+    required this.purchasesStream,
   });
 }
 
@@ -81,20 +87,67 @@ class FlutterCrosspay {
       streamController: _streamController,
       environment: environment,
     );
+
+    _listenToSSE();
   }
+
+  final List<StreamSubscription> _subscriptions = [];
 
   Stream<PurchaseEvent> get purchaseEvents => _streamController.stream;
 
+  void dispose() {
+    for (var sub in _subscriptions) {
+      sub.cancel();
+    }
+    _streamController.close();
+    SSEClient.unsubscribeFromSSE();
+  }
+
+  void _listenToSSE() {
+    if (_customerEmail == null) return;
+    if ((kIsDesktop || kIsWeb) && !kIsMacOS) {
+      final stream = SSEClient.subscribeToSSE(
+        method: SSERequestType.GET,
+        url:
+            "${dio.options.baseUrl}${endpoints.purchasesStream}?customer_email=$_customerEmail",
+        header: {
+          ...dio.options.headers,
+        },
+      );
+
+      _subscriptions.add(
+        stream.listen(
+          (event) {
+            if (event.data != null && event.data != "ping" && event.data!.isNotEmpty) {
+              _streamController
+                  .add(PurchaseEvent.fromJson(jsonDecode(event.data!)));
+            }
+          },
+          onError: (error) {
+            debugPrint("SSE Error: $error");
+          },
+        ),
+      );
+    }
+  }
+
   void identify(String customerEmail) {
     _customerEmail = customerEmail;
+    _listenToSSE();
   }
 
   void logout() {
+    for (var sub in _subscriptions) {
+      sub.cancel();
+    }
+    _subscriptions.clear();
+    SSEClient.unsubscribeFromSSE();
     _customerEmail = null;
   }
 
   Future<List<SubscriptionStoreProduct>> queryProducts(
-      ExternalStore externalStore) async {
+    ExternalStore externalStore,
+  ) async {
     if (kIsMobile || kIsMacOS) {
       return _iapStore.queryProducts();
     } else {
@@ -107,7 +160,6 @@ class FlutterCrosspay {
 
   Future<void> purchase(
     SubscriptionStoreProduct product, {
-    required ExternalStore externalStore,
     required String redirectUrl,
     required String failureRedirectUrl,
     ReplacementMode replacementMode = ReplacementMode.withTimeProration,
@@ -125,20 +177,23 @@ class FlutterCrosspay {
         replacementMode: replacementMode,
       );
     } else {
-      return switch (externalStore) {
-        ExternalStore.stripe => _stripeStore.purchase(
+      return switch (product.store) {
+        SubscriptionStore.stripe => _stripeStore.purchase(
             product,
             _customerEmail!,
             redirectUrl: redirectUrl,
             failureRedirectUrl: failureRedirectUrl,
             replacementMode: replacementMode,
           ),
-        ExternalStore.gocardless => _gocardlessStore.purchase(
+        SubscriptionStore.gocardless => _gocardlessStore.purchase(
             product,
             _customerEmail!,
             redirectUrl: redirectUrl,
             failureRedirectUrl: failureRedirectUrl,
             replacementMode: replacementMode,
+          ),
+        _ => throw Exception(
+            "Unsupported store ${product.store} for non-mobile platforms",
           ),
       };
     }
@@ -148,22 +203,13 @@ class FlutterCrosspay {
   ///
   /// This gives the active subscription stored in DB. This is usually not used
   /// that much but it has receipts and expiration details.
-  Future<StorableSubscription?> getActiveSubscription(
-      ExternalStore externalStore) async {
+  Future<StorableSubscription?> getActiveSubscription() async {
     assert(
       _customerEmail != null,
       "Customer email is not set. Please call identify() to set the customer email before calling getActiveSubscription().",
     );
-    if (kIsMobile || kIsMacOS) {
-      return _iapStore.getActiveSubscription(_customerEmail!);
-    } else {
-      return switch (externalStore) {
-        ExternalStore.stripe =>
-          _stripeStore.getActiveSubscription(_customerEmail!),
-        ExternalStore.gocardless =>
-          _gocardlessStore.getActiveSubscription(_customerEmail!),
-      };
-    }
+    return _iapStore.getActiveSubscription(
+        _customerEmail!); // this is a core method so same for all platforms
   }
 
   /// Get the active [SubscriptionStoreProduct]
@@ -174,48 +220,26 @@ class FlutterCrosspay {
       "Customer email is not set. Please call identify() to set the customer email before calling activeProduct().",
     );
 
-    if (kIsMobile || kIsMacOS) {
-      return _iapStore.activeProduct(_customerEmail!);
-    } else {
-      return switch (externalStore) {
-        ExternalStore.stripe => _stripeStore.activeProduct(_customerEmail!),
-        ExternalStore.gocardless =>
-          _gocardlessStore.activeProduct(_customerEmail!),
-      };
-    }
+    return _iapStore.activeProduct(
+        _customerEmail!); // this is a core method so same for all platforms
   }
 
-  Future<List<CrosspayEntitlement>> listEntitlements(
-      ExternalStore externalStore) async {
-    if (kIsMobile || kIsMacOS) {
-      return _iapStore.listEntitlements();
-    } else {
-      return switch (externalStore) {
-        ExternalStore.stripe => _stripeStore.listEntitlements(),
-        ExternalStore.gocardless => _gocardlessStore.listEntitlements(),
-      };
-    }
+  Future<List<CrosspayEntitlement>> listEntitlements() async {
+    return _iapStore
+        .listEntitlements(); // this is a core method so same for all platforms
   }
 
-  Future<CrosspayEntitlement?> activeEntitlement(
-    ExternalStore externalStore,
-  ) async {
+  Future<CrosspayEntitlement?> activeEntitlement() async {
     assert(
       _customerEmail != null,
       "Customer email is not set. Please call identify() to set the customer email before calling activeEntitlement().",
     );
-    if (kIsMobile || kIsMacOS) {
-      return _iapStore.activeEntitlement(_customerEmail!);
-    } else {
-      return switch (externalStore) {
-        ExternalStore.stripe => _stripeStore.activeEntitlement(_customerEmail!),
-        ExternalStore.gocardless =>
-          _gocardlessStore.activeEntitlement(_customerEmail!),
-      };
-    }
+    return _iapStore.activeEntitlement(
+      _customerEmail!,
+    ); // this is a core method so same for all platforms
   }
 
-  Future<void> cancelSubscription(ExternalStore externalStore) async {
+  Future<void> cancelSubscription() async {
     assert(
       _customerEmail != null,
       "Customer email is not set. Please call identify() to set the customer email before calling cancelSubscription().",
@@ -226,11 +250,12 @@ class FlutterCrosspay {
         kIsWeb ||
         active?.store == SubscriptionStore.stripe ||
         active?.store == SubscriptionStore.gocardless) {
-      switch (externalStore) {
-        case ExternalStore.stripe:
+      switch (active?.store) {
+        case SubscriptionStore.stripe:
           await _stripeStore.cancel();
-        case ExternalStore.gocardless:
+        case SubscriptionStore.gocardless:
           await _gocardlessStore.cancel();
+        default:
       }
     }
   }

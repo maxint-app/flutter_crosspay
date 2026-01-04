@@ -8,11 +8,11 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
-  alfred: ^1.1.2+1
-  collection: ^1.19.0
+  collection: ^1.19.1
   dio: ^5.8.0+1
   flutter:
     sdk: flutter
+  flutter_client_sse: ^2.0.3
   freezed_annotation: ^2.4.4
   in_app_purchase: ^3.2.2
   in_app_purchase_android: ^0.4.0+3

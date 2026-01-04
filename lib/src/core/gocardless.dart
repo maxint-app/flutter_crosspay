@@ -92,7 +92,8 @@ class GocardlessSubscriptionStore extends Store {
     final storeProducts = await _queryStoreProducts();
     final storeProduct =
         storeProducts.firstWhere((element) => element.id == product.id);
-    await launchUrl(Uri.parse(storeProduct.checkoutUrl));
+
+    await launchUrl(Uri.parse(storeProduct.checkoutUrl), mode: LaunchMode.externalApplication);
   }
 
   Future<void> cancel() async {

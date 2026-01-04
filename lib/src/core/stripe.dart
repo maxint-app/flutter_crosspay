@@ -1,15 +1,9 @@
-import 'dart:io';
-import 'dart:math';
-
-import 'package:alfred/alfred.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 import 'package:in_app_purchase_android/billing_client_wrappers.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../core/core.dart';
 import '../models/models.dart';
-import '../utils/platform.dart';
 
 class StripeSubscriptionStore extends Store {
   List<SubscriptionStoreProduct>? _platformProducts = [];
@@ -33,8 +27,9 @@ class StripeSubscriptionStore extends Store {
       ),
     );
 
-    _storeProducts =
-        (res.data!["data"] as List).map((e) => SubscriptionStripeProduct.fromJson(e)).toList();
+    _storeProducts = (res.data!["data"] as List)
+        .map((e) => SubscriptionStripeProduct.fromJson(e))
+        .toList();
 
     return _storeProducts!;
   }
@@ -76,8 +71,6 @@ class StripeSubscriptionStore extends Store {
     required String redirectUrl,
     required String failureRedirectUrl,
     ReplacementMode replacementMode = ReplacementMode.withTimeProration,
-    String? successHtml,
-    String? failureHtml,
   }) async {
     final activeSubscription = await getActiveSubscription(customerEmail);
 
@@ -94,68 +87,17 @@ class StripeSubscriptionStore extends Store {
       );
     }
 
-    final port = Random().nextInt(1000) + 8000;
     final res = await dio.post<Map>(
       "${endpoints.stripeCheckoutSession}/${environment.label}",
       data: {
         "product_id": product.id,
         "customer_email": customerEmail,
-        "redirect_url": kIsWeb ? redirectUrl : "http://localhost:$port/success",
-        "failure_redirect_url":
-            kIsWeb ? failureRedirectUrl : "http://localhost:$port/failure",
+        "redirect_url": redirectUrl,
+        "failure_redirect_url": failureRedirectUrl,
       },
     );
 
-    await launchUrl(Uri.parse(res.data!["url"]));
-
-    if (kIsWindows || kIsLinux) {
-      final alfred = Alfred();
-
-      alfred.get("/success", (req, res) async {
-        streamController.add(PurchaseEvent(PurchaseEventType.success));
-        res.headers.contentType = ContentType.html;
-        final data = successHtml ??
-            """
-        <!DOCTYPE html>
-        <html>
-          <head>
-            <title>Stripe Payment</title>
-          </head>
-          <body>
-            <h1>Payment successful</h1>
-            <p>You can close this window now</p>
-          </body>
-        </html>
-        """;
-
-        await res.send(data);
-
-        await alfred.close();
-      });
-
-      alfred.get("/failure", (req, res) async {
-        streamController.add(PurchaseEvent(PurchaseEventType.canceled));
-        res.headers.contentType = ContentType.html;
-        final data = failureHtml ??
-            """
-        <!DOCTYPE html>
-        <html>
-          <head>
-            <title>Stripe Payment</title>
-          </head>
-          <body>
-            <h1>Payment failed</h1>
-            <p>You can close this window now</p>
-          </body>
-        </html>
-        """;
-        await res.send(data);
-
-        await alfred.close();
-      });
-
-      await alfred.listen(port);
-    }
+    await launchUrl(Uri.parse(res.data!["url"]), mode: LaunchMode.externalApplication);
   }
 
   Future<void> cancel() async {

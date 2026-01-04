@@ -16,7 +16,9 @@ enum SubscriptionStatus {
   expired
 }
 
-int _dateToEpochMilliseconds(DateTime date) => date.millisecondsSinceEpoch;
+int _dateToEpochSeconds(DateTime date) => date.millisecondsSinceEpoch ~/ 1000;
+DateTime _dateFromEpochSeconds(int seconds) =>
+    DateTime.fromMillisecondsSinceEpoch(seconds * 1000);
 
 @freezed
 class StorableSubscription with _$StorableSubscription {
@@ -30,8 +32,8 @@ class StorableSubscription with _$StorableSubscription {
     required String productId,
     @JsonKey(
       name: 'expires_at',
-      fromJson: DateTime.fromMillisecondsSinceEpoch,
-      toJson: _dateToEpochMilliseconds,
+      fromJson: _dateFromEpochSeconds,
+      toJson: _dateToEpochSeconds,
     )
 
     /// The time the subscription will expire.

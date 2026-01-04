@@ -207,8 +207,7 @@ _$StorableSubscriptionImpl _$$StorableSubscriptionImplFromJson(
     _$StorableSubscriptionImpl(
       id: json['id'] as String,
       productId: json['product_id'] as String,
-      expiresAt: DateTime.fromMillisecondsSinceEpoch(
-          (json['expires_at'] as num).toInt()),
+      expiresAt: _dateFromEpochSeconds((json['expires_at'] as num).toInt()),
       store: $enumDecode(_$SubscriptionStoreEnumMap, json['store']),
       status: $enumDecode(_$SubscriptionStatusEnumMap, json['status']),
       renewalStatus: $enumDecode(
@@ -220,7 +219,7 @@ Map<String, dynamic> _$$StorableSubscriptionImplToJson(
     <String, dynamic>{
       'id': instance.id,
       'product_id': instance.productId,
-      'expires_at': _dateToEpochMilliseconds(instance.expiresAt),
+      'expires_at': _dateToEpochSeconds(instance.expiresAt),
       'store': _$SubscriptionStoreEnumMap[instance.store]!,
       'status': _$SubscriptionStatusEnumMap[instance.status]!,
       'renewal_status':

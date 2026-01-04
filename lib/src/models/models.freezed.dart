@@ -2399,8 +2399,8 @@ mixin _$StorableSubscription {
   String get productId => throw _privateConstructorUsedError;
   @JsonKey(
       name: 'expires_at',
-      fromJson: DateTime.fromMillisecondsSinceEpoch,
-      toJson: _dateToEpochMilliseconds)
+      fromJson: _dateFromEpochSeconds,
+      toJson: _dateToEpochSeconds)
   DateTime get expiresAt => throw _privateConstructorUsedError;
 
   /// The store that the user purchased the subscription from.
@@ -2433,8 +2433,8 @@ abstract class $StorableSubscriptionCopyWith<$Res> {
       @JsonKey(name: 'product_id') String productId,
       @JsonKey(
           name: 'expires_at',
-          fromJson: DateTime.fromMillisecondsSinceEpoch,
-          toJson: _dateToEpochMilliseconds)
+          fromJson: _dateFromEpochSeconds,
+          toJson: _dateToEpochSeconds)
       DateTime expiresAt,
       SubscriptionStore store,
       SubscriptionStatus status,
@@ -2507,8 +2507,8 @@ abstract class _$$StorableSubscriptionImplCopyWith<$Res>
       @JsonKey(name: 'product_id') String productId,
       @JsonKey(
           name: 'expires_at',
-          fromJson: DateTime.fromMillisecondsSinceEpoch,
-          toJson: _dateToEpochMilliseconds)
+          fromJson: _dateFromEpochSeconds,
+          toJson: _dateToEpochSeconds)
       DateTime expiresAt,
       SubscriptionStore store,
       SubscriptionStatus status,
@@ -2573,8 +2573,8 @@ class _$StorableSubscriptionImpl implements _StorableSubscription {
       @JsonKey(name: 'product_id') required this.productId,
       @JsonKey(
           name: 'expires_at',
-          fromJson: DateTime.fromMillisecondsSinceEpoch,
-          toJson: _dateToEpochMilliseconds)
+          fromJson: _dateFromEpochSeconds,
+          toJson: _dateToEpochSeconds)
       required this.expiresAt,
       required this.store,
       required this.status,
@@ -2593,8 +2593,8 @@ class _$StorableSubscriptionImpl implements _StorableSubscription {
   @override
   @JsonKey(
       name: 'expires_at',
-      fromJson: DateTime.fromMillisecondsSinceEpoch,
-      toJson: _dateToEpochMilliseconds)
+      fromJson: _dateFromEpochSeconds,
+      toJson: _dateToEpochSeconds)
   final DateTime expiresAt;
 
   /// The store that the user purchased the subscription from.
@@ -2658,8 +2658,8 @@ abstract class _StorableSubscription implements StorableSubscription {
           @JsonKey(name: 'product_id') required final String productId,
           @JsonKey(
               name: 'expires_at',
-              fromJson: DateTime.fromMillisecondsSinceEpoch,
-              toJson: _dateToEpochMilliseconds)
+              fromJson: _dateFromEpochSeconds,
+              toJson: _dateToEpochSeconds)
           required final DateTime expiresAt,
           required final SubscriptionStore store,
           required final SubscriptionStatus status,
@@ -2680,8 +2680,8 @@ abstract class _StorableSubscription implements StorableSubscription {
   @override
   @JsonKey(
       name: 'expires_at',
-      fromJson: DateTime.fromMillisecondsSinceEpoch,
-      toJson: _dateToEpochMilliseconds)
+      fromJson: _dateFromEpochSeconds,
+      toJson: _dateToEpochSeconds)
   DateTime get expiresAt;
 
   /// The store that the user purchased the subscription from.
