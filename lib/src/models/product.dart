@@ -5,8 +5,14 @@ enum SubscriptionStore {
   appStore,
   @JsonValue("playstore")
   playStore,
+  @JsonValue("stripe")
   stripe,
-  gocardless
+  @JsonValue("stripe_sandbox")
+  stripeSandbox,
+  @JsonValue("gocardless")
+  gocardless,
+  @JsonValue("gocardless_sandbox")
+  gocardlessSandbox,
 }
 
 enum ExternalStore { stripe, gocardless }
@@ -69,8 +75,10 @@ sealed class CrosspayProducts with _$CrosspayProducts {
       case SubscriptionStore.playStore:
         return playStore;
       case SubscriptionStore.stripe:
+      case SubscriptionStore.stripeSandbox:
         return stripe;
       case SubscriptionStore.gocardless:
+      case SubscriptionStore.gocardlessSandbox:
         return gocardless;
     }
   }
