@@ -31,7 +31,7 @@ class _MainAppState extends State<MainApp> {
       publicKey: Env.crosspayPublicKey,
       environment: CrosspayEnvironment.sandbox,
       baseUrl: Env.crosspayApiUrl,
-    )..identify("predrag.cvetkovski@maxint.com");
+    )..identify("<your email>");
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       _subscription = crosspay.purchaseEvents.listen((event) {
