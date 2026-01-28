@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,256 +9,37 @@ part of 'models.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-SubscriptionStoreProduct _$SubscriptionStoreProductFromJson(
-    Map<String, dynamic> json) {
-  return _SubscriptionStoreProduct.fromJson(json);
-}
 
 /// @nodoc
 mixin _$SubscriptionStoreProduct {
-  String get id => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
-  String get description => throw _privateConstructorUsedError;
-  double get price => throw _privateConstructorUsedError;
-  String get formattedPrice => throw _privateConstructorUsedError;
-  String get currencyCode => throw _privateConstructorUsedError;
-  SubscriptionStore get store => throw _privateConstructorUsedError;
-  int get subscriptionRecurrenceDays => throw _privateConstructorUsedError;
-  String get accessLevel => throw _privateConstructorUsedError;
-
-  /// Serializes this SubscriptionStoreProduct to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  String get id;
+  String get name;
+  String get description;
+  double get price;
+  String get formattedPrice;
+  String get currencyCode;
+  SubscriptionStore get store;
+  int get subscriptionRecurrenceDays;
+  String get accessLevel;
 
   /// Create a copy of SubscriptionStoreProduct
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $SubscriptionStoreProductCopyWith<SubscriptionStoreProduct> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+      _$SubscriptionStoreProductCopyWithImpl<SubscriptionStoreProduct>(
+          this as SubscriptionStoreProduct, _$identity);
 
-/// @nodoc
-abstract class $SubscriptionStoreProductCopyWith<$Res> {
-  factory $SubscriptionStoreProductCopyWith(SubscriptionStoreProduct value,
-          $Res Function(SubscriptionStoreProduct) then) =
-      _$SubscriptionStoreProductCopyWithImpl<$Res, SubscriptionStoreProduct>;
-  @useResult
-  $Res call(
-      {String id,
-      String name,
-      String description,
-      double price,
-      String formattedPrice,
-      String currencyCode,
-      SubscriptionStore store,
-      int subscriptionRecurrenceDays,
-      String accessLevel});
-}
-
-/// @nodoc
-class _$SubscriptionStoreProductCopyWithImpl<$Res,
-        $Val extends SubscriptionStoreProduct>
-    implements $SubscriptionStoreProductCopyWith<$Res> {
-  _$SubscriptionStoreProductCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of SubscriptionStoreProduct
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? name = null,
-    Object? description = null,
-    Object? price = null,
-    Object? formattedPrice = null,
-    Object? currencyCode = null,
-    Object? store = null,
-    Object? subscriptionRecurrenceDays = null,
-    Object? accessLevel = null,
-  }) {
-    return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      description: null == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String,
-      price: null == price
-          ? _value.price
-          : price // ignore: cast_nullable_to_non_nullable
-              as double,
-      formattedPrice: null == formattedPrice
-          ? _value.formattedPrice
-          : formattedPrice // ignore: cast_nullable_to_non_nullable
-              as String,
-      currencyCode: null == currencyCode
-          ? _value.currencyCode
-          : currencyCode // ignore: cast_nullable_to_non_nullable
-              as String,
-      store: null == store
-          ? _value.store
-          : store // ignore: cast_nullable_to_non_nullable
-              as SubscriptionStore,
-      subscriptionRecurrenceDays: null == subscriptionRecurrenceDays
-          ? _value.subscriptionRecurrenceDays
-          : subscriptionRecurrenceDays // ignore: cast_nullable_to_non_nullable
-              as int,
-      accessLevel: null == accessLevel
-          ? _value.accessLevel
-          : accessLevel // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$SubscriptionStoreProductImplCopyWith<$Res>
-    implements $SubscriptionStoreProductCopyWith<$Res> {
-  factory _$$SubscriptionStoreProductImplCopyWith(
-          _$SubscriptionStoreProductImpl value,
-          $Res Function(_$SubscriptionStoreProductImpl) then) =
-      __$$SubscriptionStoreProductImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {String id,
-      String name,
-      String description,
-      double price,
-      String formattedPrice,
-      String currencyCode,
-      SubscriptionStore store,
-      int subscriptionRecurrenceDays,
-      String accessLevel});
-}
-
-/// @nodoc
-class __$$SubscriptionStoreProductImplCopyWithImpl<$Res>
-    extends _$SubscriptionStoreProductCopyWithImpl<$Res,
-        _$SubscriptionStoreProductImpl>
-    implements _$$SubscriptionStoreProductImplCopyWith<$Res> {
-  __$$SubscriptionStoreProductImplCopyWithImpl(
-      _$SubscriptionStoreProductImpl _value,
-      $Res Function(_$SubscriptionStoreProductImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of SubscriptionStoreProduct
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? name = null,
-    Object? description = null,
-    Object? price = null,
-    Object? formattedPrice = null,
-    Object? currencyCode = null,
-    Object? store = null,
-    Object? subscriptionRecurrenceDays = null,
-    Object? accessLevel = null,
-  }) {
-    return _then(_$SubscriptionStoreProductImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      description: null == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String,
-      price: null == price
-          ? _value.price
-          : price // ignore: cast_nullable_to_non_nullable
-              as double,
-      formattedPrice: null == formattedPrice
-          ? _value.formattedPrice
-          : formattedPrice // ignore: cast_nullable_to_non_nullable
-              as String,
-      currencyCode: null == currencyCode
-          ? _value.currencyCode
-          : currencyCode // ignore: cast_nullable_to_non_nullable
-              as String,
-      store: null == store
-          ? _value.store
-          : store // ignore: cast_nullable_to_non_nullable
-              as SubscriptionStore,
-      subscriptionRecurrenceDays: null == subscriptionRecurrenceDays
-          ? _value.subscriptionRecurrenceDays
-          : subscriptionRecurrenceDays // ignore: cast_nullable_to_non_nullable
-              as int,
-      accessLevel: null == accessLevel
-          ? _value.accessLevel
-          : accessLevel // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$SubscriptionStoreProductImpl implements _SubscriptionStoreProduct {
-  _$SubscriptionStoreProductImpl(
-      {required this.id,
-      required this.name,
-      required this.description,
-      required this.price,
-      required this.formattedPrice,
-      required this.currencyCode,
-      required this.store,
-      required this.subscriptionRecurrenceDays,
-      required this.accessLevel});
-
-  factory _$SubscriptionStoreProductImpl.fromJson(Map<String, dynamic> json) =>
-      _$$SubscriptionStoreProductImplFromJson(json);
-
-  @override
-  final String id;
-  @override
-  final String name;
-  @override
-  final String description;
-  @override
-  final double price;
-  @override
-  final String formattedPrice;
-  @override
-  final String currencyCode;
-  @override
-  final SubscriptionStore store;
-  @override
-  final int subscriptionRecurrenceDays;
-  @override
-  final String accessLevel;
-
-  @override
-  String toString() {
-    return 'SubscriptionStoreProduct(id: $id, name: $name, description: $description, price: $price, formattedPrice: $formattedPrice, currencyCode: $currencyCode, store: $store, subscriptionRecurrenceDays: $subscriptionRecurrenceDays, accessLevel: $accessLevel)';
-  }
+  /// Serializes this SubscriptionStoreProduct to a JSON map.
+  Map<String, dynamic> toJson();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SubscriptionStoreProductImpl &&
+            other is SubscriptionStoreProduct &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.description, description) ||
@@ -291,97 +72,537 @@ class _$SubscriptionStoreProductImpl implements _SubscriptionStoreProduct {
       subscriptionRecurrenceDays,
       accessLevel);
 
-  /// Create a copy of SubscriptionStoreProduct
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$SubscriptionStoreProductImplCopyWith<_$SubscriptionStoreProductImpl>
-      get copyWith => __$$SubscriptionStoreProductImplCopyWithImpl<
-          _$SubscriptionStoreProductImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$SubscriptionStoreProductImplToJson(
-      this,
-    );
+  String toString() {
+    return 'SubscriptionStoreProduct(id: $id, name: $name, description: $description, price: $price, formattedPrice: $formattedPrice, currencyCode: $currencyCode, store: $store, subscriptionRecurrenceDays: $subscriptionRecurrenceDays, accessLevel: $accessLevel)';
   }
 }
 
-abstract class _SubscriptionStoreProduct implements SubscriptionStoreProduct {
-  factory _SubscriptionStoreProduct(
-      {required final String id,
-      required final String name,
-      required final String description,
-      required final double price,
-      required final String formattedPrice,
-      required final String currencyCode,
-      required final SubscriptionStore store,
-      required final int subscriptionRecurrenceDays,
-      required final String accessLevel}) = _$SubscriptionStoreProductImpl;
+/// @nodoc
+abstract mixin class $SubscriptionStoreProductCopyWith<$Res> {
+  factory $SubscriptionStoreProductCopyWith(SubscriptionStoreProduct value,
+          $Res Function(SubscriptionStoreProduct) _then) =
+      _$SubscriptionStoreProductCopyWithImpl;
+  @useResult
+  $Res call(
+      {String id,
+      String name,
+      String description,
+      double price,
+      String formattedPrice,
+      String currencyCode,
+      SubscriptionStore store,
+      int subscriptionRecurrenceDays,
+      String accessLevel});
+}
 
-  factory _SubscriptionStoreProduct.fromJson(Map<String, dynamic> json) =
-      _$SubscriptionStoreProductImpl.fromJson;
+/// @nodoc
+class _$SubscriptionStoreProductCopyWithImpl<$Res>
+    implements $SubscriptionStoreProductCopyWith<$Res> {
+  _$SubscriptionStoreProductCopyWithImpl(this._self, this._then);
+
+  final SubscriptionStoreProduct _self;
+  final $Res Function(SubscriptionStoreProduct) _then;
+
+  /// Create a copy of SubscriptionStoreProduct
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? name = null,
+    Object? description = null,
+    Object? price = null,
+    Object? formattedPrice = null,
+    Object? currencyCode = null,
+    Object? store = null,
+    Object? subscriptionRecurrenceDays = null,
+    Object? accessLevel = null,
+  }) {
+    return _then(_self.copyWith(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: null == description
+          ? _self.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      price: null == price
+          ? _self.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as double,
+      formattedPrice: null == formattedPrice
+          ? _self.formattedPrice
+          : formattedPrice // ignore: cast_nullable_to_non_nullable
+              as String,
+      currencyCode: null == currencyCode
+          ? _self.currencyCode
+          : currencyCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      store: null == store
+          ? _self.store
+          : store // ignore: cast_nullable_to_non_nullable
+              as SubscriptionStore,
+      subscriptionRecurrenceDays: null == subscriptionRecurrenceDays
+          ? _self.subscriptionRecurrenceDays
+          : subscriptionRecurrenceDays // ignore: cast_nullable_to_non_nullable
+              as int,
+      accessLevel: null == accessLevel
+          ? _self.accessLevel
+          : accessLevel // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// Adds pattern-matching-related methods to [SubscriptionStoreProduct].
+extension SubscriptionStoreProductPatterns on SubscriptionStoreProduct {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_SubscriptionStoreProduct value)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _SubscriptionStoreProduct() when $default != null:
+        return $default(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_SubscriptionStoreProduct value) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _SubscriptionStoreProduct():
+        return $default(_that);
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_SubscriptionStoreProduct value)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _SubscriptionStoreProduct() when $default != null:
+        return $default(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            String id,
+            String name,
+            String description,
+            double price,
+            String formattedPrice,
+            String currencyCode,
+            SubscriptionStore store,
+            int subscriptionRecurrenceDays,
+            String accessLevel)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _SubscriptionStoreProduct() when $default != null:
+        return $default(
+            _that.id,
+            _that.name,
+            _that.description,
+            _that.price,
+            _that.formattedPrice,
+            _that.currencyCode,
+            _that.store,
+            _that.subscriptionRecurrenceDays,
+            _that.accessLevel);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            String id,
+            String name,
+            String description,
+            double price,
+            String formattedPrice,
+            String currencyCode,
+            SubscriptionStore store,
+            int subscriptionRecurrenceDays,
+            String accessLevel)
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _SubscriptionStoreProduct():
+        return $default(
+            _that.id,
+            _that.name,
+            _that.description,
+            _that.price,
+            _that.formattedPrice,
+            _that.currencyCode,
+            _that.store,
+            _that.subscriptionRecurrenceDays,
+            _that.accessLevel);
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(
+            String id,
+            String name,
+            String description,
+            double price,
+            String formattedPrice,
+            String currencyCode,
+            SubscriptionStore store,
+            int subscriptionRecurrenceDays,
+            String accessLevel)?
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _SubscriptionStoreProduct() when $default != null:
+        return $default(
+            _that.id,
+            _that.name,
+            _that.description,
+            _that.price,
+            _that.formattedPrice,
+            _that.currencyCode,
+            _that.store,
+            _that.subscriptionRecurrenceDays,
+            _that.accessLevel);
+      case _:
+        return null;
+    }
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _SubscriptionStoreProduct implements SubscriptionStoreProduct {
+  _SubscriptionStoreProduct(
+      {required this.id,
+      required this.name,
+      required this.description,
+      required this.price,
+      required this.formattedPrice,
+      required this.currencyCode,
+      required this.store,
+      required this.subscriptionRecurrenceDays,
+      required this.accessLevel});
+  factory _SubscriptionStoreProduct.fromJson(Map<String, dynamic> json) =>
+      _$SubscriptionStoreProductFromJson(json);
 
   @override
-  String get id;
+  final String id;
   @override
-  String get name;
+  final String name;
   @override
-  String get description;
+  final String description;
   @override
-  double get price;
+  final double price;
   @override
-  String get formattedPrice;
+  final String formattedPrice;
   @override
-  String get currencyCode;
+  final String currencyCode;
   @override
-  SubscriptionStore get store;
+  final SubscriptionStore store;
   @override
-  int get subscriptionRecurrenceDays;
+  final int subscriptionRecurrenceDays;
   @override
-  String get accessLevel;
+  final String accessLevel;
 
   /// Create a copy of SubscriptionStoreProduct
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$SubscriptionStoreProductImplCopyWith<_$SubscriptionStoreProductImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  _$SubscriptionStoreProductCopyWith<_SubscriptionStoreProduct> get copyWith =>
+      __$SubscriptionStoreProductCopyWithImpl<_SubscriptionStoreProduct>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$SubscriptionStoreProductToJson(
+      this,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _SubscriptionStoreProduct &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            (identical(other.price, price) || other.price == price) &&
+            (identical(other.formattedPrice, formattedPrice) ||
+                other.formattedPrice == formattedPrice) &&
+            (identical(other.currencyCode, currencyCode) ||
+                other.currencyCode == currencyCode) &&
+            (identical(other.store, store) || other.store == store) &&
+            (identical(other.subscriptionRecurrenceDays,
+                    subscriptionRecurrenceDays) ||
+                other.subscriptionRecurrenceDays ==
+                    subscriptionRecurrenceDays) &&
+            (identical(other.accessLevel, accessLevel) ||
+                other.accessLevel == accessLevel));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      name,
+      description,
+      price,
+      formattedPrice,
+      currencyCode,
+      store,
+      subscriptionRecurrenceDays,
+      accessLevel);
+
+  @override
+  String toString() {
+    return 'SubscriptionStoreProduct(id: $id, name: $name, description: $description, price: $price, formattedPrice: $formattedPrice, currencyCode: $currencyCode, store: $store, subscriptionRecurrenceDays: $subscriptionRecurrenceDays, accessLevel: $accessLevel)';
+  }
 }
 
-CrosspayEntitlement _$CrosspayEntitlementFromJson(Map<String, dynamic> json) {
-  return _CrosspayEntitlement.fromJson(json);
+/// @nodoc
+abstract mixin class _$SubscriptionStoreProductCopyWith<$Res>
+    implements $SubscriptionStoreProductCopyWith<$Res> {
+  factory _$SubscriptionStoreProductCopyWith(_SubscriptionStoreProduct value,
+          $Res Function(_SubscriptionStoreProduct) _then) =
+      __$SubscriptionStoreProductCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String id,
+      String name,
+      String description,
+      double price,
+      String formattedPrice,
+      String currencyCode,
+      SubscriptionStore store,
+      int subscriptionRecurrenceDays,
+      String accessLevel});
+}
+
+/// @nodoc
+class __$SubscriptionStoreProductCopyWithImpl<$Res>
+    implements _$SubscriptionStoreProductCopyWith<$Res> {
+  __$SubscriptionStoreProductCopyWithImpl(this._self, this._then);
+
+  final _SubscriptionStoreProduct _self;
+  final $Res Function(_SubscriptionStoreProduct) _then;
+
+  /// Create a copy of SubscriptionStoreProduct
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? id = null,
+    Object? name = null,
+    Object? description = null,
+    Object? price = null,
+    Object? formattedPrice = null,
+    Object? currencyCode = null,
+    Object? store = null,
+    Object? subscriptionRecurrenceDays = null,
+    Object? accessLevel = null,
+  }) {
+    return _then(_SubscriptionStoreProduct(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: null == description
+          ? _self.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      price: null == price
+          ? _self.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as double,
+      formattedPrice: null == formattedPrice
+          ? _self.formattedPrice
+          : formattedPrice // ignore: cast_nullable_to_non_nullable
+              as String,
+      currencyCode: null == currencyCode
+          ? _self.currencyCode
+          : currencyCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      store: null == store
+          ? _self.store
+          : store // ignore: cast_nullable_to_non_nullable
+              as SubscriptionStore,
+      subscriptionRecurrenceDays: null == subscriptionRecurrenceDays
+          ? _self.subscriptionRecurrenceDays
+          : subscriptionRecurrenceDays // ignore: cast_nullable_to_non_nullable
+              as int,
+      accessLevel: null == accessLevel
+          ? _self.accessLevel
+          : accessLevel // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
 /// @nodoc
 mixin _$CrosspayEntitlement {
-  String get id => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
+  String get id;
+  String get name;
   @JsonKey(
       name: "period_ms",
       fromJson: _durationFromMillis,
       toJson: _durationToMillis)
-  Duration get period => throw _privateConstructorUsedError;
-  String? get description => throw _privateConstructorUsedError;
-  Map<String, dynamic>? get metadata => throw _privateConstructorUsedError;
-  CrosspayProducts get products => throw _privateConstructorUsedError;
-
-  /// Serializes this CrosspayEntitlement to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  Duration get period;
+  String? get description;
+  Map<String, dynamic>? get metadata;
+  CrosspayProducts get products;
 
   /// Create a copy of CrosspayEntitlement
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $CrosspayEntitlementCopyWith<CrosspayEntitlement> get copyWith =>
-      throw _privateConstructorUsedError;
+      _$CrosspayEntitlementCopyWithImpl<CrosspayEntitlement>(
+          this as CrosspayEntitlement, _$identity);
+
+  /// Serializes this CrosspayEntitlement to a JSON map.
+  Map<String, dynamic> toJson();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is CrosspayEntitlement &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.period, period) || other.period == period) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            const DeepCollectionEquality().equals(other.metadata, metadata) &&
+            (identical(other.products, products) ||
+                other.products == products));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, id, name, period, description,
+      const DeepCollectionEquality().hash(metadata), products);
+
+  @override
+  String toString() {
+    return 'CrosspayEntitlement(id: $id, name: $name, period: $period, description: $description, metadata: $metadata, products: $products)';
+  }
 }
 
 /// @nodoc
-abstract class $CrosspayEntitlementCopyWith<$Res> {
+abstract mixin class $CrosspayEntitlementCopyWith<$Res> {
   factory $CrosspayEntitlementCopyWith(
-          CrosspayEntitlement value, $Res Function(CrosspayEntitlement) then) =
-      _$CrosspayEntitlementCopyWithImpl<$Res, CrosspayEntitlement>;
+          CrosspayEntitlement value, $Res Function(CrosspayEntitlement) _then) =
+      _$CrosspayEntitlementCopyWithImpl;
   @useResult
   $Res call(
       {String id,
@@ -399,14 +620,12 @@ abstract class $CrosspayEntitlementCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$CrosspayEntitlementCopyWithImpl<$Res, $Val extends CrosspayEntitlement>
+class _$CrosspayEntitlementCopyWithImpl<$Res>
     implements $CrosspayEntitlementCopyWith<$Res> {
-  _$CrosspayEntitlementCopyWithImpl(this._value, this._then);
+  _$CrosspayEntitlementCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final CrosspayEntitlement _self;
+  final $Res Function(CrosspayEntitlement) _then;
 
   /// Create a copy of CrosspayEntitlement
   /// with the given fields replaced by the non-null parameter values.
@@ -420,32 +639,32 @@ class _$CrosspayEntitlementCopyWithImpl<$Res, $Val extends CrosspayEntitlement>
     Object? metadata = freezed,
     Object? products = null,
   }) {
-    return _then(_value.copyWith(
+    return _then(_self.copyWith(
       id: null == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
       name: null == name
-          ? _value.name
+          ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
       period: null == period
-          ? _value.period
+          ? _self.period
           : period // ignore: cast_nullable_to_non_nullable
               as Duration,
       description: freezed == description
-          ? _value.description
+          ? _self.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
       metadata: freezed == metadata
-          ? _value.metadata
+          ? _self.metadata
           : metadata // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>?,
       products: null == products
-          ? _value.products
+          ? _self.products
           : products // ignore: cast_nullable_to_non_nullable
               as CrosspayProducts,
-    ) as $Val);
+    ));
   }
 
   /// Create a copy of CrosspayEntitlement
@@ -453,89 +672,205 @@ class _$CrosspayEntitlementCopyWithImpl<$Res, $Val extends CrosspayEntitlement>
   @override
   @pragma('vm:prefer-inline')
   $CrosspayProductsCopyWith<$Res> get products {
-    return $CrosspayProductsCopyWith<$Res>(_value.products, (value) {
-      return _then(_value.copyWith(products: value) as $Val);
+    return $CrosspayProductsCopyWith<$Res>(_self.products, (value) {
+      return _then(_self.copyWith(products: value));
     });
   }
 }
 
-/// @nodoc
-abstract class _$$CrosspayEntitlementImplCopyWith<$Res>
-    implements $CrosspayEntitlementCopyWith<$Res> {
-  factory _$$CrosspayEntitlementImplCopyWith(_$CrosspayEntitlementImpl value,
-          $Res Function(_$CrosspayEntitlementImpl) then) =
-      __$$CrosspayEntitlementImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {String id,
-      String name,
-      @JsonKey(
-          name: "period_ms",
-          fromJson: _durationFromMillis,
-          toJson: _durationToMillis)
-      Duration period,
-      String? description,
-      Map<String, dynamic>? metadata,
-      CrosspayProducts products});
+/// Adds pattern-matching-related methods to [CrosspayEntitlement].
+extension CrosspayEntitlementPatterns on CrosspayEntitlement {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
 
-  @override
-  $CrosspayProductsCopyWith<$Res> get products;
-}
-
-/// @nodoc
-class __$$CrosspayEntitlementImplCopyWithImpl<$Res>
-    extends _$CrosspayEntitlementCopyWithImpl<$Res, _$CrosspayEntitlementImpl>
-    implements _$$CrosspayEntitlementImplCopyWith<$Res> {
-  __$$CrosspayEntitlementImplCopyWithImpl(_$CrosspayEntitlementImpl _value,
-      $Res Function(_$CrosspayEntitlementImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of CrosspayEntitlement
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? name = null,
-    Object? period = null,
-    Object? description = freezed,
-    Object? metadata = freezed,
-    Object? products = null,
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_CrosspayEntitlement value)? $default, {
+    required TResult orElse(),
   }) {
-    return _then(_$CrosspayEntitlementImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      period: null == period
-          ? _value.period
-          : period // ignore: cast_nullable_to_non_nullable
-              as Duration,
-      description: freezed == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String?,
-      metadata: freezed == metadata
-          ? _value._metadata
-          : metadata // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>?,
-      products: null == products
-          ? _value.products
-          : products // ignore: cast_nullable_to_non_nullable
-              as CrosspayProducts,
-    ));
+    final _that = this;
+    switch (_that) {
+      case _CrosspayEntitlement() when $default != null:
+        return $default(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_CrosspayEntitlement value) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _CrosspayEntitlement():
+        return $default(_that);
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_CrosspayEntitlement value)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _CrosspayEntitlement() when $default != null:
+        return $default(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            String id,
+            String name,
+            @JsonKey(
+                name: "period_ms",
+                fromJson: _durationFromMillis,
+                toJson: _durationToMillis)
+            Duration period,
+            String? description,
+            Map<String, dynamic>? metadata,
+            CrosspayProducts products)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _CrosspayEntitlement() when $default != null:
+        return $default(_that.id, _that.name, _that.period, _that.description,
+            _that.metadata, _that.products);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            String id,
+            String name,
+            @JsonKey(
+                name: "period_ms",
+                fromJson: _durationFromMillis,
+                toJson: _durationToMillis)
+            Duration period,
+            String? description,
+            Map<String, dynamic>? metadata,
+            CrosspayProducts products)
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _CrosspayEntitlement():
+        return $default(_that.id, _that.name, _that.period, _that.description,
+            _that.metadata, _that.products);
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(
+            String id,
+            String name,
+            @JsonKey(
+                name: "period_ms",
+                fromJson: _durationFromMillis,
+                toJson: _durationToMillis)
+            Duration period,
+            String? description,
+            Map<String, dynamic>? metadata,
+            CrosspayProducts products)?
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _CrosspayEntitlement() when $default != null:
+        return $default(_that.id, _that.name, _that.period, _that.description,
+            _that.metadata, _that.products);
+      case _:
+        return null;
+    }
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$CrosspayEntitlementImpl implements _CrosspayEntitlement {
-  _$CrosspayEntitlementImpl(
+class _CrosspayEntitlement implements CrosspayEntitlement {
+  _CrosspayEntitlement(
       {required this.id,
       required this.name,
       @JsonKey(
@@ -547,9 +882,8 @@ class _$CrosspayEntitlementImpl implements _CrosspayEntitlement {
       final Map<String, dynamic>? metadata,
       required this.products})
       : _metadata = metadata;
-
-  factory _$CrosspayEntitlementImpl.fromJson(Map<String, dynamic> json) =>
-      _$$CrosspayEntitlementImplFromJson(json);
+  factory _CrosspayEntitlement.fromJson(Map<String, dynamic> json) =>
+      _$CrosspayEntitlementFromJson(json);
 
   @override
   final String id;
@@ -576,16 +910,27 @@ class _$CrosspayEntitlementImpl implements _CrosspayEntitlement {
   @override
   final CrosspayProducts products;
 
+  /// Create a copy of CrosspayEntitlement
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'CrosspayEntitlement(id: $id, name: $name, period: $period, description: $description, metadata: $metadata, products: $products)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$CrosspayEntitlementCopyWith<_CrosspayEntitlement> get copyWith =>
+      __$CrosspayEntitlementCopyWithImpl<_CrosspayEntitlement>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$CrosspayEntitlementToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$CrosspayEntitlementImpl &&
+            other is _CrosspayEntitlement &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.period, period) || other.period == period) &&
@@ -601,299 +946,120 @@ class _$CrosspayEntitlementImpl implements _CrosspayEntitlement {
   int get hashCode => Object.hash(runtimeType, id, name, period, description,
       const DeepCollectionEquality().hash(_metadata), products);
 
-  /// Create a copy of CrosspayEntitlement
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$CrosspayEntitlementImplCopyWith<_$CrosspayEntitlementImpl> get copyWith =>
-      __$$CrosspayEntitlementImplCopyWithImpl<_$CrosspayEntitlementImpl>(
-          this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$CrosspayEntitlementImplToJson(
-      this,
-    );
+  String toString() {
+    return 'CrosspayEntitlement(id: $id, name: $name, period: $period, description: $description, metadata: $metadata, products: $products)';
   }
 }
 
-abstract class _CrosspayEntitlement implements CrosspayEntitlement {
-  factory _CrosspayEntitlement(
-      {required final String id,
-      required final String name,
+/// @nodoc
+abstract mixin class _$CrosspayEntitlementCopyWith<$Res>
+    implements $CrosspayEntitlementCopyWith<$Res> {
+  factory _$CrosspayEntitlementCopyWith(_CrosspayEntitlement value,
+          $Res Function(_CrosspayEntitlement) _then) =
+      __$CrosspayEntitlementCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String id,
+      String name,
       @JsonKey(
           name: "period_ms",
           fromJson: _durationFromMillis,
           toJson: _durationToMillis)
-      required final Duration period,
-      final String? description,
-      final Map<String, dynamic>? metadata,
-      required final CrosspayProducts products}) = _$CrosspayEntitlementImpl;
-
-  factory _CrosspayEntitlement.fromJson(Map<String, dynamic> json) =
-      _$CrosspayEntitlementImpl.fromJson;
+      Duration period,
+      String? description,
+      Map<String, dynamic>? metadata,
+      CrosspayProducts products});
 
   @override
-  String get id;
-  @override
-  String get name;
-  @override
-  @JsonKey(
-      name: "period_ms",
-      fromJson: _durationFromMillis,
-      toJson: _durationToMillis)
-  Duration get period;
-  @override
-  String? get description;
-  @override
-  Map<String, dynamic>? get metadata;
-  @override
-  CrosspayProducts get products;
+  $CrosspayProductsCopyWith<$Res> get products;
+}
+
+/// @nodoc
+class __$CrosspayEntitlementCopyWithImpl<$Res>
+    implements _$CrosspayEntitlementCopyWith<$Res> {
+  __$CrosspayEntitlementCopyWithImpl(this._self, this._then);
+
+  final _CrosspayEntitlement _self;
+  final $Res Function(_CrosspayEntitlement) _then;
 
   /// Create a copy of CrosspayEntitlement
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$CrosspayEntitlementImplCopyWith<_$CrosspayEntitlementImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? id = null,
+    Object? name = null,
+    Object? period = null,
+    Object? description = freezed,
+    Object? metadata = freezed,
+    Object? products = null,
+  }) {
+    return _then(_CrosspayEntitlement(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      period: null == period
+          ? _self.period
+          : period // ignore: cast_nullable_to_non_nullable
+              as Duration,
+      description: freezed == description
+          ? _self.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      metadata: freezed == metadata
+          ? _self._metadata
+          : metadata // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+      products: null == products
+          ? _self.products
+          : products // ignore: cast_nullable_to_non_nullable
+              as CrosspayProducts,
+    ));
+  }
 
-CrosspayProducts _$CrosspayProductsFromJson(Map<String, dynamic> json) {
-  return _CrosspayProducts.fromJson(json);
+  /// Create a copy of CrosspayEntitlement
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $CrosspayProductsCopyWith<$Res> get products {
+    return $CrosspayProductsCopyWith<$Res>(_self.products, (value) {
+      return _then(_self.copyWith(products: value));
+    });
+  }
 }
 
 /// @nodoc
 mixin _$CrosspayProducts {
   @JsonKey(name: "playstore")
-  CrosspayProduct? get playStore => throw _privateConstructorUsedError;
+  CrosspayProduct? get playStore;
   @JsonKey(name: "appstore")
-  CrosspayProduct? get appStore => throw _privateConstructorUsedError;
-  CrosspayProduct? get stripe => throw _privateConstructorUsedError;
-  CrosspayProduct? get gocardless => throw _privateConstructorUsedError;
-
-  /// Serializes this CrosspayProducts to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  CrosspayProduct? get appStore;
+  CrosspayProduct? get stripe;
+  CrosspayProduct? get gocardless;
 
   /// Create a copy of CrosspayProducts
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $CrosspayProductsCopyWith<CrosspayProducts> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+      _$CrosspayProductsCopyWithImpl<CrosspayProducts>(
+          this as CrosspayProducts, _$identity);
 
-/// @nodoc
-abstract class $CrosspayProductsCopyWith<$Res> {
-  factory $CrosspayProductsCopyWith(
-          CrosspayProducts value, $Res Function(CrosspayProducts) then) =
-      _$CrosspayProductsCopyWithImpl<$Res, CrosspayProducts>;
-  @useResult
-  $Res call(
-      {@JsonKey(name: "playstore") CrosspayProduct? playStore,
-      @JsonKey(name: "appstore") CrosspayProduct? appStore,
-      CrosspayProduct? stripe,
-      CrosspayProduct? gocardless});
-
-  $CrosspayProductCopyWith<$Res>? get playStore;
-  $CrosspayProductCopyWith<$Res>? get appStore;
-  $CrosspayProductCopyWith<$Res>? get stripe;
-  $CrosspayProductCopyWith<$Res>? get gocardless;
-}
-
-/// @nodoc
-class _$CrosspayProductsCopyWithImpl<$Res, $Val extends CrosspayProducts>
-    implements $CrosspayProductsCopyWith<$Res> {
-  _$CrosspayProductsCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of CrosspayProducts
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? playStore = freezed,
-    Object? appStore = freezed,
-    Object? stripe = freezed,
-    Object? gocardless = freezed,
-  }) {
-    return _then(_value.copyWith(
-      playStore: freezed == playStore
-          ? _value.playStore
-          : playStore // ignore: cast_nullable_to_non_nullable
-              as CrosspayProduct?,
-      appStore: freezed == appStore
-          ? _value.appStore
-          : appStore // ignore: cast_nullable_to_non_nullable
-              as CrosspayProduct?,
-      stripe: freezed == stripe
-          ? _value.stripe
-          : stripe // ignore: cast_nullable_to_non_nullable
-              as CrosspayProduct?,
-      gocardless: freezed == gocardless
-          ? _value.gocardless
-          : gocardless // ignore: cast_nullable_to_non_nullable
-              as CrosspayProduct?,
-    ) as $Val);
-  }
-
-  /// Create a copy of CrosspayProducts
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $CrosspayProductCopyWith<$Res>? get playStore {
-    if (_value.playStore == null) {
-      return null;
-    }
-
-    return $CrosspayProductCopyWith<$Res>(_value.playStore!, (value) {
-      return _then(_value.copyWith(playStore: value) as $Val);
-    });
-  }
-
-  /// Create a copy of CrosspayProducts
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $CrosspayProductCopyWith<$Res>? get appStore {
-    if (_value.appStore == null) {
-      return null;
-    }
-
-    return $CrosspayProductCopyWith<$Res>(_value.appStore!, (value) {
-      return _then(_value.copyWith(appStore: value) as $Val);
-    });
-  }
-
-  /// Create a copy of CrosspayProducts
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $CrosspayProductCopyWith<$Res>? get stripe {
-    if (_value.stripe == null) {
-      return null;
-    }
-
-    return $CrosspayProductCopyWith<$Res>(_value.stripe!, (value) {
-      return _then(_value.copyWith(stripe: value) as $Val);
-    });
-  }
-
-  /// Create a copy of CrosspayProducts
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $CrosspayProductCopyWith<$Res>? get gocardless {
-    if (_value.gocardless == null) {
-      return null;
-    }
-
-    return $CrosspayProductCopyWith<$Res>(_value.gocardless!, (value) {
-      return _then(_value.copyWith(gocardless: value) as $Val);
-    });
-  }
-}
-
-/// @nodoc
-abstract class _$$CrosspayProductsImplCopyWith<$Res>
-    implements $CrosspayProductsCopyWith<$Res> {
-  factory _$$CrosspayProductsImplCopyWith(_$CrosspayProductsImpl value,
-          $Res Function(_$CrosspayProductsImpl) then) =
-      __$$CrosspayProductsImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {@JsonKey(name: "playstore") CrosspayProduct? playStore,
-      @JsonKey(name: "appstore") CrosspayProduct? appStore,
-      CrosspayProduct? stripe,
-      CrosspayProduct? gocardless});
-
-  @override
-  $CrosspayProductCopyWith<$Res>? get playStore;
-  @override
-  $CrosspayProductCopyWith<$Res>? get appStore;
-  @override
-  $CrosspayProductCopyWith<$Res>? get stripe;
-  @override
-  $CrosspayProductCopyWith<$Res>? get gocardless;
-}
-
-/// @nodoc
-class __$$CrosspayProductsImplCopyWithImpl<$Res>
-    extends _$CrosspayProductsCopyWithImpl<$Res, _$CrosspayProductsImpl>
-    implements _$$CrosspayProductsImplCopyWith<$Res> {
-  __$$CrosspayProductsImplCopyWithImpl(_$CrosspayProductsImpl _value,
-      $Res Function(_$CrosspayProductsImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of CrosspayProducts
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? playStore = freezed,
-    Object? appStore = freezed,
-    Object? stripe = freezed,
-    Object? gocardless = freezed,
-  }) {
-    return _then(_$CrosspayProductsImpl(
-      playStore: freezed == playStore
-          ? _value.playStore
-          : playStore // ignore: cast_nullable_to_non_nullable
-              as CrosspayProduct?,
-      appStore: freezed == appStore
-          ? _value.appStore
-          : appStore // ignore: cast_nullable_to_non_nullable
-              as CrosspayProduct?,
-      stripe: freezed == stripe
-          ? _value.stripe
-          : stripe // ignore: cast_nullable_to_non_nullable
-              as CrosspayProduct?,
-      gocardless: freezed == gocardless
-          ? _value.gocardless
-          : gocardless // ignore: cast_nullable_to_non_nullable
-              as CrosspayProduct?,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$CrosspayProductsImpl extends _CrosspayProducts {
-  _$CrosspayProductsImpl(
-      {@JsonKey(name: "playstore") this.playStore,
-      @JsonKey(name: "appstore") this.appStore,
-      this.stripe,
-      this.gocardless})
-      : super._();
-
-  factory _$CrosspayProductsImpl.fromJson(Map<String, dynamic> json) =>
-      _$$CrosspayProductsImplFromJson(json);
-
-  @override
-  @JsonKey(name: "playstore")
-  final CrosspayProduct? playStore;
-  @override
-  @JsonKey(name: "appstore")
-  final CrosspayProduct? appStore;
-  @override
-  final CrosspayProduct? stripe;
-  @override
-  final CrosspayProduct? gocardless;
-
-  @override
-  String toString() {
-    return 'CrosspayProducts(playStore: $playStore, appStore: $appStore, stripe: $stripe, gocardless: $gocardless)';
-  }
+  /// Serializes this CrosspayProducts to a JSON map.
+  Map<String, dynamic> toJson();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$CrosspayProductsImpl &&
+            other is CrosspayProducts &&
             (identical(other.playStore, playStore) ||
                 other.playStore == playStore) &&
             (identical(other.appStore, appStore) ||
@@ -908,143 +1074,528 @@ class _$CrosspayProductsImpl extends _CrosspayProducts {
   int get hashCode =>
       Object.hash(runtimeType, playStore, appStore, stripe, gocardless);
 
-  /// Create a copy of CrosspayProducts
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$CrosspayProductsImplCopyWith<_$CrosspayProductsImpl> get copyWith =>
-      __$$CrosspayProductsImplCopyWithImpl<_$CrosspayProductsImpl>(
-          this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$CrosspayProductsImplToJson(
-      this,
-    );
+  String toString() {
+    return 'CrosspayProducts(playStore: $playStore, appStore: $appStore, stripe: $stripe, gocardless: $gocardless)';
   }
 }
 
-abstract class _CrosspayProducts extends CrosspayProducts {
-  factory _CrosspayProducts(
-      {@JsonKey(name: "playstore") final CrosspayProduct? playStore,
-      @JsonKey(name: "appstore") final CrosspayProduct? appStore,
-      final CrosspayProduct? stripe,
-      final CrosspayProduct? gocardless}) = _$CrosspayProductsImpl;
-  _CrosspayProducts._() : super._();
+/// @nodoc
+abstract mixin class $CrosspayProductsCopyWith<$Res> {
+  factory $CrosspayProductsCopyWith(
+          CrosspayProducts value, $Res Function(CrosspayProducts) _then) =
+      _$CrosspayProductsCopyWithImpl;
+  @useResult
+  $Res call(
+      {@JsonKey(name: "playstore") CrosspayProduct? playStore,
+      @JsonKey(name: "appstore") CrosspayProduct? appStore,
+      CrosspayProduct? stripe,
+      CrosspayProduct? gocardless});
 
-  factory _CrosspayProducts.fromJson(Map<String, dynamic> json) =
-      _$CrosspayProductsImpl.fromJson;
+  $CrosspayProductCopyWith<$Res>? get playStore;
+  $CrosspayProductCopyWith<$Res>? get appStore;
+  $CrosspayProductCopyWith<$Res>? get stripe;
+  $CrosspayProductCopyWith<$Res>? get gocardless;
+}
+
+/// @nodoc
+class _$CrosspayProductsCopyWithImpl<$Res>
+    implements $CrosspayProductsCopyWith<$Res> {
+  _$CrosspayProductsCopyWithImpl(this._self, this._then);
+
+  final CrosspayProducts _self;
+  final $Res Function(CrosspayProducts) _then;
+
+  /// Create a copy of CrosspayProducts
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? playStore = freezed,
+    Object? appStore = freezed,
+    Object? stripe = freezed,
+    Object? gocardless = freezed,
+  }) {
+    return _then(_self.copyWith(
+      playStore: freezed == playStore
+          ? _self.playStore
+          : playStore // ignore: cast_nullable_to_non_nullable
+              as CrosspayProduct?,
+      appStore: freezed == appStore
+          ? _self.appStore
+          : appStore // ignore: cast_nullable_to_non_nullable
+              as CrosspayProduct?,
+      stripe: freezed == stripe
+          ? _self.stripe
+          : stripe // ignore: cast_nullable_to_non_nullable
+              as CrosspayProduct?,
+      gocardless: freezed == gocardless
+          ? _self.gocardless
+          : gocardless // ignore: cast_nullable_to_non_nullable
+              as CrosspayProduct?,
+    ));
+  }
+
+  /// Create a copy of CrosspayProducts
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $CrosspayProductCopyWith<$Res>? get playStore {
+    if (_self.playStore == null) {
+      return null;
+    }
+
+    return $CrosspayProductCopyWith<$Res>(_self.playStore!, (value) {
+      return _then(_self.copyWith(playStore: value));
+    });
+  }
+
+  /// Create a copy of CrosspayProducts
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $CrosspayProductCopyWith<$Res>? get appStore {
+    if (_self.appStore == null) {
+      return null;
+    }
+
+    return $CrosspayProductCopyWith<$Res>(_self.appStore!, (value) {
+      return _then(_self.copyWith(appStore: value));
+    });
+  }
+
+  /// Create a copy of CrosspayProducts
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $CrosspayProductCopyWith<$Res>? get stripe {
+    if (_self.stripe == null) {
+      return null;
+    }
+
+    return $CrosspayProductCopyWith<$Res>(_self.stripe!, (value) {
+      return _then(_self.copyWith(stripe: value));
+    });
+  }
+
+  /// Create a copy of CrosspayProducts
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $CrosspayProductCopyWith<$Res>? get gocardless {
+    if (_self.gocardless == null) {
+      return null;
+    }
+
+    return $CrosspayProductCopyWith<$Res>(_self.gocardless!, (value) {
+      return _then(_self.copyWith(gocardless: value));
+    });
+  }
+}
+
+/// Adds pattern-matching-related methods to [CrosspayProducts].
+extension CrosspayProductsPatterns on CrosspayProducts {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_CrosspayProducts value)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _CrosspayProducts() when $default != null:
+        return $default(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_CrosspayProducts value) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _CrosspayProducts():
+        return $default(_that);
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_CrosspayProducts value)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _CrosspayProducts() when $default != null:
+        return $default(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            @JsonKey(name: "playstore") CrosspayProduct? playStore,
+            @JsonKey(name: "appstore") CrosspayProduct? appStore,
+            CrosspayProduct? stripe,
+            CrosspayProduct? gocardless)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _CrosspayProducts() when $default != null:
+        return $default(
+            _that.playStore, _that.appStore, _that.stripe, _that.gocardless);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            @JsonKey(name: "playstore") CrosspayProduct? playStore,
+            @JsonKey(name: "appstore") CrosspayProduct? appStore,
+            CrosspayProduct? stripe,
+            CrosspayProduct? gocardless)
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _CrosspayProducts():
+        return $default(
+            _that.playStore, _that.appStore, _that.stripe, _that.gocardless);
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(
+            @JsonKey(name: "playstore") CrosspayProduct? playStore,
+            @JsonKey(name: "appstore") CrosspayProduct? appStore,
+            CrosspayProduct? stripe,
+            CrosspayProduct? gocardless)?
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _CrosspayProducts() when $default != null:
+        return $default(
+            _that.playStore, _that.appStore, _that.stripe, _that.gocardless);
+      case _:
+        return null;
+    }
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _CrosspayProducts extends CrosspayProducts {
+  _CrosspayProducts(
+      {@JsonKey(name: "playstore") this.playStore,
+      @JsonKey(name: "appstore") this.appStore,
+      this.stripe,
+      this.gocardless})
+      : super._();
+  factory _CrosspayProducts.fromJson(Map<String, dynamic> json) =>
+      _$CrosspayProductsFromJson(json);
 
   @override
   @JsonKey(name: "playstore")
-  CrosspayProduct? get playStore;
+  final CrosspayProduct? playStore;
   @override
   @JsonKey(name: "appstore")
-  CrosspayProduct? get appStore;
+  final CrosspayProduct? appStore;
   @override
-  CrosspayProduct? get stripe;
+  final CrosspayProduct? stripe;
   @override
-  CrosspayProduct? get gocardless;
+  final CrosspayProduct? gocardless;
 
   /// Create a copy of CrosspayProducts
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$CrosspayProductsImplCopyWith<_$CrosspayProductsImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  _$CrosspayProductsCopyWith<_CrosspayProducts> get copyWith =>
+      __$CrosspayProductsCopyWithImpl<_CrosspayProducts>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$CrosspayProductsToJson(
+      this,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _CrosspayProducts &&
+            (identical(other.playStore, playStore) ||
+                other.playStore == playStore) &&
+            (identical(other.appStore, appStore) ||
+                other.appStore == appStore) &&
+            (identical(other.stripe, stripe) || other.stripe == stripe) &&
+            (identical(other.gocardless, gocardless) ||
+                other.gocardless == gocardless));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, playStore, appStore, stripe, gocardless);
+
+  @override
+  String toString() {
+    return 'CrosspayProducts(playStore: $playStore, appStore: $appStore, stripe: $stripe, gocardless: $gocardless)';
+  }
 }
 
-CrosspayProduct _$CrosspayProductFromJson(Map<String, dynamic> json) {
-  return _CrosspayProduct.fromJson(json);
+/// @nodoc
+abstract mixin class _$CrosspayProductsCopyWith<$Res>
+    implements $CrosspayProductsCopyWith<$Res> {
+  factory _$CrosspayProductsCopyWith(
+          _CrosspayProducts value, $Res Function(_CrosspayProducts) _then) =
+      __$CrosspayProductsCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {@JsonKey(name: "playstore") CrosspayProduct? playStore,
+      @JsonKey(name: "appstore") CrosspayProduct? appStore,
+      CrosspayProduct? stripe,
+      CrosspayProduct? gocardless});
+
+  @override
+  $CrosspayProductCopyWith<$Res>? get playStore;
+  @override
+  $CrosspayProductCopyWith<$Res>? get appStore;
+  @override
+  $CrosspayProductCopyWith<$Res>? get stripe;
+  @override
+  $CrosspayProductCopyWith<$Res>? get gocardless;
+}
+
+/// @nodoc
+class __$CrosspayProductsCopyWithImpl<$Res>
+    implements _$CrosspayProductsCopyWith<$Res> {
+  __$CrosspayProductsCopyWithImpl(this._self, this._then);
+
+  final _CrosspayProducts _self;
+  final $Res Function(_CrosspayProducts) _then;
+
+  /// Create a copy of CrosspayProducts
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? playStore = freezed,
+    Object? appStore = freezed,
+    Object? stripe = freezed,
+    Object? gocardless = freezed,
+  }) {
+    return _then(_CrosspayProducts(
+      playStore: freezed == playStore
+          ? _self.playStore
+          : playStore // ignore: cast_nullable_to_non_nullable
+              as CrosspayProduct?,
+      appStore: freezed == appStore
+          ? _self.appStore
+          : appStore // ignore: cast_nullable_to_non_nullable
+              as CrosspayProduct?,
+      stripe: freezed == stripe
+          ? _self.stripe
+          : stripe // ignore: cast_nullable_to_non_nullable
+              as CrosspayProduct?,
+      gocardless: freezed == gocardless
+          ? _self.gocardless
+          : gocardless // ignore: cast_nullable_to_non_nullable
+              as CrosspayProduct?,
+    ));
+  }
+
+  /// Create a copy of CrosspayProducts
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $CrosspayProductCopyWith<$Res>? get playStore {
+    if (_self.playStore == null) {
+      return null;
+    }
+
+    return $CrosspayProductCopyWith<$Res>(_self.playStore!, (value) {
+      return _then(_self.copyWith(playStore: value));
+    });
+  }
+
+  /// Create a copy of CrosspayProducts
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $CrosspayProductCopyWith<$Res>? get appStore {
+    if (_self.appStore == null) {
+      return null;
+    }
+
+    return $CrosspayProductCopyWith<$Res>(_self.appStore!, (value) {
+      return _then(_self.copyWith(appStore: value));
+    });
+  }
+
+  /// Create a copy of CrosspayProducts
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $CrosspayProductCopyWith<$Res>? get stripe {
+    if (_self.stripe == null) {
+      return null;
+    }
+
+    return $CrosspayProductCopyWith<$Res>(_self.stripe!, (value) {
+      return _then(_self.copyWith(stripe: value));
+    });
+  }
+
+  /// Create a copy of CrosspayProducts
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $CrosspayProductCopyWith<$Res>? get gocardless {
+    if (_self.gocardless == null) {
+      return null;
+    }
+
+    return $CrosspayProductCopyWith<$Res>(_self.gocardless!, (value) {
+      return _then(_self.copyWith(gocardless: value));
+    });
+  }
 }
 
 /// @nodoc
 mixin _$CrosspayProduct {
-  String get id => throw _privateConstructorUsedError;
+  String get id;
   @JsonKey(name: "product_id")
-  String get productId => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
-  String? get description => throw _privateConstructorUsedError;
-  Map<String, dynamic>? get metadata => throw _privateConstructorUsedError;
-
-  /// Serializes this CrosspayProduct to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  String get productId;
+  String get name;
+  String? get description;
+  Map<String, dynamic>? get metadata;
 
   /// Create a copy of CrosspayProduct
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $CrosspayProductCopyWith<CrosspayProduct> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $CrosspayProductCopyWith<$Res> {
-  factory $CrosspayProductCopyWith(
-          CrosspayProduct value, $Res Function(CrosspayProduct) then) =
-      _$CrosspayProductCopyWithImpl<$Res, CrosspayProduct>;
-  @useResult
-  $Res call(
-      {String id,
-      @JsonKey(name: "product_id") String productId,
-      String name,
-      String? description,
-      Map<String, dynamic>? metadata});
-}
-
-/// @nodoc
-class _$CrosspayProductCopyWithImpl<$Res, $Val extends CrosspayProduct>
-    implements $CrosspayProductCopyWith<$Res> {
-  _$CrosspayProductCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of CrosspayProduct
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $CrosspayProductCopyWith<CrosspayProduct> get copyWith =>
+      _$CrosspayProductCopyWithImpl<CrosspayProduct>(
+          this as CrosspayProduct, _$identity);
+
+  /// Serializes this CrosspayProduct to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? id = null,
-    Object? productId = null,
-    Object? name = null,
-    Object? description = freezed,
-    Object? metadata = freezed,
-  }) {
-    return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      productId: null == productId
-          ? _value.productId
-          : productId // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      description: freezed == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String?,
-      metadata: freezed == metadata
-          ? _value.metadata
-          : metadata // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>?,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is CrosspayProduct &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.productId, productId) ||
+                other.productId == productId) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            const DeepCollectionEquality().equals(other.metadata, metadata));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, id, productId, name, description,
+      const DeepCollectionEquality().hash(metadata));
+
+  @override
+  String toString() {
+    return 'CrosspayProduct(id: $id, productId: $productId, name: $name, description: $description, metadata: $metadata)';
   }
 }
 
 /// @nodoc
-abstract class _$$CrosspayProductImplCopyWith<$Res>
-    implements $CrosspayProductCopyWith<$Res> {
-  factory _$$CrosspayProductImplCopyWith(_$CrosspayProductImpl value,
-          $Res Function(_$CrosspayProductImpl) then) =
-      __$$CrosspayProductImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $CrosspayProductCopyWith<$Res> {
+  factory $CrosspayProductCopyWith(
+          CrosspayProduct value, $Res Function(CrosspayProduct) _then) =
+      _$CrosspayProductCopyWithImpl;
   @useResult
   $Res call(
       {String id,
@@ -1055,12 +1606,12 @@ abstract class _$$CrosspayProductImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$CrosspayProductImplCopyWithImpl<$Res>
-    extends _$CrosspayProductCopyWithImpl<$Res, _$CrosspayProductImpl>
-    implements _$$CrosspayProductImplCopyWith<$Res> {
-  __$$CrosspayProductImplCopyWithImpl(
-      _$CrosspayProductImpl _value, $Res Function(_$CrosspayProductImpl) _then)
-      : super(_value, _then);
+class _$CrosspayProductCopyWithImpl<$Res>
+    implements $CrosspayProductCopyWith<$Res> {
+  _$CrosspayProductCopyWithImpl(this._self, this._then);
+
+  final CrosspayProduct _self;
+  final $Res Function(CrosspayProduct) _then;
 
   /// Create a copy of CrosspayProduct
   /// with the given fields replaced by the non-null parameter values.
@@ -1073,44 +1624,205 @@ class __$$CrosspayProductImplCopyWithImpl<$Res>
     Object? description = freezed,
     Object? metadata = freezed,
   }) {
-    return _then(_$CrosspayProductImpl(
+    return _then(_self.copyWith(
       id: null == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
       productId: null == productId
-          ? _value.productId
+          ? _self.productId
           : productId // ignore: cast_nullable_to_non_nullable
               as String,
       name: null == name
-          ? _value.name
+          ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
       description: freezed == description
-          ? _value.description
+          ? _self.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
       metadata: freezed == metadata
-          ? _value._metadata
+          ? _self.metadata
           : metadata // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>?,
     ));
   }
 }
 
+/// Adds pattern-matching-related methods to [CrosspayProduct].
+extension CrosspayProductPatterns on CrosspayProduct {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_CrosspayProduct value)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _CrosspayProduct() when $default != null:
+        return $default(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_CrosspayProduct value) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _CrosspayProduct():
+        return $default(_that);
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_CrosspayProduct value)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _CrosspayProduct() when $default != null:
+        return $default(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(String id, @JsonKey(name: "product_id") String productId,
+            String name, String? description, Map<String, dynamic>? metadata)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _CrosspayProduct() when $default != null:
+        return $default(_that.id, _that.productId, _that.name,
+            _that.description, _that.metadata);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(String id, @JsonKey(name: "product_id") String productId,
+            String name, String? description, Map<String, dynamic>? metadata)
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _CrosspayProduct():
+        return $default(_that.id, _that.productId, _that.name,
+            _that.description, _that.metadata);
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(String id, @JsonKey(name: "product_id") String productId,
+            String name, String? description, Map<String, dynamic>? metadata)?
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _CrosspayProduct() when $default != null:
+        return $default(_that.id, _that.productId, _that.name,
+            _that.description, _that.metadata);
+      case _:
+        return null;
+    }
+  }
+}
+
 /// @nodoc
 @JsonSerializable()
-class _$CrosspayProductImpl implements _CrosspayProduct {
-  _$CrosspayProductImpl(
+class _CrosspayProduct implements CrosspayProduct {
+  _CrosspayProduct(
       {required this.id,
       @JsonKey(name: "product_id") required this.productId,
       required this.name,
       this.description,
       final Map<String, dynamic>? metadata})
       : _metadata = metadata;
-
-  factory _$CrosspayProductImpl.fromJson(Map<String, dynamic> json) =>
-      _$$CrosspayProductImplFromJson(json);
+  factory _CrosspayProduct.fromJson(Map<String, dynamic> json) =>
+      _$CrosspayProductFromJson(json);
 
   @override
   final String id;
@@ -1131,16 +1843,26 @@ class _$CrosspayProductImpl implements _CrosspayProduct {
     return EqualUnmodifiableMapView(value);
   }
 
+  /// Create a copy of CrosspayProduct
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'CrosspayProduct(id: $id, productId: $productId, name: $name, description: $description, metadata: $metadata)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$CrosspayProductCopyWith<_CrosspayProduct> get copyWith =>
+      __$CrosspayProductCopyWithImpl<_CrosspayProduct>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$CrosspayProductToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$CrosspayProductImpl &&
+            other is _CrosspayProduct &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.productId, productId) ||
                 other.productId == productId) &&
@@ -1155,275 +1877,101 @@ class _$CrosspayProductImpl implements _CrosspayProduct {
   int get hashCode => Object.hash(runtimeType, id, productId, name, description,
       const DeepCollectionEquality().hash(_metadata));
 
-  /// Create a copy of CrosspayProduct
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$CrosspayProductImplCopyWith<_$CrosspayProductImpl> get copyWith =>
-      __$$CrosspayProductImplCopyWithImpl<_$CrosspayProductImpl>(
-          this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$CrosspayProductImplToJson(
-      this,
-    );
-  }
-}
-
-abstract class _CrosspayProduct implements CrosspayProduct {
-  factory _CrosspayProduct(
-      {required final String id,
-      @JsonKey(name: "product_id") required final String productId,
-      required final String name,
-      final String? description,
-      final Map<String, dynamic>? metadata}) = _$CrosspayProductImpl;
-
-  factory _CrosspayProduct.fromJson(Map<String, dynamic> json) =
-      _$CrosspayProductImpl.fromJson;
-
-  @override
-  String get id;
-  @override
-  @JsonKey(name: "product_id")
-  String get productId;
-  @override
-  String get name;
-  @override
-  String? get description;
-  @override
-  Map<String, dynamic>? get metadata;
-
-  /// Create a copy of CrosspayProduct
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$CrosspayProductImplCopyWith<_$CrosspayProductImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-SubscriptionGocardlessProduct _$SubscriptionGocardlessProductFromJson(
-    Map<String, dynamic> json) {
-  return _SubscriptionGocardlessProduct.fromJson(json);
-}
-
-/// @nodoc
-mixin _$SubscriptionGocardlessProduct {
-  String get id => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
-  String? get description => throw _privateConstructorUsedError;
-  @JsonKey(name: "formatted_price")
-  String get formattedPrice => throw _privateConstructorUsedError;
-  int get price => throw _privateConstructorUsedError;
-  String get currency => throw _privateConstructorUsedError;
-  @JsonKey(name: "checkout_url")
-  String get checkoutUrl => throw _privateConstructorUsedError;
-
-  /// Serializes this SubscriptionGocardlessProduct to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of SubscriptionGocardlessProduct
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $SubscriptionGocardlessProductCopyWith<SubscriptionGocardlessProduct>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $SubscriptionGocardlessProductCopyWith<$Res> {
-  factory $SubscriptionGocardlessProductCopyWith(
-          SubscriptionGocardlessProduct value,
-          $Res Function(SubscriptionGocardlessProduct) then) =
-      _$SubscriptionGocardlessProductCopyWithImpl<$Res,
-          SubscriptionGocardlessProduct>;
-  @useResult
-  $Res call(
-      {String id,
-      String name,
-      String? description,
-      @JsonKey(name: "formatted_price") String formattedPrice,
-      int price,
-      String currency,
-      @JsonKey(name: "checkout_url") String checkoutUrl});
-}
-
-/// @nodoc
-class _$SubscriptionGocardlessProductCopyWithImpl<$Res,
-        $Val extends SubscriptionGocardlessProduct>
-    implements $SubscriptionGocardlessProductCopyWith<$Res> {
-  _$SubscriptionGocardlessProductCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of SubscriptionGocardlessProduct
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? name = null,
-    Object? description = freezed,
-    Object? formattedPrice = null,
-    Object? price = null,
-    Object? currency = null,
-    Object? checkoutUrl = null,
-  }) {
-    return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      description: freezed == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String?,
-      formattedPrice: null == formattedPrice
-          ? _value.formattedPrice
-          : formattedPrice // ignore: cast_nullable_to_non_nullable
-              as String,
-      price: null == price
-          ? _value.price
-          : price // ignore: cast_nullable_to_non_nullable
-              as int,
-      currency: null == currency
-          ? _value.currency
-          : currency // ignore: cast_nullable_to_non_nullable
-              as String,
-      checkoutUrl: null == checkoutUrl
-          ? _value.checkoutUrl
-          : checkoutUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
+  String toString() {
+    return 'CrosspayProduct(id: $id, productId: $productId, name: $name, description: $description, metadata: $metadata)';
   }
 }
 
 /// @nodoc
-abstract class _$$SubscriptionGocardlessProductImplCopyWith<$Res>
-    implements $SubscriptionGocardlessProductCopyWith<$Res> {
-  factory _$$SubscriptionGocardlessProductImplCopyWith(
-          _$SubscriptionGocardlessProductImpl value,
-          $Res Function(_$SubscriptionGocardlessProductImpl) then) =
-      __$$SubscriptionGocardlessProductImplCopyWithImpl<$Res>;
+abstract mixin class _$CrosspayProductCopyWith<$Res>
+    implements $CrosspayProductCopyWith<$Res> {
+  factory _$CrosspayProductCopyWith(
+          _CrosspayProduct value, $Res Function(_CrosspayProduct) _then) =
+      __$CrosspayProductCopyWithImpl;
   @override
   @useResult
   $Res call(
       {String id,
+      @JsonKey(name: "product_id") String productId,
       String name,
       String? description,
-      @JsonKey(name: "formatted_price") String formattedPrice,
-      int price,
-      String currency,
-      @JsonKey(name: "checkout_url") String checkoutUrl});
+      Map<String, dynamic>? metadata});
 }
 
 /// @nodoc
-class __$$SubscriptionGocardlessProductImplCopyWithImpl<$Res>
-    extends _$SubscriptionGocardlessProductCopyWithImpl<$Res,
-        _$SubscriptionGocardlessProductImpl>
-    implements _$$SubscriptionGocardlessProductImplCopyWith<$Res> {
-  __$$SubscriptionGocardlessProductImplCopyWithImpl(
-      _$SubscriptionGocardlessProductImpl _value,
-      $Res Function(_$SubscriptionGocardlessProductImpl) _then)
-      : super(_value, _then);
+class __$CrosspayProductCopyWithImpl<$Res>
+    implements _$CrosspayProductCopyWith<$Res> {
+  __$CrosspayProductCopyWithImpl(this._self, this._then);
 
-  /// Create a copy of SubscriptionGocardlessProduct
+  final _CrosspayProduct _self;
+  final $Res Function(_CrosspayProduct) _then;
+
+  /// Create a copy of CrosspayProduct
   /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
   @override
+  @pragma('vm:prefer-inline')
   $Res call({
     Object? id = null,
+    Object? productId = null,
     Object? name = null,
     Object? description = freezed,
-    Object? formattedPrice = null,
-    Object? price = null,
-    Object? currency = null,
-    Object? checkoutUrl = null,
+    Object? metadata = freezed,
   }) {
-    return _then(_$SubscriptionGocardlessProductImpl(
+    return _then(_CrosspayProduct(
       id: null == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      productId: null == productId
+          ? _self.productId
+          : productId // ignore: cast_nullable_to_non_nullable
+              as String,
       name: null == name
-          ? _value.name
+          ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
       description: freezed == description
-          ? _value.description
+          ? _self.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
-      formattedPrice: null == formattedPrice
-          ? _value.formattedPrice
-          : formattedPrice // ignore: cast_nullable_to_non_nullable
-              as String,
-      price: null == price
-          ? _value.price
-          : price // ignore: cast_nullable_to_non_nullable
-              as int,
-      currency: null == currency
-          ? _value.currency
-          : currency // ignore: cast_nullable_to_non_nullable
-              as String,
-      checkoutUrl: null == checkoutUrl
-          ? _value.checkoutUrl
-          : checkoutUrl // ignore: cast_nullable_to_non_nullable
-              as String,
+      metadata: freezed == metadata
+          ? _self._metadata
+          : metadata // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
     ));
   }
 }
 
 /// @nodoc
-@JsonSerializable()
-class _$SubscriptionGocardlessProductImpl
-    implements _SubscriptionGocardlessProduct {
-  _$SubscriptionGocardlessProductImpl(
-      {required this.id,
-      required this.name,
-      this.description,
-      @JsonKey(name: "formatted_price") required this.formattedPrice,
-      required this.price,
-      required this.currency,
-      @JsonKey(name: "checkout_url") required this.checkoutUrl});
-
-  factory _$SubscriptionGocardlessProductImpl.fromJson(
-          Map<String, dynamic> json) =>
-      _$$SubscriptionGocardlessProductImplFromJson(json);
-
-  @override
-  final String id;
-  @override
-  final String name;
-  @override
-  final String? description;
-  @override
+mixin _$SubscriptionGocardlessProduct {
+  String get id;
+  String get name;
+  String? get description;
   @JsonKey(name: "formatted_price")
-  final String formattedPrice;
-  @override
-  final int price;
-  @override
-  final String currency;
-  @override
+  String get formattedPrice;
+  int get price;
+  String get currency;
   @JsonKey(name: "checkout_url")
-  final String checkoutUrl;
+  String get checkoutUrl;
 
-  @override
-  String toString() {
-    return 'SubscriptionGocardlessProduct(id: $id, name: $name, description: $description, formattedPrice: $formattedPrice, price: $price, currency: $currency, checkoutUrl: $checkoutUrl)';
-  }
+  /// Create a copy of SubscriptionGocardlessProduct
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $SubscriptionGocardlessProductCopyWith<SubscriptionGocardlessProduct>
+      get copyWith => _$SubscriptionGocardlessProductCopyWithImpl<
+              SubscriptionGocardlessProduct>(
+          this as SubscriptionGocardlessProduct, _$identity);
+
+  /// Serializes this SubscriptionGocardlessProduct to a JSON map.
+  Map<String, dynamic> toJson();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SubscriptionGocardlessProductImpl &&
+            other is SubscriptionGocardlessProduct &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.description, description) ||
@@ -1442,141 +1990,561 @@ class _$SubscriptionGocardlessProductImpl
   int get hashCode => Object.hash(runtimeType, id, name, description,
       formattedPrice, price, currency, checkoutUrl);
 
-  /// Create a copy of SubscriptionGocardlessProduct
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$SubscriptionGocardlessProductImplCopyWith<
-          _$SubscriptionGocardlessProductImpl>
-      get copyWith => __$$SubscriptionGocardlessProductImplCopyWithImpl<
-          _$SubscriptionGocardlessProductImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$SubscriptionGocardlessProductImplToJson(
-      this,
-    );
+  String toString() {
+    return 'SubscriptionGocardlessProduct(id: $id, name: $name, description: $description, formattedPrice: $formattedPrice, price: $price, currency: $currency, checkoutUrl: $checkoutUrl)';
   }
 }
 
-abstract class _SubscriptionGocardlessProduct
-    implements SubscriptionGocardlessProduct {
-  factory _SubscriptionGocardlessProduct(
-      {required final String id,
-      required final String name,
-      final String? description,
-      @JsonKey(name: "formatted_price") required final String formattedPrice,
-      required final int price,
-      required final String currency,
-      @JsonKey(name: "checkout_url")
-      required final String checkoutUrl}) = _$SubscriptionGocardlessProductImpl;
+/// @nodoc
+abstract mixin class $SubscriptionGocardlessProductCopyWith<$Res> {
+  factory $SubscriptionGocardlessProductCopyWith(
+          SubscriptionGocardlessProduct value,
+          $Res Function(SubscriptionGocardlessProduct) _then) =
+      _$SubscriptionGocardlessProductCopyWithImpl;
+  @useResult
+  $Res call(
+      {String id,
+      String name,
+      String? description,
+      @JsonKey(name: "formatted_price") String formattedPrice,
+      int price,
+      String currency,
+      @JsonKey(name: "checkout_url") String checkoutUrl});
+}
 
-  factory _SubscriptionGocardlessProduct.fromJson(Map<String, dynamic> json) =
-      _$SubscriptionGocardlessProductImpl.fromJson;
+/// @nodoc
+class _$SubscriptionGocardlessProductCopyWithImpl<$Res>
+    implements $SubscriptionGocardlessProductCopyWith<$Res> {
+  _$SubscriptionGocardlessProductCopyWithImpl(this._self, this._then);
+
+  final SubscriptionGocardlessProduct _self;
+  final $Res Function(SubscriptionGocardlessProduct) _then;
+
+  /// Create a copy of SubscriptionGocardlessProduct
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? name = null,
+    Object? description = freezed,
+    Object? formattedPrice = null,
+    Object? price = null,
+    Object? currency = null,
+    Object? checkoutUrl = null,
+  }) {
+    return _then(_self.copyWith(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: freezed == description
+          ? _self.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      formattedPrice: null == formattedPrice
+          ? _self.formattedPrice
+          : formattedPrice // ignore: cast_nullable_to_non_nullable
+              as String,
+      price: null == price
+          ? _self.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as int,
+      currency: null == currency
+          ? _self.currency
+          : currency // ignore: cast_nullable_to_non_nullable
+              as String,
+      checkoutUrl: null == checkoutUrl
+          ? _self.checkoutUrl
+          : checkoutUrl // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// Adds pattern-matching-related methods to [SubscriptionGocardlessProduct].
+extension SubscriptionGocardlessProductPatterns
+    on SubscriptionGocardlessProduct {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_SubscriptionGocardlessProduct value)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _SubscriptionGocardlessProduct() when $default != null:
+        return $default(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_SubscriptionGocardlessProduct value) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _SubscriptionGocardlessProduct():
+        return $default(_that);
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_SubscriptionGocardlessProduct value)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _SubscriptionGocardlessProduct() when $default != null:
+        return $default(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            String id,
+            String name,
+            String? description,
+            @JsonKey(name: "formatted_price") String formattedPrice,
+            int price,
+            String currency,
+            @JsonKey(name: "checkout_url") String checkoutUrl)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _SubscriptionGocardlessProduct() when $default != null:
+        return $default(
+            _that.id,
+            _that.name,
+            _that.description,
+            _that.formattedPrice,
+            _that.price,
+            _that.currency,
+            _that.checkoutUrl);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            String id,
+            String name,
+            String? description,
+            @JsonKey(name: "formatted_price") String formattedPrice,
+            int price,
+            String currency,
+            @JsonKey(name: "checkout_url") String checkoutUrl)
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _SubscriptionGocardlessProduct():
+        return $default(
+            _that.id,
+            _that.name,
+            _that.description,
+            _that.formattedPrice,
+            _that.price,
+            _that.currency,
+            _that.checkoutUrl);
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(
+            String id,
+            String name,
+            String? description,
+            @JsonKey(name: "formatted_price") String formattedPrice,
+            int price,
+            String currency,
+            @JsonKey(name: "checkout_url") String checkoutUrl)?
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _SubscriptionGocardlessProduct() when $default != null:
+        return $default(
+            _that.id,
+            _that.name,
+            _that.description,
+            _that.formattedPrice,
+            _that.price,
+            _that.currency,
+            _that.checkoutUrl);
+      case _:
+        return null;
+    }
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _SubscriptionGocardlessProduct implements SubscriptionGocardlessProduct {
+  _SubscriptionGocardlessProduct(
+      {required this.id,
+      required this.name,
+      this.description,
+      @JsonKey(name: "formatted_price") required this.formattedPrice,
+      required this.price,
+      required this.currency,
+      @JsonKey(name: "checkout_url") required this.checkoutUrl});
+  factory _SubscriptionGocardlessProduct.fromJson(Map<String, dynamic> json) =>
+      _$SubscriptionGocardlessProductFromJson(json);
 
   @override
-  String get id;
+  final String id;
   @override
-  String get name;
+  final String name;
   @override
-  String? get description;
+  final String? description;
   @override
   @JsonKey(name: "formatted_price")
-  String get formattedPrice;
+  final String formattedPrice;
   @override
-  int get price;
+  final int price;
   @override
-  String get currency;
+  final String currency;
   @override
   @JsonKey(name: "checkout_url")
-  String get checkoutUrl;
+  final String checkoutUrl;
 
   /// Create a copy of SubscriptionGocardlessProduct
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$SubscriptionGocardlessProductImplCopyWith<
-          _$SubscriptionGocardlessProductImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  _$SubscriptionGocardlessProductCopyWith<_SubscriptionGocardlessProduct>
+      get copyWith => __$SubscriptionGocardlessProductCopyWithImpl<
+          _SubscriptionGocardlessProduct>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$SubscriptionGocardlessProductToJson(
+      this,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _SubscriptionGocardlessProduct &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            (identical(other.formattedPrice, formattedPrice) ||
+                other.formattedPrice == formattedPrice) &&
+            (identical(other.price, price) || other.price == price) &&
+            (identical(other.currency, currency) ||
+                other.currency == currency) &&
+            (identical(other.checkoutUrl, checkoutUrl) ||
+                other.checkoutUrl == checkoutUrl));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, id, name, description,
+      formattedPrice, price, currency, checkoutUrl);
+
+  @override
+  String toString() {
+    return 'SubscriptionGocardlessProduct(id: $id, name: $name, description: $description, formattedPrice: $formattedPrice, price: $price, currency: $currency, checkoutUrl: $checkoutUrl)';
+  }
 }
 
-SubscriptionStripeProduct _$SubscriptionStripeProductFromJson(
-    Map<String, dynamic> json) {
-  return _SubscriptionStripeProduct.fromJson(json);
+/// @nodoc
+abstract mixin class _$SubscriptionGocardlessProductCopyWith<$Res>
+    implements $SubscriptionGocardlessProductCopyWith<$Res> {
+  factory _$SubscriptionGocardlessProductCopyWith(
+          _SubscriptionGocardlessProduct value,
+          $Res Function(_SubscriptionGocardlessProduct) _then) =
+      __$SubscriptionGocardlessProductCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String id,
+      String name,
+      String? description,
+      @JsonKey(name: "formatted_price") String formattedPrice,
+      int price,
+      String currency,
+      @JsonKey(name: "checkout_url") String checkoutUrl});
+}
+
+/// @nodoc
+class __$SubscriptionGocardlessProductCopyWithImpl<$Res>
+    implements _$SubscriptionGocardlessProductCopyWith<$Res> {
+  __$SubscriptionGocardlessProductCopyWithImpl(this._self, this._then);
+
+  final _SubscriptionGocardlessProduct _self;
+  final $Res Function(_SubscriptionGocardlessProduct) _then;
+
+  /// Create a copy of SubscriptionGocardlessProduct
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? id = null,
+    Object? name = null,
+    Object? description = freezed,
+    Object? formattedPrice = null,
+    Object? price = null,
+    Object? currency = null,
+    Object? checkoutUrl = null,
+  }) {
+    return _then(_SubscriptionGocardlessProduct(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: freezed == description
+          ? _self.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      formattedPrice: null == formattedPrice
+          ? _self.formattedPrice
+          : formattedPrice // ignore: cast_nullable_to_non_nullable
+              as String,
+      price: null == price
+          ? _self.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as int,
+      currency: null == currency
+          ? _self.currency
+          : currency // ignore: cast_nullable_to_non_nullable
+              as String,
+      checkoutUrl: null == checkoutUrl
+          ? _self.checkoutUrl
+          : checkoutUrl // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
 /// @nodoc
 mixin _$SubscriptionStripeProduct {
   /// Unique identifier for the object.
-  String get id => throw _privateConstructorUsedError;
+  String get id;
 
   /// String representing the object's type. Objects of the same type share the same value.
   @JsonKey(name: 'object')
-  String get objectType => throw _privateConstructorUsedError;
+  String get objectType;
 
   /// Whether the product is currently available for purchase.
-  bool get active => throw _privateConstructorUsedError;
+  bool get active;
 
   /// Time at which the object was created. Measured in seconds since the Unix epoch.
-  int get created => throw _privateConstructorUsedError;
+  int get created;
 
   /// The ID of the Price object that is the default price for this product.
-  SubscriptionStripePrice get price => throw _privateConstructorUsedError;
+  SubscriptionStripePrice get price;
 
   /// Always true for a deleted object
-  bool? get deleted => throw _privateConstructorUsedError;
+  bool? get deleted;
 
   /// The product's description, meant to be displayable to the customer.
-  String? get description => throw _privateConstructorUsedError;
+  String? get description;
 
   /// A list of up to 8 URLs of images for this product, meant to be displayable to the customer.
-  List<String> get images => throw _privateConstructorUsedError;
+  List<String> get images;
 
   /// Has the value true if the object exists in live mode or the value false if the object exists in test mode.
-  bool get livemode => throw _privateConstructorUsedError;
+  bool get livemode;
 
   /// Set of key-value pairs that you can attach to an object.
-  Map<String, dynamic> get metadata => throw _privateConstructorUsedError;
+  Map<String, dynamic> get metadata;
 
   /// The product's name, meant to be displayable to the customer.
-  String get name => throw _privateConstructorUsedError;
+  String get name;
 
   /// Whether this product is shipped (i.e., physical goods).
-  bool? get shippable => throw _privateConstructorUsedError;
+  bool? get shippable;
 
   /// Extra information about a product which will appear on your customer's credit card statement.
   @JsonKey(name: 'statement_descriptor')
-  String? get statementDescriptor => throw _privateConstructorUsedError;
+  String? get statementDescriptor;
 
   /// The type of the product. The product is either of type 'good' or 'service'.
-  String get type => throw _privateConstructorUsedError;
+  String get type;
 
   /// A label that represents units of this product.
   @JsonKey(name: 'unit_label')
-  String? get unitLabel => throw _privateConstructorUsedError;
+  String? get unitLabel;
 
   /// Time at which the object was last updated. Measured in seconds since the Unix epoch.
-  int get updated => throw _privateConstructorUsedError;
+  int get updated;
 
   /// A URL of a publicly-accessible webpage for this product.
-  String? get url => throw _privateConstructorUsedError;
-
-  /// Serializes this SubscriptionStripeProduct to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  String? get url;
 
   /// Create a copy of SubscriptionStripeProduct
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $SubscriptionStripeProductCopyWith<SubscriptionStripeProduct> get copyWith =>
-      throw _privateConstructorUsedError;
+      _$SubscriptionStripeProductCopyWithImpl<SubscriptionStripeProduct>(
+          this as SubscriptionStripeProduct, _$identity);
+
+  /// Serializes this SubscriptionStripeProduct to a JSON map.
+  Map<String, dynamic> toJson();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is SubscriptionStripeProduct &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.objectType, objectType) ||
+                other.objectType == objectType) &&
+            (identical(other.active, active) || other.active == active) &&
+            (identical(other.created, created) || other.created == created) &&
+            (identical(other.price, price) || other.price == price) &&
+            (identical(other.deleted, deleted) || other.deleted == deleted) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            const DeepCollectionEquality().equals(other.images, images) &&
+            (identical(other.livemode, livemode) ||
+                other.livemode == livemode) &&
+            const DeepCollectionEquality().equals(other.metadata, metadata) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.shippable, shippable) ||
+                other.shippable == shippable) &&
+            (identical(other.statementDescriptor, statementDescriptor) ||
+                other.statementDescriptor == statementDescriptor) &&
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.unitLabel, unitLabel) ||
+                other.unitLabel == unitLabel) &&
+            (identical(other.updated, updated) || other.updated == updated) &&
+            (identical(other.url, url) || other.url == url));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      objectType,
+      active,
+      created,
+      price,
+      deleted,
+      description,
+      const DeepCollectionEquality().hash(images),
+      livemode,
+      const DeepCollectionEquality().hash(metadata),
+      name,
+      shippable,
+      statementDescriptor,
+      type,
+      unitLabel,
+      updated,
+      url);
+
+  @override
+  String toString() {
+    return 'SubscriptionStripeProduct(id: $id, objectType: $objectType, active: $active, created: $created, price: $price, deleted: $deleted, description: $description, images: $images, livemode: $livemode, metadata: $metadata, name: $name, shippable: $shippable, statementDescriptor: $statementDescriptor, type: $type, unitLabel: $unitLabel, updated: $updated, url: $url)';
+  }
 }
 
 /// @nodoc
-abstract class $SubscriptionStripeProductCopyWith<$Res> {
+abstract mixin class $SubscriptionStripeProductCopyWith<$Res> {
   factory $SubscriptionStripeProductCopyWith(SubscriptionStripeProduct value,
-          $Res Function(SubscriptionStripeProduct) then) =
-      _$SubscriptionStripeProductCopyWithImpl<$Res, SubscriptionStripeProduct>;
+          $Res Function(SubscriptionStripeProduct) _then) =
+      _$SubscriptionStripeProductCopyWithImpl;
   @useResult
   $Res call(
       {String id,
@@ -1601,15 +2569,12 @@ abstract class $SubscriptionStripeProductCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$SubscriptionStripeProductCopyWithImpl<$Res,
-        $Val extends SubscriptionStripeProduct>
+class _$SubscriptionStripeProductCopyWithImpl<$Res>
     implements $SubscriptionStripeProductCopyWith<$Res> {
-  _$SubscriptionStripeProductCopyWithImpl(this._value, this._then);
+  _$SubscriptionStripeProductCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final SubscriptionStripeProduct _self;
+  final $Res Function(SubscriptionStripeProduct) _then;
 
   /// Create a copy of SubscriptionStripeProduct
   /// with the given fields replaced by the non-null parameter values.
@@ -1634,76 +2599,76 @@ class _$SubscriptionStripeProductCopyWithImpl<$Res,
     Object? updated = null,
     Object? url = freezed,
   }) {
-    return _then(_value.copyWith(
+    return _then(_self.copyWith(
       id: null == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
       objectType: null == objectType
-          ? _value.objectType
+          ? _self.objectType
           : objectType // ignore: cast_nullable_to_non_nullable
               as String,
       active: null == active
-          ? _value.active
+          ? _self.active
           : active // ignore: cast_nullable_to_non_nullable
               as bool,
       created: null == created
-          ? _value.created
+          ? _self.created
           : created // ignore: cast_nullable_to_non_nullable
               as int,
       price: null == price
-          ? _value.price
+          ? _self.price
           : price // ignore: cast_nullable_to_non_nullable
               as SubscriptionStripePrice,
       deleted: freezed == deleted
-          ? _value.deleted
+          ? _self.deleted
           : deleted // ignore: cast_nullable_to_non_nullable
               as bool?,
       description: freezed == description
-          ? _value.description
+          ? _self.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
       images: null == images
-          ? _value.images
+          ? _self.images
           : images // ignore: cast_nullable_to_non_nullable
               as List<String>,
       livemode: null == livemode
-          ? _value.livemode
+          ? _self.livemode
           : livemode // ignore: cast_nullable_to_non_nullable
               as bool,
       metadata: null == metadata
-          ? _value.metadata
+          ? _self.metadata
           : metadata // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>,
       name: null == name
-          ? _value.name
+          ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
       shippable: freezed == shippable
-          ? _value.shippable
+          ? _self.shippable
           : shippable // ignore: cast_nullable_to_non_nullable
               as bool?,
       statementDescriptor: freezed == statementDescriptor
-          ? _value.statementDescriptor
+          ? _self.statementDescriptor
           : statementDescriptor // ignore: cast_nullable_to_non_nullable
               as String?,
       type: null == type
-          ? _value.type
+          ? _self.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
       unitLabel: freezed == unitLabel
-          ? _value.unitLabel
+          ? _self.unitLabel
           : unitLabel // ignore: cast_nullable_to_non_nullable
               as String?,
       updated: null == updated
-          ? _value.updated
+          ? _self.updated
           : updated // ignore: cast_nullable_to_non_nullable
               as int,
       url: freezed == url
-          ? _value.url
+          ? _self.url
           : url // ignore: cast_nullable_to_non_nullable
               as String?,
-    ) as $Val);
+    ));
   }
 
   /// Create a copy of SubscriptionStripeProduct
@@ -1711,154 +2676,274 @@ class _$SubscriptionStripeProductCopyWithImpl<$Res,
   @override
   @pragma('vm:prefer-inline')
   $SubscriptionStripePriceCopyWith<$Res> get price {
-    return $SubscriptionStripePriceCopyWith<$Res>(_value.price, (value) {
-      return _then(_value.copyWith(price: value) as $Val);
+    return $SubscriptionStripePriceCopyWith<$Res>(_self.price, (value) {
+      return _then(_self.copyWith(price: value));
     });
   }
 }
 
-/// @nodoc
-abstract class _$$SubscriptionStripeProductImplCopyWith<$Res>
-    implements $SubscriptionStripeProductCopyWith<$Res> {
-  factory _$$SubscriptionStripeProductImplCopyWith(
-          _$SubscriptionStripeProductImpl value,
-          $Res Function(_$SubscriptionStripeProductImpl) then) =
-      __$$SubscriptionStripeProductImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {String id,
-      @JsonKey(name: 'object') String objectType,
-      bool active,
-      int created,
-      SubscriptionStripePrice price,
-      bool? deleted,
-      String? description,
-      List<String> images,
-      bool livemode,
-      Map<String, dynamic> metadata,
-      String name,
-      bool? shippable,
-      @JsonKey(name: 'statement_descriptor') String? statementDescriptor,
-      String type,
-      @JsonKey(name: 'unit_label') String? unitLabel,
-      int updated,
-      String? url});
+/// Adds pattern-matching-related methods to [SubscriptionStripeProduct].
+extension SubscriptionStripeProductPatterns on SubscriptionStripeProduct {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
 
-  @override
-  $SubscriptionStripePriceCopyWith<$Res> get price;
-}
-
-/// @nodoc
-class __$$SubscriptionStripeProductImplCopyWithImpl<$Res>
-    extends _$SubscriptionStripeProductCopyWithImpl<$Res,
-        _$SubscriptionStripeProductImpl>
-    implements _$$SubscriptionStripeProductImplCopyWith<$Res> {
-  __$$SubscriptionStripeProductImplCopyWithImpl(
-      _$SubscriptionStripeProductImpl _value,
-      $Res Function(_$SubscriptionStripeProductImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of SubscriptionStripeProduct
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? objectType = null,
-    Object? active = null,
-    Object? created = null,
-    Object? price = null,
-    Object? deleted = freezed,
-    Object? description = freezed,
-    Object? images = null,
-    Object? livemode = null,
-    Object? metadata = null,
-    Object? name = null,
-    Object? shippable = freezed,
-    Object? statementDescriptor = freezed,
-    Object? type = null,
-    Object? unitLabel = freezed,
-    Object? updated = null,
-    Object? url = freezed,
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_SubscriptionStripeProduct value)? $default, {
+    required TResult orElse(),
   }) {
-    return _then(_$SubscriptionStripeProductImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      objectType: null == objectType
-          ? _value.objectType
-          : objectType // ignore: cast_nullable_to_non_nullable
-              as String,
-      active: null == active
-          ? _value.active
-          : active // ignore: cast_nullable_to_non_nullable
-              as bool,
-      created: null == created
-          ? _value.created
-          : created // ignore: cast_nullable_to_non_nullable
-              as int,
-      price: null == price
-          ? _value.price
-          : price // ignore: cast_nullable_to_non_nullable
-              as SubscriptionStripePrice,
-      deleted: freezed == deleted
-          ? _value.deleted
-          : deleted // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      description: freezed == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String?,
-      images: null == images
-          ? _value._images
-          : images // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      livemode: null == livemode
-          ? _value.livemode
-          : livemode // ignore: cast_nullable_to_non_nullable
-              as bool,
-      metadata: null == metadata
-          ? _value._metadata
-          : metadata // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      shippable: freezed == shippable
-          ? _value.shippable
-          : shippable // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      statementDescriptor: freezed == statementDescriptor
-          ? _value.statementDescriptor
-          : statementDescriptor // ignore: cast_nullable_to_non_nullable
-              as String?,
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as String,
-      unitLabel: freezed == unitLabel
-          ? _value.unitLabel
-          : unitLabel // ignore: cast_nullable_to_non_nullable
-              as String?,
-      updated: null == updated
-          ? _value.updated
-          : updated // ignore: cast_nullable_to_non_nullable
-              as int,
-      url: freezed == url
-          ? _value.url
-          : url // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
+    final _that = this;
+    switch (_that) {
+      case _SubscriptionStripeProduct() when $default != null:
+        return $default(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_SubscriptionStripeProduct value) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _SubscriptionStripeProduct():
+        return $default(_that);
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_SubscriptionStripeProduct value)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _SubscriptionStripeProduct() when $default != null:
+        return $default(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            String id,
+            @JsonKey(name: 'object') String objectType,
+            bool active,
+            int created,
+            SubscriptionStripePrice price,
+            bool? deleted,
+            String? description,
+            List<String> images,
+            bool livemode,
+            Map<String, dynamic> metadata,
+            String name,
+            bool? shippable,
+            @JsonKey(name: 'statement_descriptor') String? statementDescriptor,
+            String type,
+            @JsonKey(name: 'unit_label') String? unitLabel,
+            int updated,
+            String? url)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _SubscriptionStripeProduct() when $default != null:
+        return $default(
+            _that.id,
+            _that.objectType,
+            _that.active,
+            _that.created,
+            _that.price,
+            _that.deleted,
+            _that.description,
+            _that.images,
+            _that.livemode,
+            _that.metadata,
+            _that.name,
+            _that.shippable,
+            _that.statementDescriptor,
+            _that.type,
+            _that.unitLabel,
+            _that.updated,
+            _that.url);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            String id,
+            @JsonKey(name: 'object') String objectType,
+            bool active,
+            int created,
+            SubscriptionStripePrice price,
+            bool? deleted,
+            String? description,
+            List<String> images,
+            bool livemode,
+            Map<String, dynamic> metadata,
+            String name,
+            bool? shippable,
+            @JsonKey(name: 'statement_descriptor') String? statementDescriptor,
+            String type,
+            @JsonKey(name: 'unit_label') String? unitLabel,
+            int updated,
+            String? url)
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _SubscriptionStripeProduct():
+        return $default(
+            _that.id,
+            _that.objectType,
+            _that.active,
+            _that.created,
+            _that.price,
+            _that.deleted,
+            _that.description,
+            _that.images,
+            _that.livemode,
+            _that.metadata,
+            _that.name,
+            _that.shippable,
+            _that.statementDescriptor,
+            _that.type,
+            _that.unitLabel,
+            _that.updated,
+            _that.url);
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(
+            String id,
+            @JsonKey(name: 'object') String objectType,
+            bool active,
+            int created,
+            SubscriptionStripePrice price,
+            bool? deleted,
+            String? description,
+            List<String> images,
+            bool livemode,
+            Map<String, dynamic> metadata,
+            String name,
+            bool? shippable,
+            @JsonKey(name: 'statement_descriptor') String? statementDescriptor,
+            String type,
+            @JsonKey(name: 'unit_label') String? unitLabel,
+            int updated,
+            String? url)?
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _SubscriptionStripeProduct() when $default != null:
+        return $default(
+            _that.id,
+            _that.objectType,
+            _that.active,
+            _that.created,
+            _that.price,
+            _that.deleted,
+            _that.description,
+            _that.images,
+            _that.livemode,
+            _that.metadata,
+            _that.name,
+            _that.shippable,
+            _that.statementDescriptor,
+            _that.type,
+            _that.unitLabel,
+            _that.updated,
+            _that.url);
+      case _:
+        return null;
+    }
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$SubscriptionStripeProductImpl implements _SubscriptionStripeProduct {
-  const _$SubscriptionStripeProductImpl(
+class _SubscriptionStripeProduct implements SubscriptionStripeProduct {
+  const _SubscriptionStripeProduct(
       {required this.id,
       @JsonKey(name: 'object') required this.objectType,
       required this.active,
@@ -1878,9 +2963,8 @@ class _$SubscriptionStripeProductImpl implements _SubscriptionStripeProduct {
       this.url})
       : _images = images,
         _metadata = metadata;
-
-  factory _$SubscriptionStripeProductImpl.fromJson(Map<String, dynamic> json) =>
-      _$$SubscriptionStripeProductImplFromJson(json);
+  factory _SubscriptionStripeProduct.fromJson(Map<String, dynamic> json) =>
+      _$SubscriptionStripeProductFromJson(json);
 
   /// Unique identifier for the object.
   @override
@@ -1967,16 +3051,28 @@ class _$SubscriptionStripeProductImpl implements _SubscriptionStripeProduct {
   @override
   final String? url;
 
+  /// Create a copy of SubscriptionStripeProduct
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'SubscriptionStripeProduct(id: $id, objectType: $objectType, active: $active, created: $created, price: $price, deleted: $deleted, description: $description, images: $images, livemode: $livemode, metadata: $metadata, name: $name, shippable: $shippable, statementDescriptor: $statementDescriptor, type: $type, unitLabel: $unitLabel, updated: $updated, url: $url)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$SubscriptionStripeProductCopyWith<_SubscriptionStripeProduct>
+      get copyWith =>
+          __$SubscriptionStripeProductCopyWithImpl<_SubscriptionStripeProduct>(
+              this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$SubscriptionStripeProductToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SubscriptionStripeProductImpl &&
+            other is _SubscriptionStripeProduct &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.objectType, objectType) ||
                 other.objectType == objectType) &&
@@ -2024,306 +3120,181 @@ class _$SubscriptionStripeProductImpl implements _SubscriptionStripeProduct {
       updated,
       url);
 
-  /// Create a copy of SubscriptionStripeProduct
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$SubscriptionStripeProductImplCopyWith<_$SubscriptionStripeProductImpl>
-      get copyWith => __$$SubscriptionStripeProductImplCopyWithImpl<
-          _$SubscriptionStripeProductImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$SubscriptionStripeProductImplToJson(
-      this,
-    );
+  String toString() {
+    return 'SubscriptionStripeProduct(id: $id, objectType: $objectType, active: $active, created: $created, price: $price, deleted: $deleted, description: $description, images: $images, livemode: $livemode, metadata: $metadata, name: $name, shippable: $shippable, statementDescriptor: $statementDescriptor, type: $type, unitLabel: $unitLabel, updated: $updated, url: $url)';
   }
 }
 
-abstract class _SubscriptionStripeProduct implements SubscriptionStripeProduct {
-  const factory _SubscriptionStripeProduct(
-      {required final String id,
-      @JsonKey(name: 'object') required final String objectType,
-      required final bool active,
-      required final int created,
-      required final SubscriptionStripePrice price,
-      final bool? deleted,
-      final String? description,
-      required final List<String> images,
-      required final bool livemode,
-      required final Map<String, dynamic> metadata,
-      required final String name,
-      final bool? shippable,
-      @JsonKey(name: 'statement_descriptor') final String? statementDescriptor,
-      required final String type,
-      @JsonKey(name: 'unit_label') final String? unitLabel,
-      required final int updated,
-      final String? url}) = _$SubscriptionStripeProductImpl;
-
-  factory _SubscriptionStripeProduct.fromJson(Map<String, dynamic> json) =
-      _$SubscriptionStripeProductImpl.fromJson;
-
-  /// Unique identifier for the object.
+/// @nodoc
+abstract mixin class _$SubscriptionStripeProductCopyWith<$Res>
+    implements $SubscriptionStripeProductCopyWith<$Res> {
+  factory _$SubscriptionStripeProductCopyWith(_SubscriptionStripeProduct value,
+          $Res Function(_SubscriptionStripeProduct) _then) =
+      __$SubscriptionStripeProductCopyWithImpl;
   @override
-  String get id;
+  @useResult
+  $Res call(
+      {String id,
+      @JsonKey(name: 'object') String objectType,
+      bool active,
+      int created,
+      SubscriptionStripePrice price,
+      bool? deleted,
+      String? description,
+      List<String> images,
+      bool livemode,
+      Map<String, dynamic> metadata,
+      String name,
+      bool? shippable,
+      @JsonKey(name: 'statement_descriptor') String? statementDescriptor,
+      String type,
+      @JsonKey(name: 'unit_label') String? unitLabel,
+      int updated,
+      String? url});
 
-  /// String representing the object's type. Objects of the same type share the same value.
   @override
-  @JsonKey(name: 'object')
-  String get objectType;
+  $SubscriptionStripePriceCopyWith<$Res> get price;
+}
 
-  /// Whether the product is currently available for purchase.
-  @override
-  bool get active;
+/// @nodoc
+class __$SubscriptionStripeProductCopyWithImpl<$Res>
+    implements _$SubscriptionStripeProductCopyWith<$Res> {
+  __$SubscriptionStripeProductCopyWithImpl(this._self, this._then);
 
-  /// Time at which the object was created. Measured in seconds since the Unix epoch.
-  @override
-  int get created;
-
-  /// The ID of the Price object that is the default price for this product.
-  @override
-  SubscriptionStripePrice get price;
-
-  /// Always true for a deleted object
-  @override
-  bool? get deleted;
-
-  /// The product's description, meant to be displayable to the customer.
-  @override
-  String? get description;
-
-  /// A list of up to 8 URLs of images for this product, meant to be displayable to the customer.
-  @override
-  List<String> get images;
-
-  /// Has the value true if the object exists in live mode or the value false if the object exists in test mode.
-  @override
-  bool get livemode;
-
-  /// Set of key-value pairs that you can attach to an object.
-  @override
-  Map<String, dynamic> get metadata;
-
-  /// The product's name, meant to be displayable to the customer.
-  @override
-  String get name;
-
-  /// Whether this product is shipped (i.e., physical goods).
-  @override
-  bool? get shippable;
-
-  /// Extra information about a product which will appear on your customer's credit card statement.
-  @override
-  @JsonKey(name: 'statement_descriptor')
-  String? get statementDescriptor;
-
-  /// The type of the product. The product is either of type 'good' or 'service'.
-  @override
-  String get type;
-
-  /// A label that represents units of this product.
-  @override
-  @JsonKey(name: 'unit_label')
-  String? get unitLabel;
-
-  /// Time at which the object was last updated. Measured in seconds since the Unix epoch.
-  @override
-  int get updated;
-
-  /// A URL of a publicly-accessible webpage for this product.
-  @override
-  String? get url;
+  final _SubscriptionStripeProduct _self;
+  final $Res Function(_SubscriptionStripeProduct) _then;
 
   /// Create a copy of SubscriptionStripeProduct
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$SubscriptionStripeProductImplCopyWith<_$SubscriptionStripeProductImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? id = null,
+    Object? objectType = null,
+    Object? active = null,
+    Object? created = null,
+    Object? price = null,
+    Object? deleted = freezed,
+    Object? description = freezed,
+    Object? images = null,
+    Object? livemode = null,
+    Object? metadata = null,
+    Object? name = null,
+    Object? shippable = freezed,
+    Object? statementDescriptor = freezed,
+    Object? type = null,
+    Object? unitLabel = freezed,
+    Object? updated = null,
+    Object? url = freezed,
+  }) {
+    return _then(_SubscriptionStripeProduct(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      objectType: null == objectType
+          ? _self.objectType
+          : objectType // ignore: cast_nullable_to_non_nullable
+              as String,
+      active: null == active
+          ? _self.active
+          : active // ignore: cast_nullable_to_non_nullable
+              as bool,
+      created: null == created
+          ? _self.created
+          : created // ignore: cast_nullable_to_non_nullable
+              as int,
+      price: null == price
+          ? _self.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as SubscriptionStripePrice,
+      deleted: freezed == deleted
+          ? _self.deleted
+          : deleted // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      description: freezed == description
+          ? _self.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      images: null == images
+          ? _self._images
+          : images // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      livemode: null == livemode
+          ? _self.livemode
+          : livemode // ignore: cast_nullable_to_non_nullable
+              as bool,
+      metadata: null == metadata
+          ? _self._metadata
+          : metadata // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
+      name: null == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      shippable: freezed == shippable
+          ? _self.shippable
+          : shippable // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      statementDescriptor: freezed == statementDescriptor
+          ? _self.statementDescriptor
+          : statementDescriptor // ignore: cast_nullable_to_non_nullable
+              as String?,
+      type: null == type
+          ? _self.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String,
+      unitLabel: freezed == unitLabel
+          ? _self.unitLabel
+          : unitLabel // ignore: cast_nullable_to_non_nullable
+              as String?,
+      updated: null == updated
+          ? _self.updated
+          : updated // ignore: cast_nullable_to_non_nullable
+              as int,
+      url: freezed == url
+          ? _self.url
+          : url // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
 
-SubscriptionStripePrice _$SubscriptionStripePriceFromJson(
-    Map<String, dynamic> json) {
-  return _SubscriptionStripePrice.fromJson(json);
+  /// Create a copy of SubscriptionStripeProduct
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $SubscriptionStripePriceCopyWith<$Res> get price {
+    return $SubscriptionStripePriceCopyWith<$Res>(_self.price, (value) {
+      return _then(_self.copyWith(price: value));
+    });
+  }
 }
 
 /// @nodoc
 mixin _$SubscriptionStripePrice {
-  String get id => throw _privateConstructorUsedError;
-  int get price => throw _privateConstructorUsedError;
-  String get currency => throw _privateConstructorUsedError;
-  String get formattedPrice => throw _privateConstructorUsedError;
-  String get unitLabel => throw _privateConstructorUsedError;
-
-  /// Serializes this SubscriptionStripePrice to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  String get id;
+  int get price;
+  String get currency;
+  String get formattedPrice;
+  String get unitLabel;
 
   /// Create a copy of SubscriptionStripePrice
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $SubscriptionStripePriceCopyWith<SubscriptionStripePrice> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+      _$SubscriptionStripePriceCopyWithImpl<SubscriptionStripePrice>(
+          this as SubscriptionStripePrice, _$identity);
 
-/// @nodoc
-abstract class $SubscriptionStripePriceCopyWith<$Res> {
-  factory $SubscriptionStripePriceCopyWith(SubscriptionStripePrice value,
-          $Res Function(SubscriptionStripePrice) then) =
-      _$SubscriptionStripePriceCopyWithImpl<$Res, SubscriptionStripePrice>;
-  @useResult
-  $Res call(
-      {String id,
-      int price,
-      String currency,
-      String formattedPrice,
-      String unitLabel});
-}
-
-/// @nodoc
-class _$SubscriptionStripePriceCopyWithImpl<$Res,
-        $Val extends SubscriptionStripePrice>
-    implements $SubscriptionStripePriceCopyWith<$Res> {
-  _$SubscriptionStripePriceCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of SubscriptionStripePrice
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? price = null,
-    Object? currency = null,
-    Object? formattedPrice = null,
-    Object? unitLabel = null,
-  }) {
-    return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      price: null == price
-          ? _value.price
-          : price // ignore: cast_nullable_to_non_nullable
-              as int,
-      currency: null == currency
-          ? _value.currency
-          : currency // ignore: cast_nullable_to_non_nullable
-              as String,
-      formattedPrice: null == formattedPrice
-          ? _value.formattedPrice
-          : formattedPrice // ignore: cast_nullable_to_non_nullable
-              as String,
-      unitLabel: null == unitLabel
-          ? _value.unitLabel
-          : unitLabel // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$SubscriptionStripePriceImplCopyWith<$Res>
-    implements $SubscriptionStripePriceCopyWith<$Res> {
-  factory _$$SubscriptionStripePriceImplCopyWith(
-          _$SubscriptionStripePriceImpl value,
-          $Res Function(_$SubscriptionStripePriceImpl) then) =
-      __$$SubscriptionStripePriceImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {String id,
-      int price,
-      String currency,
-      String formattedPrice,
-      String unitLabel});
-}
-
-/// @nodoc
-class __$$SubscriptionStripePriceImplCopyWithImpl<$Res>
-    extends _$SubscriptionStripePriceCopyWithImpl<$Res,
-        _$SubscriptionStripePriceImpl>
-    implements _$$SubscriptionStripePriceImplCopyWith<$Res> {
-  __$$SubscriptionStripePriceImplCopyWithImpl(
-      _$SubscriptionStripePriceImpl _value,
-      $Res Function(_$SubscriptionStripePriceImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of SubscriptionStripePrice
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? price = null,
-    Object? currency = null,
-    Object? formattedPrice = null,
-    Object? unitLabel = null,
-  }) {
-    return _then(_$SubscriptionStripePriceImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      price: null == price
-          ? _value.price
-          : price // ignore: cast_nullable_to_non_nullable
-              as int,
-      currency: null == currency
-          ? _value.currency
-          : currency // ignore: cast_nullable_to_non_nullable
-              as String,
-      formattedPrice: null == formattedPrice
-          ? _value.formattedPrice
-          : formattedPrice // ignore: cast_nullable_to_non_nullable
-              as String,
-      unitLabel: null == unitLabel
-          ? _value.unitLabel
-          : unitLabel // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$SubscriptionStripePriceImpl implements _SubscriptionStripePrice {
-  _$SubscriptionStripePriceImpl(
-      {required this.id,
-      required this.price,
-      required this.currency,
-      required this.formattedPrice,
-      required this.unitLabel});
-
-  factory _$SubscriptionStripePriceImpl.fromJson(Map<String, dynamic> json) =>
-      _$$SubscriptionStripePriceImplFromJson(json);
-
-  @override
-  final String id;
-  @override
-  final int price;
-  @override
-  final String currency;
-  @override
-  final String formattedPrice;
-  @override
-  final String unitLabel;
-
-  @override
-  String toString() {
-    return 'SubscriptionStripePrice(id: $id, price: $price, currency: $currency, formattedPrice: $formattedPrice, unitLabel: $unitLabel)';
-  }
+  /// Serializes this SubscriptionStripePrice to a JSON map.
+  Map<String, dynamic> toJson();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SubscriptionStripePriceImpl &&
+            other is SubscriptionStripePrice &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.price, price) || other.price == price) &&
             (identical(other.currency, currency) ||
@@ -2339,168 +3310,421 @@ class _$SubscriptionStripePriceImpl implements _SubscriptionStripePrice {
   int get hashCode =>
       Object.hash(runtimeType, id, price, currency, formattedPrice, unitLabel);
 
-  /// Create a copy of SubscriptionStripePrice
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$SubscriptionStripePriceImplCopyWith<_$SubscriptionStripePriceImpl>
-      get copyWith => __$$SubscriptionStripePriceImplCopyWithImpl<
-          _$SubscriptionStripePriceImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$SubscriptionStripePriceImplToJson(
-      this,
-    );
+  String toString() {
+    return 'SubscriptionStripePrice(id: $id, price: $price, currency: $currency, formattedPrice: $formattedPrice, unitLabel: $unitLabel)';
   }
 }
 
-abstract class _SubscriptionStripePrice implements SubscriptionStripePrice {
-  factory _SubscriptionStripePrice(
-      {required final String id,
-      required final int price,
-      required final String currency,
-      required final String formattedPrice,
-      required final String unitLabel}) = _$SubscriptionStripePriceImpl;
+/// @nodoc
+abstract mixin class $SubscriptionStripePriceCopyWith<$Res> {
+  factory $SubscriptionStripePriceCopyWith(SubscriptionStripePrice value,
+          $Res Function(SubscriptionStripePrice) _then) =
+      _$SubscriptionStripePriceCopyWithImpl;
+  @useResult
+  $Res call(
+      {String id,
+      int price,
+      String currency,
+      String formattedPrice,
+      String unitLabel});
+}
 
-  factory _SubscriptionStripePrice.fromJson(Map<String, dynamic> json) =
-      _$SubscriptionStripePriceImpl.fromJson;
+/// @nodoc
+class _$SubscriptionStripePriceCopyWithImpl<$Res>
+    implements $SubscriptionStripePriceCopyWith<$Res> {
+  _$SubscriptionStripePriceCopyWithImpl(this._self, this._then);
+
+  final SubscriptionStripePrice _self;
+  final $Res Function(SubscriptionStripePrice) _then;
+
+  /// Create a copy of SubscriptionStripePrice
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? price = null,
+    Object? currency = null,
+    Object? formattedPrice = null,
+    Object? unitLabel = null,
+  }) {
+    return _then(_self.copyWith(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      price: null == price
+          ? _self.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as int,
+      currency: null == currency
+          ? _self.currency
+          : currency // ignore: cast_nullable_to_non_nullable
+              as String,
+      formattedPrice: null == formattedPrice
+          ? _self.formattedPrice
+          : formattedPrice // ignore: cast_nullable_to_non_nullable
+              as String,
+      unitLabel: null == unitLabel
+          ? _self.unitLabel
+          : unitLabel // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// Adds pattern-matching-related methods to [SubscriptionStripePrice].
+extension SubscriptionStripePricePatterns on SubscriptionStripePrice {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_SubscriptionStripePrice value)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _SubscriptionStripePrice() when $default != null:
+        return $default(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_SubscriptionStripePrice value) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _SubscriptionStripePrice():
+        return $default(_that);
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_SubscriptionStripePrice value)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _SubscriptionStripePrice() when $default != null:
+        return $default(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(String id, int price, String currency,
+            String formattedPrice, String unitLabel)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _SubscriptionStripePrice() when $default != null:
+        return $default(_that.id, _that.price, _that.currency,
+            _that.formattedPrice, _that.unitLabel);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(String id, int price, String currency,
+            String formattedPrice, String unitLabel)
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _SubscriptionStripePrice():
+        return $default(_that.id, _that.price, _that.currency,
+            _that.formattedPrice, _that.unitLabel);
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(String id, int price, String currency,
+            String formattedPrice, String unitLabel)?
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _SubscriptionStripePrice() when $default != null:
+        return $default(_that.id, _that.price, _that.currency,
+            _that.formattedPrice, _that.unitLabel);
+      case _:
+        return null;
+    }
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _SubscriptionStripePrice implements SubscriptionStripePrice {
+  _SubscriptionStripePrice(
+      {required this.id,
+      required this.price,
+      required this.currency,
+      required this.formattedPrice,
+      required this.unitLabel});
+  factory _SubscriptionStripePrice.fromJson(Map<String, dynamic> json) =>
+      _$SubscriptionStripePriceFromJson(json);
 
   @override
-  String get id;
+  final String id;
   @override
-  int get price;
+  final int price;
   @override
-  String get currency;
+  final String currency;
   @override
-  String get formattedPrice;
+  final String formattedPrice;
   @override
-  String get unitLabel;
+  final String unitLabel;
 
   /// Create a copy of SubscriptionStripePrice
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$SubscriptionStripePriceImplCopyWith<_$SubscriptionStripePriceImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  _$SubscriptionStripePriceCopyWith<_SubscriptionStripePrice> get copyWith =>
+      __$SubscriptionStripePriceCopyWithImpl<_SubscriptionStripePrice>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$SubscriptionStripePriceToJson(
+      this,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _SubscriptionStripePrice &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.price, price) || other.price == price) &&
+            (identical(other.currency, currency) ||
+                other.currency == currency) &&
+            (identical(other.formattedPrice, formattedPrice) ||
+                other.formattedPrice == formattedPrice) &&
+            (identical(other.unitLabel, unitLabel) ||
+                other.unitLabel == unitLabel));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, id, price, currency, formattedPrice, unitLabel);
+
+  @override
+  String toString() {
+    return 'SubscriptionStripePrice(id: $id, price: $price, currency: $currency, formattedPrice: $formattedPrice, unitLabel: $unitLabel)';
+  }
 }
 
-StorableSubscription _$StorableSubscriptionFromJson(Map<String, dynamic> json) {
-  return _StorableSubscription.fromJson(json);
+/// @nodoc
+abstract mixin class _$SubscriptionStripePriceCopyWith<$Res>
+    implements $SubscriptionStripePriceCopyWith<$Res> {
+  factory _$SubscriptionStripePriceCopyWith(_SubscriptionStripePrice value,
+          $Res Function(_SubscriptionStripePrice) _then) =
+      __$SubscriptionStripePriceCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String id,
+      int price,
+      String currency,
+      String formattedPrice,
+      String unitLabel});
+}
+
+/// @nodoc
+class __$SubscriptionStripePriceCopyWithImpl<$Res>
+    implements _$SubscriptionStripePriceCopyWith<$Res> {
+  __$SubscriptionStripePriceCopyWithImpl(this._self, this._then);
+
+  final _SubscriptionStripePrice _self;
+  final $Res Function(_SubscriptionStripePrice) _then;
+
+  /// Create a copy of SubscriptionStripePrice
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? id = null,
+    Object? price = null,
+    Object? currency = null,
+    Object? formattedPrice = null,
+    Object? unitLabel = null,
+  }) {
+    return _then(_SubscriptionStripePrice(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      price: null == price
+          ? _self.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as int,
+      currency: null == currency
+          ? _self.currency
+          : currency // ignore: cast_nullable_to_non_nullable
+              as String,
+      formattedPrice: null == formattedPrice
+          ? _self.formattedPrice
+          : formattedPrice // ignore: cast_nullable_to_non_nullable
+              as String,
+      unitLabel: null == unitLabel
+          ? _self.unitLabel
+          : unitLabel // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
 /// @nodoc
 mixin _$StorableSubscription {
   /// This is the ID of the subscription. It should generated by your database.
   /// And should be unique (Primary Key).
-  String get id => throw _privateConstructorUsedError;
+  String get id;
   @JsonKey(name: 'product_id')
-  String get productId => throw _privateConstructorUsedError;
+  String get productId;
   @JsonKey(
       name: 'expires_at',
       fromJson: _dateFromEpochSeconds,
       toJson: _dateToEpochSeconds)
-  DateTime get expiresAt => throw _privateConstructorUsedError;
+  DateTime get expiresAt;
 
   /// The store that the user purchased the subscription from.
-  SubscriptionStore get store => throw _privateConstructorUsedError;
+  SubscriptionStore get store;
 
   /// The status of the subscription
-  SubscriptionStatus get status => throw _privateConstructorUsedError;
+  SubscriptionStatus get status;
   @JsonKey(name: 'renewal_status')
-  SubscriptionRenewalStatus get renewalStatus =>
-      throw _privateConstructorUsedError;
-
-  /// Serializes this StorableSubscription to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  SubscriptionRenewalStatus get renewalStatus;
 
   /// Create a copy of StorableSubscription
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $StorableSubscriptionCopyWith<StorableSubscription> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $StorableSubscriptionCopyWith<$Res> {
-  factory $StorableSubscriptionCopyWith(StorableSubscription value,
-          $Res Function(StorableSubscription) then) =
-      _$StorableSubscriptionCopyWithImpl<$Res, StorableSubscription>;
-  @useResult
-  $Res call(
-      {String id,
-      @JsonKey(name: 'product_id') String productId,
-      @JsonKey(
-          name: 'expires_at',
-          fromJson: _dateFromEpochSeconds,
-          toJson: _dateToEpochSeconds)
-      DateTime expiresAt,
-      SubscriptionStore store,
-      SubscriptionStatus status,
-      @JsonKey(name: 'renewal_status')
-      SubscriptionRenewalStatus renewalStatus});
-}
-
-/// @nodoc
-class _$StorableSubscriptionCopyWithImpl<$Res,
-        $Val extends StorableSubscription>
-    implements $StorableSubscriptionCopyWith<$Res> {
-  _$StorableSubscriptionCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of StorableSubscription
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $StorableSubscriptionCopyWith<StorableSubscription> get copyWith =>
+      _$StorableSubscriptionCopyWithImpl<StorableSubscription>(
+          this as StorableSubscription, _$identity);
+
+  /// Serializes this StorableSubscription to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? id = null,
-    Object? productId = null,
-    Object? expiresAt = null,
-    Object? store = null,
-    Object? status = null,
-    Object? renewalStatus = null,
-  }) {
-    return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      productId: null == productId
-          ? _value.productId
-          : productId // ignore: cast_nullable_to_non_nullable
-              as String,
-      expiresAt: null == expiresAt
-          ? _value.expiresAt
-          : expiresAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      store: null == store
-          ? _value.store
-          : store // ignore: cast_nullable_to_non_nullable
-              as SubscriptionStore,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as SubscriptionStatus,
-      renewalStatus: null == renewalStatus
-          ? _value.renewalStatus
-          : renewalStatus // ignore: cast_nullable_to_non_nullable
-              as SubscriptionRenewalStatus,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is StorableSubscription &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.productId, productId) ||
+                other.productId == productId) &&
+            (identical(other.expiresAt, expiresAt) ||
+                other.expiresAt == expiresAt) &&
+            (identical(other.store, store) || other.store == store) &&
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.renewalStatus, renewalStatus) ||
+                other.renewalStatus == renewalStatus));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, id, productId, expiresAt, store, status, renewalStatus);
+
+  @override
+  String toString() {
+    return 'StorableSubscription(id: $id, productId: $productId, expiresAt: $expiresAt, store: $store, status: $status, renewalStatus: $renewalStatus)';
   }
 }
 
 /// @nodoc
-abstract class _$$StorableSubscriptionImplCopyWith<$Res>
-    implements $StorableSubscriptionCopyWith<$Res> {
-  factory _$$StorableSubscriptionImplCopyWith(_$StorableSubscriptionImpl value,
-          $Res Function(_$StorableSubscriptionImpl) then) =
-      __$$StorableSubscriptionImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $StorableSubscriptionCopyWith<$Res> {
+  factory $StorableSubscriptionCopyWith(StorableSubscription value,
+          $Res Function(StorableSubscription) _then) =
+      _$StorableSubscriptionCopyWithImpl;
   @useResult
   $Res call(
       {String id,
@@ -2517,12 +3741,12 @@ abstract class _$$StorableSubscriptionImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$StorableSubscriptionImplCopyWithImpl<$Res>
-    extends _$StorableSubscriptionCopyWithImpl<$Res, _$StorableSubscriptionImpl>
-    implements _$$StorableSubscriptionImplCopyWith<$Res> {
-  __$$StorableSubscriptionImplCopyWithImpl(_$StorableSubscriptionImpl _value,
-      $Res Function(_$StorableSubscriptionImpl) _then)
-      : super(_value, _then);
+class _$StorableSubscriptionCopyWithImpl<$Res>
+    implements $StorableSubscriptionCopyWith<$Res> {
+  _$StorableSubscriptionCopyWithImpl(this._self, this._then);
+
+  final StorableSubscription _self;
+  final $Res Function(StorableSubscription) _then;
 
   /// Create a copy of StorableSubscription
   /// with the given fields replaced by the non-null parameter values.
@@ -2536,39 +3760,231 @@ class __$$StorableSubscriptionImplCopyWithImpl<$Res>
     Object? status = null,
     Object? renewalStatus = null,
   }) {
-    return _then(_$StorableSubscriptionImpl(
+    return _then(_self.copyWith(
       id: null == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
       productId: null == productId
-          ? _value.productId
+          ? _self.productId
           : productId // ignore: cast_nullable_to_non_nullable
               as String,
       expiresAt: null == expiresAt
-          ? _value.expiresAt
+          ? _self.expiresAt
           : expiresAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
       store: null == store
-          ? _value.store
+          ? _self.store
           : store // ignore: cast_nullable_to_non_nullable
               as SubscriptionStore,
       status: null == status
-          ? _value.status
+          ? _self.status
           : status // ignore: cast_nullable_to_non_nullable
               as SubscriptionStatus,
       renewalStatus: null == renewalStatus
-          ? _value.renewalStatus
+          ? _self.renewalStatus
           : renewalStatus // ignore: cast_nullable_to_non_nullable
               as SubscriptionRenewalStatus,
     ));
   }
 }
 
+/// Adds pattern-matching-related methods to [StorableSubscription].
+extension StorableSubscriptionPatterns on StorableSubscription {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_StorableSubscription value)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _StorableSubscription() when $default != null:
+        return $default(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_StorableSubscription value) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _StorableSubscription():
+        return $default(_that);
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_StorableSubscription value)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _StorableSubscription() when $default != null:
+        return $default(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            String id,
+            @JsonKey(name: 'product_id') String productId,
+            @JsonKey(
+                name: 'expires_at',
+                fromJson: _dateFromEpochSeconds,
+                toJson: _dateToEpochSeconds)
+            DateTime expiresAt,
+            SubscriptionStore store,
+            SubscriptionStatus status,
+            @JsonKey(name: 'renewal_status')
+            SubscriptionRenewalStatus renewalStatus)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _StorableSubscription() when $default != null:
+        return $default(_that.id, _that.productId, _that.expiresAt, _that.store,
+            _that.status, _that.renewalStatus);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            String id,
+            @JsonKey(name: 'product_id') String productId,
+            @JsonKey(
+                name: 'expires_at',
+                fromJson: _dateFromEpochSeconds,
+                toJson: _dateToEpochSeconds)
+            DateTime expiresAt,
+            SubscriptionStore store,
+            SubscriptionStatus status,
+            @JsonKey(name: 'renewal_status')
+            SubscriptionRenewalStatus renewalStatus)
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _StorableSubscription():
+        return $default(_that.id, _that.productId, _that.expiresAt, _that.store,
+            _that.status, _that.renewalStatus);
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(
+            String id,
+            @JsonKey(name: 'product_id') String productId,
+            @JsonKey(
+                name: 'expires_at',
+                fromJson: _dateFromEpochSeconds,
+                toJson: _dateToEpochSeconds)
+            DateTime expiresAt,
+            SubscriptionStore store,
+            SubscriptionStatus status,
+            @JsonKey(name: 'renewal_status')
+            SubscriptionRenewalStatus renewalStatus)?
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _StorableSubscription() when $default != null:
+        return $default(_that.id, _that.productId, _that.expiresAt, _that.store,
+            _that.status, _that.renewalStatus);
+      case _:
+        return null;
+    }
+  }
+}
+
 /// @nodoc
 @JsonSerializable()
-class _$StorableSubscriptionImpl implements _StorableSubscription {
-  _$StorableSubscriptionImpl(
+class _StorableSubscription implements StorableSubscription {
+  _StorableSubscription(
       {required this.id,
       @JsonKey(name: 'product_id') required this.productId,
       @JsonKey(
@@ -2579,9 +3995,8 @@ class _$StorableSubscriptionImpl implements _StorableSubscription {
       required this.store,
       required this.status,
       @JsonKey(name: 'renewal_status') required this.renewalStatus});
-
-  factory _$StorableSubscriptionImpl.fromJson(Map<String, dynamic> json) =>
-      _$$StorableSubscriptionImplFromJson(json);
+  factory _StorableSubscription.fromJson(Map<String, dynamic> json) =>
+      _$StorableSubscriptionFromJson(json);
 
   /// This is the ID of the subscription. It should generated by your database.
   /// And should be unique (Primary Key).
@@ -2608,16 +4023,27 @@ class _$StorableSubscriptionImpl implements _StorableSubscription {
   @JsonKey(name: 'renewal_status')
   final SubscriptionRenewalStatus renewalStatus;
 
+  /// Create a copy of StorableSubscription
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'StorableSubscription(id: $id, productId: $productId, expiresAt: $expiresAt, store: $store, status: $status, renewalStatus: $renewalStatus)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$StorableSubscriptionCopyWith<_StorableSubscription> get copyWith =>
+      __$StorableSubscriptionCopyWithImpl<_StorableSubscription>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$StorableSubscriptionToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$StorableSubscriptionImpl &&
+            other is _StorableSubscription &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.productId, productId) ||
                 other.productId == productId) &&
@@ -2634,71 +4060,81 @@ class _$StorableSubscriptionImpl implements _StorableSubscription {
   int get hashCode => Object.hash(
       runtimeType, id, productId, expiresAt, store, status, renewalStatus);
 
-  /// Create a copy of StorableSubscription
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$StorableSubscriptionImplCopyWith<_$StorableSubscriptionImpl>
-      get copyWith =>
-          __$$StorableSubscriptionImplCopyWithImpl<_$StorableSubscriptionImpl>(
-              this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$StorableSubscriptionImplToJson(
-      this,
-    );
+  String toString() {
+    return 'StorableSubscription(id: $id, productId: $productId, expiresAt: $expiresAt, store: $store, status: $status, renewalStatus: $renewalStatus)';
   }
 }
 
-abstract class _StorableSubscription implements StorableSubscription {
-  factory _StorableSubscription(
-          {required final String id,
-          @JsonKey(name: 'product_id') required final String productId,
-          @JsonKey(
-              name: 'expires_at',
-              fromJson: _dateFromEpochSeconds,
-              toJson: _dateToEpochSeconds)
-          required final DateTime expiresAt,
-          required final SubscriptionStore store,
-          required final SubscriptionStatus status,
-          @JsonKey(name: 'renewal_status')
-          required final SubscriptionRenewalStatus renewalStatus}) =
-      _$StorableSubscriptionImpl;
+/// @nodoc
+abstract mixin class _$StorableSubscriptionCopyWith<$Res>
+    implements $StorableSubscriptionCopyWith<$Res> {
+  factory _$StorableSubscriptionCopyWith(_StorableSubscription value,
+          $Res Function(_StorableSubscription) _then) =
+      __$StorableSubscriptionCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String id,
+      @JsonKey(name: 'product_id') String productId,
+      @JsonKey(
+          name: 'expires_at',
+          fromJson: _dateFromEpochSeconds,
+          toJson: _dateToEpochSeconds)
+      DateTime expiresAt,
+      SubscriptionStore store,
+      SubscriptionStatus status,
+      @JsonKey(name: 'renewal_status')
+      SubscriptionRenewalStatus renewalStatus});
+}
 
-  factory _StorableSubscription.fromJson(Map<String, dynamic> json) =
-      _$StorableSubscriptionImpl.fromJson;
+/// @nodoc
+class __$StorableSubscriptionCopyWithImpl<$Res>
+    implements _$StorableSubscriptionCopyWith<$Res> {
+  __$StorableSubscriptionCopyWithImpl(this._self, this._then);
 
-  /// This is the ID of the subscription. It should generated by your database.
-  /// And should be unique (Primary Key).
-  @override
-  String get id;
-  @override
-  @JsonKey(name: 'product_id')
-  String get productId;
-  @override
-  @JsonKey(
-      name: 'expires_at',
-      fromJson: _dateFromEpochSeconds,
-      toJson: _dateToEpochSeconds)
-  DateTime get expiresAt;
-
-  /// The store that the user purchased the subscription from.
-  @override
-  SubscriptionStore get store;
-
-  /// The status of the subscription
-  @override
-  SubscriptionStatus get status;
-  @override
-  @JsonKey(name: 'renewal_status')
-  SubscriptionRenewalStatus get renewalStatus;
+  final _StorableSubscription _self;
+  final $Res Function(_StorableSubscription) _then;
 
   /// Create a copy of StorableSubscription
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$StorableSubscriptionImplCopyWith<_$StorableSubscriptionImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? id = null,
+    Object? productId = null,
+    Object? expiresAt = null,
+    Object? store = null,
+    Object? status = null,
+    Object? renewalStatus = null,
+  }) {
+    return _then(_StorableSubscription(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      productId: null == productId
+          ? _self.productId
+          : productId // ignore: cast_nullable_to_non_nullable
+              as String,
+      expiresAt: null == expiresAt
+          ? _self.expiresAt
+          : expiresAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      store: null == store
+          ? _self.store
+          : store // ignore: cast_nullable_to_non_nullable
+              as SubscriptionStore,
+      status: null == status
+          ? _self.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as SubscriptionStatus,
+      renewalStatus: null == renewalStatus
+          ? _self.renewalStatus
+          : renewalStatus // ignore: cast_nullable_to_non_nullable
+              as SubscriptionRenewalStatus,
+    ));
+  }
 }
+
+// dart format on

@@ -6,9 +6,9 @@ part of 'models.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$SubscriptionStoreProductImpl _$$SubscriptionStoreProductImplFromJson(
+_SubscriptionStoreProduct _$SubscriptionStoreProductFromJson(
         Map<String, dynamic> json) =>
-    _$SubscriptionStoreProductImpl(
+    _SubscriptionStoreProduct(
       id: json['id'] as String,
       name: json['name'] as String,
       description: json['description'] as String,
@@ -21,8 +21,8 @@ _$SubscriptionStoreProductImpl _$$SubscriptionStoreProductImplFromJson(
       accessLevel: json['accessLevel'] as String,
     );
 
-Map<String, dynamic> _$$SubscriptionStoreProductImplToJson(
-        _$SubscriptionStoreProductImpl instance) =>
+Map<String, dynamic> _$SubscriptionStoreProductToJson(
+        _SubscriptionStoreProduct instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
@@ -42,9 +42,8 @@ const _$SubscriptionStoreEnumMap = {
   SubscriptionStore.gocardless: 'gocardless',
 };
 
-_$CrosspayEntitlementImpl _$$CrosspayEntitlementImplFromJson(
-        Map<String, dynamic> json) =>
-    _$CrosspayEntitlementImpl(
+_CrosspayEntitlement _$CrosspayEntitlementFromJson(Map<String, dynamic> json) =>
+    _CrosspayEntitlement(
       id: json['id'] as String,
       name: json['name'] as String,
       period: _durationFromMillis(json['period_ms']),
@@ -54,8 +53,8 @@ _$CrosspayEntitlementImpl _$$CrosspayEntitlementImplFromJson(
           CrosspayProducts.fromJson(json['products'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$CrosspayEntitlementImplToJson(
-        _$CrosspayEntitlementImpl instance) =>
+Map<String, dynamic> _$CrosspayEntitlementToJson(
+        _CrosspayEntitlement instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
@@ -65,9 +64,8 @@ Map<String, dynamic> _$$CrosspayEntitlementImplToJson(
       'products': instance.products,
     };
 
-_$CrosspayProductsImpl _$$CrosspayProductsImplFromJson(
-        Map<String, dynamic> json) =>
-    _$CrosspayProductsImpl(
+_CrosspayProducts _$CrosspayProductsFromJson(Map<String, dynamic> json) =>
+    _CrosspayProducts(
       playStore: json['playstore'] == null
           ? null
           : CrosspayProduct.fromJson(json['playstore'] as Map<String, dynamic>),
@@ -83,8 +81,7 @@ _$CrosspayProductsImpl _$$CrosspayProductsImplFromJson(
               json['gocardless'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$CrosspayProductsImplToJson(
-        _$CrosspayProductsImpl instance) =>
+Map<String, dynamic> _$CrosspayProductsToJson(_CrosspayProducts instance) =>
     <String, dynamic>{
       'playstore': instance.playStore,
       'appstore': instance.appStore,
@@ -92,9 +89,8 @@ Map<String, dynamic> _$$CrosspayProductsImplToJson(
       'gocardless': instance.gocardless,
     };
 
-_$CrosspayProductImpl _$$CrosspayProductImplFromJson(
-        Map<String, dynamic> json) =>
-    _$CrosspayProductImpl(
+_CrosspayProduct _$CrosspayProductFromJson(Map<String, dynamic> json) =>
+    _CrosspayProduct(
       id: json['id'] as String,
       productId: json['product_id'] as String,
       name: json['name'] as String,
@@ -102,8 +98,7 @@ _$CrosspayProductImpl _$$CrosspayProductImplFromJson(
       metadata: json['metadata'] as Map<String, dynamic>?,
     );
 
-Map<String, dynamic> _$$CrosspayProductImplToJson(
-        _$CrosspayProductImpl instance) =>
+Map<String, dynamic> _$CrosspayProductToJson(_CrosspayProduct instance) =>
     <String, dynamic>{
       'id': instance.id,
       'product_id': instance.productId,
@@ -112,20 +107,20 @@ Map<String, dynamic> _$$CrosspayProductImplToJson(
       'metadata': instance.metadata,
     };
 
-_$SubscriptionGocardlessProductImpl
-    _$$SubscriptionGocardlessProductImplFromJson(Map<String, dynamic> json) =>
-        _$SubscriptionGocardlessProductImpl(
-          id: json['id'] as String,
-          name: json['name'] as String,
-          description: json['description'] as String?,
-          formattedPrice: json['formatted_price'] as String,
-          price: (json['price'] as num).toInt(),
-          currency: json['currency'] as String,
-          checkoutUrl: json['checkout_url'] as String,
-        );
+_SubscriptionGocardlessProduct _$SubscriptionGocardlessProductFromJson(
+        Map<String, dynamic> json) =>
+    _SubscriptionGocardlessProduct(
+      id: json['id'] as String,
+      name: json['name'] as String,
+      description: json['description'] as String?,
+      formattedPrice: json['formatted_price'] as String,
+      price: (json['price'] as num).toInt(),
+      currency: json['currency'] as String,
+      checkoutUrl: json['checkout_url'] as String,
+    );
 
-Map<String, dynamic> _$$SubscriptionGocardlessProductImplToJson(
-        _$SubscriptionGocardlessProductImpl instance) =>
+Map<String, dynamic> _$SubscriptionGocardlessProductToJson(
+        _SubscriptionGocardlessProduct instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
@@ -136,9 +131,9 @@ Map<String, dynamic> _$$SubscriptionGocardlessProductImplToJson(
       'checkout_url': instance.checkoutUrl,
     };
 
-_$SubscriptionStripeProductImpl _$$SubscriptionStripeProductImplFromJson(
+_SubscriptionStripeProduct _$SubscriptionStripeProductFromJson(
         Map<String, dynamic> json) =>
-    _$SubscriptionStripeProductImpl(
+    _SubscriptionStripeProduct(
       id: json['id'] as String,
       objectType: json['object'] as String,
       active: json['active'] as bool,
@@ -160,8 +155,8 @@ _$SubscriptionStripeProductImpl _$$SubscriptionStripeProductImplFromJson(
       url: json['url'] as String?,
     );
 
-Map<String, dynamic> _$$SubscriptionStripeProductImplToJson(
-        _$SubscriptionStripeProductImpl instance) =>
+Map<String, dynamic> _$SubscriptionStripeProductToJson(
+        _SubscriptionStripeProduct instance) =>
     <String, dynamic>{
       'id': instance.id,
       'object': instance.objectType,
@@ -182,9 +177,9 @@ Map<String, dynamic> _$$SubscriptionStripeProductImplToJson(
       'url': instance.url,
     };
 
-_$SubscriptionStripePriceImpl _$$SubscriptionStripePriceImplFromJson(
+_SubscriptionStripePrice _$SubscriptionStripePriceFromJson(
         Map<String, dynamic> json) =>
-    _$SubscriptionStripePriceImpl(
+    _SubscriptionStripePrice(
       id: json['id'] as String,
       price: (json['price'] as num).toInt(),
       currency: json['currency'] as String,
@@ -192,8 +187,8 @@ _$SubscriptionStripePriceImpl _$$SubscriptionStripePriceImplFromJson(
       unitLabel: json['unitLabel'] as String,
     );
 
-Map<String, dynamic> _$$SubscriptionStripePriceImplToJson(
-        _$SubscriptionStripePriceImpl instance) =>
+Map<String, dynamic> _$SubscriptionStripePriceToJson(
+        _SubscriptionStripePrice instance) =>
     <String, dynamic>{
       'id': instance.id,
       'price': instance.price,
@@ -202,9 +197,9 @@ Map<String, dynamic> _$$SubscriptionStripePriceImplToJson(
       'unitLabel': instance.unitLabel,
     };
 
-_$StorableSubscriptionImpl _$$StorableSubscriptionImplFromJson(
+_StorableSubscription _$StorableSubscriptionFromJson(
         Map<String, dynamic> json) =>
-    _$StorableSubscriptionImpl(
+    _StorableSubscription(
       id: json['id'] as String,
       productId: json['product_id'] as String,
       expiresAt: _dateFromEpochSeconds((json['expires_at'] as num).toInt()),
@@ -214,8 +209,8 @@ _$StorableSubscriptionImpl _$$StorableSubscriptionImplFromJson(
           _$SubscriptionRenewalStatusEnumMap, json['renewal_status']),
     );
 
-Map<String, dynamic> _$$StorableSubscriptionImplToJson(
-        _$StorableSubscriptionImpl instance) =>
+Map<String, dynamic> _$StorableSubscriptionToJson(
+        _StorableSubscription instance) =>
     <String, dynamic>{
       'id': instance.id,
       'product_id': instance.productId,

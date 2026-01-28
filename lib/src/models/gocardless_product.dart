@@ -1,7 +1,7 @@
 part of './models.dart';
 
 @freezed
-class SubscriptionGocardlessProduct with _$SubscriptionGocardlessProduct {
+sealed class SubscriptionGocardlessProduct with _$SubscriptionGocardlessProduct {
   factory SubscriptionGocardlessProduct({
     required String id,
     required String name,

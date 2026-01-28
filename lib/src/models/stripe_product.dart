@@ -1,7 +1,7 @@
 part of 'models.dart';
 
 @freezed
-class SubscriptionStripeProduct with _$SubscriptionStripeProduct {
+sealed class SubscriptionStripeProduct with _$SubscriptionStripeProduct {
   const factory SubscriptionStripeProduct({
     /// Unique identifier for the object.
     required String id,
@@ -60,7 +60,7 @@ class SubscriptionStripeProduct with _$SubscriptionStripeProduct {
 }
 
 @freezed
-class SubscriptionStripePrice with _$SubscriptionStripePrice {
+sealed class SubscriptionStripePrice with _$SubscriptionStripePrice {
   factory SubscriptionStripePrice({
     required String id,
     required int price,

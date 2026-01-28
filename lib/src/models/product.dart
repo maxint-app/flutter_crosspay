@@ -12,7 +12,7 @@ enum SubscriptionStore {
 enum ExternalStore { stripe, gocardless }
 
 @freezed
-class SubscriptionStoreProduct with _$SubscriptionStoreProduct {
+sealed class SubscriptionStoreProduct with _$SubscriptionStoreProduct {
   factory SubscriptionStoreProduct({
     required String id,
     required String name,
@@ -30,7 +30,7 @@ class SubscriptionStoreProduct with _$SubscriptionStoreProduct {
 }
 
 @freezed
-class CrosspayEntitlement with _$CrosspayEntitlement {
+sealed class CrosspayEntitlement with _$CrosspayEntitlement {
   factory CrosspayEntitlement({
     required String id,
     required String name,
@@ -49,7 +49,7 @@ class CrosspayEntitlement with _$CrosspayEntitlement {
 }
 
 @freezed
-class CrosspayProducts with _$CrosspayProducts {
+sealed class CrosspayProducts with _$CrosspayProducts {
   CrosspayProducts._();
 
   factory CrosspayProducts({
@@ -77,7 +77,7 @@ class CrosspayProducts with _$CrosspayProducts {
 }
 
 @freezed
-class CrosspayProduct with _$CrosspayProduct {
+sealed class CrosspayProduct with _$CrosspayProduct {
   factory CrosspayProduct({
     required String id,
     @JsonKey(name: "product_id") required String productId,
