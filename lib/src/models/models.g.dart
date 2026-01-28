@@ -39,7 +39,9 @@ const _$SubscriptionStoreEnumMap = {
   SubscriptionStore.appStore: 'appstore',
   SubscriptionStore.playStore: 'playstore',
   SubscriptionStore.stripe: 'stripe',
+  SubscriptionStore.stripeSandbox: 'stripe_sandbox',
   SubscriptionStore.gocardless: 'gocardless',
+  SubscriptionStore.gocardlessSandbox: 'gocardless_sandbox',
 };
 
 _CrosspayEntitlement _$CrosspayEntitlementFromJson(Map<String, dynamic> json) =>
