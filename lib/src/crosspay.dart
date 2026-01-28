@@ -213,8 +213,7 @@ class FlutterCrosspay {
   }
 
   /// Get the active [SubscriptionStoreProduct]
-  Future<SubscriptionStoreProduct?> activeProduct(
-      ExternalStore externalStore) async {
+  Future<SubscriptionStoreProduct?> activeProduct() async {
     assert(
       _customerEmail != null,
       "Customer email is not set. Please call identify() to set the customer email before calling activeProduct().",
