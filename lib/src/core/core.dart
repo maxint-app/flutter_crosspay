@@ -73,20 +73,27 @@ abstract class Store {
   Future<StorableSubscription?> getActiveSubscription(
     String customerEmail,
   ) async {
-    final res =
-        await dio.post<Map<String, dynamic>?>(endpoints.activeSubscription,
-            options: Options(
-              responseType: ResponseType.json,
-            ),
-            data: {
-          "customer_email": customerEmail,
-        });
+    try {
+      final res =
+          await dio.post<Map<String, dynamic>?>(endpoints.activeSubscription,
+              options: Options(
+                responseType: ResponseType.json,
+              ),
+              data: {
+            "customer_email": customerEmail,
+          });
 
-    if (res.data?["data"] == null) {
-      return null;
+      if (res.data?["data"] == null) {
+        return null;
+      }
+
+      return StorableSubscription.fromJson(res.data?["data"]);
+    } on DioException catch (e) {
+      if (e.response?.statusCode == 404) {
+        return null;
+      }
+      rethrow;
     }
-
-    return StorableSubscription.fromJson(res.data?["data"]);
   }
 
   /// Get the active [SubscriptionStoreProduct]
