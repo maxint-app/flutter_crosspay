@@ -65,7 +65,7 @@ class FlutterCrosspay {
   FlutterCrosspay({
     required this.publicKey,
     required CrosspayEnvironment environment,
-    String baseUrl = "https://api.crosspy.dev/tenant",
+    String baseUrl = "https://api.crosspay.dev/tenant",
     String? customerEmail,
   })  : dio = Dio(BaseOptions(baseUrl: baseUrl, headers: {
           "api-key": publicKey,
