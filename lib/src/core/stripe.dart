@@ -102,7 +102,10 @@ class StripeSubscriptionStore extends Store {
         mode: LaunchMode.externalApplication);
   }
 
-  Future<void> cancel() async {
-    await dio.post(endpoints.stripeCancelSubscription);
+  Future<void> cancel(String customerEmail) async {
+    await dio.post("${endpoints.stripeCancelSubscription}/${environment.label}",
+        data: {
+          "customer_email": customerEmail,
+        });
   }
 }

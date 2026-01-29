@@ -45,8 +45,8 @@ class GocardlessSubscriptionStore extends Store {
     final storeProducts = await _queryStoreProducts();
 
     _platformProducts = storeProducts.map((storeProduct) {
-      final entitlement = entitlements
-          .firstWhere((e) => e.products.gocardless?.productId == storeProduct.id);
+      final entitlement = entitlements.firstWhere(
+          (e) => e.products.gocardless?.productId == storeProduct.id);
 
       return SubscriptionStoreProduct(
         id: storeProduct.id,
@@ -93,10 +93,15 @@ class GocardlessSubscriptionStore extends Store {
     final storeProduct =
         storeProducts.firstWhere((element) => element.id == product.id);
 
-    await launchUrl(Uri.parse(storeProduct.checkoutUrl), mode: LaunchMode.externalApplication);
+    await launchUrl(Uri.parse(storeProduct.checkoutUrl),
+        mode: LaunchMode.externalApplication);
   }
 
-  Future<void> cancel() async {
-    await dio.post(endpoints.gocardlessCancelSubscription);
+  Future<void> cancel(String customerEmail) async {
+    await dio.post(
+        "${endpoints.gocardlessCancelSubscription}/${environment.label}",
+        data: {
+          "customer_email": customerEmail,
+        });
   }
 }

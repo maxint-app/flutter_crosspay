@@ -259,10 +259,10 @@ class FlutterCrosspay {
         active?.store == SubscriptionStore.gocardlessSandbox) {
       switch (active?.store) {
         case SubscriptionStore.stripe || SubscriptionStore.stripeSandbox:
-          await _stripeStore.cancel();
+          await _stripeStore.cancel(_customerEmail!);
         case SubscriptionStore.gocardless ||
               SubscriptionStore.gocardlessSandbox:
-          await _gocardlessStore.cancel();
+          await _gocardlessStore.cancel(_customerEmail!);
         default:
       }
     }
