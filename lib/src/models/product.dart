@@ -74,11 +74,9 @@ sealed class CrosspayProducts with _$CrosspayProducts {
         return appStore;
       case SubscriptionStore.playStore:
         return playStore;
-      case SubscriptionStore.stripe:
-      case SubscriptionStore.stripeSandbox:
+      case SubscriptionStore.stripe || SubscriptionStore.stripeSandbox:
         return stripe;
-      case SubscriptionStore.gocardless:
-      case SubscriptionStore.gocardlessSandbox:
+      case SubscriptionStore.gocardless || SubscriptionStore.gocardlessSandbox:
         return gocardless;
     }
   }

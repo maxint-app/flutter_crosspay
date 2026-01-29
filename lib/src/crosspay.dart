@@ -118,7 +118,9 @@ class FlutterCrosspay {
       _subscriptions.add(
         stream.listen(
           (event) {
-            if (event.data != null && event.data != "ping" && event.data!.isNotEmpty) {
+            if (event.data != null &&
+                event.data != "ping" &&
+                event.data!.isNotEmpty) {
               _streamController
                   .add(PurchaseEvent.fromJson(jsonDecode(event.data!)));
             }
@@ -178,14 +180,18 @@ class FlutterCrosspay {
       );
     } else {
       return switch (product.store) {
-        SubscriptionStore.stripe => _stripeStore.purchase(
+        SubscriptionStore.stripe ||
+        SubscriptionStore.stripeSandbox =>
+          _stripeStore.purchase(
             product,
             _customerEmail!,
             redirectUrl: redirectUrl,
             failureRedirectUrl: failureRedirectUrl,
             replacementMode: replacementMode,
           ),
-        SubscriptionStore.gocardless => _gocardlessStore.purchase(
+        SubscriptionStore.gocardless ||
+        SubscriptionStore.gocardlessSandbox =>
+          _gocardlessStore.purchase(
             product,
             _customerEmail!,
             redirectUrl: redirectUrl,
@@ -248,11 +254,14 @@ class FlutterCrosspay {
         kIsWindows ||
         kIsWeb ||
         active?.store == SubscriptionStore.stripe ||
-        active?.store == SubscriptionStore.gocardless) {
+        active?.store == SubscriptionStore.stripeSandbox ||
+        active?.store == SubscriptionStore.gocardless ||
+        active?.store == SubscriptionStore.gocardlessSandbox) {
       switch (active?.store) {
-        case SubscriptionStore.stripe:
+        case SubscriptionStore.stripe || SubscriptionStore.stripeSandbox:
           await _stripeStore.cancel();
-        case SubscriptionStore.gocardless:
+        case SubscriptionStore.gocardless ||
+              SubscriptionStore.gocardlessSandbox:
           await _gocardlessStore.cancel();
         default:
       }

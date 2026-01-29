@@ -80,7 +80,8 @@ class StripeSubscriptionStore extends Store {
         "User can not be allowed to purchase the same product again",
       );
     } else if (activeSubscription != null &&
-        activeSubscription.store != SubscriptionStore.stripe) {
+        activeSubscription.store != SubscriptionStore.stripe &&
+        activeSubscription.store != SubscriptionStore.stripeSandbox) {
       throw CrosspayException.crossUpgradeDowngrade(
         "User is already subscribed this product on a different platform ${activeSubscription.store}. "
         "User have to manage subscription on the same platform",
@@ -97,7 +98,8 @@ class StripeSubscriptionStore extends Store {
       },
     );
 
-    await launchUrl(Uri.parse(res.data!["url"]), mode: LaunchMode.externalApplication);
+    await launchUrl(Uri.parse(res.data!["url"]),
+        mode: LaunchMode.externalApplication);
   }
 
   Future<void> cancel() async {
