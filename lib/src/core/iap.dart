@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:collection/collection.dart';
+import 'package:crypto/crypto.dart';
 import 'package:dio/dio.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:in_app_purchase_storekit/store_kit_wrappers.dart';
@@ -88,11 +89,12 @@ class InAppPurchaseSubscriptionStore extends Store {
     final productIds = entitlements
         .map((s) {
           if (kIsAndroid) {
-            return s.products.playStore?.id;
+            return s.products.playStore?.productId;
           } else if (kIsMacOS || kIsIOS) {
-            return s.products.appStore?.id;
+            return s.products.appStore?.productId;
           } else {
-            return s.products.stripe?.id ?? s.products.gocardless?.id;
+            return s.products.stripe?.productId ??
+                s.products.gocardless?.productId;
           }
         })
         .nonNulls
@@ -156,9 +158,11 @@ class InAppPurchaseSubscriptionStore extends Store {
       orElse: () => throw Exception('Product not found'),
     );
 
+    final customerEmailSha256Sum = sha256.convert(customerEmail.codeUnits).toString();
+
     final purchaseParam = PurchaseParam(
       productDetails: platformProduct,
-      applicationUserName: customerEmail,
+      applicationUserName: customerEmailSha256Sum,
     );
 
     final activeSubscription = await getActiveSubscription(customerEmail);
@@ -185,7 +189,7 @@ class InAppPurchaseSubscriptionStore extends Store {
       final billingClient = InAppPurchase.instance
           .getPlatformAddition<InAppPurchaseAndroidPlatformAddition>();
       final oldPurchaseDetails = await billingClient.queryPastPurchases(
-        applicationUserName: customerEmail,
+        applicationUserName: customerEmailSha256Sum,
       );
 
       if (oldPurchaseDetails.error != null) {
@@ -201,6 +205,7 @@ class InAppPurchaseSubscriptionStore extends Store {
 
       if (oldPurchase != null) {
         final purchaseParam = GooglePlayPurchaseParam(
+          applicationUserName: customerEmailSha256Sum,
           productDetails: platformProduct,
           changeSubscriptionParam: ChangeSubscriptionParam(
             oldPurchaseDetails: oldPurchase,
