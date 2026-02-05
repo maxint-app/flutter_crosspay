@@ -9,8 +9,8 @@ import '../crosspay.dart';
 import '../models/models.dart';
 
 const endpoints = CrosspayEndpoints(
+  identifyCustomer: "/identify",
   entitlements: "/entitlements",
-  verifyPurchase: "/verify",
   activeSubscription: "/subscriptions/active",
   stripeListProduct: "/stripe/products",
   stripeCheckoutSession: "/stripe/checkout",
@@ -94,6 +94,21 @@ abstract class Store {
       }
       rethrow;
     }
+  }
+
+  Future<String> identifyCustomer(
+    String customerEmail,
+  ) async {
+    final res =
+        await dio.post<Map<String, dynamic>?>(endpoints.identifyCustomer,
+            options: Options(
+              responseType: ResponseType.json,
+            ),
+            data: {
+          "customer_email": customerEmail,
+        });
+
+    return res.data?["customer_id"] as String;
   }
 
   /// Get the active [SubscriptionStoreProduct]

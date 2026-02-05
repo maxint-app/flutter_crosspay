@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:collection/collection.dart';
 import 'package:crypto/crypto.dart';
-import 'package:dio/dio.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:in_app_purchase_storekit/store_kit_wrappers.dart';
 import 'package:in_app_purchase_android/in_app_purchase_android.dart';
@@ -30,12 +29,7 @@ class InAppPurchaseSubscriptionStore extends Store {
               break;
             case PurchaseStatus.purchased || PurchaseStatus.restored:
               {
-                if (kIsIOS || kIsMacOS) {
-                  streamController
-                      .add(PurchaseEvent(PurchaseEventType.success));
-                } else {
-                  await _verifyPurchase(purchaseDetails);
-                }
+                streamController.add(PurchaseEvent(PurchaseEventType.success));
                 break;
               }
             case PurchaseStatus.canceled:
@@ -59,27 +53,6 @@ class InAppPurchaseSubscriptionStore extends Store {
       for (var transaction in transactions) {
         await SKPaymentQueueWrapper().finishTransaction(transaction);
       }
-    }
-  }
-
-  Future<void> _verifyPurchase(PurchaseDetails purchaseDetails) async {
-    if (!kIsAndroid) return;
-    final res = await dio.post<Map<String, dynamic>?>(
-      endpoints.verifyPurchase,
-      data: {
-        "productId": purchaseDetails.productID,
-        "purchaseToken":
-            purchaseDetails.verificationData.serverVerificationData,
-      },
-      options: Options(
-        responseType: ResponseType.json,
-      ),
-    );
-
-    if (res.data?["valid"] == true) {
-      streamController.add(PurchaseEvent(PurchaseEventType.success));
-    } else {
-      streamController.add(PurchaseEvent(PurchaseEventType.failed));
     }
   }
 
@@ -158,7 +131,8 @@ class InAppPurchaseSubscriptionStore extends Store {
       orElse: () => throw Exception('Product not found'),
     );
 
-    final customerEmailSha256Sum = sha256.convert(customerEmail.codeUnits).toString();
+    final customerEmailSha256Sum =
+        sha256.convert(customerEmail.codeUnits).toString();
 
     final purchaseParam = PurchaseParam(
       productDetails: platformProduct,

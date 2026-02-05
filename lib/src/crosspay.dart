@@ -15,7 +15,7 @@ import 'package:in_app_purchase_android/billing_client_wrappers.dart';
 
 class CrosspayEndpoints {
   final String entitlements;
-  final String verifyPurchase;
+  final String identifyCustomer;
   final String activeSubscription;
   final String stripeListProduct;
   final String gocardlessListProduct;
@@ -26,7 +26,6 @@ class CrosspayEndpoints {
 
   const CrosspayEndpoints({
     required this.entitlements,
-    required this.verifyPurchase,
     required this.activeSubscription,
     required this.stripeListProduct,
     required this.stripeCheckoutSession,
@@ -34,6 +33,7 @@ class CrosspayEndpoints {
     required this.gocardlessListProduct,
     required this.gocardlessCancelSubscription,
     required this.purchasesStream,
+    required this.identifyCustomer ,
   });
 }
 
@@ -133,7 +133,8 @@ class FlutterCrosspay {
     }
   }
 
-  void identify(String customerEmail) {
+  Future<void> identify(String customerEmail) async {
+    await _iapStore.identifyCustomer(customerEmail);
     _customerEmail = customerEmail;
     _listenToSSE();
   }

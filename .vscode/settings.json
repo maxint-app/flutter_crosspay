@@ -1,3 +1,6 @@
 {
-    "cmake.sourceDirectory": "/home/krtirtho/work/flutter_crosspay/example/linux"
+    "cmake.sourceDirectory": "/home/krtirtho/work/flutter_crosspay/example/linux",
+    "cSpell.words": [
+        "krtirtho"
+    ]
 }

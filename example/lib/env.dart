@@ -9,4 +9,7 @@ abstract class Env {
 
     @EnviedField(varName: 'CROSSPAY_API_URL')
     static const String crosspayApiUrl = _Env.crosspayApiUrl;
+
+    @EnviedField(varName: 'USER_EMAIL')
+    static const String userEmail = _Env.userEmail;
 }
