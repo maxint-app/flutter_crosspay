@@ -35,7 +35,7 @@ class _MainAppState extends State<MainApp> {
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await crosspay.identify(Env.userEmail);
-      
+
       _subscription = crosspay.purchaseEvents.listen((event) {
         debugPrint("Purchase Event: ${event.event}");
       });
@@ -105,6 +105,19 @@ class _MainAppState extends State<MainApp> {
                         child: isReSubscribable
                             ? const Text("Resubscribe")
                             : const Text("Subscribe"),
+                      )
+                    : isActive &&
+                          const [
+                            SubscriptionStore.stripe,
+                            SubscriptionStore.stripeSandbox,
+                            SubscriptionStore.gocardless,
+                            SubscriptionStore.gocardlessSandbox,
+                          ].contains(storeProduct.store)
+                    ? FilledButton.tonal(
+                        onPressed: () async {
+                          await crosspay.cancelSubscription();
+                        },
+                        child: const Text("Cancel"),
                       )
                     : null,
               ),
