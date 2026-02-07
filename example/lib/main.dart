@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:example/env.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_crosspay/flutter_crosspay.dart';
 
@@ -95,12 +96,82 @@ class _MainAppState extends State<MainApp> {
                 ),
                 trailing: !isActive || isReSubscribable
                     ? FilledButton.tonal(
-                        onPressed: () {
-                          crosspay.purchase(
-                            storeProduct,
-                            redirectUrl: "https://example.com/success",
-                            failureRedirectUrl: "https://example.com/failure",
-                          );
+                        onPressed: () async {
+                          if (kIsWeb ||
+                              Theme.of(context).platform ==
+                                  TargetPlatform.windows ||
+                              Theme.of(context).platform ==
+                                  TargetPlatform.linux) {
+                            final provider = await showDialog<ExternalStore>(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  title: Text("Choose Provide"),
+                                  content: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      ListTile(
+                                        title: Text("Stripe"),
+                                        subtitle: Text(
+                                          "Debit/Credit/Paypal, international",
+                                        ),
+                                        onTap: () {
+                                          Navigator.of(
+                                            context,
+                                          ).pop(ExternalStore.stripe);
+                                        },
+                                      ),
+                                      ListTile(
+                                        title: Text("GoCardless"),
+                                        subtitle: Text(
+                                          "Debit/Direct bank transfer, small fee",
+                                        ),
+                                        onTap: () {
+                                          Navigator.of(
+                                            context,
+                                          ).pop(ExternalStore.gocardless);
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              },
+                            );
+
+                            if (provider == null || !context.mounted) return;
+
+                            if (provider == ExternalStore.stripe) {
+                              await crosspay.purchase(
+                                storeProduct,
+                                redirectUrl: "https://example.com/success",
+                                failureRedirectUrl:
+                                    "https://example.com/failure",
+                              );
+                            } else {
+                              final products = await crosspay.queryProducts(
+                                ExternalStore.gocardless,
+                              );
+                              final storeProduct = products.firstWhere(
+                                (product) =>
+                                    entitlement
+                                        .products[product.store]
+                                        ?.productId ==
+                                    product.id,
+                              );
+                              await crosspay.purchase(
+                                storeProduct,
+                                redirectUrl: "https://example.com/success",
+                                failureRedirectUrl:
+                                    "https://example.com/failure",
+                              );
+                            }
+                          } else {
+                            await crosspay.purchase(
+                              storeProduct,
+                              redirectUrl: "https://example.com/success",
+                              failureRedirectUrl: "https://example.com/failure",
+                            );
+                          }
                         },
                         child: isReSubscribable
                             ? const Text("Resubscribe")

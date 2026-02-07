@@ -71,12 +71,15 @@ class GocardlessSubscriptionStore extends Store {
     required String redirectUrl,
     required String failureRedirectUrl,
     ReplacementMode replacementMode = ReplacementMode.withTimeProration,
-    String? successHtml,
-    String? failureHtml,
   }) async {
     final activeSubscription = await getActiveSubscription(customerEmail);
 
-    if (activeSubscription?.productId == product.id) {
+    if (activeSubscription?.productId == product.id &&
+        const [
+          SubscriptionStatus.active,
+          SubscriptionStatus.gracePeriod,
+          SubscriptionStatus.trialing
+        ].contains(activeSubscription?.status)) {
       throw CrosspayException.alreadyActive(
         "User is already subscribed to this product '${product.id}'. "
         "User can not be allowed to purchase the same product again",
@@ -89,12 +92,24 @@ class GocardlessSubscriptionStore extends Store {
       );
     }
 
-    final storeProducts = await _queryStoreProducts();
-    final storeProduct =
-        storeProducts.firstWhere((element) => element.id == product.id);
+    final res = await dio.post<Map>(
+      "${endpoints.gocardlessBillingRequestFlow}/${environment.label}",
+      data: {
+        "customer_email": customerEmail,
+        "product_id": product.id,
+        "redirect_url": redirectUrl,
+        "failure_redirect_url": failureRedirectUrl
+      },
+    );
 
-    await launchUrl(Uri.parse(storeProduct.checkoutUrl),
-        mode: LaunchMode.externalApplication);
+    final checkoutUrl = res.data?["url"];
+    if (checkoutUrl == null) {
+      throw Exception("Failed to create GoCardless billing request flow");
+    }
+
+    if (!await launchUrl(Uri.parse(checkoutUrl))) {
+      throw Exception("Could not launch GoCardless checkout URL");
+    }
   }
 
   Future<void> cancel(String customerEmail) async {

@@ -21,6 +21,7 @@ class CrosspayEndpoints {
   final String gocardlessListProduct;
   final String stripeCheckoutSession;
   final String stripeCancelSubscription;
+  final String gocardlessBillingRequestFlow;
   final String gocardlessCancelSubscription;
   final String purchasesStream;
 
@@ -30,6 +31,7 @@ class CrosspayEndpoints {
     required this.stripeListProduct,
     required this.stripeCheckoutSession,
     required this.stripeCancelSubscription,
+    required this.gocardlessBillingRequestFlow,
     required this.gocardlessListProduct,
     required this.gocardlessCancelSubscription,
     required this.purchasesStream,

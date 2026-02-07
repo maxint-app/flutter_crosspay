@@ -73,15 +73,21 @@ class StripeSubscriptionStore extends Store {
     ReplacementMode replacementMode = ReplacementMode.withTimeProration,
   }) async {
     final activeSubscription = await getActiveSubscription(customerEmail);
+    final isActive = const [
+      SubscriptionStatus.active,
+      SubscriptionStatus.gracePeriod,
+      SubscriptionStatus.trialing
+    ].contains(activeSubscription?.status);
 
-    if (activeSubscription?.productId == product.id) {
+    if (activeSubscription?.productId == product.id && isActive) {
       throw CrosspayException.alreadyActive(
         "User is already subscribed to this product '${product.id}'. "
         "User can not be allowed to purchase the same product again",
       );
     } else if (activeSubscription != null &&
         activeSubscription.store != SubscriptionStore.stripe &&
-        activeSubscription.store != SubscriptionStore.stripeSandbox) {
+        activeSubscription.store != SubscriptionStore.stripeSandbox &&
+        isActive) {
       throw CrosspayException.crossUpgradeDowngrade(
         "User is already subscribed this product on a different platform ${activeSubscription.store}. "
         "User have to manage subscription on the same platform",

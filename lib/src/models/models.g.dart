@@ -118,7 +118,6 @@ _SubscriptionGocardlessProduct _$SubscriptionGocardlessProductFromJson(
       formattedPrice: json['formatted_price'] as String,
       price: (json['price'] as num).toInt(),
       currency: json['currency'] as String,
-      checkoutUrl: json['checkout_url'] as String,
     );
 
 Map<String, dynamic> _$SubscriptionGocardlessProductToJson(
@@ -130,7 +129,6 @@ Map<String, dynamic> _$SubscriptionGocardlessProductToJson(
       'formatted_price': instance.formattedPrice,
       'price': instance.price,
       'currency': instance.currency,
-      'checkout_url': instance.checkoutUrl,
     };
 
 _SubscriptionStripeProduct _$SubscriptionStripeProductFromJson(

@@ -17,6 +17,7 @@ const endpoints = CrosspayEndpoints(
   stripeCancelSubscription: "/stripe/cancel",
   gocardlessListProduct: "/gocardless/products",
   gocardlessCancelSubscription: "/gocardless/cancel",
+  gocardlessBillingRequestFlow: "/gocardless/billing-request-flow",
   purchasesStream: "/purchases-stream",
 );
 

@@ -1952,8 +1952,6 @@ mixin _$SubscriptionGocardlessProduct {
   String get formattedPrice;
   int get price;
   String get currency;
-  @JsonKey(name: "checkout_url")
-  String get checkoutUrl;
 
   /// Create a copy of SubscriptionGocardlessProduct
   /// with the given fields replaced by the non-null parameter values.
@@ -1980,19 +1978,17 @@ mixin _$SubscriptionGocardlessProduct {
                 other.formattedPrice == formattedPrice) &&
             (identical(other.price, price) || other.price == price) &&
             (identical(other.currency, currency) ||
-                other.currency == currency) &&
-            (identical(other.checkoutUrl, checkoutUrl) ||
-                other.checkoutUrl == checkoutUrl));
+                other.currency == currency));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, description,
-      formattedPrice, price, currency, checkoutUrl);
+  int get hashCode => Object.hash(
+      runtimeType, id, name, description, formattedPrice, price, currency);
 
   @override
   String toString() {
-    return 'SubscriptionGocardlessProduct(id: $id, name: $name, description: $description, formattedPrice: $formattedPrice, price: $price, currency: $currency, checkoutUrl: $checkoutUrl)';
+    return 'SubscriptionGocardlessProduct(id: $id, name: $name, description: $description, formattedPrice: $formattedPrice, price: $price, currency: $currency)';
   }
 }
 
@@ -2009,8 +2005,7 @@ abstract mixin class $SubscriptionGocardlessProductCopyWith<$Res> {
       String? description,
       @JsonKey(name: "formatted_price") String formattedPrice,
       int price,
-      String currency,
-      @JsonKey(name: "checkout_url") String checkoutUrl});
+      String currency});
 }
 
 /// @nodoc
@@ -2032,7 +2027,6 @@ class _$SubscriptionGocardlessProductCopyWithImpl<$Res>
     Object? formattedPrice = null,
     Object? price = null,
     Object? currency = null,
-    Object? checkoutUrl = null,
   }) {
     return _then(_self.copyWith(
       id: null == id
@@ -2058,10 +2052,6 @@ class _$SubscriptionGocardlessProductCopyWithImpl<$Res>
       currency: null == currency
           ? _self.currency
           : currency // ignore: cast_nullable_to_non_nullable
-              as String,
-      checkoutUrl: null == checkoutUrl
-          ? _self.checkoutUrl
-          : checkoutUrl // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -2165,22 +2155,15 @@ extension SubscriptionGocardlessProductPatterns
             String? description,
             @JsonKey(name: "formatted_price") String formattedPrice,
             int price,
-            String currency,
-            @JsonKey(name: "checkout_url") String checkoutUrl)?
+            String currency)?
         $default, {
     required TResult orElse(),
   }) {
     final _that = this;
     switch (_that) {
       case _SubscriptionGocardlessProduct() when $default != null:
-        return $default(
-            _that.id,
-            _that.name,
-            _that.description,
-            _that.formattedPrice,
-            _that.price,
-            _that.currency,
-            _that.checkoutUrl);
+        return $default(_that.id, _that.name, _that.description,
+            _that.formattedPrice, _that.price, _that.currency);
       case _:
         return orElse();
     }
@@ -2207,21 +2190,14 @@ extension SubscriptionGocardlessProductPatterns
             String? description,
             @JsonKey(name: "formatted_price") String formattedPrice,
             int price,
-            String currency,
-            @JsonKey(name: "checkout_url") String checkoutUrl)
+            String currency)
         $default,
   ) {
     final _that = this;
     switch (_that) {
       case _SubscriptionGocardlessProduct():
-        return $default(
-            _that.id,
-            _that.name,
-            _that.description,
-            _that.formattedPrice,
-            _that.price,
-            _that.currency,
-            _that.checkoutUrl);
+        return $default(_that.id, _that.name, _that.description,
+            _that.formattedPrice, _that.price, _that.currency);
     }
   }
 
@@ -2245,21 +2221,14 @@ extension SubscriptionGocardlessProductPatterns
             String? description,
             @JsonKey(name: "formatted_price") String formattedPrice,
             int price,
-            String currency,
-            @JsonKey(name: "checkout_url") String checkoutUrl)?
+            String currency)?
         $default,
   ) {
     final _that = this;
     switch (_that) {
       case _SubscriptionGocardlessProduct() when $default != null:
-        return $default(
-            _that.id,
-            _that.name,
-            _that.description,
-            _that.formattedPrice,
-            _that.price,
-            _that.currency,
-            _that.checkoutUrl);
+        return $default(_that.id, _that.name, _that.description,
+            _that.formattedPrice, _that.price, _that.currency);
       case _:
         return null;
     }
@@ -2275,8 +2244,7 @@ class _SubscriptionGocardlessProduct implements SubscriptionGocardlessProduct {
       this.description,
       @JsonKey(name: "formatted_price") required this.formattedPrice,
       required this.price,
-      required this.currency,
-      @JsonKey(name: "checkout_url") required this.checkoutUrl});
+      required this.currency});
   factory _SubscriptionGocardlessProduct.fromJson(Map<String, dynamic> json) =>
       _$SubscriptionGocardlessProductFromJson(json);
 
@@ -2293,9 +2261,6 @@ class _SubscriptionGocardlessProduct implements SubscriptionGocardlessProduct {
   final int price;
   @override
   final String currency;
-  @override
-  @JsonKey(name: "checkout_url")
-  final String checkoutUrl;
 
   /// Create a copy of SubscriptionGocardlessProduct
   /// with the given fields replaced by the non-null parameter values.
@@ -2326,19 +2291,17 @@ class _SubscriptionGocardlessProduct implements SubscriptionGocardlessProduct {
                 other.formattedPrice == formattedPrice) &&
             (identical(other.price, price) || other.price == price) &&
             (identical(other.currency, currency) ||
-                other.currency == currency) &&
-            (identical(other.checkoutUrl, checkoutUrl) ||
-                other.checkoutUrl == checkoutUrl));
+                other.currency == currency));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, description,
-      formattedPrice, price, currency, checkoutUrl);
+  int get hashCode => Object.hash(
+      runtimeType, id, name, description, formattedPrice, price, currency);
 
   @override
   String toString() {
-    return 'SubscriptionGocardlessProduct(id: $id, name: $name, description: $description, formattedPrice: $formattedPrice, price: $price, currency: $currency, checkoutUrl: $checkoutUrl)';
+    return 'SubscriptionGocardlessProduct(id: $id, name: $name, description: $description, formattedPrice: $formattedPrice, price: $price, currency: $currency)';
   }
 }
 
@@ -2357,8 +2320,7 @@ abstract mixin class _$SubscriptionGocardlessProductCopyWith<$Res>
       String? description,
       @JsonKey(name: "formatted_price") String formattedPrice,
       int price,
-      String currency,
-      @JsonKey(name: "checkout_url") String checkoutUrl});
+      String currency});
 }
 
 /// @nodoc
@@ -2380,7 +2342,6 @@ class __$SubscriptionGocardlessProductCopyWithImpl<$Res>
     Object? formattedPrice = null,
     Object? price = null,
     Object? currency = null,
-    Object? checkoutUrl = null,
   }) {
     return _then(_SubscriptionGocardlessProduct(
       id: null == id
@@ -2406,10 +2367,6 @@ class __$SubscriptionGocardlessProductCopyWithImpl<$Res>
       currency: null == currency
           ? _self.currency
           : currency // ignore: cast_nullable_to_non_nullable
-              as String,
-      checkoutUrl: null == checkoutUrl
-          ? _self.checkoutUrl
-          : checkoutUrl // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
