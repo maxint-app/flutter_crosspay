@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:collection/collection.dart';
-import 'package:crypto/crypto.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:in_app_purchase_storekit/store_kit_wrappers.dart';
 import 'package:in_app_purchase_android/in_app_purchase_android.dart';
@@ -14,6 +13,11 @@ import '../utils/platform.dart';
 class InAppPurchaseSubscriptionStore extends Store {
   List<SubscriptionStoreProduct>? _storeProducts;
   List<ProductDetails>? _platformProducts;
+  String? _customerId;
+
+  void setCustomerId(String customerId) {
+    _customerId = customerId;
+  }
 
   InAppPurchaseSubscriptionStore({
     required super.dio,
@@ -131,12 +135,9 @@ class InAppPurchaseSubscriptionStore extends Store {
       orElse: () => throw Exception('Product not found'),
     );
 
-    final customerEmailSha256Sum =
-        sha256.convert(customerEmail.codeUnits).toString();
-
     final purchaseParam = PurchaseParam(
       productDetails: platformProduct,
-      applicationUserName: customerEmailSha256Sum,
+      applicationUserName: _customerId,
     );
 
     final activeSubscription = await getActiveSubscription(customerEmail);
@@ -163,7 +164,7 @@ class InAppPurchaseSubscriptionStore extends Store {
       final billingClient = InAppPurchase.instance
           .getPlatformAddition<InAppPurchaseAndroidPlatformAddition>();
       final oldPurchaseDetails = await billingClient.queryPastPurchases(
-        applicationUserName: customerEmailSha256Sum,
+        applicationUserName: _customerId,
       );
 
       if (oldPurchaseDetails.error != null) {
@@ -179,7 +180,7 @@ class InAppPurchaseSubscriptionStore extends Store {
 
       if (oldPurchase != null) {
         final purchaseParam = GooglePlayPurchaseParam(
-          applicationUserName: customerEmailSha256Sum,
+          applicationUserName: _customerId,
           productDetails: platformProduct,
           changeSubscriptionParam: ChangeSubscriptionParam(
             oldPurchaseDetails: oldPurchase,

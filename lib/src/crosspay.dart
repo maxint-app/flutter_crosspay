@@ -35,7 +35,7 @@ class CrosspayEndpoints {
     required this.gocardlessListProduct,
     required this.gocardlessCancelSubscription,
     required this.purchasesStream,
-    required this.identifyCustomer ,
+    required this.identifyCustomer,
   });
 }
 
@@ -49,6 +49,7 @@ enum CrosspayEnvironment {
 
 class FlutterCrosspay {
   String? _customerEmail;
+  String? _customerId;
   final StreamController<PurchaseEvent> _streamController;
 
   late final InAppPurchaseSubscriptionStore _iapStore;
@@ -135,8 +136,20 @@ class FlutterCrosspay {
     }
   }
 
-  Future<void> identify(String customerEmail) async {
-    await _iapStore.identifyCustomer(customerEmail);
+  Future<void> identify(
+    String customerEmail,
+  ) async {
+    final res =
+        await dio.post<Map<String, dynamic>?>(endpoints.identifyCustomer,
+            options: Options(
+              responseType: ResponseType.json,
+            ),
+            data: {
+          "customer_email": customerEmail,
+        });
+
+    _customerId = res.data?["customer_id"] as String;
+    _iapStore.setCustomerId(_customerId!);
     _customerEmail = customerEmail;
     _listenToSSE();
   }

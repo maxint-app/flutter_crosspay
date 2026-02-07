@@ -97,21 +97,6 @@ abstract class Store {
     }
   }
 
-  Future<String> identifyCustomer(
-    String customerEmail,
-  ) async {
-    final res =
-        await dio.post<Map<String, dynamic>?>(endpoints.identifyCustomer,
-            options: Options(
-              responseType: ResponseType.json,
-            ),
-            data: {
-          "customer_email": customerEmail,
-        });
-
-    return res.data?["customer_id"] as String;
-  }
-
   /// Get the active [SubscriptionStoreProduct]
   ///
   /// This returns the currently active store product
