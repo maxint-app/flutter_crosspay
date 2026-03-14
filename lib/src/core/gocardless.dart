@@ -73,19 +73,23 @@ class GocardlessSubscriptionStore extends Store {
     ReplacementMode replacementMode = ReplacementMode.withTimeProration,
   }) async {
     final activeSubscription = await getActiveSubscription(customerEmail);
-
-    if (activeSubscription?.productId == product.id &&
-        const [
+    final isActive = const [
           SubscriptionStatus.active,
           SubscriptionStatus.gracePeriod,
           SubscriptionStatus.trialing
-        ].contains(activeSubscription?.status)) {
+        ].contains(activeSubscription?.status) &&
+        activeSubscription?.renewalStatus ==
+            SubscriptionRenewalStatus.autoRenew;
+
+    if (activeSubscription?.productId == product.id && isActive) {
       throw CrosspayException.alreadyActive(
         "User is already subscribed to this product '${product.id}'. "
         "User can not be allowed to purchase the same product again",
       );
     } else if (activeSubscription != null &&
-        activeSubscription.store != SubscriptionStore.gocardless) {
+        activeSubscription.store != SubscriptionStore.gocardless &&
+        activeSubscription.store != SubscriptionStore.gocardlessSandbox &&
+        isActive) {
       throw CrosspayException.crossUpgradeDowngrade(
         "User is already subscribed this product on a different platform ${activeSubscription.store}. "
         "User have to manage subscription on the same platform",

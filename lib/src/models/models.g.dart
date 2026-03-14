@@ -203,6 +203,8 @@ _StorableSubscription _$StorableSubscriptionFromJson(
       id: json['id'] as String,
       productId: json['product_id'] as String,
       expiresAt: _dateFromEpochSeconds((json['expires_at'] as num).toInt()),
+      trialExpiresAt: _dateFromEpochSecondsNullable(
+          (json['trial_expires_at'] as num?)?.toInt()),
       store: $enumDecode(_$SubscriptionStoreEnumMap, json['store']),
       status: $enumDecode(_$SubscriptionStatusEnumMap, json['status']),
       renewalStatus: $enumDecode(
@@ -215,6 +217,7 @@ Map<String, dynamic> _$StorableSubscriptionToJson(
       'id': instance.id,
       'product_id': instance.productId,
       'expires_at': _dateToEpochSeconds(instance.expiresAt),
+      'trial_expires_at': _dateToEpochSecondsNullable(instance.trialExpiresAt),
       'store': _$SubscriptionStoreEnumMap[instance.store]!,
       'status': _$SubscriptionStatusEnumMap[instance.status]!,
       'renewal_status':

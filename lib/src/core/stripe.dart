@@ -74,10 +74,12 @@ class StripeSubscriptionStore extends Store {
   }) async {
     final activeSubscription = await getActiveSubscription(customerEmail);
     final isActive = const [
-      SubscriptionStatus.active,
-      SubscriptionStatus.gracePeriod,
-      SubscriptionStatus.trialing
-    ].contains(activeSubscription?.status);
+          SubscriptionStatus.active,
+          SubscriptionStatus.gracePeriod,
+          SubscriptionStatus.trialing
+        ].contains(activeSubscription?.status) &&
+        activeSubscription?.renewalStatus ==
+            SubscriptionRenewalStatus.autoRenew;
 
     if (activeSubscription?.productId == product.id && isActive) {
       throw CrosspayException.alreadyActive(

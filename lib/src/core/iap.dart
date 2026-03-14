@@ -141,18 +141,27 @@ class InAppPurchaseSubscriptionStore extends Store {
     );
 
     final activeSubscription = await getActiveSubscription(customerEmail);
+    final isActive = const [
+          SubscriptionStatus.active,
+          SubscriptionStatus.gracePeriod,
+          SubscriptionStatus.trialing
+        ].contains(activeSubscription?.status) &&
+        activeSubscription?.renewalStatus ==
+            SubscriptionRenewalStatus.autoRenew;
 
     if (activeSubscription != null &&
-        activeSubscription.productId == product.id) {
+        activeSubscription.productId == product.id &&
+        isActive) {
       throw CrosspayException.alreadyActive(
         "User is already subscribed to this product '${product.id}'. "
         "User can not be allowed to purchase the same product again",
       );
     } else if (activeSubscription != null &&
-        (kIsAndroid &&
+        ((kIsAndroid &&
                 activeSubscription.store != SubscriptionStore.playStore ||
             (kIsIOS || kIsMacOS) &&
-                activeSubscription.store != SubscriptionStore.appStore)) {
+                activeSubscription.store != SubscriptionStore.appStore)) &&
+        isActive) {
       throw CrosspayException.crossUpgradeDowngrade(
         "User is already subscribed this product on a different platform ${activeSubscription.store}. "
         "User have to manage subscription on the same platform",

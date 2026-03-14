@@ -3630,6 +3630,11 @@ mixin _$StorableSubscription {
       fromJson: _dateFromEpochSeconds,
       toJson: _dateToEpochSeconds)
   DateTime get expiresAt;
+  @JsonKey(
+      name: 'trial_expires_at',
+      fromJson: _dateFromEpochSecondsNullable,
+      toJson: _dateToEpochSecondsNullable)
+  DateTime? get trialExpiresAt;
 
   /// The store that the user purchased the subscription from.
   SubscriptionStore get store;
@@ -3660,6 +3665,8 @@ mixin _$StorableSubscription {
                 other.productId == productId) &&
             (identical(other.expiresAt, expiresAt) ||
                 other.expiresAt == expiresAt) &&
+            (identical(other.trialExpiresAt, trialExpiresAt) ||
+                other.trialExpiresAt == trialExpiresAt) &&
             (identical(other.store, store) || other.store == store) &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.renewalStatus, renewalStatus) ||
@@ -3668,12 +3675,12 @@ mixin _$StorableSubscription {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, productId, expiresAt, store, status, renewalStatus);
+  int get hashCode => Object.hash(runtimeType, id, productId, expiresAt,
+      trialExpiresAt, store, status, renewalStatus);
 
   @override
   String toString() {
-    return 'StorableSubscription(id: $id, productId: $productId, expiresAt: $expiresAt, store: $store, status: $status, renewalStatus: $renewalStatus)';
+    return 'StorableSubscription(id: $id, productId: $productId, expiresAt: $expiresAt, trialExpiresAt: $trialExpiresAt, store: $store, status: $status, renewalStatus: $renewalStatus)';
   }
 }
 
@@ -3691,6 +3698,11 @@ abstract mixin class $StorableSubscriptionCopyWith<$Res> {
           fromJson: _dateFromEpochSeconds,
           toJson: _dateToEpochSeconds)
       DateTime expiresAt,
+      @JsonKey(
+          name: 'trial_expires_at',
+          fromJson: _dateFromEpochSecondsNullable,
+          toJson: _dateToEpochSecondsNullable)
+      DateTime? trialExpiresAt,
       SubscriptionStore store,
       SubscriptionStatus status,
       @JsonKey(name: 'renewal_status')
@@ -3713,6 +3725,7 @@ class _$StorableSubscriptionCopyWithImpl<$Res>
     Object? id = null,
     Object? productId = null,
     Object? expiresAt = null,
+    Object? trialExpiresAt = freezed,
     Object? store = null,
     Object? status = null,
     Object? renewalStatus = null,
@@ -3730,6 +3743,10 @@ class _$StorableSubscriptionCopyWithImpl<$Res>
           ? _self.expiresAt
           : expiresAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      trialExpiresAt: freezed == trialExpiresAt
+          ? _self.trialExpiresAt
+          : trialExpiresAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       store: null == store
           ? _self.store
           : store // ignore: cast_nullable_to_non_nullable
@@ -3845,6 +3862,11 @@ extension StorableSubscriptionPatterns on StorableSubscription {
                 fromJson: _dateFromEpochSeconds,
                 toJson: _dateToEpochSeconds)
             DateTime expiresAt,
+            @JsonKey(
+                name: 'trial_expires_at',
+                fromJson: _dateFromEpochSecondsNullable,
+                toJson: _dateToEpochSecondsNullable)
+            DateTime? trialExpiresAt,
             SubscriptionStore store,
             SubscriptionStatus status,
             @JsonKey(name: 'renewal_status')
@@ -3855,8 +3877,14 @@ extension StorableSubscriptionPatterns on StorableSubscription {
     final _that = this;
     switch (_that) {
       case _StorableSubscription() when $default != null:
-        return $default(_that.id, _that.productId, _that.expiresAt, _that.store,
-            _that.status, _that.renewalStatus);
+        return $default(
+            _that.id,
+            _that.productId,
+            _that.expiresAt,
+            _that.trialExpiresAt,
+            _that.store,
+            _that.status,
+            _that.renewalStatus);
       case _:
         return orElse();
     }
@@ -3885,6 +3913,11 @@ extension StorableSubscriptionPatterns on StorableSubscription {
                 fromJson: _dateFromEpochSeconds,
                 toJson: _dateToEpochSeconds)
             DateTime expiresAt,
+            @JsonKey(
+                name: 'trial_expires_at',
+                fromJson: _dateFromEpochSecondsNullable,
+                toJson: _dateToEpochSecondsNullable)
+            DateTime? trialExpiresAt,
             SubscriptionStore store,
             SubscriptionStatus status,
             @JsonKey(name: 'renewal_status')
@@ -3894,8 +3927,14 @@ extension StorableSubscriptionPatterns on StorableSubscription {
     final _that = this;
     switch (_that) {
       case _StorableSubscription():
-        return $default(_that.id, _that.productId, _that.expiresAt, _that.store,
-            _that.status, _that.renewalStatus);
+        return $default(
+            _that.id,
+            _that.productId,
+            _that.expiresAt,
+            _that.trialExpiresAt,
+            _that.store,
+            _that.status,
+            _that.renewalStatus);
     }
   }
 
@@ -3921,6 +3960,11 @@ extension StorableSubscriptionPatterns on StorableSubscription {
                 fromJson: _dateFromEpochSeconds,
                 toJson: _dateToEpochSeconds)
             DateTime expiresAt,
+            @JsonKey(
+                name: 'trial_expires_at',
+                fromJson: _dateFromEpochSecondsNullable,
+                toJson: _dateToEpochSecondsNullable)
+            DateTime? trialExpiresAt,
             SubscriptionStore store,
             SubscriptionStatus status,
             @JsonKey(name: 'renewal_status')
@@ -3930,8 +3974,14 @@ extension StorableSubscriptionPatterns on StorableSubscription {
     final _that = this;
     switch (_that) {
       case _StorableSubscription() when $default != null:
-        return $default(_that.id, _that.productId, _that.expiresAt, _that.store,
-            _that.status, _that.renewalStatus);
+        return $default(
+            _that.id,
+            _that.productId,
+            _that.expiresAt,
+            _that.trialExpiresAt,
+            _that.store,
+            _that.status,
+            _that.renewalStatus);
       case _:
         return null;
     }
@@ -3949,6 +3999,11 @@ class _StorableSubscription implements StorableSubscription {
           fromJson: _dateFromEpochSeconds,
           toJson: _dateToEpochSeconds)
       required this.expiresAt,
+      @JsonKey(
+          name: 'trial_expires_at',
+          fromJson: _dateFromEpochSecondsNullable,
+          toJson: _dateToEpochSecondsNullable)
+      required this.trialExpiresAt,
       required this.store,
       required this.status,
       @JsonKey(name: 'renewal_status') required this.renewalStatus});
@@ -3968,6 +4023,12 @@ class _StorableSubscription implements StorableSubscription {
       fromJson: _dateFromEpochSeconds,
       toJson: _dateToEpochSeconds)
   final DateTime expiresAt;
+  @override
+  @JsonKey(
+      name: 'trial_expires_at',
+      fromJson: _dateFromEpochSecondsNullable,
+      toJson: _dateToEpochSecondsNullable)
+  final DateTime? trialExpiresAt;
 
   /// The store that the user purchased the subscription from.
   @override
@@ -4006,6 +4067,8 @@ class _StorableSubscription implements StorableSubscription {
                 other.productId == productId) &&
             (identical(other.expiresAt, expiresAt) ||
                 other.expiresAt == expiresAt) &&
+            (identical(other.trialExpiresAt, trialExpiresAt) ||
+                other.trialExpiresAt == trialExpiresAt) &&
             (identical(other.store, store) || other.store == store) &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.renewalStatus, renewalStatus) ||
@@ -4014,12 +4077,12 @@ class _StorableSubscription implements StorableSubscription {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, productId, expiresAt, store, status, renewalStatus);
+  int get hashCode => Object.hash(runtimeType, id, productId, expiresAt,
+      trialExpiresAt, store, status, renewalStatus);
 
   @override
   String toString() {
-    return 'StorableSubscription(id: $id, productId: $productId, expiresAt: $expiresAt, store: $store, status: $status, renewalStatus: $renewalStatus)';
+    return 'StorableSubscription(id: $id, productId: $productId, expiresAt: $expiresAt, trialExpiresAt: $trialExpiresAt, store: $store, status: $status, renewalStatus: $renewalStatus)';
   }
 }
 
@@ -4039,6 +4102,11 @@ abstract mixin class _$StorableSubscriptionCopyWith<$Res>
           fromJson: _dateFromEpochSeconds,
           toJson: _dateToEpochSeconds)
       DateTime expiresAt,
+      @JsonKey(
+          name: 'trial_expires_at',
+          fromJson: _dateFromEpochSecondsNullable,
+          toJson: _dateToEpochSecondsNullable)
+      DateTime? trialExpiresAt,
       SubscriptionStore store,
       SubscriptionStatus status,
       @JsonKey(name: 'renewal_status')
@@ -4061,6 +4129,7 @@ class __$StorableSubscriptionCopyWithImpl<$Res>
     Object? id = null,
     Object? productId = null,
     Object? expiresAt = null,
+    Object? trialExpiresAt = freezed,
     Object? store = null,
     Object? status = null,
     Object? renewalStatus = null,
@@ -4078,6 +4147,10 @@ class __$StorableSubscriptionCopyWithImpl<$Res>
           ? _self.expiresAt
           : expiresAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      trialExpiresAt: freezed == trialExpiresAt
+          ? _self.trialExpiresAt
+          : trialExpiresAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       store: null == store
           ? _self.store
           : store // ignore: cast_nullable_to_non_nullable

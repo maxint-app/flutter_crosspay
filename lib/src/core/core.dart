@@ -82,6 +82,7 @@ abstract class Store {
               ),
               data: {
             "customer_email": customerEmail,
+            "environment": environment.label,
           });
 
       if (res.data?["data"] == null) {

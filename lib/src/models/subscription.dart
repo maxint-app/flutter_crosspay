@@ -19,6 +19,11 @@ enum SubscriptionStatus {
 int _dateToEpochSeconds(DateTime date) => date.millisecondsSinceEpoch ~/ 1000;
 DateTime _dateFromEpochSeconds(int seconds) =>
     DateTime.fromMillisecondsSinceEpoch(seconds * 1000);
+int? _dateToEpochSecondsNullable(DateTime? date) =>
+    date == null ? null : date.millisecondsSinceEpoch ~/ 1000;
+DateTime? _dateFromEpochSecondsNullable(int? seconds) => seconds == null
+    ? null
+    : DateTime.fromMillisecondsSinceEpoch(seconds * 1000);
 
 @freezed
 sealed class StorableSubscription with _$StorableSubscription {
@@ -38,6 +43,14 @@ sealed class StorableSubscription with _$StorableSubscription {
 
     /// The time the subscription will expire.
     required DateTime expiresAt,
+    @JsonKey(
+      name: 'trial_expires_at',
+      fromJson: _dateFromEpochSecondsNullable,
+      toJson: _dateToEpochSecondsNullable,
+    )
+
+    /// The time the subscription trial will expire. This is null if the subscription is not in trial.
+    required DateTime? trialExpiresAt,
 
     /// The store that the user purchased the subscription from.
     required SubscriptionStore store,
