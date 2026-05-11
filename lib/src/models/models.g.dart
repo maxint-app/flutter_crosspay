@@ -15,7 +15,7 @@ _SubscriptionStoreProduct _$SubscriptionStoreProductFromJson(
       price: (json['price'] as num).toDouble(),
       formattedPrice: json['formattedPrice'] as String,
       currencyCode: json['currencyCode'] as String,
-      store: $enumDecode(_$SubscriptionStoreEnumMap, json['store']),
+      store: $enumDecode(_$CrosspayStoreEnumMap, json['store']),
       subscriptionRecurrenceDays:
           (json['subscriptionRecurrenceDays'] as num).toInt(),
       accessLevel: json['accessLevel'] as String,
@@ -30,18 +30,18 @@ Map<String, dynamic> _$SubscriptionStoreProductToJson(
       'price': instance.price,
       'formattedPrice': instance.formattedPrice,
       'currencyCode': instance.currencyCode,
-      'store': _$SubscriptionStoreEnumMap[instance.store]!,
+      'store': _$CrosspayStoreEnumMap[instance.store]!,
       'subscriptionRecurrenceDays': instance.subscriptionRecurrenceDays,
       'accessLevel': instance.accessLevel,
     };
 
-const _$SubscriptionStoreEnumMap = {
-  SubscriptionStore.appStore: 'appstore',
-  SubscriptionStore.playStore: 'playstore',
-  SubscriptionStore.stripe: 'stripe',
-  SubscriptionStore.stripeSandbox: 'stripe_sandbox',
-  SubscriptionStore.gocardless: 'gocardless',
-  SubscriptionStore.gocardlessSandbox: 'gocardless_sandbox',
+const _$CrosspayStoreEnumMap = {
+  CrosspayStore.appStore: 'appstore',
+  CrosspayStore.playStore: 'playstore',
+  CrosspayStore.stripe: 'stripe',
+  CrosspayStore.stripeSandbox: 'stripe_sandbox',
+  CrosspayStore.gocardless: 'gocardless',
+  CrosspayStore.gocardlessSandbox: 'gocardless_sandbox',
 };
 
 _CrosspayEntitlement _$CrosspayEntitlementFromJson(Map<String, dynamic> json) =>
@@ -117,6 +117,53 @@ Map<String, dynamic> _$CrosspayProductToJson(_CrosspayProduct instance) =>
       'description': instance.description,
       'metadata': instance.metadata,
     };
+
+_CrosspayStorableEntitlement _$CrosspayStorableEntitlementFromJson(
+        Map<String, dynamic> json) =>
+    _CrosspayStorableEntitlement(
+      id: json['id'] as String,
+      productId: json['product_id'] as String,
+      entitlementId: json['entitlement_id'] as String,
+      expiresAt: DateTime.parse(json['expires_at'] as String),
+      trialExpiresAt: json['trial_expires_at'] == null
+          ? null
+          : DateTime.parse(json['trial_expires_at'] as String),
+      store: $enumDecode(_$CrosspayStoreEnumMap, json['store']),
+      status: $enumDecode(_$SubscriptionStatusEnumMap, json['status']),
+      renewalStatus: $enumDecode(
+          _$SubscriptionRenewalStatusEnumMap, json['renewal_status']),
+      entitlementType: json['entitlement_type'] as String,
+      purchaseState: json['purchase_state'] as String?,
+    );
+
+Map<String, dynamic> _$CrosspayStorableEntitlementToJson(
+        _CrosspayStorableEntitlement instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'product_id': instance.productId,
+      'entitlement_id': instance.entitlementId,
+      'expires_at': instance.expiresAt.toIso8601String(),
+      'trial_expires_at': instance.trialExpiresAt?.toIso8601String(),
+      'store': _$CrosspayStoreEnumMap[instance.store]!,
+      'status': _$SubscriptionStatusEnumMap[instance.status]!,
+      'renewal_status':
+          _$SubscriptionRenewalStatusEnumMap[instance.renewalStatus]!,
+      'entitlement_type': instance.entitlementType,
+      'purchase_state': instance.purchaseState,
+    };
+
+const _$SubscriptionStatusEnumMap = {
+  SubscriptionStatus.active: 'active',
+  SubscriptionStatus.onHold: 'on_hold',
+  SubscriptionStatus.gracePeriod: 'grace_period',
+  SubscriptionStatus.trialing: 'trialing',
+  SubscriptionStatus.expired: 'expired',
+};
+
+const _$SubscriptionRenewalStatusEnumMap = {
+  SubscriptionRenewalStatus.autoRenew: 'auto_renew',
+  SubscriptionRenewalStatus.canceled: 'canceled',
+};
 
 _SubscriptionGocardlessProduct _$SubscriptionGocardlessProductFromJson(
         Map<String, dynamic> json) =>
@@ -205,45 +252,3 @@ Map<String, dynamic> _$SubscriptionStripePriceToJson(
       'formattedPrice': instance.formattedPrice,
       'unitLabel': instance.unitLabel,
     };
-
-_StorableSubscription _$StorableSubscriptionFromJson(
-        Map<String, dynamic> json) =>
-    _StorableSubscription(
-      id: json['id'] as String,
-      productId: json['product_id'] as String,
-      entitlementId: json['entitlement_id'] as String,
-      expiresAt: _dateFromEpochSeconds((json['expires_at'] as num).toInt()),
-      trialExpiresAt: _dateFromEpochSecondsNullable(
-          (json['trial_expires_at'] as num?)?.toInt()),
-      store: $enumDecode(_$SubscriptionStoreEnumMap, json['store']),
-      status: $enumDecode(_$SubscriptionStatusEnumMap, json['status']),
-      renewalStatus: $enumDecode(
-          _$SubscriptionRenewalStatusEnumMap, json['renewal_status']),
-    );
-
-Map<String, dynamic> _$StorableSubscriptionToJson(
-        _StorableSubscription instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'product_id': instance.productId,
-      'entitlement_id': instance.entitlementId,
-      'expires_at': _dateToEpochSeconds(instance.expiresAt),
-      'trial_expires_at': _dateToEpochSecondsNullable(instance.trialExpiresAt),
-      'store': _$SubscriptionStoreEnumMap[instance.store]!,
-      'status': _$SubscriptionStatusEnumMap[instance.status]!,
-      'renewal_status':
-          _$SubscriptionRenewalStatusEnumMap[instance.renewalStatus]!,
-    };
-
-const _$SubscriptionStatusEnumMap = {
-  SubscriptionStatus.active: 'active',
-  SubscriptionStatus.onHold: 'on_hold',
-  SubscriptionStatus.gracePeriod: 'grace_period',
-  SubscriptionStatus.trialing: 'trialing',
-  SubscriptionStatus.expired: 'expired',
-};
-
-const _$SubscriptionRenewalStatusEnumMap = {
-  SubscriptionRenewalStatus.autoRenew: 'auto_renew',
-  SubscriptionRenewalStatus.canceled: 'canceled',
-};

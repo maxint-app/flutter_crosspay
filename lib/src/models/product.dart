@@ -1,6 +1,6 @@
 part of 'models.dart';
 
-enum SubscriptionStore {
+enum CrosspayStore {
   @JsonValue("appstore")
   appStore,
   @JsonValue("playstore")
@@ -26,7 +26,7 @@ sealed class SubscriptionStoreProduct with _$SubscriptionStoreProduct {
     required double price,
     required String formattedPrice,
     required String currencyCode,
-    required SubscriptionStore store,
+    required CrosspayStore store,
     required int subscriptionRecurrenceDays,
     required String accessLevel,
   }) = _SubscriptionStoreProduct;
@@ -79,15 +79,15 @@ sealed class CrosspayProducts with _$CrosspayProducts {
   factory CrosspayProducts.fromJson(Map<String, dynamic> json) =>
       _$CrosspayProductsFromJson(json);
 
-  CrosspayProduct? operator [](SubscriptionStore store) {
+  CrosspayProduct? operator [](CrosspayStore store) {
     switch (store) {
-      case SubscriptionStore.appStore:
+      case CrosspayStore.appStore:
         return appStore;
-      case SubscriptionStore.playStore:
+      case CrosspayStore.playStore:
         return playStore;
-      case SubscriptionStore.stripe || SubscriptionStore.stripeSandbox:
+      case CrosspayStore.stripe || CrosspayStore.stripeSandbox:
         return stripe;
-      case SubscriptionStore.gocardless || SubscriptionStore.gocardlessSandbox:
+      case CrosspayStore.gocardless || CrosspayStore.gocardlessSandbox:
         return gocardless;
     }
   }
@@ -105,4 +105,28 @@ sealed class CrosspayProduct with _$CrosspayProduct {
 
   factory CrosspayProduct.fromJson(Map<String, dynamic> json) =>
       _$CrosspayProductFromJson(json);
+}
+
+@freezed
+sealed class CrosspayStorableEntitlement with _$CrosspayStorableEntitlement {
+  factory CrosspayStorableEntitlement({
+    required String id,
+    @JsonKey(name: "product_id") required String productId,
+    @JsonKey(name: "entitlement_id") required String entitlementId,
+    @JsonKey(name: "expires_at")
+    required DateTime expiresAt,
+    @JsonKey(name: "trial_expires_at")
+    DateTime? trialExpiresAt,
+    required CrosspayStore store,
+    required SubscriptionStatus status,
+    @JsonKey(name: "renewal_status")
+    required SubscriptionRenewalStatus renewalStatus,
+    @JsonKey(name: "entitlement_type")
+    required String entitlementType,
+    @JsonKey(name: "purchase_state")
+    String? purchaseState,
+  }) = _CrosspayStorableEntitlement;
+
+  factory CrosspayStorableEntitlement.fromJson(Map<String, dynamic> json) =>
+      _$CrosspayStorableEntitlementFromJson(json);
 }

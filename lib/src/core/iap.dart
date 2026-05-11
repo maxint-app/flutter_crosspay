@@ -110,8 +110,8 @@ class InAppPurchaseSubscriptionStore extends Store {
         formattedPrice: platformProduct.price,
         price: platformProduct.rawPrice,
         store: kIsAndroid
-            ? SubscriptionStore.playStore
-            : SubscriptionStore.appStore,
+            ? CrosspayStore.playStore
+            : CrosspayStore.appStore,
         subscriptionRecurrenceDays: entitlement.period.inDays,
       );
     }).toList();
@@ -142,7 +142,7 @@ class InAppPurchaseSubscriptionStore extends Store {
       applicationUserName: _customerId,
     );
 
-    final activeEntitlements = await this.activeEntitlements(customerEmail);
+    final activeEntitlements = await getActiveEntitlements(customerEmail);
     final isActive = activeEntitlements.any((e) =>
         entitlement.id == e.id &&
         (entitlement.entitlementType == EntitlementType.subscription ||
@@ -172,7 +172,7 @@ class InAppPurchaseSubscriptionStore extends Store {
           final activeEntitlement = activeEntitlements
               .firstWhereOrNull((e) => e.id == entitlement.id);
 
-          return p.productID == activeEntitlement?.products.playStore?.id &&
+          return p.productID == activeEntitlement?.productId &&
               (p.status == PurchaseStatus.purchased ||
                   p.status == PurchaseStatus.restored);
         },

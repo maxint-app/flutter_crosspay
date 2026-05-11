@@ -56,7 +56,7 @@ class GocardlessSubscriptionStore extends Store {
         description: storeProduct.description ?? "",
         formattedPrice: storeProduct.formattedPrice,
         price: storeProduct.price / 100,
-        store: SubscriptionStore.gocardless,
+        store: CrosspayStore.gocardless,
         subscriptionRecurrenceDays: entitlement.period.inDays,
       );
     }).toList();
@@ -72,7 +72,7 @@ class GocardlessSubscriptionStore extends Store {
     required String failureRedirectUrl,
     ReplacementMode replacementMode = ReplacementMode.withTimeProration,
   }) async {
-    final activeEntitlement = await activeEntitlements(customerEmail);
+    final activeEntitlement = await getActiveEntitlements(customerEmail);
 
     final isActive = activeEntitlement.any((e) => entitlement.id == e.id);
 

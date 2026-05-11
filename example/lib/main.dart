@@ -28,8 +28,7 @@ class MainApp extends StatefulWidget {
 class _MainAppState extends State<MainApp> {
   List<CrosspayEntitlement> entitlements = [];
   List<SubscriptionStoreProduct> products = [];
-  List<StorableSubscription> activeSubscriptions = [];
-  List<CrosspayEntitlement> activeEntitlements = [];
+  List<CrosspayStorableEntitlement> activeEntitlements = [];
 
   StreamSubscription? _subscription;
 
@@ -44,13 +43,11 @@ class _MainAppState extends State<MainApp> {
 
       final entitlements = await crosspay.listEntitlements();
       final products = await crosspay.queryProducts(ExternalStore.stripe);
-      final activeSubscriptions = await crosspay.getActiveSubscription();
-      final activeEntitlements = await crosspay.activeEntitlements();
+      final activeEntitlements = await crosspay.getActiveEntitlements();
 
       setState(() {
         this.entitlements = entitlements;
         this.products = products;
-        this.activeSubscriptions = activeSubscriptions;
         this.activeEntitlements = activeEntitlements;
       });
     });
@@ -79,7 +76,7 @@ class _MainAppState extends State<MainApp> {
                     (e) => e.id == entitlement.id,
                   );
 
-                  final activeSubscription = activeSubscriptions
+                  final activeSubscription = activeEntitlements
                       .firstWhereOrNull(
                         (s) => s.entitlementId == entitlement.id,
                       );

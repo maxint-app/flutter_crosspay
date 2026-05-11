@@ -56,7 +56,7 @@ class StripeSubscriptionStore extends Store {
         description: storeProduct.description ?? "",
         formattedPrice: storeProduct.price.formattedPrice,
         price: storeProduct.price.price / 100,
-        store: SubscriptionStore.stripe,
+        store: CrosspayStore.stripe,
         subscriptionRecurrenceDays: entitlement.period.inDays,
       );
     }).toList();
@@ -72,7 +72,7 @@ class StripeSubscriptionStore extends Store {
     required String failureRedirectUrl,
     ReplacementMode replacementMode = ReplacementMode.withTimeProration,
   }) async {
-    final activeEntitlement = await activeEntitlements(customerEmail);
+    final activeEntitlement = await getActiveEntitlements(customerEmail);
 
     final isActive = activeEntitlement.any((e) => entitlement.id == e.id);
 

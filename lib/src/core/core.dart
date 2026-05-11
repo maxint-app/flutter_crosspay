@@ -11,7 +11,7 @@ import '../models/models.dart';
 const endpoints = CrosspayEndpoints(
   identifyCustomer: "/identify",
   entitlements: "/entitlements",
-  activeSubscription: "/subscriptions/active",
+  activeEntitlements: "/entitlements/active",
   stripeListProduct: "/stripe/products",
   stripeCheckoutSession: "/stripe/checkout",
   gocardlessListProduct: "/gocardless/products",
@@ -65,16 +65,16 @@ abstract class Store {
     return _entitlements!;
   }
 
-  /// Get the active [StorableSubscription]
+  /// Get the active [CrosspayStorableEntitlement]
   ///
-  /// This gives the active subscription stored in DB. This is usually not used
+  /// This gives the active entitlements stored in DB. This is usually not used
   /// that much but it has receipts and expiration details.
-  Future<List<StorableSubscription>> getActiveSubscriptions(
+  Future<List<CrosspayStorableEntitlement>> getActiveEntitlements(
     String customerEmail,
   ) async {
     try {
       final res =
-          await dio.post<Map<String, dynamic>?>(endpoints.activeSubscription,
+          await dio.post<Map<String, dynamic>?>(endpoints.activeEntitlements,
               options: Options(
                 responseType: ResponseType.json,
               ),
@@ -88,7 +88,7 @@ abstract class Store {
       }
 
       return (res.data?["data"] as List<Map<String, dynamic>>)
-          .map(StorableSubscription.fromJson)
+          .map(CrosspayStorableEntitlement.fromJson)
           .toList();
     } on DioException catch (e) {
       if (e.response?.statusCode == 404) {
@@ -107,52 +107,25 @@ abstract class Store {
   Future<List<SubscriptionStoreProduct>> activeProducts(
     String customerEmail,
   ) async {
-    final subscriptions = await getActiveSubscriptions(customerEmail);
+    final entitlements = await getActiveEntitlements(customerEmail);
 
     final products = <SubscriptionStoreProduct>[];
     final storeProduct = await queryProducts();
 
-    for (final subscription in subscriptions) {
+    for (final entitlement in entitlements) {
       if (const [
         SubscriptionStatus.onHold,
         SubscriptionStatus.expired,
-      ].contains(subscription.status)) {
+      ].contains(entitlement.status)) {
         continue;
       }
       final product = storeProduct.firstWhereOrNull(
-        (p) => p.id == subscription.productId && p.store == subscription.store,
+        (p) => p.id == entitlement.productId && p.store == entitlement.store,
       );
       if (product == null) continue;
       products.add(product);
     }
 
     return products;
-  }
-
-  Future<List<CrosspayEntitlement>> activeEntitlements(
-    String customerEmail,
-  ) async {
-    final subscription = await getActiveSubscriptions(customerEmail);
-
-    final entitlements = await listEntitlements();
-
-    final activeEntitlements = <CrosspayEntitlement>[];
-
-    for (final sub in subscription) {
-      if (const [
-        SubscriptionStatus.onHold,
-        SubscriptionStatus.expired,
-      ].contains(sub.status)) {
-        continue;
-      }
-      final entitlement = entitlements.firstWhereOrNull(
-        (e) => e.products[sub.store]?.productId == sub.productId,
-      );
-      if (entitlement != null) {
-        activeEntitlements.add(entitlement);
-      }
-    }
-
-    return activeEntitlements;
   }
 }

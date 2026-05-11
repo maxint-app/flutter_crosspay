@@ -3,7 +3,7 @@ library;
 export 'src/crosspay.dart';
 export 'src/models/models.dart'
     show
-        StorableSubscription,
+        CrosspayStorableEntitlement,
         CrosspayEntitlement,
         CrosspayException,
         CrosspayExceptionType,
@@ -17,5 +17,5 @@ export 'src/models/models.dart'
         SubscriptionGocardlessProduct,
         SubscriptionRenewalStatus,
         SubscriptionStatus,
-        SubscriptionStore,
+        CrosspayStore,
         ExternalStore;

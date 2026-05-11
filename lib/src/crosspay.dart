@@ -16,7 +16,7 @@ import 'package:in_app_purchase_android/billing_client_wrappers.dart';
 class CrosspayEndpoints {
   final String entitlements;
   final String identifyCustomer;
-  final String activeSubscription;
+  final String activeEntitlements;
   final String stripeListProduct;
   final String gocardlessListProduct;
   final String stripeCheckoutSession;
@@ -25,7 +25,7 @@ class CrosspayEndpoints {
 
   const CrosspayEndpoints({
     required this.entitlements,
-    required this.activeSubscription,
+    required this.activeEntitlements,
     required this.stripeListProduct,
     required this.stripeCheckoutSession,
     required this.gocardlessBillingRequestFlow,
@@ -211,16 +211,16 @@ class FlutterCrosspay {
     }
   }
 
-  /// Get the active [StorableSubscription]
+  /// Get the active [CrosspayStorableEntitlement]
   ///
-  /// This gives the active subscription stored in DB. This is usually not used
+  /// This gives the active entitlements stored in DB. This is usually not used
   /// that much but it has receipts and expiration details.
-  Future<List<StorableSubscription>> getActiveSubscription() async {
+  Future<List<CrosspayStorableEntitlement>> getActiveEntitlements() async {
     assert(
       _customerEmail != null,
-      "Customer email is not set. Please call identify() to set the customer email before calling getActiveSubscription().",
+      "Customer email is not set. Please call identify() to set the customer email before calling getActiveEntitlements().",
     );
-    return _iapStore.getActiveSubscriptions(
+    return _iapStore.getActiveEntitlements(
         _customerEmail!); // this is a core method so same for all platforms
   }
 
@@ -238,16 +238,6 @@ class FlutterCrosspay {
   Future<List<CrosspayEntitlement>> listEntitlements() async {
     return _iapStore
         .listEntitlements(); // this is a core method so same for all platforms
-  }
-
-  Future<List<CrosspayEntitlement>> activeEntitlements() async {
-    assert(
-      _customerEmail != null,
-      "Customer email is not set. Please call identify() to set the customer email before calling activeEntitlement().",
-    );
-    return _iapStore.activeEntitlements(
-      _customerEmail!,
-    ); // this is a core method so same for all platforms
   }
 
   String get appStoreManagementUrl =>
