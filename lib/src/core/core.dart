@@ -14,9 +14,7 @@ const endpoints = CrosspayEndpoints(
   activeSubscription: "/subscriptions/active",
   stripeListProduct: "/stripe/products",
   stripeCheckoutSession: "/stripe/checkout",
-  stripeCancelSubscription: "/stripe/cancel",
   gocardlessListProduct: "/gocardless/products",
-  gocardlessCancelSubscription: "/gocardless/cancel",
   gocardlessBillingRequestFlow: "/gocardless/billing-request-flow",
   purchasesStream: "/purchases-stream",
 );
@@ -37,7 +35,7 @@ abstract class Store {
 
   Future<List<SubscriptionStoreProduct>> queryProducts();
   Future<void> purchase(
-    SubscriptionStoreProduct product,
+    CrosspayEntitlement entitlement,
     String customerEmail, {
     required String redirectUrl,
     required String failureRedirectUrl,
@@ -71,7 +69,7 @@ abstract class Store {
   ///
   /// This gives the active subscription stored in DB. This is usually not used
   /// that much but it has receipts and expiration details.
-  Future<StorableSubscription?> getActiveSubscription(
+  Future<List<StorableSubscription>> getActiveSubscriptions(
     String customerEmail,
   ) async {
     try {
@@ -86,58 +84,75 @@ abstract class Store {
           });
 
       if (res.data?["data"] == null) {
-        return null;
+        return [];
       }
 
-      return StorableSubscription.fromJson(res.data?["data"]);
+      return (res.data?["data"] as List<Map<String, dynamic>>)
+          .map(StorableSubscription.fromJson)
+          .toList();
     } on DioException catch (e) {
       if (e.response?.statusCode == 404) {
-        return null;
+        return [];
       }
       rethrow;
     }
   }
 
-  /// Get the active [SubscriptionStoreProduct]
+  /// Gets the active [List<SubscriptionStoreProduct>]
   ///
   /// This returns the currently active store product
   ///
   /// It'll return null even if there is an active subscription but the product
   /// is from a different store
-  Future<SubscriptionStoreProduct?> activeProduct(String customerEmail) async {
-    final subscription = await getActiveSubscription(customerEmail);
+  Future<List<SubscriptionStoreProduct>> activeProducts(
+    String customerEmail,
+  ) async {
+    final subscriptions = await getActiveSubscriptions(customerEmail);
 
-    if (subscription == null ||
-        const [
-          SubscriptionStatus.onHold,
-          SubscriptionStatus.expired,
-        ].contains(subscription.status)) {
-      return null;
+    final products = <SubscriptionStoreProduct>[];
+    final storeProduct = await queryProducts();
+
+    for (final subscription in subscriptions) {
+      if (const [
+        SubscriptionStatus.onHold,
+        SubscriptionStatus.expired,
+      ].contains(subscription.status)) {
+        continue;
+      }
+      final product = storeProduct.firstWhereOrNull(
+        (p) => p.id == subscription.productId && p.store == subscription.store,
+      );
+      if (product == null) continue;
+      products.add(product);
     }
 
-    final product = await queryProducts();
-
-    return product.firstWhereOrNull(
-      (p) => p.id == subscription.productId,
-    );
+    return products;
   }
 
-  Future<CrosspayEntitlement?> activeEntitlement(String customerEmail) async {
-    final subscription = await getActiveSubscription(customerEmail);
-
-    if (subscription == null ||
-        const [
-          SubscriptionStatus.onHold,
-          SubscriptionStatus.expired,
-        ].contains(subscription.status)) {
-      return null;
-    }
+  Future<List<CrosspayEntitlement>> activeEntitlements(
+    String customerEmail,
+  ) async {
+    final subscription = await getActiveSubscriptions(customerEmail);
 
     final entitlements = await listEntitlements();
 
-    return entitlements.firstWhereOrNull(
-      (e) =>
-          e.products[subscription.store]?.productId == subscription.productId,
-    );
+    final activeEntitlements = <CrosspayEntitlement>[];
+
+    for (final sub in subscription) {
+      if (const [
+        SubscriptionStatus.onHold,
+        SubscriptionStatus.expired,
+      ].contains(sub.status)) {
+        continue;
+      }
+      final entitlement = entitlements.firstWhereOrNull(
+        (e) => e.products[sub.store]?.productId == sub.productId,
+      );
+      if (entitlement != null) {
+        activeEntitlements.add(entitlement);
+      }
+    }
+
+    return activeEntitlements;
   }
 }

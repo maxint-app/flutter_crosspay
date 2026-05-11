@@ -20,9 +20,7 @@ class CrosspayEndpoints {
   final String stripeListProduct;
   final String gocardlessListProduct;
   final String stripeCheckoutSession;
-  final String stripeCancelSubscription;
   final String gocardlessBillingRequestFlow;
-  final String gocardlessCancelSubscription;
   final String purchasesStream;
 
   const CrosspayEndpoints({
@@ -30,10 +28,8 @@ class CrosspayEndpoints {
     required this.activeSubscription,
     required this.stripeListProduct,
     required this.stripeCheckoutSession,
-    required this.stripeCancelSubscription,
     required this.gocardlessBillingRequestFlow,
     required this.gocardlessListProduct,
-    required this.gocardlessCancelSubscription,
     required this.purchasesStream,
     required this.identifyCustomer,
   });
@@ -177,7 +173,8 @@ class FlutterCrosspay {
   }
 
   Future<void> purchase(
-    SubscriptionStoreProduct product, {
+    CrosspayEntitlement product, {
+    required ExternalStore externalStore,
     required String redirectUrl,
     required String failureRedirectUrl,
     ReplacementMode replacementMode = ReplacementMode.withTimeProration,
@@ -195,27 +192,20 @@ class FlutterCrosspay {
         replacementMode: replacementMode,
       );
     } else {
-      return switch (product.store) {
-        SubscriptionStore.stripe ||
-        SubscriptionStore.stripeSandbox =>
-          _stripeStore.purchase(
+      return switch (externalStore) {
+        ExternalStore.stripe => _stripeStore.purchase(
             product,
             _customerEmail!,
             redirectUrl: redirectUrl,
             failureRedirectUrl: failureRedirectUrl,
             replacementMode: replacementMode,
           ),
-        SubscriptionStore.gocardless ||
-        SubscriptionStore.gocardlessSandbox =>
-          _gocardlessStore.purchase(
+        ExternalStore.gocardless => _gocardlessStore.purchase(
             product,
             _customerEmail!,
             redirectUrl: redirectUrl,
             failureRedirectUrl: failureRedirectUrl,
             replacementMode: replacementMode,
-          ),
-        _ => throw Exception(
-            "Unsupported store ${product.store} for non-mobile platforms",
           ),
       };
     }
@@ -225,23 +215,23 @@ class FlutterCrosspay {
   ///
   /// This gives the active subscription stored in DB. This is usually not used
   /// that much but it has receipts and expiration details.
-  Future<StorableSubscription?> getActiveSubscription() async {
+  Future<List<StorableSubscription>> getActiveSubscription() async {
     assert(
       _customerEmail != null,
       "Customer email is not set. Please call identify() to set the customer email before calling getActiveSubscription().",
     );
-    return _iapStore.getActiveSubscription(
+    return _iapStore.getActiveSubscriptions(
         _customerEmail!); // this is a core method so same for all platforms
   }
 
   /// Get the active [SubscriptionStoreProduct]
-  Future<SubscriptionStoreProduct?> activeProduct() async {
+  Future<List<SubscriptionStoreProduct>> activeProduct() async {
     assert(
       _customerEmail != null,
       "Customer email is not set. Please call identify() to set the customer email before calling activeProduct().",
     );
 
-    return _iapStore.activeProduct(
+    return _iapStore.activeProducts(
         _customerEmail!); // this is a core method so same for all platforms
   }
 
@@ -250,38 +240,14 @@ class FlutterCrosspay {
         .listEntitlements(); // this is a core method so same for all platforms
   }
 
-  Future<CrosspayEntitlement?> activeEntitlement() async {
+  Future<List<CrosspayEntitlement>> activeEntitlements() async {
     assert(
       _customerEmail != null,
       "Customer email is not set. Please call identify() to set the customer email before calling activeEntitlement().",
     );
-    return _iapStore.activeEntitlement(
+    return _iapStore.activeEntitlements(
       _customerEmail!,
     ); // this is a core method so same for all platforms
-  }
-
-  Future<void> cancelSubscription() async {
-    assert(
-      _customerEmail != null,
-      "Customer email is not set. Please call identify() to set the customer email before calling cancelSubscription().",
-    );
-    final active = await _stripeStore.getActiveSubscription(_customerEmail!);
-    if (kIsLinux ||
-        kIsWindows ||
-        kIsWeb ||
-        active?.store == SubscriptionStore.stripe ||
-        active?.store == SubscriptionStore.stripeSandbox ||
-        active?.store == SubscriptionStore.gocardless ||
-        active?.store == SubscriptionStore.gocardlessSandbox) {
-      switch (active?.store) {
-        case SubscriptionStore.stripe || SubscriptionStore.stripeSandbox:
-          await _stripeStore.cancel(_customerEmail!);
-        case SubscriptionStore.gocardless ||
-              SubscriptionStore.gocardlessSandbox:
-          await _gocardlessStore.cancel(_customerEmail!);
-        default:
-      }
-    }
   }
 
   String get appStoreManagementUrl =>

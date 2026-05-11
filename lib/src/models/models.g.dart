@@ -53,6 +53,8 @@ _CrosspayEntitlement _$CrosspayEntitlementFromJson(Map<String, dynamic> json) =>
       metadata: json['metadata'] as Map<String, dynamic>?,
       products:
           CrosspayProducts.fromJson(json['products'] as Map<String, dynamic>),
+      entitlementType:
+          $enumDecode(_$EntitlementTypeEnumMap, json['entitlement_type']),
     );
 
 Map<String, dynamic> _$CrosspayEntitlementToJson(
@@ -64,7 +66,14 @@ Map<String, dynamic> _$CrosspayEntitlementToJson(
       'description': instance.description,
       'metadata': instance.metadata,
       'products': instance.products,
+      'entitlement_type': _$EntitlementTypeEnumMap[instance.entitlementType]!,
     };
+
+const _$EntitlementTypeEnumMap = {
+  EntitlementType.consumable: 'consumable',
+  EntitlementType.nonConsumable: 'non_consumable',
+  EntitlementType.subscription: 'subscription',
+};
 
 _CrosspayProducts _$CrosspayProductsFromJson(Map<String, dynamic> json) =>
     _CrosspayProducts(
@@ -202,6 +211,7 @@ _StorableSubscription _$StorableSubscriptionFromJson(
     _StorableSubscription(
       id: json['id'] as String,
       productId: json['product_id'] as String,
+      entitlementId: json['entitlement_id'] as String,
       expiresAt: _dateFromEpochSeconds((json['expires_at'] as num).toInt()),
       trialExpiresAt: _dateFromEpochSecondsNullable(
           (json['trial_expires_at'] as num?)?.toInt()),
@@ -216,6 +226,7 @@ Map<String, dynamic> _$StorableSubscriptionToJson(
     <String, dynamic>{
       'id': instance.id,
       'product_id': instance.productId,
+      'entitlement_id': instance.entitlementId,
       'expires_at': _dateToEpochSeconds(instance.expiresAt),
       'trial_expires_at': _dateToEpochSecondsNullable(instance.trialExpiresAt),
       'store': _$SubscriptionStoreEnumMap[instance.store]!,

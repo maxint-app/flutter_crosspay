@@ -121,7 +121,7 @@ class InAppPurchaseSubscriptionStore extends Store {
 
   @override
   Future<void> purchase(
-    SubscriptionStoreProduct product,
+    CrosspayEntitlement entitlement,
     String customerEmail, {
     required String redirectUrl,
     required String failureRedirectUrl,
@@ -131,7 +131,9 @@ class InAppPurchaseSubscriptionStore extends Store {
     final platformProducts = await _queryPlatformProducts(entitlements);
 
     final platformProduct = platformProducts.firstWhere(
-      (p) => p.id == product.id,
+      (p) =>
+          p.id == entitlement.products.appStore?.id ||
+          p.id == entitlement.products.playStore?.id,
       orElse: () => throw Exception('Product not found'),
     );
 
@@ -140,36 +142,21 @@ class InAppPurchaseSubscriptionStore extends Store {
       applicationUserName: _customerId,
     );
 
-    final activeSubscription = await getActiveSubscription(customerEmail);
-    final isActive = const [
-          SubscriptionStatus.active,
-          SubscriptionStatus.gracePeriod,
-          SubscriptionStatus.trialing
-        ].contains(activeSubscription?.status) &&
-        activeSubscription?.renewalStatus ==
-            SubscriptionRenewalStatus.autoRenew;
+    final activeEntitlements = await this.activeEntitlements(customerEmail);
+    final isActive = activeEntitlements.any((e) =>
+        entitlement.id == e.id &&
+        (entitlement.entitlementType == EntitlementType.subscription ||
+            entitlement.entitlementType == EntitlementType.nonConsumable));
 
-    if (activeSubscription != null &&
-        activeSubscription.productId == product.id &&
-        isActive) {
+    if (isActive) {
       throw CrosspayException.alreadyActive(
-        "User is already subscribed to this product '${product.id}'. "
-        "User can not be allowed to purchase the same product again",
-      );
-    } else if (activeSubscription != null &&
-        ((kIsAndroid &&
-                activeSubscription.store != SubscriptionStore.playStore ||
-            (kIsIOS || kIsMacOS) &&
-                activeSubscription.store != SubscriptionStore.appStore)) &&
-        isActive) {
-      throw CrosspayException.crossUpgradeDowngrade(
-        "User is already subscribed this product on a different platform ${activeSubscription.store}. "
-        "User have to manage subscription on the same platform",
+        "User is already ${entitlement.entitlementType == EntitlementType.subscription ? 'subscribed to' : 'purchased'} this entitlement '${entitlement.name}'. "
+        "User can not be allowed to purchase the entitlement product again",
       );
     }
 
     /// Automatically handling Google Play Store upgrade/downgrade
-    if (kIsAndroid && activeSubscription != null) {
+    if (kIsAndroid && isActive) {
       final billingClient = InAppPurchase.instance
           .getPlatformAddition<InAppPurchaseAndroidPlatformAddition>();
       final oldPurchaseDetails = await billingClient.queryPastPurchases(
@@ -181,10 +168,14 @@ class InAppPurchaseSubscriptionStore extends Store {
       }
 
       final oldPurchase = oldPurchaseDetails.pastPurchases.firstWhereOrNull(
-        (p) =>
-            p.productID == activeSubscription.productId &&
-            (p.status == PurchaseStatus.purchased ||
-                p.status == PurchaseStatus.restored),
+        (p) {
+          final activeEntitlement = activeEntitlements
+              .firstWhereOrNull((e) => e.id == entitlement.id);
+
+          return p.productID == activeEntitlement?.products.playStore?.id &&
+              (p.status == PurchaseStatus.purchased ||
+                  p.status == PurchaseStatus.restored);
+        },
       );
 
       if (oldPurchase != null) {
@@ -196,12 +187,25 @@ class InAppPurchaseSubscriptionStore extends Store {
           ),
         );
 
-        await InAppPurchase.instance
-            .buyNonConsumable(purchaseParam: purchaseParam);
+        switch (entitlement.entitlementType) {
+          case EntitlementType.nonConsumable || EntitlementType.subscription:
+            await InAppPurchase.instance
+                .buyNonConsumable(purchaseParam: purchaseParam);
+          default:
+            await InAppPurchase.instance
+                .buyConsumable(purchaseParam: purchaseParam);
+        }
         return;
       }
     }
 
-    await InAppPurchase.instance.buyNonConsumable(purchaseParam: purchaseParam);
+    switch (entitlement.entitlementType) {
+      case EntitlementType.nonConsumable || EntitlementType.subscription:
+        await InAppPurchase.instance
+            .buyNonConsumable(purchaseParam: purchaseParam);
+      default:
+        await InAppPurchase.instance
+            .buyConsumable(purchaseParam: purchaseParam);
+    }
   }
 }

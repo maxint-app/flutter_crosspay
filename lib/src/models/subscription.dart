@@ -35,6 +35,10 @@ sealed class StorableSubscription with _$StorableSubscription {
 
     /// The product that the user purchased. This is used to grant user access levels.
     required String productId,
+    @JsonKey(name: 'entitlement_id')
+
+    /// The entitlement that the user purchased. This is used to grant user access levels.
+    required String entitlementId,
     @JsonKey(
       name: 'expires_at',
       fromJson: _dateFromEpochSeconds,

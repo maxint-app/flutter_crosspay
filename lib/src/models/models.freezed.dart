@@ -560,6 +560,8 @@ mixin _$CrosspayEntitlement {
   String? get description;
   Map<String, dynamic>? get metadata;
   CrosspayProducts get products;
+  @JsonKey(name: "entitlement_type")
+  EntitlementType get entitlementType;
 
   /// Create a copy of CrosspayEntitlement
   /// with the given fields replaced by the non-null parameter values.
@@ -584,17 +586,19 @@ mixin _$CrosspayEntitlement {
                 other.description == description) &&
             const DeepCollectionEquality().equals(other.metadata, metadata) &&
             (identical(other.products, products) ||
-                other.products == products));
+                other.products == products) &&
+            (identical(other.entitlementType, entitlementType) ||
+                other.entitlementType == entitlementType));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, name, period, description,
-      const DeepCollectionEquality().hash(metadata), products);
+      const DeepCollectionEquality().hash(metadata), products, entitlementType);
 
   @override
   String toString() {
-    return 'CrosspayEntitlement(id: $id, name: $name, period: $period, description: $description, metadata: $metadata, products: $products)';
+    return 'CrosspayEntitlement(id: $id, name: $name, period: $period, description: $description, metadata: $metadata, products: $products, entitlementType: $entitlementType)';
   }
 }
 
@@ -614,7 +618,8 @@ abstract mixin class $CrosspayEntitlementCopyWith<$Res> {
       Duration period,
       String? description,
       Map<String, dynamic>? metadata,
-      CrosspayProducts products});
+      CrosspayProducts products,
+      @JsonKey(name: "entitlement_type") EntitlementType entitlementType});
 
   $CrosspayProductsCopyWith<$Res> get products;
 }
@@ -638,6 +643,7 @@ class _$CrosspayEntitlementCopyWithImpl<$Res>
     Object? description = freezed,
     Object? metadata = freezed,
     Object? products = null,
+    Object? entitlementType = null,
   }) {
     return _then(_self.copyWith(
       id: null == id
@@ -664,6 +670,10 @@ class _$CrosspayEntitlementCopyWithImpl<$Res>
           ? _self.products
           : products // ignore: cast_nullable_to_non_nullable
               as CrosspayProducts,
+      entitlementType: null == entitlementType
+          ? _self.entitlementType
+          : entitlementType // ignore: cast_nullable_to_non_nullable
+              as EntitlementType,
     ));
   }
 
@@ -779,7 +789,8 @@ extension CrosspayEntitlementPatterns on CrosspayEntitlement {
             Duration period,
             String? description,
             Map<String, dynamic>? metadata,
-            CrosspayProducts products)?
+            CrosspayProducts products,
+            @JsonKey(name: "entitlement_type") EntitlementType entitlementType)?
         $default, {
     required TResult orElse(),
   }) {
@@ -787,7 +798,7 @@ extension CrosspayEntitlementPatterns on CrosspayEntitlement {
     switch (_that) {
       case _CrosspayEntitlement() when $default != null:
         return $default(_that.id, _that.name, _that.period, _that.description,
-            _that.metadata, _that.products);
+            _that.metadata, _that.products, _that.entitlementType);
       case _:
         return orElse();
     }
@@ -818,14 +829,15 @@ extension CrosspayEntitlementPatterns on CrosspayEntitlement {
             Duration period,
             String? description,
             Map<String, dynamic>? metadata,
-            CrosspayProducts products)
+            CrosspayProducts products,
+            @JsonKey(name: "entitlement_type") EntitlementType entitlementType)
         $default,
   ) {
     final _that = this;
     switch (_that) {
       case _CrosspayEntitlement():
         return $default(_that.id, _that.name, _that.period, _that.description,
-            _that.metadata, _that.products);
+            _that.metadata, _that.products, _that.entitlementType);
     }
   }
 
@@ -853,14 +865,15 @@ extension CrosspayEntitlementPatterns on CrosspayEntitlement {
             Duration period,
             String? description,
             Map<String, dynamic>? metadata,
-            CrosspayProducts products)?
+            CrosspayProducts products,
+            @JsonKey(name: "entitlement_type") EntitlementType entitlementType)?
         $default,
   ) {
     final _that = this;
     switch (_that) {
       case _CrosspayEntitlement() when $default != null:
         return $default(_that.id, _that.name, _that.period, _that.description,
-            _that.metadata, _that.products);
+            _that.metadata, _that.products, _that.entitlementType);
       case _:
         return null;
     }
@@ -880,7 +893,8 @@ class _CrosspayEntitlement implements CrosspayEntitlement {
       required this.period,
       this.description,
       final Map<String, dynamic>? metadata,
-      required this.products})
+      required this.products,
+      @JsonKey(name: "entitlement_type") required this.entitlementType})
       : _metadata = metadata;
   factory _CrosspayEntitlement.fromJson(Map<String, dynamic> json) =>
       _$CrosspayEntitlementFromJson(json);
@@ -909,6 +923,9 @@ class _CrosspayEntitlement implements CrosspayEntitlement {
 
   @override
   final CrosspayProducts products;
+  @override
+  @JsonKey(name: "entitlement_type")
+  final EntitlementType entitlementType;
 
   /// Create a copy of CrosspayEntitlement
   /// with the given fields replaced by the non-null parameter values.
@@ -938,17 +955,26 @@ class _CrosspayEntitlement implements CrosspayEntitlement {
                 other.description == description) &&
             const DeepCollectionEquality().equals(other._metadata, _metadata) &&
             (identical(other.products, products) ||
-                other.products == products));
+                other.products == products) &&
+            (identical(other.entitlementType, entitlementType) ||
+                other.entitlementType == entitlementType));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, period, description,
-      const DeepCollectionEquality().hash(_metadata), products);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      name,
+      period,
+      description,
+      const DeepCollectionEquality().hash(_metadata),
+      products,
+      entitlementType);
 
   @override
   String toString() {
-    return 'CrosspayEntitlement(id: $id, name: $name, period: $period, description: $description, metadata: $metadata, products: $products)';
+    return 'CrosspayEntitlement(id: $id, name: $name, period: $period, description: $description, metadata: $metadata, products: $products, entitlementType: $entitlementType)';
   }
 }
 
@@ -970,7 +996,8 @@ abstract mixin class _$CrosspayEntitlementCopyWith<$Res>
       Duration period,
       String? description,
       Map<String, dynamic>? metadata,
-      CrosspayProducts products});
+      CrosspayProducts products,
+      @JsonKey(name: "entitlement_type") EntitlementType entitlementType});
 
   @override
   $CrosspayProductsCopyWith<$Res> get products;
@@ -995,6 +1022,7 @@ class __$CrosspayEntitlementCopyWithImpl<$Res>
     Object? description = freezed,
     Object? metadata = freezed,
     Object? products = null,
+    Object? entitlementType = null,
   }) {
     return _then(_CrosspayEntitlement(
       id: null == id
@@ -1021,6 +1049,10 @@ class __$CrosspayEntitlementCopyWithImpl<$Res>
           ? _self.products
           : products // ignore: cast_nullable_to_non_nullable
               as CrosspayProducts,
+      entitlementType: null == entitlementType
+          ? _self.entitlementType
+          : entitlementType // ignore: cast_nullable_to_non_nullable
+              as EntitlementType,
     ));
   }
 
@@ -3625,6 +3657,8 @@ mixin _$StorableSubscription {
   String get id;
   @JsonKey(name: 'product_id')
   String get productId;
+  @JsonKey(name: 'entitlement_id')
+  String get entitlementId;
   @JsonKey(
       name: 'expires_at',
       fromJson: _dateFromEpochSeconds,
@@ -3663,6 +3697,8 @@ mixin _$StorableSubscription {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.productId, productId) ||
                 other.productId == productId) &&
+            (identical(other.entitlementId, entitlementId) ||
+                other.entitlementId == entitlementId) &&
             (identical(other.expiresAt, expiresAt) ||
                 other.expiresAt == expiresAt) &&
             (identical(other.trialExpiresAt, trialExpiresAt) ||
@@ -3675,12 +3711,12 @@ mixin _$StorableSubscription {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, productId, expiresAt,
-      trialExpiresAt, store, status, renewalStatus);
+  int get hashCode => Object.hash(runtimeType, id, productId, entitlementId,
+      expiresAt, trialExpiresAt, store, status, renewalStatus);
 
   @override
   String toString() {
-    return 'StorableSubscription(id: $id, productId: $productId, expiresAt: $expiresAt, trialExpiresAt: $trialExpiresAt, store: $store, status: $status, renewalStatus: $renewalStatus)';
+    return 'StorableSubscription(id: $id, productId: $productId, entitlementId: $entitlementId, expiresAt: $expiresAt, trialExpiresAt: $trialExpiresAt, store: $store, status: $status, renewalStatus: $renewalStatus)';
   }
 }
 
@@ -3693,6 +3729,7 @@ abstract mixin class $StorableSubscriptionCopyWith<$Res> {
   $Res call(
       {String id,
       @JsonKey(name: 'product_id') String productId,
+      @JsonKey(name: 'entitlement_id') String entitlementId,
       @JsonKey(
           name: 'expires_at',
           fromJson: _dateFromEpochSeconds,
@@ -3724,6 +3761,7 @@ class _$StorableSubscriptionCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? productId = null,
+    Object? entitlementId = null,
     Object? expiresAt = null,
     Object? trialExpiresAt = freezed,
     Object? store = null,
@@ -3738,6 +3776,10 @@ class _$StorableSubscriptionCopyWithImpl<$Res>
       productId: null == productId
           ? _self.productId
           : productId // ignore: cast_nullable_to_non_nullable
+              as String,
+      entitlementId: null == entitlementId
+          ? _self.entitlementId
+          : entitlementId // ignore: cast_nullable_to_non_nullable
               as String,
       expiresAt: null == expiresAt
           ? _self.expiresAt
@@ -3857,6 +3899,7 @@ extension StorableSubscriptionPatterns on StorableSubscription {
     TResult Function(
             String id,
             @JsonKey(name: 'product_id') String productId,
+            @JsonKey(name: 'entitlement_id') String entitlementId,
             @JsonKey(
                 name: 'expires_at',
                 fromJson: _dateFromEpochSeconds,
@@ -3880,6 +3923,7 @@ extension StorableSubscriptionPatterns on StorableSubscription {
         return $default(
             _that.id,
             _that.productId,
+            _that.entitlementId,
             _that.expiresAt,
             _that.trialExpiresAt,
             _that.store,
@@ -3908,6 +3952,7 @@ extension StorableSubscriptionPatterns on StorableSubscription {
     TResult Function(
             String id,
             @JsonKey(name: 'product_id') String productId,
+            @JsonKey(name: 'entitlement_id') String entitlementId,
             @JsonKey(
                 name: 'expires_at',
                 fromJson: _dateFromEpochSeconds,
@@ -3930,6 +3975,7 @@ extension StorableSubscriptionPatterns on StorableSubscription {
         return $default(
             _that.id,
             _that.productId,
+            _that.entitlementId,
             _that.expiresAt,
             _that.trialExpiresAt,
             _that.store,
@@ -3955,6 +4001,7 @@ extension StorableSubscriptionPatterns on StorableSubscription {
     TResult? Function(
             String id,
             @JsonKey(name: 'product_id') String productId,
+            @JsonKey(name: 'entitlement_id') String entitlementId,
             @JsonKey(
                 name: 'expires_at',
                 fromJson: _dateFromEpochSeconds,
@@ -3977,6 +4024,7 @@ extension StorableSubscriptionPatterns on StorableSubscription {
         return $default(
             _that.id,
             _that.productId,
+            _that.entitlementId,
             _that.expiresAt,
             _that.trialExpiresAt,
             _that.store,
@@ -3994,6 +4042,7 @@ class _StorableSubscription implements StorableSubscription {
   _StorableSubscription(
       {required this.id,
       @JsonKey(name: 'product_id') required this.productId,
+      @JsonKey(name: 'entitlement_id') required this.entitlementId,
       @JsonKey(
           name: 'expires_at',
           fromJson: _dateFromEpochSeconds,
@@ -4017,6 +4066,9 @@ class _StorableSubscription implements StorableSubscription {
   @override
   @JsonKey(name: 'product_id')
   final String productId;
+  @override
+  @JsonKey(name: 'entitlement_id')
+  final String entitlementId;
   @override
   @JsonKey(
       name: 'expires_at',
@@ -4065,6 +4117,8 @@ class _StorableSubscription implements StorableSubscription {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.productId, productId) ||
                 other.productId == productId) &&
+            (identical(other.entitlementId, entitlementId) ||
+                other.entitlementId == entitlementId) &&
             (identical(other.expiresAt, expiresAt) ||
                 other.expiresAt == expiresAt) &&
             (identical(other.trialExpiresAt, trialExpiresAt) ||
@@ -4077,12 +4131,12 @@ class _StorableSubscription implements StorableSubscription {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, productId, expiresAt,
-      trialExpiresAt, store, status, renewalStatus);
+  int get hashCode => Object.hash(runtimeType, id, productId, entitlementId,
+      expiresAt, trialExpiresAt, store, status, renewalStatus);
 
   @override
   String toString() {
-    return 'StorableSubscription(id: $id, productId: $productId, expiresAt: $expiresAt, trialExpiresAt: $trialExpiresAt, store: $store, status: $status, renewalStatus: $renewalStatus)';
+    return 'StorableSubscription(id: $id, productId: $productId, entitlementId: $entitlementId, expiresAt: $expiresAt, trialExpiresAt: $trialExpiresAt, store: $store, status: $status, renewalStatus: $renewalStatus)';
   }
 }
 
@@ -4097,6 +4151,7 @@ abstract mixin class _$StorableSubscriptionCopyWith<$Res>
   $Res call(
       {String id,
       @JsonKey(name: 'product_id') String productId,
+      @JsonKey(name: 'entitlement_id') String entitlementId,
       @JsonKey(
           name: 'expires_at',
           fromJson: _dateFromEpochSeconds,
@@ -4128,6 +4183,7 @@ class __$StorableSubscriptionCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? productId = null,
+    Object? entitlementId = null,
     Object? expiresAt = null,
     Object? trialExpiresAt = freezed,
     Object? store = null,
@@ -4142,6 +4198,10 @@ class __$StorableSubscriptionCopyWithImpl<$Res>
       productId: null == productId
           ? _self.productId
           : productId // ignore: cast_nullable_to_non_nullable
+              as String,
+      entitlementId: null == entitlementId
+          ? _self.entitlementId
+          : entitlementId // ignore: cast_nullable_to_non_nullable
               as String,
       expiresAt: null == expiresAt
           ? _self.expiresAt

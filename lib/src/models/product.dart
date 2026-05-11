@@ -35,6 +35,15 @@ sealed class SubscriptionStoreProduct with _$SubscriptionStoreProduct {
       _$SubscriptionStoreProductFromJson(json);
 }
 
+enum EntitlementType {
+  @JsonValue("consumable")
+  consumable,
+  @JsonValue("non_consumable")
+  nonConsumable,
+  @JsonValue("subscription")
+  subscription,
+}
+
 @freezed
 sealed class CrosspayEntitlement with _$CrosspayEntitlement {
   factory CrosspayEntitlement({
@@ -48,6 +57,8 @@ sealed class CrosspayEntitlement with _$CrosspayEntitlement {
     String? description,
     Map<String, dynamic>? metadata,
     required CrosspayProducts products,
+    @JsonKey(name: "entitlement_type")
+    required EntitlementType entitlementType,
   }) = _CrosspayEntitlement;
 
   factory CrosspayEntitlement.fromJson(Map<String, dynamic> json) =>
