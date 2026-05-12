@@ -27,8 +27,9 @@ sealed class SubscriptionStoreProduct with _$SubscriptionStoreProduct {
     required String formattedPrice,
     required String currencyCode,
     required CrosspayStore store,
-    required int subscriptionRecurrenceDays,
+    required int? subscriptionRecurrenceDays,
     required String accessLevel,
+    required EntitlementType productType,
   }) = _SubscriptionStoreProduct;
 
   factory SubscriptionStoreProduct.fromJson(Map<String, dynamic> json) =>
@@ -53,7 +54,7 @@ sealed class CrosspayEntitlement with _$CrosspayEntitlement {
         name: "period_ms",
         fromJson: _durationFromMillis,
         toJson: _durationToMillis)
-    required Duration period,
+    required Duration? period,
     String? description,
     Map<String, dynamic>? metadata,
     required CrosspayProducts products,
@@ -113,16 +114,16 @@ sealed class CrosspayStorableEntitlement with _$CrosspayStorableEntitlement {
     required String id,
     @JsonKey(name: "product_id") required String productId,
     @JsonKey(name: "entitlement_id") required String entitlementId,
-    @JsonKey(name: "expires_at")
+    @JsonKey(name: "expires_at", fromJson: _dateTimeFromEpoch, toJson: _dateTimeToEpoch)
     required DateTime expiresAt,
     @JsonKey(name: "trial_expires_at")
     DateTime? trialExpiresAt,
     required CrosspayStore store,
     required SubscriptionStatus status,
     @JsonKey(name: "renewal_status")
-    required SubscriptionRenewalStatus renewalStatus,
+    required SubscriptionRenewalStatus? renewalStatus,
     @JsonKey(name: "entitlement_type")
-    required String entitlementType,
+    required EntitlementType entitlementType,
     @JsonKey(name: "purchase_state")
     String? purchaseState,
   }) = _CrosspayStorableEntitlement;

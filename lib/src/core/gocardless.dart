@@ -57,7 +57,8 @@ class GocardlessSubscriptionStore extends Store {
         formattedPrice: storeProduct.formattedPrice,
         price: storeProduct.price / 100,
         store: CrosspayStore.gocardless,
-        subscriptionRecurrenceDays: entitlement.period.inDays,
+        subscriptionRecurrenceDays: entitlement.period?.inDays,
+        productType: entitlement.entitlementType,
       );
     }).toList();
 

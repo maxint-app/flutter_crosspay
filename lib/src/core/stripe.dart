@@ -57,7 +57,8 @@ class StripeSubscriptionStore extends Store {
         formattedPrice: storeProduct.price.formattedPrice,
         price: storeProduct.price.price / 100,
         store: CrosspayStore.stripe,
-        subscriptionRecurrenceDays: entitlement.period.inDays,
+        subscriptionRecurrenceDays: entitlement.period?.inDays,
+        productType: entitlement.entitlementType,
       );
     }).toList();
 

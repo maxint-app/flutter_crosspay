@@ -87,8 +87,8 @@ abstract class Store {
         return [];
       }
 
-      return (res.data?["data"] as List<Map<String, dynamic>>)
-          .map(CrosspayStorableEntitlement.fromJson)
+      return (res.data?["data"] as List)
+          .map((d) => CrosspayStorableEntitlement.fromJson(d))
           .toList();
     } on DioException catch (e) {
       if (e.response?.statusCode == 404) {

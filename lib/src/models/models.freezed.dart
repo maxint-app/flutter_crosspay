@@ -21,8 +21,9 @@ mixin _$SubscriptionStoreProduct {
   String get formattedPrice;
   String get currencyCode;
   CrosspayStore get store;
-  int get subscriptionRecurrenceDays;
+  int? get subscriptionRecurrenceDays;
   String get accessLevel;
+  EntitlementType get productType;
 
   /// Create a copy of SubscriptionStoreProduct
   /// with the given fields replaced by the non-null parameter values.
@@ -55,7 +56,9 @@ mixin _$SubscriptionStoreProduct {
                 other.subscriptionRecurrenceDays ==
                     subscriptionRecurrenceDays) &&
             (identical(other.accessLevel, accessLevel) ||
-                other.accessLevel == accessLevel));
+                other.accessLevel == accessLevel) &&
+            (identical(other.productType, productType) ||
+                other.productType == productType));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -70,11 +73,12 @@ mixin _$SubscriptionStoreProduct {
       currencyCode,
       store,
       subscriptionRecurrenceDays,
-      accessLevel);
+      accessLevel,
+      productType);
 
   @override
   String toString() {
-    return 'SubscriptionStoreProduct(id: $id, name: $name, description: $description, price: $price, formattedPrice: $formattedPrice, currencyCode: $currencyCode, store: $store, subscriptionRecurrenceDays: $subscriptionRecurrenceDays, accessLevel: $accessLevel)';
+    return 'SubscriptionStoreProduct(id: $id, name: $name, description: $description, price: $price, formattedPrice: $formattedPrice, currencyCode: $currencyCode, store: $store, subscriptionRecurrenceDays: $subscriptionRecurrenceDays, accessLevel: $accessLevel, productType: $productType)';
   }
 }
 
@@ -92,8 +96,9 @@ abstract mixin class $SubscriptionStoreProductCopyWith<$Res> {
       String formattedPrice,
       String currencyCode,
       CrosspayStore store,
-      int subscriptionRecurrenceDays,
-      String accessLevel});
+      int? subscriptionRecurrenceDays,
+      String accessLevel,
+      EntitlementType productType});
 }
 
 /// @nodoc
@@ -116,8 +121,9 @@ class _$SubscriptionStoreProductCopyWithImpl<$Res>
     Object? formattedPrice = null,
     Object? currencyCode = null,
     Object? store = null,
-    Object? subscriptionRecurrenceDays = null,
+    Object? subscriptionRecurrenceDays = freezed,
     Object? accessLevel = null,
+    Object? productType = null,
   }) {
     return _then(_self.copyWith(
       id: null == id
@@ -148,14 +154,18 @@ class _$SubscriptionStoreProductCopyWithImpl<$Res>
           ? _self.store
           : store // ignore: cast_nullable_to_non_nullable
               as CrosspayStore,
-      subscriptionRecurrenceDays: null == subscriptionRecurrenceDays
+      subscriptionRecurrenceDays: freezed == subscriptionRecurrenceDays
           ? _self.subscriptionRecurrenceDays
           : subscriptionRecurrenceDays // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       accessLevel: null == accessLevel
           ? _self.accessLevel
           : accessLevel // ignore: cast_nullable_to_non_nullable
               as String,
+      productType: null == productType
+          ? _self.productType
+          : productType // ignore: cast_nullable_to_non_nullable
+              as EntitlementType,
     ));
   }
 }
@@ -259,8 +269,9 @@ extension SubscriptionStoreProductPatterns on SubscriptionStoreProduct {
             String formattedPrice,
             String currencyCode,
             CrosspayStore store,
-            int subscriptionRecurrenceDays,
-            String accessLevel)?
+            int? subscriptionRecurrenceDays,
+            String accessLevel,
+            EntitlementType productType)?
         $default, {
     required TResult orElse(),
   }) {
@@ -276,7 +287,8 @@ extension SubscriptionStoreProductPatterns on SubscriptionStoreProduct {
             _that.currencyCode,
             _that.store,
             _that.subscriptionRecurrenceDays,
-            _that.accessLevel);
+            _that.accessLevel,
+            _that.productType);
       case _:
         return orElse();
     }
@@ -305,8 +317,9 @@ extension SubscriptionStoreProductPatterns on SubscriptionStoreProduct {
             String formattedPrice,
             String currencyCode,
             CrosspayStore store,
-            int subscriptionRecurrenceDays,
-            String accessLevel)
+            int? subscriptionRecurrenceDays,
+            String accessLevel,
+            EntitlementType productType)
         $default,
   ) {
     final _that = this;
@@ -321,7 +334,8 @@ extension SubscriptionStoreProductPatterns on SubscriptionStoreProduct {
             _that.currencyCode,
             _that.store,
             _that.subscriptionRecurrenceDays,
-            _that.accessLevel);
+            _that.accessLevel,
+            _that.productType);
     }
   }
 
@@ -347,8 +361,9 @@ extension SubscriptionStoreProductPatterns on SubscriptionStoreProduct {
             String formattedPrice,
             String currencyCode,
             CrosspayStore store,
-            int subscriptionRecurrenceDays,
-            String accessLevel)?
+            int? subscriptionRecurrenceDays,
+            String accessLevel,
+            EntitlementType productType)?
         $default,
   ) {
     final _that = this;
@@ -363,7 +378,8 @@ extension SubscriptionStoreProductPatterns on SubscriptionStoreProduct {
             _that.currencyCode,
             _that.store,
             _that.subscriptionRecurrenceDays,
-            _that.accessLevel);
+            _that.accessLevel,
+            _that.productType);
       case _:
         return null;
     }
@@ -382,7 +398,8 @@ class _SubscriptionStoreProduct implements SubscriptionStoreProduct {
       required this.currencyCode,
       required this.store,
       required this.subscriptionRecurrenceDays,
-      required this.accessLevel});
+      required this.accessLevel,
+      required this.productType});
   factory _SubscriptionStoreProduct.fromJson(Map<String, dynamic> json) =>
       _$SubscriptionStoreProductFromJson(json);
 
@@ -401,9 +418,11 @@ class _SubscriptionStoreProduct implements SubscriptionStoreProduct {
   @override
   final CrosspayStore store;
   @override
-  final int subscriptionRecurrenceDays;
+  final int? subscriptionRecurrenceDays;
   @override
   final String accessLevel;
+  @override
+  final EntitlementType productType;
 
   /// Create a copy of SubscriptionStoreProduct
   /// with the given fields replaced by the non-null parameter values.
@@ -441,7 +460,9 @@ class _SubscriptionStoreProduct implements SubscriptionStoreProduct {
                 other.subscriptionRecurrenceDays ==
                     subscriptionRecurrenceDays) &&
             (identical(other.accessLevel, accessLevel) ||
-                other.accessLevel == accessLevel));
+                other.accessLevel == accessLevel) &&
+            (identical(other.productType, productType) ||
+                other.productType == productType));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -456,11 +477,12 @@ class _SubscriptionStoreProduct implements SubscriptionStoreProduct {
       currencyCode,
       store,
       subscriptionRecurrenceDays,
-      accessLevel);
+      accessLevel,
+      productType);
 
   @override
   String toString() {
-    return 'SubscriptionStoreProduct(id: $id, name: $name, description: $description, price: $price, formattedPrice: $formattedPrice, currencyCode: $currencyCode, store: $store, subscriptionRecurrenceDays: $subscriptionRecurrenceDays, accessLevel: $accessLevel)';
+    return 'SubscriptionStoreProduct(id: $id, name: $name, description: $description, price: $price, formattedPrice: $formattedPrice, currencyCode: $currencyCode, store: $store, subscriptionRecurrenceDays: $subscriptionRecurrenceDays, accessLevel: $accessLevel, productType: $productType)';
   }
 }
 
@@ -480,8 +502,9 @@ abstract mixin class _$SubscriptionStoreProductCopyWith<$Res>
       String formattedPrice,
       String currencyCode,
       CrosspayStore store,
-      int subscriptionRecurrenceDays,
-      String accessLevel});
+      int? subscriptionRecurrenceDays,
+      String accessLevel,
+      EntitlementType productType});
 }
 
 /// @nodoc
@@ -504,8 +527,9 @@ class __$SubscriptionStoreProductCopyWithImpl<$Res>
     Object? formattedPrice = null,
     Object? currencyCode = null,
     Object? store = null,
-    Object? subscriptionRecurrenceDays = null,
+    Object? subscriptionRecurrenceDays = freezed,
     Object? accessLevel = null,
+    Object? productType = null,
   }) {
     return _then(_SubscriptionStoreProduct(
       id: null == id
@@ -536,14 +560,18 @@ class __$SubscriptionStoreProductCopyWithImpl<$Res>
           ? _self.store
           : store // ignore: cast_nullable_to_non_nullable
               as CrosspayStore,
-      subscriptionRecurrenceDays: null == subscriptionRecurrenceDays
+      subscriptionRecurrenceDays: freezed == subscriptionRecurrenceDays
           ? _self.subscriptionRecurrenceDays
           : subscriptionRecurrenceDays // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       accessLevel: null == accessLevel
           ? _self.accessLevel
           : accessLevel // ignore: cast_nullable_to_non_nullable
               as String,
+      productType: null == productType
+          ? _self.productType
+          : productType // ignore: cast_nullable_to_non_nullable
+              as EntitlementType,
     ));
   }
 }
@@ -556,7 +584,7 @@ mixin _$CrosspayEntitlement {
       name: "period_ms",
       fromJson: _durationFromMillis,
       toJson: _durationToMillis)
-  Duration get period;
+  Duration? get period;
   String? get description;
   Map<String, dynamic>? get metadata;
   CrosspayProducts get products;
@@ -615,7 +643,7 @@ abstract mixin class $CrosspayEntitlementCopyWith<$Res> {
           name: "period_ms",
           fromJson: _durationFromMillis,
           toJson: _durationToMillis)
-      Duration period,
+      Duration? period,
       String? description,
       Map<String, dynamic>? metadata,
       CrosspayProducts products,
@@ -639,7 +667,7 @@ class _$CrosspayEntitlementCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? period = null,
+    Object? period = freezed,
     Object? description = freezed,
     Object? metadata = freezed,
     Object? products = null,
@@ -654,10 +682,10 @@ class _$CrosspayEntitlementCopyWithImpl<$Res>
           ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      period: null == period
+      period: freezed == period
           ? _self.period
           : period // ignore: cast_nullable_to_non_nullable
-              as Duration,
+              as Duration?,
       description: freezed == description
           ? _self.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -786,7 +814,7 @@ extension CrosspayEntitlementPatterns on CrosspayEntitlement {
                 name: "period_ms",
                 fromJson: _durationFromMillis,
                 toJson: _durationToMillis)
-            Duration period,
+            Duration? period,
             String? description,
             Map<String, dynamic>? metadata,
             CrosspayProducts products,
@@ -826,7 +854,7 @@ extension CrosspayEntitlementPatterns on CrosspayEntitlement {
                 name: "period_ms",
                 fromJson: _durationFromMillis,
                 toJson: _durationToMillis)
-            Duration period,
+            Duration? period,
             String? description,
             Map<String, dynamic>? metadata,
             CrosspayProducts products,
@@ -862,7 +890,7 @@ extension CrosspayEntitlementPatterns on CrosspayEntitlement {
                 name: "period_ms",
                 fromJson: _durationFromMillis,
                 toJson: _durationToMillis)
-            Duration period,
+            Duration? period,
             String? description,
             Map<String, dynamic>? metadata,
             CrosspayProducts products,
@@ -908,7 +936,7 @@ class _CrosspayEntitlement implements CrosspayEntitlement {
       name: "period_ms",
       fromJson: _durationFromMillis,
       toJson: _durationToMillis)
-  final Duration period;
+  final Duration? period;
   @override
   final String? description;
   final Map<String, dynamic>? _metadata;
@@ -993,7 +1021,7 @@ abstract mixin class _$CrosspayEntitlementCopyWith<$Res>
           name: "period_ms",
           fromJson: _durationFromMillis,
           toJson: _durationToMillis)
-      Duration period,
+      Duration? period,
       String? description,
       Map<String, dynamic>? metadata,
       CrosspayProducts products,
@@ -1018,7 +1046,7 @@ class __$CrosspayEntitlementCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? period = null,
+    Object? period = freezed,
     Object? description = freezed,
     Object? metadata = freezed,
     Object? products = null,
@@ -1033,10 +1061,10 @@ class __$CrosspayEntitlementCopyWithImpl<$Res>
           ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      period: null == period
+      period: freezed == period
           ? _self.period
           : period // ignore: cast_nullable_to_non_nullable
-              as Duration,
+              as Duration?,
       description: freezed == description
           ? _self.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -1982,16 +2010,19 @@ mixin _$CrosspayStorableEntitlement {
   String get productId;
   @JsonKey(name: "entitlement_id")
   String get entitlementId;
-  @JsonKey(name: "expires_at")
+  @JsonKey(
+      name: "expires_at",
+      fromJson: _dateTimeFromEpoch,
+      toJson: _dateTimeToEpoch)
   DateTime get expiresAt;
   @JsonKey(name: "trial_expires_at")
   DateTime? get trialExpiresAt;
   CrosspayStore get store;
   SubscriptionStatus get status;
   @JsonKey(name: "renewal_status")
-  SubscriptionRenewalStatus get renewalStatus;
+  SubscriptionRenewalStatus? get renewalStatus;
   @JsonKey(name: "entitlement_type")
-  String get entitlementType;
+  EntitlementType get entitlementType;
   @JsonKey(name: "purchase_state")
   String? get purchaseState;
 
@@ -2063,12 +2094,16 @@ abstract mixin class $CrosspayStorableEntitlementCopyWith<$Res> {
       {String id,
       @JsonKey(name: "product_id") String productId,
       @JsonKey(name: "entitlement_id") String entitlementId,
-      @JsonKey(name: "expires_at") DateTime expiresAt,
+      @JsonKey(
+          name: "expires_at",
+          fromJson: _dateTimeFromEpoch,
+          toJson: _dateTimeToEpoch)
+      DateTime expiresAt,
       @JsonKey(name: "trial_expires_at") DateTime? trialExpiresAt,
       CrosspayStore store,
       SubscriptionStatus status,
-      @JsonKey(name: "renewal_status") SubscriptionRenewalStatus renewalStatus,
-      @JsonKey(name: "entitlement_type") String entitlementType,
+      @JsonKey(name: "renewal_status") SubscriptionRenewalStatus? renewalStatus,
+      @JsonKey(name: "entitlement_type") EntitlementType entitlementType,
       @JsonKey(name: "purchase_state") String? purchaseState});
 }
 
@@ -2092,7 +2127,7 @@ class _$CrosspayStorableEntitlementCopyWithImpl<$Res>
     Object? trialExpiresAt = freezed,
     Object? store = null,
     Object? status = null,
-    Object? renewalStatus = null,
+    Object? renewalStatus = freezed,
     Object? entitlementType = null,
     Object? purchaseState = freezed,
   }) {
@@ -2125,14 +2160,14 @@ class _$CrosspayStorableEntitlementCopyWithImpl<$Res>
           ? _self.status
           : status // ignore: cast_nullable_to_non_nullable
               as SubscriptionStatus,
-      renewalStatus: null == renewalStatus
+      renewalStatus: freezed == renewalStatus
           ? _self.renewalStatus
           : renewalStatus // ignore: cast_nullable_to_non_nullable
-              as SubscriptionRenewalStatus,
+              as SubscriptionRenewalStatus?,
       entitlementType: null == entitlementType
           ? _self.entitlementType
           : entitlementType // ignore: cast_nullable_to_non_nullable
-              as String,
+              as EntitlementType,
       purchaseState: freezed == purchaseState
           ? _self.purchaseState
           : purchaseState // ignore: cast_nullable_to_non_nullable
@@ -2236,13 +2271,17 @@ extension CrosspayStorableEntitlementPatterns on CrosspayStorableEntitlement {
             String id,
             @JsonKey(name: "product_id") String productId,
             @JsonKey(name: "entitlement_id") String entitlementId,
-            @JsonKey(name: "expires_at") DateTime expiresAt,
+            @JsonKey(
+                name: "expires_at",
+                fromJson: _dateTimeFromEpoch,
+                toJson: _dateTimeToEpoch)
+            DateTime expiresAt,
             @JsonKey(name: "trial_expires_at") DateTime? trialExpiresAt,
             CrosspayStore store,
             SubscriptionStatus status,
             @JsonKey(name: "renewal_status")
-            SubscriptionRenewalStatus renewalStatus,
-            @JsonKey(name: "entitlement_type") String entitlementType,
+            SubscriptionRenewalStatus? renewalStatus,
+            @JsonKey(name: "entitlement_type") EntitlementType entitlementType,
             @JsonKey(name: "purchase_state") String? purchaseState)?
         $default, {
     required TResult orElse(),
@@ -2285,13 +2324,17 @@ extension CrosspayStorableEntitlementPatterns on CrosspayStorableEntitlement {
             String id,
             @JsonKey(name: "product_id") String productId,
             @JsonKey(name: "entitlement_id") String entitlementId,
-            @JsonKey(name: "expires_at") DateTime expiresAt,
+            @JsonKey(
+                name: "expires_at",
+                fromJson: _dateTimeFromEpoch,
+                toJson: _dateTimeToEpoch)
+            DateTime expiresAt,
             @JsonKey(name: "trial_expires_at") DateTime? trialExpiresAt,
             CrosspayStore store,
             SubscriptionStatus status,
             @JsonKey(name: "renewal_status")
-            SubscriptionRenewalStatus renewalStatus,
-            @JsonKey(name: "entitlement_type") String entitlementType,
+            SubscriptionRenewalStatus? renewalStatus,
+            @JsonKey(name: "entitlement_type") EntitlementType entitlementType,
             @JsonKey(name: "purchase_state") String? purchaseState)
         $default,
   ) {
@@ -2330,13 +2373,17 @@ extension CrosspayStorableEntitlementPatterns on CrosspayStorableEntitlement {
             String id,
             @JsonKey(name: "product_id") String productId,
             @JsonKey(name: "entitlement_id") String entitlementId,
-            @JsonKey(name: "expires_at") DateTime expiresAt,
+            @JsonKey(
+                name: "expires_at",
+                fromJson: _dateTimeFromEpoch,
+                toJson: _dateTimeToEpoch)
+            DateTime expiresAt,
             @JsonKey(name: "trial_expires_at") DateTime? trialExpiresAt,
             CrosspayStore store,
             SubscriptionStatus status,
             @JsonKey(name: "renewal_status")
-            SubscriptionRenewalStatus renewalStatus,
-            @JsonKey(name: "entitlement_type") String entitlementType,
+            SubscriptionRenewalStatus? renewalStatus,
+            @JsonKey(name: "entitlement_type") EntitlementType entitlementType,
             @JsonKey(name: "purchase_state") String? purchaseState)?
         $default,
   ) {
@@ -2367,7 +2414,11 @@ class _CrosspayStorableEntitlement implements CrosspayStorableEntitlement {
       {required this.id,
       @JsonKey(name: "product_id") required this.productId,
       @JsonKey(name: "entitlement_id") required this.entitlementId,
-      @JsonKey(name: "expires_at") required this.expiresAt,
+      @JsonKey(
+          name: "expires_at",
+          fromJson: _dateTimeFromEpoch,
+          toJson: _dateTimeToEpoch)
+      required this.expiresAt,
       @JsonKey(name: "trial_expires_at") this.trialExpiresAt,
       required this.store,
       required this.status,
@@ -2386,7 +2437,10 @@ class _CrosspayStorableEntitlement implements CrosspayStorableEntitlement {
   @JsonKey(name: "entitlement_id")
   final String entitlementId;
   @override
-  @JsonKey(name: "expires_at")
+  @JsonKey(
+      name: "expires_at",
+      fromJson: _dateTimeFromEpoch,
+      toJson: _dateTimeToEpoch)
   final DateTime expiresAt;
   @override
   @JsonKey(name: "trial_expires_at")
@@ -2397,10 +2451,10 @@ class _CrosspayStorableEntitlement implements CrosspayStorableEntitlement {
   final SubscriptionStatus status;
   @override
   @JsonKey(name: "renewal_status")
-  final SubscriptionRenewalStatus renewalStatus;
+  final SubscriptionRenewalStatus? renewalStatus;
   @override
   @JsonKey(name: "entitlement_type")
-  final String entitlementType;
+  final EntitlementType entitlementType;
   @override
   @JsonKey(name: "purchase_state")
   final String? purchaseState;
@@ -2479,12 +2533,16 @@ abstract mixin class _$CrosspayStorableEntitlementCopyWith<$Res>
       {String id,
       @JsonKey(name: "product_id") String productId,
       @JsonKey(name: "entitlement_id") String entitlementId,
-      @JsonKey(name: "expires_at") DateTime expiresAt,
+      @JsonKey(
+          name: "expires_at",
+          fromJson: _dateTimeFromEpoch,
+          toJson: _dateTimeToEpoch)
+      DateTime expiresAt,
       @JsonKey(name: "trial_expires_at") DateTime? trialExpiresAt,
       CrosspayStore store,
       SubscriptionStatus status,
-      @JsonKey(name: "renewal_status") SubscriptionRenewalStatus renewalStatus,
-      @JsonKey(name: "entitlement_type") String entitlementType,
+      @JsonKey(name: "renewal_status") SubscriptionRenewalStatus? renewalStatus,
+      @JsonKey(name: "entitlement_type") EntitlementType entitlementType,
       @JsonKey(name: "purchase_state") String? purchaseState});
 }
 
@@ -2508,7 +2566,7 @@ class __$CrosspayStorableEntitlementCopyWithImpl<$Res>
     Object? trialExpiresAt = freezed,
     Object? store = null,
     Object? status = null,
-    Object? renewalStatus = null,
+    Object? renewalStatus = freezed,
     Object? entitlementType = null,
     Object? purchaseState = freezed,
   }) {
@@ -2541,14 +2599,14 @@ class __$CrosspayStorableEntitlementCopyWithImpl<$Res>
           ? _self.status
           : status // ignore: cast_nullable_to_non_nullable
               as SubscriptionStatus,
-      renewalStatus: null == renewalStatus
+      renewalStatus: freezed == renewalStatus
           ? _self.renewalStatus
           : renewalStatus // ignore: cast_nullable_to_non_nullable
-              as SubscriptionRenewalStatus,
+              as SubscriptionRenewalStatus?,
       entitlementType: null == entitlementType
           ? _self.entitlementType
           : entitlementType // ignore: cast_nullable_to_non_nullable
-              as String,
+              as EntitlementType,
       purchaseState: freezed == purchaseState
           ? _self.purchaseState
           : purchaseState // ignore: cast_nullable_to_non_nullable

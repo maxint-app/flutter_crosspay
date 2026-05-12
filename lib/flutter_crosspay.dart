@@ -18,4 +18,5 @@ export 'src/models/models.dart'
         SubscriptionRenewalStatus,
         SubscriptionStatus,
         CrosspayStore,
-        ExternalStore;
+        ExternalStore,
+        EntitlementType;

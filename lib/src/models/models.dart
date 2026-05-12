@@ -12,5 +12,8 @@ part 'gocardless_product.dart';
 part 'stripe_product.dart';
 part 'subscription.dart';
 
-Duration _durationFromMillis(ms) => Duration(milliseconds: ms);
-int _durationToMillis(Duration duration) => duration.inMilliseconds;
+Duration? _durationFromMillis(ms) => ms != null ? Duration(milliseconds: ms) : null;
+int _durationToMillis(Duration? duration) => duration?.inMilliseconds ?? 0;
+
+DateTime _dateTimeFromEpoch(int epoch) => DateTime.fromMillisecondsSinceEpoch(epoch);
+int _dateTimeToEpoch(DateTime dateTime) => dateTime.millisecondsSinceEpoch;

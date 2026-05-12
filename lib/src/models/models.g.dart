@@ -17,8 +17,9 @@ _SubscriptionStoreProduct _$SubscriptionStoreProductFromJson(
       currencyCode: json['currencyCode'] as String,
       store: $enumDecode(_$CrosspayStoreEnumMap, json['store']),
       subscriptionRecurrenceDays:
-          (json['subscriptionRecurrenceDays'] as num).toInt(),
+          (json['subscriptionRecurrenceDays'] as num?)?.toInt(),
       accessLevel: json['accessLevel'] as String,
+      productType: $enumDecode(_$EntitlementTypeEnumMap, json['productType']),
     );
 
 Map<String, dynamic> _$SubscriptionStoreProductToJson(
@@ -33,6 +34,7 @@ Map<String, dynamic> _$SubscriptionStoreProductToJson(
       'store': _$CrosspayStoreEnumMap[instance.store]!,
       'subscriptionRecurrenceDays': instance.subscriptionRecurrenceDays,
       'accessLevel': instance.accessLevel,
+      'productType': _$EntitlementTypeEnumMap[instance.productType]!,
     };
 
 const _$CrosspayStoreEnumMap = {
@@ -42,6 +44,12 @@ const _$CrosspayStoreEnumMap = {
   CrosspayStore.stripeSandbox: 'stripe_sandbox',
   CrosspayStore.gocardless: 'gocardless',
   CrosspayStore.gocardlessSandbox: 'gocardless_sandbox',
+};
+
+const _$EntitlementTypeEnumMap = {
+  EntitlementType.consumable: 'consumable',
+  EntitlementType.nonConsumable: 'non_consumable',
+  EntitlementType.subscription: 'subscription',
 };
 
 _CrosspayEntitlement _$CrosspayEntitlementFromJson(Map<String, dynamic> json) =>
@@ -68,12 +76,6 @@ Map<String, dynamic> _$CrosspayEntitlementToJson(
       'products': instance.products,
       'entitlement_type': _$EntitlementTypeEnumMap[instance.entitlementType]!,
     };
-
-const _$EntitlementTypeEnumMap = {
-  EntitlementType.consumable: 'consumable',
-  EntitlementType.nonConsumable: 'non_consumable',
-  EntitlementType.subscription: 'subscription',
-};
 
 _CrosspayProducts _$CrosspayProductsFromJson(Map<String, dynamic> json) =>
     _CrosspayProducts(
@@ -124,15 +126,16 @@ _CrosspayStorableEntitlement _$CrosspayStorableEntitlementFromJson(
       id: json['id'] as String,
       productId: json['product_id'] as String,
       entitlementId: json['entitlement_id'] as String,
-      expiresAt: DateTime.parse(json['expires_at'] as String),
+      expiresAt: _dateTimeFromEpoch((json['expires_at'] as num).toInt()),
       trialExpiresAt: json['trial_expires_at'] == null
           ? null
           : DateTime.parse(json['trial_expires_at'] as String),
       store: $enumDecode(_$CrosspayStoreEnumMap, json['store']),
       status: $enumDecode(_$SubscriptionStatusEnumMap, json['status']),
-      renewalStatus: $enumDecode(
+      renewalStatus: $enumDecodeNullable(
           _$SubscriptionRenewalStatusEnumMap, json['renewal_status']),
-      entitlementType: json['entitlement_type'] as String,
+      entitlementType:
+          $enumDecode(_$EntitlementTypeEnumMap, json['entitlement_type']),
       purchaseState: json['purchase_state'] as String?,
     );
 
@@ -142,13 +145,13 @@ Map<String, dynamic> _$CrosspayStorableEntitlementToJson(
       'id': instance.id,
       'product_id': instance.productId,
       'entitlement_id': instance.entitlementId,
-      'expires_at': instance.expiresAt.toIso8601String(),
+      'expires_at': _dateTimeToEpoch(instance.expiresAt),
       'trial_expires_at': instance.trialExpiresAt?.toIso8601String(),
       'store': _$CrosspayStoreEnumMap[instance.store]!,
       'status': _$SubscriptionStatusEnumMap[instance.status]!,
       'renewal_status':
-          _$SubscriptionRenewalStatusEnumMap[instance.renewalStatus]!,
-      'entitlement_type': instance.entitlementType,
+          _$SubscriptionRenewalStatusEnumMap[instance.renewalStatus],
+      'entitlement_type': _$EntitlementTypeEnumMap[instance.entitlementType]!,
       'purchase_state': instance.purchaseState,
     };
 

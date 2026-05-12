@@ -93,15 +93,17 @@ class _MainAppState extends State<MainApp> {
                   return Card(
                     child: ListTile(
                       title: Text(
-                        '${entitlement.name} - ${entitlement.period.inDays} days ${isActive ? "(active) " : ""}',
+                        '${entitlement.entitlementType.name} ${entitlement.name} '
+                        '${entitlement.entitlementType == EntitlementType.subscription ? '- ${entitlement.period?.inDays ?? 0} days' : ""} '
+                        '${isActive ? "(active) " : ""}',
                       ),
                       subtitle: Text(
                         "Price: ${storeProduct.formattedPrice}"
                         "${entitlement.description ?? ''}"
                         "${isActive ? '\nActive until: ${activeSubscription?.expiresAt}'
-                                  ' Auto-Renew: ${activeSubscription?.renewalStatus.name}' : ''}",
+                                  ' Auto-Renew: ${activeSubscription?.renewalStatus?.name}' : ''}",
                       ),
-                      trailing: !isActive || isReSubscribable
+                      trailing: !isActive || isReSubscribable || entitlement.entitlementType != EntitlementType.subscription
                           ? FilledButton.tonal(
                               onPressed: () async {
                                 if (kIsWeb ||
@@ -177,9 +179,15 @@ class _MainAppState extends State<MainApp> {
                                   );
                                 }
                               },
-                              child: isReSubscribable
-                                  ? const Text("Resubscribe")
-                                  : const Text("Subscribe"),
+                              child:
+                                  entitlement.entitlementType ==
+                                      EntitlementType.subscription
+                                  ? (isReSubscribable
+                                        ? const Text("Resubscribe")
+                                        : const Text("Subscribe"))
+                                  : isActive
+                                  ? const Text("Purchase Again")
+                                  : const Text("Purchase"),
                             )
                           : null,
                     ),

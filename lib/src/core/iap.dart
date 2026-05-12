@@ -127,7 +127,8 @@ class InAppPurchaseSubscriptionStore extends Store {
         formattedPrice: platformProduct.price,
         price: platformProduct.rawPrice,
         store: kIsAndroid ? CrosspayStore.playStore : CrosspayStore.appStore,
-        subscriptionRecurrenceDays: entitlement.period.inDays,
+        subscriptionRecurrenceDays: entitlement.period?.inDays,
+        productType: entitlement.entitlementType,
       );
     }).toList();
 
