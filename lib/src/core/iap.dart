@@ -25,7 +25,7 @@ class InAppPurchaseSubscriptionStore extends Store {
     required super.environment,
   }) {
     if (kIsMobile || kIsMacOS) {
-      _finishAppStorePendingTransactions();
+      _finishPendingTransactions();
       InAppPurchase.instance.purchaseStream.listen((purchaseDetailsList) async {
         for (final purchaseDetails in purchaseDetailsList) {
           switch (purchaseDetails.status) {
@@ -51,11 +51,28 @@ class InAppPurchaseSubscriptionStore extends Store {
     }
   }
 
-  Future<void> _finishAppStorePendingTransactions() async {
+  Future<void> _finishPendingTransactions() async {
     if (kIsMacOS || kIsIOS) {
       final transactions = await SKPaymentQueueWrapper().transactions();
       for (var transaction in transactions) {
         await SKPaymentQueueWrapper().finishTransaction(transaction);
+      }
+    } else if (kIsAndroid) {
+      final billingClient = InAppPurchase.instance
+          .getPlatformAddition<InAppPurchaseAndroidPlatformAddition>();
+      final purchasesResult = await billingClient.queryPastPurchases(
+        applicationUserName: _customerId,
+      );
+
+      if (purchasesResult.error != null) {
+        throw purchasesResult.error!;
+      }
+
+      for (var purchase in purchasesResult.pastPurchases) {
+        if (purchase.status == PurchaseStatus.purchased ||
+            purchase.status == PurchaseStatus.restored) {
+          await billingClient.consumePurchase(purchase);
+        }
       }
     }
   }
@@ -109,9 +126,7 @@ class InAppPurchaseSubscriptionStore extends Store {
         description: platformProduct.description,
         formattedPrice: platformProduct.price,
         price: platformProduct.rawPrice,
-        store: kIsAndroid
-            ? CrosspayStore.playStore
-            : CrosspayStore.appStore,
+        store: kIsAndroid ? CrosspayStore.playStore : CrosspayStore.appStore,
         subscriptionRecurrenceDays: entitlement.period.inDays,
       );
     }).toList();
