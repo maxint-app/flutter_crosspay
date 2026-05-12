@@ -116,7 +116,7 @@ sealed class CrosspayStorableEntitlement with _$CrosspayStorableEntitlement {
     @JsonKey(name: "entitlement_id") required String entitlementId,
     @JsonKey(name: "expires_at", fromJson: _dateTimeFromEpoch, toJson: _dateTimeToEpoch)
     required DateTime expiresAt,
-    @JsonKey(name: "trial_expires_at")
+    @JsonKey(name: "trial_expires_at", fromJson: _dateTimeNullableFromEpoch, toJson: _dateTimeNullableToEpoch)
     DateTime? trialExpiresAt,
     required CrosspayStore store,
     required SubscriptionStatus status,

@@ -2015,7 +2015,10 @@ mixin _$CrosspayStorableEntitlement {
       fromJson: _dateTimeFromEpoch,
       toJson: _dateTimeToEpoch)
   DateTime get expiresAt;
-  @JsonKey(name: "trial_expires_at")
+  @JsonKey(
+      name: "trial_expires_at",
+      fromJson: _dateTimeNullableFromEpoch,
+      toJson: _dateTimeNullableToEpoch)
   DateTime? get trialExpiresAt;
   CrosspayStore get store;
   SubscriptionStatus get status;
@@ -2099,7 +2102,11 @@ abstract mixin class $CrosspayStorableEntitlementCopyWith<$Res> {
           fromJson: _dateTimeFromEpoch,
           toJson: _dateTimeToEpoch)
       DateTime expiresAt,
-      @JsonKey(name: "trial_expires_at") DateTime? trialExpiresAt,
+      @JsonKey(
+          name: "trial_expires_at",
+          fromJson: _dateTimeNullableFromEpoch,
+          toJson: _dateTimeNullableToEpoch)
+      DateTime? trialExpiresAt,
       CrosspayStore store,
       SubscriptionStatus status,
       @JsonKey(name: "renewal_status") SubscriptionRenewalStatus? renewalStatus,
@@ -2276,7 +2283,11 @@ extension CrosspayStorableEntitlementPatterns on CrosspayStorableEntitlement {
                 fromJson: _dateTimeFromEpoch,
                 toJson: _dateTimeToEpoch)
             DateTime expiresAt,
-            @JsonKey(name: "trial_expires_at") DateTime? trialExpiresAt,
+            @JsonKey(
+                name: "trial_expires_at",
+                fromJson: _dateTimeNullableFromEpoch,
+                toJson: _dateTimeNullableToEpoch)
+            DateTime? trialExpiresAt,
             CrosspayStore store,
             SubscriptionStatus status,
             @JsonKey(name: "renewal_status")
@@ -2329,7 +2340,11 @@ extension CrosspayStorableEntitlementPatterns on CrosspayStorableEntitlement {
                 fromJson: _dateTimeFromEpoch,
                 toJson: _dateTimeToEpoch)
             DateTime expiresAt,
-            @JsonKey(name: "trial_expires_at") DateTime? trialExpiresAt,
+            @JsonKey(
+                name: "trial_expires_at",
+                fromJson: _dateTimeNullableFromEpoch,
+                toJson: _dateTimeNullableToEpoch)
+            DateTime? trialExpiresAt,
             CrosspayStore store,
             SubscriptionStatus status,
             @JsonKey(name: "renewal_status")
@@ -2378,7 +2393,11 @@ extension CrosspayStorableEntitlementPatterns on CrosspayStorableEntitlement {
                 fromJson: _dateTimeFromEpoch,
                 toJson: _dateTimeToEpoch)
             DateTime expiresAt,
-            @JsonKey(name: "trial_expires_at") DateTime? trialExpiresAt,
+            @JsonKey(
+                name: "trial_expires_at",
+                fromJson: _dateTimeNullableFromEpoch,
+                toJson: _dateTimeNullableToEpoch)
+            DateTime? trialExpiresAt,
             CrosspayStore store,
             SubscriptionStatus status,
             @JsonKey(name: "renewal_status")
@@ -2419,7 +2438,11 @@ class _CrosspayStorableEntitlement implements CrosspayStorableEntitlement {
           fromJson: _dateTimeFromEpoch,
           toJson: _dateTimeToEpoch)
       required this.expiresAt,
-      @JsonKey(name: "trial_expires_at") this.trialExpiresAt,
+      @JsonKey(
+          name: "trial_expires_at",
+          fromJson: _dateTimeNullableFromEpoch,
+          toJson: _dateTimeNullableToEpoch)
+      this.trialExpiresAt,
       required this.store,
       required this.status,
       @JsonKey(name: "renewal_status") required this.renewalStatus,
@@ -2443,7 +2466,10 @@ class _CrosspayStorableEntitlement implements CrosspayStorableEntitlement {
       toJson: _dateTimeToEpoch)
   final DateTime expiresAt;
   @override
-  @JsonKey(name: "trial_expires_at")
+  @JsonKey(
+      name: "trial_expires_at",
+      fromJson: _dateTimeNullableFromEpoch,
+      toJson: _dateTimeNullableToEpoch)
   final DateTime? trialExpiresAt;
   @override
   final CrosspayStore store;
@@ -2538,7 +2564,11 @@ abstract mixin class _$CrosspayStorableEntitlementCopyWith<$Res>
           fromJson: _dateTimeFromEpoch,
           toJson: _dateTimeToEpoch)
       DateTime expiresAt,
-      @JsonKey(name: "trial_expires_at") DateTime? trialExpiresAt,
+      @JsonKey(
+          name: "trial_expires_at",
+          fromJson: _dateTimeNullableFromEpoch,
+          toJson: _dateTimeNullableToEpoch)
+      DateTime? trialExpiresAt,
       CrosspayStore store,
       SubscriptionStatus status,
       @JsonKey(name: "renewal_status") SubscriptionRenewalStatus? renewalStatus,

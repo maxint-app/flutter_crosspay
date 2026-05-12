@@ -17,3 +17,6 @@ int _durationToMillis(Duration? duration) => duration?.inMilliseconds ?? 0;
 
 DateTime _dateTimeFromEpoch(int epoch) => DateTime.fromMillisecondsSinceEpoch(epoch);
 int _dateTimeToEpoch(DateTime dateTime) => dateTime.millisecondsSinceEpoch;
+
+DateTime? _dateTimeNullableFromEpoch(int? epoch) => epoch != null ? DateTime.fromMillisecondsSinceEpoch(epoch) : null;
+int? _dateTimeNullableToEpoch(DateTime? dateTime) => dateTime?.millisecondsSinceEpoch;

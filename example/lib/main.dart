@@ -72,19 +72,11 @@ class _MainAppState extends State<MainApp> {
                 itemCount: entitlements.length,
                 itemBuilder: (context, index) {
                   final entitlement = entitlements[index];
-                  final isActive = activeEntitlements.any(
-                    (e) => e.id == entitlement.id,
-                  );
-
                   final activeSubscription = activeEntitlements
                       .firstWhereOrNull(
                         (s) => s.entitlementId == entitlement.id,
                       );
-
-                  final isReSubscribable =
-                      isActive &&
-                      (activeSubscription?.renewalStatus ==
-                          SubscriptionRenewalStatus.canceled);
+                  final isActive = activeSubscription != null;
                   final storeProduct = products.firstWhere(
                     (product) =>
                         entitlement.products[product.store]?.productId ==
@@ -100,96 +92,104 @@ class _MainAppState extends State<MainApp> {
                       subtitle: Text(
                         "Price: ${storeProduct.formattedPrice}"
                         "${entitlement.description ?? ''}"
-                        "${isActive ? '\nActive until: ${activeSubscription?.expiresAt}'
-                                  ' Auto-Renew: ${activeSubscription?.renewalStatus?.name}' : ''}",
+                        "${isActive ? '\nActive until: ${activeSubscription.expiresAt}'
+                                  ' Auto-Renew: ${activeSubscription.renewalStatus?.name}' : ''}",
                       ),
-                      trailing: !isActive || isReSubscribable || entitlement.entitlementType != EntitlementType.subscription
-                          ? FilledButton.tonal(
-                              onPressed: () async {
-                                if (kIsWeb ||
-                                    Theme.of(context).platform ==
-                                        TargetPlatform.windows ||
-                                    Theme.of(context).platform ==
-                                        TargetPlatform.linux) {
-                                  final provider = await showDialog<ExternalStore>(
-                                    context: context,
-                                    builder: (context) {
-                                      return AlertDialog(
-                                        title: Text("Choose Provide"),
-                                        content: Column(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            ListTile(
-                                              title: Text("Stripe"),
-                                              subtitle: Text(
-                                                "Debit/Credit/Paypal, international",
-                                              ),
-                                              onTap: () {
-                                                Navigator.of(
-                                                  context,
-                                                ).pop(ExternalStore.stripe);
-                                              },
-                                            ),
-                                            ListTile(
-                                              title: Text("GoCardless"),
-                                              subtitle: Text(
-                                                "Debit/Direct bank transfer, small fee",
-                                              ),
-                                              onTap: () {
-                                                Navigator.of(
-                                                  context,
-                                                ).pop(ExternalStore.gocardless);
-                                              },
-                                            ),
-                                          ],
+                      trailing: FilledButton.tonal(
+                        onPressed: () async {
+                          if (kIsWeb ||
+                              Theme.of(context).platform ==
+                                  TargetPlatform.windows ||
+                              Theme.of(context).platform ==
+                                  TargetPlatform.linux) {
+                            final provider = await showDialog<ExternalStore>(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  title: Text("Choose Provide"),
+                                  content: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      ListTile(
+                                        title: Text("Stripe"),
+                                        subtitle: Text(
+                                          "Debit/Credit/Paypal, international",
                                         ),
-                                      );
-                                    },
-                                  );
-
-                                  if (provider == null || !context.mounted) {
-                                    return;
-                                  }
-                                  if (provider == ExternalStore.stripe) {
-                                    await crosspay.purchase(
-                                      entitlement,
-                                      externalStore: ExternalStore.stripe,
-                                      redirectUrl:
-                                          "https://example.com/success",
-                                      failureRedirectUrl:
-                                          "https://example.com/failure",
-                                    );
-                                  } else {
-                                    await crosspay.purchase(
-                                      entitlement,
-                                      externalStore: ExternalStore.gocardless,
-                                      redirectUrl:
-                                          "https://example.com/success",
-                                      failureRedirectUrl:
-                                          "https://example.com/failure",
-                                    );
-                                  }
-                                } else {
-                                  await crosspay.purchase(
-                                    entitlement,
-                                    externalStore: ExternalStore.stripe,
-                                    redirectUrl: "https://example.com/success",
-                                    failureRedirectUrl:
-                                        "https://example.com/failure",
-                                  );
-                                }
+                                        onTap: () {
+                                          Navigator.of(
+                                            context,
+                                          ).pop(ExternalStore.stripe);
+                                        },
+                                      ),
+                                      ListTile(
+                                        title: Text("GoCardless"),
+                                        subtitle: Text(
+                                          "Debit/Direct bank transfer, small fee",
+                                        ),
+                                        onTap: () {
+                                          Navigator.of(
+                                            context,
+                                          ).pop(ExternalStore.gocardless);
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                );
                               },
-                              child:
-                                  entitlement.entitlementType ==
-                                      EntitlementType.subscription
-                                  ? (isReSubscribable
-                                        ? const Text("Resubscribe")
-                                        : const Text("Subscribe"))
-                                  : isActive
-                                  ? const Text("Purchase Again")
-                                  : const Text("Purchase"),
-                            )
-                          : null,
+                            );
+
+                            if (provider == null || !context.mounted) {
+                              return;
+                            }
+                            if (provider == ExternalStore.stripe) {
+                              await crosspay.purchase(
+                                entitlement,
+                                externalStore: ExternalStore.stripe,
+                                redirectUrl: "https://example.com/success",
+                                failureRedirectUrl:
+                                    "https://example.com/failure",
+                              );
+                            } else {
+                              await crosspay.purchase(
+                                entitlement,
+                                externalStore: ExternalStore.gocardless,
+                                redirectUrl: "https://example.com/success",
+                                failureRedirectUrl:
+                                    "https://example.com/failure",
+                              );
+                            }
+                          } else {
+                            await crosspay.purchase(
+                              entitlement,
+                              externalStore: ExternalStore.stripe,
+                              redirectUrl: "https://example.com/success",
+                              failureRedirectUrl: "https://example.com/failure",
+                            );
+                          }
+                        },
+                        child: switch ((
+                          isActive,
+                          activeSubscription?.renewalStatus,
+                          entitlement.entitlementType,
+                        )) {
+                          (
+                            true,
+                            SubscriptionRenewalStatus.canceled,
+                            EntitlementType.subscription,
+                          ) =>
+                            Text("Resubscribe"),
+                          (true, _, EntitlementType.subscription) => Text(
+                            "Manage Subscription",
+                          ),
+                          (true, _, != EntitlementType.subscription) => Text(
+                            "Repurchase",
+                          ),
+                          (false, _, != EntitlementType.subscription) => Text(
+                            "Purchase",
+                          ),
+                          _ => Text("Subscribe"),
+                        },
+                      ),
                     ),
                   );
                 },

@@ -127,9 +127,8 @@ _CrosspayStorableEntitlement _$CrosspayStorableEntitlementFromJson(
       productId: json['product_id'] as String,
       entitlementId: json['entitlement_id'] as String,
       expiresAt: _dateTimeFromEpoch((json['expires_at'] as num).toInt()),
-      trialExpiresAt: json['trial_expires_at'] == null
-          ? null
-          : DateTime.parse(json['trial_expires_at'] as String),
+      trialExpiresAt: _dateTimeNullableFromEpoch(
+          (json['trial_expires_at'] as num?)?.toInt()),
       store: $enumDecode(_$CrosspayStoreEnumMap, json['store']),
       status: $enumDecode(_$SubscriptionStatusEnumMap, json['status']),
       renewalStatus: $enumDecodeNullable(
@@ -146,7 +145,7 @@ Map<String, dynamic> _$CrosspayStorableEntitlementToJson(
       'product_id': instance.productId,
       'entitlement_id': instance.entitlementId,
       'expires_at': _dateTimeToEpoch(instance.expiresAt),
-      'trial_expires_at': instance.trialExpiresAt?.toIso8601String(),
+      'trial_expires_at': _dateTimeNullableToEpoch(instance.trialExpiresAt),
       'store': _$CrosspayStoreEnumMap[instance.store]!,
       'status': _$SubscriptionStatusEnumMap[instance.status]!,
       'renewal_status':
