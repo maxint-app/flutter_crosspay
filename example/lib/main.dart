@@ -77,9 +77,11 @@ class _MainAppState extends State<MainApp> {
                         (s) => s.entitlementId == entitlement.id,
                       );
                   final isActive = activeSubscription != null;
-                  final storeProduct = products.firstWhere(
+                  final storeProduct = products.firstWhereOrNull(
                     (product) =>
-                        entitlement.products[product.store]?.productId ==
+                        entitlement.products[product.store]?.qualifiedProductId(
+                          entitlement.entitlementType,
+                        ) ==
                         product.id,
                   );
                   return Card(
@@ -90,7 +92,7 @@ class _MainAppState extends State<MainApp> {
                         '${isActive ? "(active) " : ""}',
                       ),
                       subtitle: Text(
-                        "Price: ${storeProduct.formattedPrice}"
+                        "Price: ${storeProduct?.formattedPrice ?? 'N/A'}"
                         "${entitlement.description ?? ''}"
                         "${isActive ? '\nActive until: ${activeSubscription.expiresAt}'
                                   ' Auto-Renew: ${activeSubscription.renewalStatus?.name}' : ''}",

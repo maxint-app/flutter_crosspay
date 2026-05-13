@@ -71,7 +71,8 @@ class InAppPurchaseSubscriptionStore extends Store {
 
       for (final entitlement in entitlements) {
         for (var purchase in purchasesResult.pastPurchases) {
-          final productId = entitlement.products.playStore?.productId;
+          final productId = entitlement.products.playStore
+              ?.qualifiedProductId(entitlement.entitlementType);
           final isMatchingProduct = purchase.productID == productId ||
               productId?.startsWith(purchase.productID) == true;
           if (isMatchingProduct &&
@@ -91,12 +92,12 @@ class InAppPurchaseSubscriptionStore extends Store {
     final productIds = entitlements
         .map((s) {
           if (kIsAndroid) {
-            return s.products.playStore?.productId;
+            return s.products.playStore?.qualifiedProductId(s.entitlementType);
           } else if (kIsMacOS || kIsIOS) {
-            return s.products.appStore?.productId;
+            return s.products.appStore?.qualifiedProductId(s.entitlementType);
           } else {
-            return s.products.stripe?.productId ??
-                s.products.gocardless?.productId;
+            return s.products.stripe?.qualifiedProductId(s.entitlementType) ??
+                s.products.gocardless?.qualifiedProductId(s.entitlementType);
           }
         })
         .nonNulls
@@ -121,9 +122,9 @@ class InAppPurchaseSubscriptionStore extends Store {
     _storeProducts = platformProducts.map((platformProduct) {
       final entitlement = entitlements.firstWhere((e) {
         if (kIsAndroid) {
-          return e.products.playStore?.productId == platformProduct.id;
+          return e.products.playStore?.qualifiedProductId(e.entitlementType) == platformProduct.id;
         }
-        return e.products.appStore?.productId == platformProduct.id;
+        return e.products.appStore?.qualifiedProductId(e.entitlementType) == platformProduct.id;
       });
 
       return SubscriptionStoreProduct(
@@ -157,14 +158,14 @@ class InAppPurchaseSubscriptionStore extends Store {
     final platformProduct = platformProducts.firstWhere(
       (p) {
         if (kIsIOS || kIsMacOS) {
-          return p.id == entitlement.products.appStore?.id;
+          return p.id == entitlement.products.appStore?.qualifiedProductId(entitlement.entitlementType);
         }
         if (entitlement.entitlementType != EntitlementType.subscription) {
-          return p.id == entitlement.products.playStore?.productId;
+          return p.id == entitlement.products.playStore?.qualifiedProductId(entitlement.entitlementType);
         }
 
         final playStoreParts =
-            entitlement.products.playStore?.id.split(':') ?? [];
+            entitlement.products.playStore?.productId.split(':') ?? [];
         final productId =
             playStoreParts.isNotEmpty ? playStoreParts.first : null;
         final basePlanId = playStoreParts.length > 1 ? playStoreParts[1] : null;

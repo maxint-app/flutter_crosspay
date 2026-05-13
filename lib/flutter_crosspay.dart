@@ -8,6 +8,7 @@ export 'src/models/models.dart'
         CrosspayException,
         CrosspayExceptionType,
         CrosspayProduct,
+        CrosspayQualifiedProductId,
         CrosspayProducts,
         PurchaseEventType,
         PurchaseEvent,

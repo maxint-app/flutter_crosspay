@@ -108,6 +108,18 @@ sealed class CrosspayProduct with _$CrosspayProduct {
       _$CrosspayProductFromJson(json);
 }
 
+extension CrosspayQualifiedProductId on CrosspayProduct {
+  String? qualifiedProductId(EntitlementType entitlementType) {
+    if (kIsAndroid) {
+      return switch (entitlementType) {
+        EntitlementType.subscription => productId.split(":").first,
+        _ => productId,
+      };
+    }
+    return productId;
+  }
+}
+
 @freezed
 sealed class CrosspayStorableEntitlement with _$CrosspayStorableEntitlement {
   factory CrosspayStorableEntitlement({
