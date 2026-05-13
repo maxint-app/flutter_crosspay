@@ -58,6 +58,7 @@ class InAppPurchaseSubscriptionStore extends Store {
         await SKPaymentQueueWrapper().finishTransaction(transaction);
       }
     } else if (kIsAndroid) {
+      final entitlements = await listEntitlements();
       final billingClient = InAppPurchase.instance
           .getPlatformAddition<InAppPurchaseAndroidPlatformAddition>();
       final purchasesResult = await billingClient.queryPastPurchases(
@@ -68,10 +69,17 @@ class InAppPurchaseSubscriptionStore extends Store {
         throw purchasesResult.error!;
       }
 
-      for (var purchase in purchasesResult.pastPurchases) {
-        if (purchase.status == PurchaseStatus.purchased ||
-            purchase.status == PurchaseStatus.restored) {
-          await billingClient.consumePurchase(purchase);
+      for (final entitlement in entitlements) {
+        for (var purchase in purchasesResult.pastPurchases) {
+          final productId = entitlement.products.playStore?.productId;
+          final isMatchingProduct = purchase.productID == productId ||
+              productId?.startsWith(purchase.productID) == true;
+          if (isMatchingProduct &&
+              entitlement.entitlementType == EntitlementType.consumable &&
+              (purchase.status == PurchaseStatus.purchased ||
+                  purchase.status == PurchaseStatus.restored)) {
+            await billingClient.consumePurchase(purchase);
+          }
         }
       }
     }
@@ -147,9 +155,27 @@ class InAppPurchaseSubscriptionStore extends Store {
     final platformProducts = await _queryPlatformProducts(entitlements);
 
     final platformProduct = platformProducts.firstWhere(
-      (p) =>
-          p.id == entitlement.products.appStore?.id ||
-          p.id == entitlement.products.playStore?.id,
+      (p) {
+        if (kIsIOS || kIsMacOS) {
+          return p.id == entitlement.products.appStore?.id;
+        }
+        if (entitlement.entitlementType != EntitlementType.subscription) {
+          return p.id == entitlement.products.playStore?.productId;
+        }
+
+        final playStoreParts =
+            entitlement.products.playStore?.id.split(':') ?? [];
+        final productId =
+            playStoreParts.isNotEmpty ? playStoreParts.first : null;
+        final basePlanId = playStoreParts.length > 1 ? playStoreParts[1] : null;
+
+        return (p as GooglePlayProductDetails)
+                .productDetails
+                .subscriptionOfferDetails
+                ?.any((offer) =>
+                    offer.basePlanId == basePlanId && p.id == productId) ??
+            false;
+      },
       orElse: () => throw Exception('Product not found'),
     );
 
@@ -183,15 +209,14 @@ class InAppPurchaseSubscriptionStore extends Store {
         throw oldPurchaseDetails.error!;
       }
 
-      final oldPurchase = oldPurchaseDetails.pastPurchases.firstWhereOrNull(
-        (p) {
-          final activeEntitlement = activeEntitlements
-              .firstWhereOrNull((e) => e.id == entitlement.id);
+      final activeEntitlement =
+          activeEntitlements.firstWhereOrNull((e) => e.id == entitlement.id);
 
-          return p.productID == activeEntitlement?.productId &&
-              (p.status == PurchaseStatus.purchased ||
-                  p.status == PurchaseStatus.restored);
-        },
+      final oldPurchase = oldPurchaseDetails.pastPurchases.firstWhereOrNull(
+        (p) =>
+            p.productID == activeEntitlement?.productId &&
+            (p.status == PurchaseStatus.purchased ||
+                p.status == PurchaseStatus.restored),
       );
 
       if (oldPurchase != null) {
