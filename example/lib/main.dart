@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:collection/collection.dart';
 import 'package:example/env.dart';
@@ -12,7 +13,9 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   crosspay = FlutterCrosspay(
     publicKey: Env.crosspayPublicKey,
-    environment: CrosspayEnvironment.sandbox,
+    environment: !kIsWeb && Platform.isAndroid
+        ? CrosspayEnvironment.production
+        : CrosspayEnvironment.sandbox,
     baseUrl: Env.crosspayApiUrl,
   );
   runApp(const MainApp());
