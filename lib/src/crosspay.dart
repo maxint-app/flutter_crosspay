@@ -16,24 +16,20 @@ import 'package:in_app_purchase_android/billing_client_wrappers.dart';
 class CrosspayEndpoints {
   final String entitlements;
   final String identifyCustomer;
-  final String activeSubscription;
+  final String activeEntitlements;
   final String stripeListProduct;
   final String gocardlessListProduct;
   final String stripeCheckoutSession;
-  final String stripeCancelSubscription;
   final String gocardlessBillingRequestFlow;
-  final String gocardlessCancelSubscription;
   final String purchasesStream;
 
   const CrosspayEndpoints({
     required this.entitlements,
-    required this.activeSubscription,
+    required this.activeEntitlements,
     required this.stripeListProduct,
     required this.stripeCheckoutSession,
-    required this.stripeCancelSubscription,
     required this.gocardlessBillingRequestFlow,
     required this.gocardlessListProduct,
-    required this.gocardlessCancelSubscription,
     required this.purchasesStream,
     required this.identifyCustomer,
   });
@@ -177,7 +173,10 @@ class FlutterCrosspay {
   }
 
   Future<void> purchase(
-    SubscriptionStoreProduct product, {
+    CrosspayEntitlement product, {
+    CrosspayProduct? proratedProduct,
+    ProrationMode? prorationMode,
+    required ExternalStore externalStore,
     required String redirectUrl,
     required String failureRedirectUrl,
     ReplacementMode replacementMode = ReplacementMode.withTimeProration,
@@ -190,98 +189,63 @@ class FlutterCrosspay {
       return _iapStore.purchase(
         product,
         _customerEmail!,
+        proratedProduct: proratedProduct,
+        prorationMode: prorationMode,
         redirectUrl: redirectUrl,
         failureRedirectUrl: failureRedirectUrl,
         replacementMode: replacementMode,
       );
     } else {
-      return switch (product.store) {
-        SubscriptionStore.stripe ||
-        SubscriptionStore.stripeSandbox =>
-          _stripeStore.purchase(
+      return switch (externalStore) {
+        ExternalStore.stripe => _stripeStore.purchase(
             product,
             _customerEmail!,
             redirectUrl: redirectUrl,
             failureRedirectUrl: failureRedirectUrl,
             replacementMode: replacementMode,
+            proratedProduct: proratedProduct,
+            prorationMode: prorationMode,
           ),
-        SubscriptionStore.gocardless ||
-        SubscriptionStore.gocardlessSandbox =>
-          _gocardlessStore.purchase(
+        ExternalStore.gocardless => _gocardlessStore.purchase(
             product,
             _customerEmail!,
             redirectUrl: redirectUrl,
             failureRedirectUrl: failureRedirectUrl,
             replacementMode: replacementMode,
-          ),
-        _ => throw Exception(
-            "Unsupported store ${product.store} for non-mobile platforms",
+            proratedProduct: proratedProduct,
+            prorationMode: prorationMode,
           ),
       };
     }
   }
 
-  /// Get the active [StorableSubscription]
+  /// Get the active [CrosspayStorableEntitlement]
   ///
-  /// This gives the active subscription stored in DB. This is usually not used
+  /// This gives the active entitlements stored in DB. This is usually not used
   /// that much but it has receipts and expiration details.
-  Future<StorableSubscription?> getActiveSubscription() async {
+  Future<List<CrosspayStorableEntitlement>> getActiveEntitlements() async {
     assert(
       _customerEmail != null,
-      "Customer email is not set. Please call identify() to set the customer email before calling getActiveSubscription().",
+      "Customer email is not set. Please call identify() to set the customer email before calling getActiveEntitlements().",
     );
-    return _iapStore.getActiveSubscription(
+    return _iapStore.getActiveEntitlements(
         _customerEmail!); // this is a core method so same for all platforms
   }
 
   /// Get the active [SubscriptionStoreProduct]
-  Future<SubscriptionStoreProduct?> activeProduct() async {
+  Future<List<SubscriptionStoreProduct>> activeProduct() async {
     assert(
       _customerEmail != null,
       "Customer email is not set. Please call identify() to set the customer email before calling activeProduct().",
     );
 
-    return _iapStore.activeProduct(
+    return _iapStore.activeProducts(
         _customerEmail!); // this is a core method so same for all platforms
   }
 
   Future<List<CrosspayEntitlement>> listEntitlements() async {
     return _iapStore
         .listEntitlements(); // this is a core method so same for all platforms
-  }
-
-  Future<CrosspayEntitlement?> activeEntitlement() async {
-    assert(
-      _customerEmail != null,
-      "Customer email is not set. Please call identify() to set the customer email before calling activeEntitlement().",
-    );
-    return _iapStore.activeEntitlement(
-      _customerEmail!,
-    ); // this is a core method so same for all platforms
-  }
-
-  Future<void> cancelSubscription() async {
-    assert(
-      _customerEmail != null,
-      "Customer email is not set. Please call identify() to set the customer email before calling cancelSubscription().",
-    );
-    final active = await _stripeStore.getActiveSubscription(_customerEmail!);
-    if (kIsLinux ||
-        kIsWindows ||
-        kIsWeb ||
-        active?.store == SubscriptionStore.stripe ||
-        active?.store == SubscriptionStore.stripeSandbox ||
-        active?.store == SubscriptionStore.gocardless ||
-        active?.store == SubscriptionStore.gocardlessSandbox) {
-      switch (active?.store) {
-        case SubscriptionStore.stripe || SubscriptionStore.stripeSandbox:
-          await _stripeStore.cancel(_customerEmail!);
-        case SubscriptionStore.gocardless ||
-              SubscriptionStore.gocardlessSandbox:
-          await _gocardlessStore.cancel(_customerEmail!);
-        default:
-      }
-    }
   }
 
   String get appStoreManagementUrl =>

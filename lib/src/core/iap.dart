@@ -25,7 +25,7 @@ class InAppPurchaseSubscriptionStore extends Store {
     required super.environment,
   }) {
     if (kIsMobile || kIsMacOS) {
-      _finishAppStorePendingTransactions();
+      _finishPendingTransactions();
       InAppPurchase.instance.purchaseStream.listen((purchaseDetailsList) async {
         for (final purchaseDetails in purchaseDetailsList) {
           switch (purchaseDetails.status) {
@@ -51,11 +51,37 @@ class InAppPurchaseSubscriptionStore extends Store {
     }
   }
 
-  Future<void> _finishAppStorePendingTransactions() async {
+  Future<void> _finishPendingTransactions() async {
     if (kIsMacOS || kIsIOS) {
       final transactions = await SKPaymentQueueWrapper().transactions();
       for (var transaction in transactions) {
         await SKPaymentQueueWrapper().finishTransaction(transaction);
+      }
+    } else if (kIsAndroid) {
+      final entitlements = await listEntitlements();
+      final billingClient = InAppPurchase.instance
+          .getPlatformAddition<InAppPurchaseAndroidPlatformAddition>();
+      final purchasesResult = await billingClient.queryPastPurchases(
+        applicationUserName: _customerId,
+      );
+
+      if (purchasesResult.error != null) {
+        throw purchasesResult.error!;
+      }
+
+      for (final entitlement in entitlements) {
+        for (var purchase in purchasesResult.pastPurchases) {
+          final productId = entitlement.products.playStore
+              ?.qualifiedProductId(entitlement.entitlementType);
+          final isMatchingProduct = purchase.productID == productId ||
+              productId?.startsWith(purchase.productID) == true;
+          if (isMatchingProduct &&
+              entitlement.entitlementType == EntitlementType.consumable &&
+              (purchase.status == PurchaseStatus.purchased ||
+                  purchase.status == PurchaseStatus.restored)) {
+            await billingClient.consumePurchase(purchase);
+          }
+        }
       }
     }
   }
@@ -66,12 +92,12 @@ class InAppPurchaseSubscriptionStore extends Store {
     final productIds = entitlements
         .map((s) {
           if (kIsAndroid) {
-            return s.products.playStore?.productId;
+            return s.products.playStore?.qualifiedProductId(s.entitlementType);
           } else if (kIsMacOS || kIsIOS) {
-            return s.products.appStore?.productId;
+            return s.products.appStore?.qualifiedProductId(s.entitlementType);
           } else {
-            return s.products.stripe?.productId ??
-                s.products.gocardless?.productId;
+            return s.products.stripe?.qualifiedProductId(s.entitlementType) ??
+                s.products.gocardless?.qualifiedProductId(s.entitlementType);
           }
         })
         .nonNulls
@@ -96,9 +122,9 @@ class InAppPurchaseSubscriptionStore extends Store {
     _storeProducts = platformProducts.map((platformProduct) {
       final entitlement = entitlements.firstWhere((e) {
         if (kIsAndroid) {
-          return e.products.playStore?.productId == platformProduct.id;
+          return e.products.playStore?.qualifiedProductId(e.entitlementType) == platformProduct.id;
         }
-        return e.products.appStore?.productId == platformProduct.id;
+        return e.products.appStore?.qualifiedProductId(e.entitlementType) == platformProduct.id;
       });
 
       return SubscriptionStoreProduct(
@@ -109,10 +135,9 @@ class InAppPurchaseSubscriptionStore extends Store {
         description: platformProduct.description,
         formattedPrice: platformProduct.price,
         price: platformProduct.rawPrice,
-        store: kIsAndroid
-            ? SubscriptionStore.playStore
-            : SubscriptionStore.appStore,
-        subscriptionRecurrenceDays: entitlement.period.inDays,
+        store: kIsAndroid ? CrosspayStore.playStore : CrosspayStore.appStore,
+        subscriptionRecurrenceDays: entitlement.period?.inDays,
+        productType: entitlement.entitlementType,
       );
     }).toList();
 
@@ -121,8 +146,10 @@ class InAppPurchaseSubscriptionStore extends Store {
 
   @override
   Future<void> purchase(
-    SubscriptionStoreProduct product,
+    CrosspayEntitlement entitlement,
     String customerEmail, {
+    CrosspayProduct? proratedProduct,
+    ProrationMode? prorationMode,
     required String redirectUrl,
     required String failureRedirectUrl,
     ReplacementMode replacementMode = ReplacementMode.withTimeProration,
@@ -131,7 +158,27 @@ class InAppPurchaseSubscriptionStore extends Store {
     final platformProducts = await _queryPlatformProducts(entitlements);
 
     final platformProduct = platformProducts.firstWhere(
-      (p) => p.id == product.id,
+      (p) {
+        if (kIsIOS || kIsMacOS) {
+          return p.id == entitlement.products.appStore?.qualifiedProductId(entitlement.entitlementType);
+        }
+        if (entitlement.entitlementType != EntitlementType.subscription) {
+          return p.id == entitlement.products.playStore?.qualifiedProductId(entitlement.entitlementType);
+        }
+
+        final playStoreParts =
+            entitlement.products.playStore?.productId.split(':') ?? [];
+        final productId =
+            playStoreParts.isNotEmpty ? playStoreParts.first : null;
+        final basePlanId = playStoreParts.length > 1 ? playStoreParts[1] : null;
+
+        return (p as GooglePlayProductDetails)
+                .productDetails
+                .subscriptionOfferDetails
+                ?.any((offer) =>
+                    offer.basePlanId == basePlanId && p.id == productId) ??
+            false;
+      },
       orElse: () => throw Exception('Product not found'),
     );
 
@@ -140,36 +187,21 @@ class InAppPurchaseSubscriptionStore extends Store {
       applicationUserName: _customerId,
     );
 
-    final activeSubscription = await getActiveSubscription(customerEmail);
-    final isActive = const [
-          SubscriptionStatus.active,
-          SubscriptionStatus.gracePeriod,
-          SubscriptionStatus.trialing
-        ].contains(activeSubscription?.status) &&
-        activeSubscription?.renewalStatus ==
-            SubscriptionRenewalStatus.autoRenew;
+    final activeEntitlements = await getActiveEntitlements(customerEmail);
+    final isActive = activeEntitlements.any((e) =>
+        entitlement.id == e.id &&
+        (entitlement.entitlementType == EntitlementType.subscription ||
+            entitlement.entitlementType == EntitlementType.nonConsumable));
 
-    if (activeSubscription != null &&
-        activeSubscription.productId == product.id &&
-        isActive) {
+    if (isActive) {
       throw CrosspayException.alreadyActive(
-        "User is already subscribed to this product '${product.id}'. "
-        "User can not be allowed to purchase the same product again",
-      );
-    } else if (activeSubscription != null &&
-        ((kIsAndroid &&
-                activeSubscription.store != SubscriptionStore.playStore ||
-            (kIsIOS || kIsMacOS) &&
-                activeSubscription.store != SubscriptionStore.appStore)) &&
-        isActive) {
-      throw CrosspayException.crossUpgradeDowngrade(
-        "User is already subscribed this product on a different platform ${activeSubscription.store}. "
-        "User have to manage subscription on the same platform",
+        "User is already ${entitlement.entitlementType == EntitlementType.subscription ? 'subscribed to' : 'purchased'} this entitlement '${entitlement.name}'. "
+        "User can not be allowed to purchase the entitlement product again",
       );
     }
 
     /// Automatically handling Google Play Store upgrade/downgrade
-    if (kIsAndroid && activeSubscription != null) {
+    if (kIsAndroid && prorationMode != null && proratedProduct != null) {
       final billingClient = InAppPurchase.instance
           .getPlatformAddition<InAppPurchaseAndroidPlatformAddition>();
       final oldPurchaseDetails = await billingClient.queryPastPurchases(
@@ -180,9 +212,12 @@ class InAppPurchaseSubscriptionStore extends Store {
         throw oldPurchaseDetails.error!;
       }
 
+      final oldActiveEntitlement =
+          activeEntitlements.firstWhereOrNull((e) => e.productId == proratedProduct.productId);
+
       final oldPurchase = oldPurchaseDetails.pastPurchases.firstWhereOrNull(
         (p) =>
-            p.productID == activeSubscription.productId &&
+            p.productID == oldActiveEntitlement?.qualifiedProductId() &&
             (p.status == PurchaseStatus.purchased ||
                 p.status == PurchaseStatus.restored),
       );
@@ -192,16 +227,30 @@ class InAppPurchaseSubscriptionStore extends Store {
           applicationUserName: _customerId,
           productDetails: platformProduct,
           changeSubscriptionParam: ChangeSubscriptionParam(
+            replacementMode: replacementMode,
             oldPurchaseDetails: oldPurchase,
           ),
         );
 
-        await InAppPurchase.instance
-            .buyNonConsumable(purchaseParam: purchaseParam);
+        switch (entitlement.entitlementType) {
+          case EntitlementType.nonConsumable || EntitlementType.subscription:
+            await InAppPurchase.instance
+                .buyNonConsumable(purchaseParam: purchaseParam);
+          default:
+            await InAppPurchase.instance
+                .buyConsumable(purchaseParam: purchaseParam);
+        }
         return;
       }
     }
 
-    await InAppPurchase.instance.buyNonConsumable(purchaseParam: purchaseParam);
+    switch (entitlement.entitlementType) {
+      case EntitlementType.nonConsumable || EntitlementType.subscription:
+        await InAppPurchase.instance
+            .buyNonConsumable(purchaseParam: purchaseParam);
+      default:
+        await InAppPurchase.instance
+            .buyConsumable(purchaseParam: purchaseParam);
+    }
   }
 }

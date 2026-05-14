@@ -11,12 +11,10 @@ import '../models/models.dart';
 const endpoints = CrosspayEndpoints(
   identifyCustomer: "/identify",
   entitlements: "/entitlements",
-  activeSubscription: "/subscriptions/active",
+  activeEntitlements: "/entitlements/active",
   stripeListProduct: "/stripe/products",
   stripeCheckoutSession: "/stripe/checkout",
-  stripeCancelSubscription: "/stripe/cancel",
   gocardlessListProduct: "/gocardless/products",
-  gocardlessCancelSubscription: "/gocardless/cancel",
   gocardlessBillingRequestFlow: "/gocardless/billing-request-flow",
   purchasesStream: "/purchases-stream",
 );
@@ -36,9 +34,20 @@ abstract class Store {
   });
 
   Future<List<SubscriptionStoreProduct>> queryProducts();
+
+  /// Initiates a purchase flow for the given [CrosspayEntitlement]
+  ///
+  /// [entitlement] is the product the user wants to purchase. It should be one of the products returned by [queryProducts]
+  /// [customerEmail] is the email of the customer making the purchase. This is used to link the purchase to the customer in Crosspay
+  /// [proratedProduct] is the product the customer is upgrading/downgrading from. This is required for Stripe and GoCardless purchases 
+  /// [prorationMode] indicates whether the purchase is an upgrade or downgrade. This is required for Stripe and GoCardless purchases
+  /// [redirectUrl] is the URL the customer will be redirected to after a successful purchase. This is required for Stripe and GoCardless purchases
+  /// [failureRedirectUrl] is the URL the customer will be redirected to after a failed purchase. This is required for Stripe and GoCardless purchases
   Future<void> purchase(
-    SubscriptionStoreProduct product,
+    CrosspayEntitlement entitlement,
     String customerEmail, {
+    CrosspayProduct? proratedProduct,
+    ProrationMode? prorationMode,
     required String redirectUrl,
     required String failureRedirectUrl,
     ReplacementMode replacementMode = ReplacementMode.withTimeProration,
@@ -67,16 +76,16 @@ abstract class Store {
     return _entitlements!;
   }
 
-  /// Get the active [StorableSubscription]
+  /// Get the active [CrosspayStorableEntitlement]
   ///
-  /// This gives the active subscription stored in DB. This is usually not used
+  /// This gives the active entitlements stored in DB. This is usually not used
   /// that much but it has receipts and expiration details.
-  Future<StorableSubscription?> getActiveSubscription(
+  Future<List<CrosspayStorableEntitlement>> getActiveEntitlements(
     String customerEmail,
   ) async {
     try {
       final res =
-          await dio.post<Map<String, dynamic>?>(endpoints.activeSubscription,
+          await dio.post<Map<String, dynamic>?>(endpoints.activeEntitlements,
               options: Options(
                 responseType: ResponseType.json,
               ),
@@ -86,58 +95,48 @@ abstract class Store {
           });
 
       if (res.data?["data"] == null) {
-        return null;
+        return [];
       }
 
-      return StorableSubscription.fromJson(res.data?["data"]);
+      return (res.data?["data"] as List)
+          .map((d) => CrosspayStorableEntitlement.fromJson(d))
+          .toList();
     } on DioException catch (e) {
       if (e.response?.statusCode == 404) {
-        return null;
+        return [];
       }
       rethrow;
     }
   }
 
-  /// Get the active [SubscriptionStoreProduct]
+  /// Gets the active [List<SubscriptionStoreProduct>]
   ///
   /// This returns the currently active store product
   ///
   /// It'll return null even if there is an active subscription but the product
   /// is from a different store
-  Future<SubscriptionStoreProduct?> activeProduct(String customerEmail) async {
-    final subscription = await getActiveSubscription(customerEmail);
+  Future<List<SubscriptionStoreProduct>> activeProducts(
+    String customerEmail,
+  ) async {
+    final entitlements = await getActiveEntitlements(customerEmail);
 
-    if (subscription == null ||
-        const [
-          SubscriptionStatus.onHold,
-          SubscriptionStatus.expired,
-        ].contains(subscription.status)) {
-      return null;
+    final products = <SubscriptionStoreProduct>[];
+    final storeProduct = await queryProducts();
+
+    for (final entitlement in entitlements) {
+      if (const [
+        EntitlementStatus.onHold,
+        EntitlementStatus.expired,
+      ].contains(entitlement.status)) {
+        continue;
+      }
+      final product = storeProduct.firstWhereOrNull(
+        (p) => p.id == entitlement.productId && p.store == entitlement.store,
+      );
+      if (product == null) continue;
+      products.add(product);
     }
 
-    final product = await queryProducts();
-
-    return product.firstWhereOrNull(
-      (p) => p.id == subscription.productId,
-    );
-  }
-
-  Future<CrosspayEntitlement?> activeEntitlement(String customerEmail) async {
-    final subscription = await getActiveSubscription(customerEmail);
-
-    if (subscription == null ||
-        const [
-          SubscriptionStatus.onHold,
-          SubscriptionStatus.expired,
-        ].contains(subscription.status)) {
-      return null;
-    }
-
-    final entitlements = await listEntitlements();
-
-    return entitlements.firstWhereOrNull(
-      (e) =>
-          e.products[subscription.store]?.productId == subscription.productId,
-    );
+    return products;
   }
 }
