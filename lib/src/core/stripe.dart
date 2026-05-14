@@ -69,6 +69,8 @@ class StripeSubscriptionStore extends Store {
   Future<void> purchase(
     CrosspayEntitlement entitlement,
     String customerEmail, {
+    CrosspayProduct? proratedProduct,
+    ProrationMode? prorationMode,
     required String redirectUrl,
     required String failureRedirectUrl,
     ReplacementMode replacementMode = ReplacementMode.withTimeProration,
@@ -88,8 +90,6 @@ class StripeSubscriptionStore extends Store {
       );
     }
 
-    
-
     final res = await dio.post<Map>(
       "${endpoints.stripeCheckoutSession}/${environment.label}",
       data: {
@@ -97,6 +97,8 @@ class StripeSubscriptionStore extends Store {
         "customer_email": customerEmail,
         "redirect_url": redirectUrl,
         "failure_redirect_url": failureRedirectUrl,
+        "prorated_product_id": proratedProduct?.id,
+        "proration_mode": prorationMode?.name,
       },
     );
 

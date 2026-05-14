@@ -34,9 +34,20 @@ abstract class Store {
   });
 
   Future<List<SubscriptionStoreProduct>> queryProducts();
+
+  /// Initiates a purchase flow for the given [CrosspayEntitlement]
+  ///
+  /// [entitlement] is the product the user wants to purchase. It should be one of the products returned by [queryProducts]
+  /// [customerEmail] is the email of the customer making the purchase. This is used to link the purchase to the customer in Crosspay
+  /// [proratedProduct] is the product the customer is upgrading/downgrading from. This is required for Stripe and GoCardless purchases 
+  /// [prorationMode] indicates whether the purchase is an upgrade or downgrade. This is required for Stripe and GoCardless purchases
+  /// [redirectUrl] is the URL the customer will be redirected to after a successful purchase. This is required for Stripe and GoCardless purchases
+  /// [failureRedirectUrl] is the URL the customer will be redirected to after a failed purchase. This is required for Stripe and GoCardless purchases
   Future<void> purchase(
     CrosspayEntitlement entitlement,
     String customerEmail, {
+    CrosspayProduct? proratedProduct,
+    ProrationMode? prorationMode,
     required String redirectUrl,
     required String failureRedirectUrl,
     ReplacementMode replacementMode = ReplacementMode.withTimeProration,

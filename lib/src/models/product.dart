@@ -45,6 +45,11 @@ enum EntitlementType {
   subscription,
 }
 
+enum ProrationMode {
+  upgrade,
+  downgrade,
+}
+
 @freezed
 sealed class CrosspayEntitlement with _$CrosspayEntitlement {
   factory CrosspayEntitlement({
@@ -142,4 +147,16 @@ sealed class CrosspayStorableEntitlement with _$CrosspayStorableEntitlement {
 
   factory CrosspayStorableEntitlement.fromJson(Map<String, dynamic> json) =>
       _$CrosspayStorableEntitlementFromJson(json);
+}
+
+extension CrosspayStorableEntitlementQualifiedProductId on CrosspayStorableEntitlement {
+  String? qualifiedProductId() {
+    if (kIsAndroid) {
+      return switch (entitlementType) {
+        EntitlementType.subscription => productId.split(":").first,
+        _ => productId,
+      };
+    }
+    return productId;
+  }
 }

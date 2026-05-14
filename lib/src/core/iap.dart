@@ -148,6 +148,8 @@ class InAppPurchaseSubscriptionStore extends Store {
   Future<void> purchase(
     CrosspayEntitlement entitlement,
     String customerEmail, {
+    CrosspayProduct? proratedProduct,
+    ProrationMode? prorationMode,
     required String redirectUrl,
     required String failureRedirectUrl,
     ReplacementMode replacementMode = ReplacementMode.withTimeProration,
@@ -199,7 +201,7 @@ class InAppPurchaseSubscriptionStore extends Store {
     }
 
     /// Automatically handling Google Play Store upgrade/downgrade
-    if (kIsAndroid && isActive) {
+    if (kIsAndroid && prorationMode != null && proratedProduct != null) {
       final billingClient = InAppPurchase.instance
           .getPlatformAddition<InAppPurchaseAndroidPlatformAddition>();
       final oldPurchaseDetails = await billingClient.queryPastPurchases(
@@ -210,12 +212,12 @@ class InAppPurchaseSubscriptionStore extends Store {
         throw oldPurchaseDetails.error!;
       }
 
-      final activeEntitlement =
-          activeEntitlements.firstWhereOrNull((e) => e.id == entitlement.id);
+      final oldActiveEntitlement =
+          activeEntitlements.firstWhereOrNull((e) => e.productId == proratedProduct.productId);
 
       final oldPurchase = oldPurchaseDetails.pastPurchases.firstWhereOrNull(
         (p) =>
-            p.productID == activeEntitlement?.productId &&
+            p.productID == oldActiveEntitlement?.qualifiedProductId() &&
             (p.status == PurchaseStatus.purchased ||
                 p.status == PurchaseStatus.restored),
       );
@@ -225,6 +227,7 @@ class InAppPurchaseSubscriptionStore extends Store {
           applicationUserName: _customerId,
           productDetails: platformProduct,
           changeSubscriptionParam: ChangeSubscriptionParam(
+            replacementMode: replacementMode,
             oldPurchaseDetails: oldPurchase,
           ),
         );

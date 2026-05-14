@@ -102,6 +102,25 @@ class _MainAppState extends State<MainApp> {
                       ),
                       trailing: FilledButton.tonal(
                         onPressed: () async {
+                          final basicEntitlement = entitlements
+                              .firstWhereOrNull(
+                                (e) =>
+                                    e.name.toLowerCase().contains("basic") &&
+                                    e.entitlementType ==
+                                        EntitlementType.subscription,
+                              );
+                          final isUpgrade =
+                              entitlement.name.toLowerCase().contains(
+                                "standard",
+                              ) &&
+                              basicEntitlement != null &&
+                              activeEntitlements.any(
+                                (e) =>
+                                    e.entitlementId == basicEntitlement.id &&
+                                    e.renewalStatus !=
+                                        SubscriptionRenewalStatus.canceled,
+                              );
+
                           if (kIsWeb ||
                               Theme.of(context).platform ==
                                   TargetPlatform.windows ||
@@ -146,6 +165,7 @@ class _MainAppState extends State<MainApp> {
                             if (provider == null || !context.mounted) {
                               return;
                             }
+
                             if (provider == ExternalStore.stripe) {
                               await crosspay.purchase(
                                 entitlement,
@@ -153,6 +173,12 @@ class _MainAppState extends State<MainApp> {
                                 redirectUrl: "https://example.com/success",
                                 failureRedirectUrl:
                                     "https://example.com/failure",
+                                proratedProduct: isUpgrade
+                                    ? basicEntitlement.products.stripe
+                                    : null,
+                                prorationMode: isUpgrade
+                                    ? ProrationMode.upgrade
+                                    : null,
                               );
                             } else {
                               await crosspay.purchase(
@@ -161,6 +187,12 @@ class _MainAppState extends State<MainApp> {
                                 redirectUrl: "https://example.com/success",
                                 failureRedirectUrl:
                                     "https://example.com/failure",
+                                proratedProduct: isUpgrade
+                                    ? basicEntitlement.products.gocardless
+                                    : null,
+                                prorationMode: isUpgrade
+                                    ? ProrationMode.upgrade
+                                    : null,
                               );
                             }
                           } else {
@@ -169,6 +201,14 @@ class _MainAppState extends State<MainApp> {
                               externalStore: ExternalStore.stripe,
                               redirectUrl: "https://example.com/success",
                               failureRedirectUrl: "https://example.com/failure",
+                              proratedProduct: isUpgrade
+                                  ? Platform.isAndroid
+                                        ? basicEntitlement.products.playStore
+                                        : basicEntitlement.products.appStore
+                                  : null,
+                              prorationMode: isUpgrade
+                                  ? ProrationMode.upgrade
+                                  : null,
                             );
                           }
                         },

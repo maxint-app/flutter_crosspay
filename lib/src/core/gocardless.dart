@@ -69,6 +69,8 @@ class GocardlessSubscriptionStore extends Store {
   Future<void> purchase(
     CrosspayEntitlement entitlement,
     String customerEmail, {
+    CrosspayProduct? proratedProduct,
+    ProrationMode? prorationMode,
     required String redirectUrl,
     required String failureRedirectUrl,
     ReplacementMode replacementMode = ReplacementMode.withTimeProration,
@@ -94,7 +96,9 @@ class GocardlessSubscriptionStore extends Store {
         "customer_email": customerEmail,
         "product_id": entitlement.products.gocardless?.productId,
         "redirect_url": redirectUrl,
-        "failure_redirect_url": failureRedirectUrl
+        "failure_redirect_url": failureRedirectUrl,
+        "prorated_product_id": proratedProduct?.id,
+        "proration_mode": prorationMode?.name,
       },
     );
 

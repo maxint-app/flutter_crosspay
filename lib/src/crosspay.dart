@@ -174,6 +174,8 @@ class FlutterCrosspay {
 
   Future<void> purchase(
     CrosspayEntitlement product, {
+    CrosspayProduct? proratedProduct,
+    ProrationMode? prorationMode,
     required ExternalStore externalStore,
     required String redirectUrl,
     required String failureRedirectUrl,
@@ -187,6 +189,8 @@ class FlutterCrosspay {
       return _iapStore.purchase(
         product,
         _customerEmail!,
+        proratedProduct: proratedProduct,
+        prorationMode: prorationMode,
         redirectUrl: redirectUrl,
         failureRedirectUrl: failureRedirectUrl,
         replacementMode: replacementMode,
@@ -199,6 +203,8 @@ class FlutterCrosspay {
             redirectUrl: redirectUrl,
             failureRedirectUrl: failureRedirectUrl,
             replacementMode: replacementMode,
+            proratedProduct: proratedProduct,
+            prorationMode: prorationMode,
           ),
         ExternalStore.gocardless => _gocardlessStore.purchase(
             product,
@@ -206,6 +212,8 @@ class FlutterCrosspay {
             redirectUrl: redirectUrl,
             failureRedirectUrl: failureRedirectUrl,
             replacementMode: replacementMode,
+            proratedProduct: proratedProduct,
+            prorationMode: prorationMode,
           ),
       };
     }
