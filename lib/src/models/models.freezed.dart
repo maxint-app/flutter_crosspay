@@ -2021,7 +2021,7 @@ mixin _$CrosspayStorableEntitlement {
       toJson: _dateTimeNullableToEpoch)
   DateTime? get trialExpiresAt;
   CrosspayStore get store;
-  SubscriptionStatus get status;
+  EntitlementStatus get status;
   @JsonKey(name: "renewal_status")
   SubscriptionRenewalStatus? get renewalStatus;
   @JsonKey(name: "entitlement_type")
@@ -2108,7 +2108,7 @@ abstract mixin class $CrosspayStorableEntitlementCopyWith<$Res> {
           toJson: _dateTimeNullableToEpoch)
       DateTime? trialExpiresAt,
       CrosspayStore store,
-      SubscriptionStatus status,
+      EntitlementStatus status,
       @JsonKey(name: "renewal_status") SubscriptionRenewalStatus? renewalStatus,
       @JsonKey(name: "entitlement_type") EntitlementType entitlementType,
       @JsonKey(name: "purchase_state") String? purchaseState});
@@ -2166,7 +2166,7 @@ class _$CrosspayStorableEntitlementCopyWithImpl<$Res>
       status: null == status
           ? _self.status
           : status // ignore: cast_nullable_to_non_nullable
-              as SubscriptionStatus,
+              as EntitlementStatus,
       renewalStatus: freezed == renewalStatus
           ? _self.renewalStatus
           : renewalStatus // ignore: cast_nullable_to_non_nullable
@@ -2289,7 +2289,7 @@ extension CrosspayStorableEntitlementPatterns on CrosspayStorableEntitlement {
                 toJson: _dateTimeNullableToEpoch)
             DateTime? trialExpiresAt,
             CrosspayStore store,
-            SubscriptionStatus status,
+            EntitlementStatus status,
             @JsonKey(name: "renewal_status")
             SubscriptionRenewalStatus? renewalStatus,
             @JsonKey(name: "entitlement_type") EntitlementType entitlementType,
@@ -2346,7 +2346,7 @@ extension CrosspayStorableEntitlementPatterns on CrosspayStorableEntitlement {
                 toJson: _dateTimeNullableToEpoch)
             DateTime? trialExpiresAt,
             CrosspayStore store,
-            SubscriptionStatus status,
+            EntitlementStatus status,
             @JsonKey(name: "renewal_status")
             SubscriptionRenewalStatus? renewalStatus,
             @JsonKey(name: "entitlement_type") EntitlementType entitlementType,
@@ -2399,7 +2399,7 @@ extension CrosspayStorableEntitlementPatterns on CrosspayStorableEntitlement {
                 toJson: _dateTimeNullableToEpoch)
             DateTime? trialExpiresAt,
             CrosspayStore store,
-            SubscriptionStatus status,
+            EntitlementStatus status,
             @JsonKey(name: "renewal_status")
             SubscriptionRenewalStatus? renewalStatus,
             @JsonKey(name: "entitlement_type") EntitlementType entitlementType,
@@ -2474,7 +2474,7 @@ class _CrosspayStorableEntitlement implements CrosspayStorableEntitlement {
   @override
   final CrosspayStore store;
   @override
-  final SubscriptionStatus status;
+  final EntitlementStatus status;
   @override
   @JsonKey(name: "renewal_status")
   final SubscriptionRenewalStatus? renewalStatus;
@@ -2570,7 +2570,7 @@ abstract mixin class _$CrosspayStorableEntitlementCopyWith<$Res>
           toJson: _dateTimeNullableToEpoch)
       DateTime? trialExpiresAt,
       CrosspayStore store,
-      SubscriptionStatus status,
+      EntitlementStatus status,
       @JsonKey(name: "renewal_status") SubscriptionRenewalStatus? renewalStatus,
       @JsonKey(name: "entitlement_type") EntitlementType entitlementType,
       @JsonKey(name: "purchase_state") String? purchaseState});
@@ -2628,7 +2628,7 @@ class __$CrosspayStorableEntitlementCopyWithImpl<$Res>
       status: null == status
           ? _self.status
           : status // ignore: cast_nullable_to_non_nullable
-              as SubscriptionStatus,
+              as EntitlementStatus,
       renewalStatus: freezed == renewalStatus
           ? _self.renewalStatus
           : renewalStatus // ignore: cast_nullable_to_non_nullable

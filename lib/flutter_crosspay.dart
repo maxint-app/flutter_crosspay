@@ -17,7 +17,7 @@ export 'src/models/models.dart'
         SubscriptionStripeProduct,
         SubscriptionGocardlessProduct,
         SubscriptionRenewalStatus,
-        SubscriptionStatus,
+        EntitlementStatus,
         CrosspayStore,
         ExternalStore,
         EntitlementType;

@@ -114,8 +114,8 @@ abstract class Store {
 
     for (final entitlement in entitlements) {
       if (const [
-        SubscriptionStatus.onHold,
-        SubscriptionStatus.expired,
+        EntitlementStatus.onHold,
+        EntitlementStatus.expired,
       ].contains(entitlement.status)) {
         continue;
       }

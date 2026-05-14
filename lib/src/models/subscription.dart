@@ -6,14 +6,17 @@ enum SubscriptionRenewalStatus {
   canceled,
 }
 
-enum SubscriptionStatus {
+enum EntitlementStatus {
   active,
   @JsonValue('on_hold')
   onHold,
   @JsonValue('grace_period')
   gracePeriod,
   trialing,
-  expired
+  expired,
+  consumed,
+  @JsonValue('non_consumed')
+  nonConsumed
 }
 
 // int _dateToEpochSeconds(DateTime date) => date.millisecondsSinceEpoch ~/ 1000;

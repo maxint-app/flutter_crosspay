@@ -130,7 +130,7 @@ _CrosspayStorableEntitlement _$CrosspayStorableEntitlementFromJson(
       trialExpiresAt: _dateTimeNullableFromEpoch(
           (json['trial_expires_at'] as num?)?.toInt()),
       store: $enumDecode(_$CrosspayStoreEnumMap, json['store']),
-      status: $enumDecode(_$SubscriptionStatusEnumMap, json['status']),
+      status: $enumDecode(_$EntitlementStatusEnumMap, json['status']),
       renewalStatus: $enumDecodeNullable(
           _$SubscriptionRenewalStatusEnumMap, json['renewal_status']),
       entitlementType:
@@ -147,19 +147,21 @@ Map<String, dynamic> _$CrosspayStorableEntitlementToJson(
       'expires_at': _dateTimeToEpoch(instance.expiresAt),
       'trial_expires_at': _dateTimeNullableToEpoch(instance.trialExpiresAt),
       'store': _$CrosspayStoreEnumMap[instance.store]!,
-      'status': _$SubscriptionStatusEnumMap[instance.status]!,
+      'status': _$EntitlementStatusEnumMap[instance.status]!,
       'renewal_status':
           _$SubscriptionRenewalStatusEnumMap[instance.renewalStatus],
       'entitlement_type': _$EntitlementTypeEnumMap[instance.entitlementType]!,
       'purchase_state': instance.purchaseState,
     };
 
-const _$SubscriptionStatusEnumMap = {
-  SubscriptionStatus.active: 'active',
-  SubscriptionStatus.onHold: 'on_hold',
-  SubscriptionStatus.gracePeriod: 'grace_period',
-  SubscriptionStatus.trialing: 'trialing',
-  SubscriptionStatus.expired: 'expired',
+const _$EntitlementStatusEnumMap = {
+  EntitlementStatus.active: 'active',
+  EntitlementStatus.onHold: 'on_hold',
+  EntitlementStatus.gracePeriod: 'grace_period',
+  EntitlementStatus.trialing: 'trialing',
+  EntitlementStatus.expired: 'expired',
+  EntitlementStatus.consumed: 'consumed',
+  EntitlementStatus.nonConsumed: 'non_consumed',
 };
 
 const _$SubscriptionRenewalStatusEnumMap = {
