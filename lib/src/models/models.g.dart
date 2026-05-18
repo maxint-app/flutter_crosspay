@@ -58,7 +58,7 @@ _CrosspayEntitlement _$CrosspayEntitlementFromJson(Map<String, dynamic> json) =>
       name: json['name'] as String,
       period: _durationFromMillis(json['period_ms']),
       description: json['description'] as String?,
-      metadata: json['metadata'] as Map<String, dynamic>?,
+      metadata: _fromJsonMetadata(json['metadata']),
       products:
           CrosspayProducts.fromJson(json['products'] as Map<String, dynamic>),
       entitlementType:
@@ -72,7 +72,7 @@ Map<String, dynamic> _$CrosspayEntitlementToJson(
       'name': instance.name,
       'period_ms': _durationToMillis(instance.period),
       'description': instance.description,
-      'metadata': instance.metadata,
+      'metadata': _toJsonMetadata(instance.metadata),
       'products': instance.products,
       'entitlement_type': _$EntitlementTypeEnumMap[instance.entitlementType]!,
     };
@@ -108,7 +108,7 @@ _CrosspayProduct _$CrosspayProductFromJson(Map<String, dynamic> json) =>
       productId: json['product_id'] as String,
       name: json['name'] as String,
       description: json['description'] as String?,
-      metadata: json['metadata'] as Map<String, dynamic>?,
+      metadata: _fromJsonMetadata(json['metadata']),
     );
 
 Map<String, dynamic> _$CrosspayProductToJson(_CrosspayProduct instance) =>
@@ -117,7 +117,7 @@ Map<String, dynamic> _$CrosspayProductToJson(_CrosspayProduct instance) =>
       'product_id': instance.productId,
       'name': instance.name,
       'description': instance.description,
-      'metadata': instance.metadata,
+      'metadata': _toJsonMetadata(instance.metadata),
     };
 
 _CrosspayStorableEntitlement _$CrosspayStorableEntitlementFromJson(

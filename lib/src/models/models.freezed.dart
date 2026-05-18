@@ -586,6 +586,7 @@ mixin _$CrosspayEntitlement {
       toJson: _durationToMillis)
   Duration? get period;
   String? get description;
+  @JsonKey(fromJson: _fromJsonMetadata, toJson: _toJsonMetadata)
   Map<String, dynamic>? get metadata;
   CrosspayProducts get products;
   @JsonKey(name: "entitlement_type")
@@ -645,6 +646,7 @@ abstract mixin class $CrosspayEntitlementCopyWith<$Res> {
           toJson: _durationToMillis)
       Duration? period,
       String? description,
+      @JsonKey(fromJson: _fromJsonMetadata, toJson: _toJsonMetadata)
       Map<String, dynamic>? metadata,
       CrosspayProducts products,
       @JsonKey(name: "entitlement_type") EntitlementType entitlementType});
@@ -816,6 +818,7 @@ extension CrosspayEntitlementPatterns on CrosspayEntitlement {
                 toJson: _durationToMillis)
             Duration? period,
             String? description,
+            @JsonKey(fromJson: _fromJsonMetadata, toJson: _toJsonMetadata)
             Map<String, dynamic>? metadata,
             CrosspayProducts products,
             @JsonKey(name: "entitlement_type") EntitlementType entitlementType)?
@@ -856,6 +859,7 @@ extension CrosspayEntitlementPatterns on CrosspayEntitlement {
                 toJson: _durationToMillis)
             Duration? period,
             String? description,
+            @JsonKey(fromJson: _fromJsonMetadata, toJson: _toJsonMetadata)
             Map<String, dynamic>? metadata,
             CrosspayProducts products,
             @JsonKey(name: "entitlement_type") EntitlementType entitlementType)
@@ -892,6 +896,7 @@ extension CrosspayEntitlementPatterns on CrosspayEntitlement {
                 toJson: _durationToMillis)
             Duration? period,
             String? description,
+            @JsonKey(fromJson: _fromJsonMetadata, toJson: _toJsonMetadata)
             Map<String, dynamic>? metadata,
             CrosspayProducts products,
             @JsonKey(name: "entitlement_type") EntitlementType entitlementType)?
@@ -920,6 +925,7 @@ class _CrosspayEntitlement implements CrosspayEntitlement {
           toJson: _durationToMillis)
       required this.period,
       this.description,
+      @JsonKey(fromJson: _fromJsonMetadata, toJson: _toJsonMetadata)
       final Map<String, dynamic>? metadata,
       required this.products,
       @JsonKey(name: "entitlement_type") required this.entitlementType})
@@ -941,6 +947,7 @@ class _CrosspayEntitlement implements CrosspayEntitlement {
   final String? description;
   final Map<String, dynamic>? _metadata;
   @override
+  @JsonKey(fromJson: _fromJsonMetadata, toJson: _toJsonMetadata)
   Map<String, dynamic>? get metadata {
     final value = _metadata;
     if (value == null) return null;
@@ -1023,6 +1030,7 @@ abstract mixin class _$CrosspayEntitlementCopyWith<$Res>
           toJson: _durationToMillis)
       Duration? period,
       String? description,
+      @JsonKey(fromJson: _fromJsonMetadata, toJson: _toJsonMetadata)
       Map<String, dynamic>? metadata,
       CrosspayProducts products,
       @JsonKey(name: "entitlement_type") EntitlementType entitlementType});
@@ -1613,6 +1621,7 @@ mixin _$CrosspayProduct {
   String get productId;
   String get name;
   String? get description;
+  @JsonKey(fromJson: _fromJsonMetadata, toJson: _toJsonMetadata)
   Map<String, dynamic>? get metadata;
 
   /// Create a copy of CrosspayProduct
@@ -1662,6 +1671,7 @@ abstract mixin class $CrosspayProductCopyWith<$Res> {
       @JsonKey(name: "product_id") String productId,
       String name,
       String? description,
+      @JsonKey(fromJson: _fromJsonMetadata, toJson: _toJsonMetadata)
       Map<String, dynamic>? metadata});
 }
 
@@ -1800,8 +1810,13 @@ extension CrosspayProductPatterns on CrosspayProduct {
 
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(String id, @JsonKey(name: "product_id") String productId,
-            String name, String? description, Map<String, dynamic>? metadata)?
+    TResult Function(
+            String id,
+            @JsonKey(name: "product_id") String productId,
+            String name,
+            String? description,
+            @JsonKey(fromJson: _fromJsonMetadata, toJson: _toJsonMetadata)
+            Map<String, dynamic>? metadata)?
         $default, {
     required TResult orElse(),
   }) {
@@ -1830,8 +1845,13 @@ extension CrosspayProductPatterns on CrosspayProduct {
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(String id, @JsonKey(name: "product_id") String productId,
-            String name, String? description, Map<String, dynamic>? metadata)
+    TResult Function(
+            String id,
+            @JsonKey(name: "product_id") String productId,
+            String name,
+            String? description,
+            @JsonKey(fromJson: _fromJsonMetadata, toJson: _toJsonMetadata)
+            Map<String, dynamic>? metadata)
         $default,
   ) {
     final _that = this;
@@ -1856,8 +1876,13 @@ extension CrosspayProductPatterns on CrosspayProduct {
 
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(String id, @JsonKey(name: "product_id") String productId,
-            String name, String? description, Map<String, dynamic>? metadata)?
+    TResult? Function(
+            String id,
+            @JsonKey(name: "product_id") String productId,
+            String name,
+            String? description,
+            @JsonKey(fromJson: _fromJsonMetadata, toJson: _toJsonMetadata)
+            Map<String, dynamic>? metadata)?
         $default,
   ) {
     final _that = this;
@@ -1879,6 +1904,7 @@ class _CrosspayProduct implements CrosspayProduct {
       @JsonKey(name: "product_id") required this.productId,
       required this.name,
       this.description,
+      @JsonKey(fromJson: _fromJsonMetadata, toJson: _toJsonMetadata)
       final Map<String, dynamic>? metadata})
       : _metadata = metadata;
   factory _CrosspayProduct.fromJson(Map<String, dynamic> json) =>
@@ -1895,6 +1921,7 @@ class _CrosspayProduct implements CrosspayProduct {
   final String? description;
   final Map<String, dynamic>? _metadata;
   @override
+  @JsonKey(fromJson: _fromJsonMetadata, toJson: _toJsonMetadata)
   Map<String, dynamic>? get metadata {
     final value = _metadata;
     if (value == null) return null;
@@ -1956,6 +1983,7 @@ abstract mixin class _$CrosspayProductCopyWith<$Res>
       @JsonKey(name: "product_id") String productId,
       String name,
       String? description,
+      @JsonKey(fromJson: _fromJsonMetadata, toJson: _toJsonMetadata)
       Map<String, dynamic>? metadata});
 }
 
