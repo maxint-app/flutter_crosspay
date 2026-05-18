@@ -1,5 +1,7 @@
 library;
 
+import 'dart:convert';
+
 import 'package:flutter_crosspay/src/utils/platform.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 

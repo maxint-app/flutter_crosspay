@@ -50,6 +50,14 @@ enum ProrationMode {
   downgrade,
 }
 
+Map<String, dynamic> _toJsonMetadata(Map<String, dynamic>? metadata) =>
+    metadata ?? {};
+Map<String, dynamic>? _fromJsonMetadata(dynamic json) => json is String
+    ? json.isEmpty
+        ? null
+        : jsonDecode(json) as Map<String, dynamic>
+    : null;
+
 @freezed
 sealed class CrosspayEntitlement with _$CrosspayEntitlement {
   factory CrosspayEntitlement({
@@ -61,10 +69,10 @@ sealed class CrosspayEntitlement with _$CrosspayEntitlement {
         toJson: _durationToMillis)
     required Duration? period,
     String? description,
+    @JsonKey(fromJson: _fromJsonMetadata, toJson: _toJsonMetadata)
     Map<String, dynamic>? metadata,
     required CrosspayProducts products,
-    @JsonKey(name: "entitlement_type")
-    required EntitlementType entitlementType,
+    @JsonKey(name: "entitlement_type") required EntitlementType entitlementType,
   }) = _CrosspayEntitlement;
 
   factory CrosspayEntitlement.fromJson(Map<String, dynamic> json) =>
@@ -106,6 +114,7 @@ sealed class CrosspayProduct with _$CrosspayProduct {
     @JsonKey(name: "product_id") required String productId,
     required String name,
     String? description,
+    @JsonKey(fromJson: _fromJsonMetadata, toJson: _toJsonMetadata)
     Map<String, dynamic>? metadata,
   }) = _CrosspayProduct;
 
@@ -131,25 +140,30 @@ sealed class CrosspayStorableEntitlement with _$CrosspayStorableEntitlement {
     required String id,
     @JsonKey(name: "product_id") required String productId,
     @JsonKey(name: "entitlement_id") required String entitlementId,
-    @JsonKey(name: "expires_at", fromJson: _dateTimeFromEpoch, toJson: _dateTimeToEpoch)
+    @JsonKey(
+        name: "expires_at",
+        fromJson: _dateTimeFromEpoch,
+        toJson: _dateTimeToEpoch)
     required DateTime expiresAt,
-    @JsonKey(name: "trial_expires_at", fromJson: _dateTimeNullableFromEpoch, toJson: _dateTimeNullableToEpoch)
+    @JsonKey(
+        name: "trial_expires_at",
+        fromJson: _dateTimeNullableFromEpoch,
+        toJson: _dateTimeNullableToEpoch)
     DateTime? trialExpiresAt,
     required CrosspayStore store,
     required EntitlementStatus status,
     @JsonKey(name: "renewal_status")
     required SubscriptionRenewalStatus? renewalStatus,
-    @JsonKey(name: "entitlement_type")
-    required EntitlementType entitlementType,
-    @JsonKey(name: "purchase_state")
-    String? purchaseState,
+    @JsonKey(name: "entitlement_type") required EntitlementType entitlementType,
+    @JsonKey(name: "purchase_state") String? purchaseState,
   }) = _CrosspayStorableEntitlement;
 
   factory CrosspayStorableEntitlement.fromJson(Map<String, dynamic> json) =>
       _$CrosspayStorableEntitlementFromJson(json);
 }
 
-extension CrosspayStorableEntitlementQualifiedProductId on CrosspayStorableEntitlement {
+extension CrosspayStorableEntitlementQualifiedProductId
+    on CrosspayStorableEntitlement {
   String? qualifiedProductId() {
     if (kIsAndroid) {
       return switch (entitlementType) {
