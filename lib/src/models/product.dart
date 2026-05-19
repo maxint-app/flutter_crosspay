@@ -52,11 +52,26 @@ enum ProrationMode {
 
 Map<String, dynamic> _toJsonMetadata(Map<String, dynamic>? metadata) =>
     metadata ?? {};
-Map<String, dynamic>? _fromJsonMetadata(dynamic json) => json is String
-    ? json.isEmpty
-        ? null
-        : jsonDecode(json) as Map<String, dynamic>
-    : null;
+Map<String, dynamic>? _fromJsonMetadata(dynamic json) {
+  if (json is String && json.isNotEmpty) {
+    if (json == "null") {
+      return null;
+    }
+    final isRealJson =
+        json.trim().startsWith("{") || json.trim().startsWith("[");
+    if (isRealJson) {
+      return jsonDecode(json) as Map<String, dynamic>?;
+    }
+    try {
+      final decoded = utf8.decode(base64Decode(json));
+      return jsonDecode(decoded) as Map<String, dynamic>;
+    } catch (e) {
+      // If it fails to decode, return an empty map
+      return {};
+    }
+  }
+  return json as Map<String, dynamic>?;
+}
 
 @freezed
 sealed class CrosspayEntitlement with _$CrosspayEntitlement {
