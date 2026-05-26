@@ -120,6 +120,31 @@ Map<String, dynamic> _$CrosspayProductToJson(_CrosspayProduct instance) =>
       'metadata': _toJsonMetadata(instance.metadata),
     };
 
+_CrosspayPlayStorePurchasesSyncProduct
+    _$CrosspayPlayStorePurchasesSyncProductFromJson(
+            Map<String, dynamic> json) =>
+        _CrosspayPlayStorePurchasesSyncProduct(
+          id: json['id'] as String,
+          productId: json['product_id'] as String,
+          entitlementId: json['entitlement_id'] as String,
+          name: json['name'] as String,
+          description: json['description'] as String?,
+          metadata: _fromJsonMetadata(json['metadata']),
+          purchaseToken: json['purchaseToken'] as String,
+        );
+
+Map<String, dynamic> _$CrosspayPlayStorePurchasesSyncProductToJson(
+        _CrosspayPlayStorePurchasesSyncProduct instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'product_id': instance.productId,
+      'entitlement_id': instance.entitlementId,
+      'name': instance.name,
+      'description': instance.description,
+      'metadata': _toJsonMetadata(instance.metadata),
+      'purchaseToken': instance.purchaseToken,
+    };
+
 _CrosspayStorableEntitlement _$CrosspayStorableEntitlementFromJson(
         Map<String, dynamic> json) =>
     _CrosspayStorableEntitlement(

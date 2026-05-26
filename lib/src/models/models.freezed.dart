@@ -2032,6 +2032,495 @@ class __$CrosspayProductCopyWithImpl<$Res>
 }
 
 /// @nodoc
+mixin _$CrosspayPlayStorePurchasesSyncProduct {
+  String get id;
+  @JsonKey(name: "product_id")
+  String get productId;
+  @JsonKey(name: "entitlement_id")
+  String get entitlementId;
+  String get name;
+  String? get description;
+  @JsonKey(fromJson: _fromJsonMetadata, toJson: _toJsonMetadata)
+  Map<String, dynamic>? get metadata;
+  String get purchaseToken;
+
+  /// Create a copy of CrosspayPlayStorePurchasesSyncProduct
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $CrosspayPlayStorePurchasesSyncProductCopyWith<
+          CrosspayPlayStorePurchasesSyncProduct>
+      get copyWith => _$CrosspayPlayStorePurchasesSyncProductCopyWithImpl<
+              CrosspayPlayStorePurchasesSyncProduct>(
+          this as CrosspayPlayStorePurchasesSyncProduct, _$identity);
+
+  /// Serializes this CrosspayPlayStorePurchasesSyncProduct to a JSON map.
+  Map<String, dynamic> toJson();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is CrosspayPlayStorePurchasesSyncProduct &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.productId, productId) ||
+                other.productId == productId) &&
+            (identical(other.entitlementId, entitlementId) ||
+                other.entitlementId == entitlementId) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            const DeepCollectionEquality().equals(other.metadata, metadata) &&
+            (identical(other.purchaseToken, purchaseToken) ||
+                other.purchaseToken == purchaseToken));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      productId,
+      entitlementId,
+      name,
+      description,
+      const DeepCollectionEquality().hash(metadata),
+      purchaseToken);
+
+  @override
+  String toString() {
+    return 'CrosspayPlayStorePurchasesSyncProduct(id: $id, productId: $productId, entitlementId: $entitlementId, name: $name, description: $description, metadata: $metadata, purchaseToken: $purchaseToken)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $CrosspayPlayStorePurchasesSyncProductCopyWith<$Res> {
+  factory $CrosspayPlayStorePurchasesSyncProductCopyWith(
+          CrosspayPlayStorePurchasesSyncProduct value,
+          $Res Function(CrosspayPlayStorePurchasesSyncProduct) _then) =
+      _$CrosspayPlayStorePurchasesSyncProductCopyWithImpl;
+  @useResult
+  $Res call(
+      {String id,
+      @JsonKey(name: "product_id") String productId,
+      @JsonKey(name: "entitlement_id") String entitlementId,
+      String name,
+      String? description,
+      @JsonKey(fromJson: _fromJsonMetadata, toJson: _toJsonMetadata)
+      Map<String, dynamic>? metadata,
+      String purchaseToken});
+}
+
+/// @nodoc
+class _$CrosspayPlayStorePurchasesSyncProductCopyWithImpl<$Res>
+    implements $CrosspayPlayStorePurchasesSyncProductCopyWith<$Res> {
+  _$CrosspayPlayStorePurchasesSyncProductCopyWithImpl(this._self, this._then);
+
+  final CrosspayPlayStorePurchasesSyncProduct _self;
+  final $Res Function(CrosspayPlayStorePurchasesSyncProduct) _then;
+
+  /// Create a copy of CrosspayPlayStorePurchasesSyncProduct
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? productId = null,
+    Object? entitlementId = null,
+    Object? name = null,
+    Object? description = freezed,
+    Object? metadata = freezed,
+    Object? purchaseToken = null,
+  }) {
+    return _then(_self.copyWith(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      productId: null == productId
+          ? _self.productId
+          : productId // ignore: cast_nullable_to_non_nullable
+              as String,
+      entitlementId: null == entitlementId
+          ? _self.entitlementId
+          : entitlementId // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: freezed == description
+          ? _self.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      metadata: freezed == metadata
+          ? _self.metadata
+          : metadata // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+      purchaseToken: null == purchaseToken
+          ? _self.purchaseToken
+          : purchaseToken // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// Adds pattern-matching-related methods to [CrosspayPlayStorePurchasesSyncProduct].
+extension CrosspayPlayStorePurchasesSyncProductPatterns
+    on CrosspayPlayStorePurchasesSyncProduct {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_CrosspayPlayStorePurchasesSyncProduct value)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _CrosspayPlayStorePurchasesSyncProduct() when $default != null:
+        return $default(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_CrosspayPlayStorePurchasesSyncProduct value) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _CrosspayPlayStorePurchasesSyncProduct():
+        return $default(_that);
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_CrosspayPlayStorePurchasesSyncProduct value)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _CrosspayPlayStorePurchasesSyncProduct() when $default != null:
+        return $default(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            String id,
+            @JsonKey(name: "product_id") String productId,
+            @JsonKey(name: "entitlement_id") String entitlementId,
+            String name,
+            String? description,
+            @JsonKey(fromJson: _fromJsonMetadata, toJson: _toJsonMetadata)
+            Map<String, dynamic>? metadata,
+            String purchaseToken)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _CrosspayPlayStorePurchasesSyncProduct() when $default != null:
+        return $default(_that.id, _that.productId, _that.entitlementId,
+            _that.name, _that.description, _that.metadata, _that.purchaseToken);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            String id,
+            @JsonKey(name: "product_id") String productId,
+            @JsonKey(name: "entitlement_id") String entitlementId,
+            String name,
+            String? description,
+            @JsonKey(fromJson: _fromJsonMetadata, toJson: _toJsonMetadata)
+            Map<String, dynamic>? metadata,
+            String purchaseToken)
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _CrosspayPlayStorePurchasesSyncProduct():
+        return $default(_that.id, _that.productId, _that.entitlementId,
+            _that.name, _that.description, _that.metadata, _that.purchaseToken);
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(
+            String id,
+            @JsonKey(name: "product_id") String productId,
+            @JsonKey(name: "entitlement_id") String entitlementId,
+            String name,
+            String? description,
+            @JsonKey(fromJson: _fromJsonMetadata, toJson: _toJsonMetadata)
+            Map<String, dynamic>? metadata,
+            String purchaseToken)?
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _CrosspayPlayStorePurchasesSyncProduct() when $default != null:
+        return $default(_that.id, _that.productId, _that.entitlementId,
+            _that.name, _that.description, _that.metadata, _that.purchaseToken);
+      case _:
+        return null;
+    }
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _CrosspayPlayStorePurchasesSyncProduct
+    implements CrosspayPlayStorePurchasesSyncProduct {
+  _CrosspayPlayStorePurchasesSyncProduct(
+      {required this.id,
+      @JsonKey(name: "product_id") required this.productId,
+      @JsonKey(name: "entitlement_id") required this.entitlementId,
+      required this.name,
+      this.description,
+      @JsonKey(fromJson: _fromJsonMetadata, toJson: _toJsonMetadata)
+      final Map<String, dynamic>? metadata,
+      required this.purchaseToken})
+      : _metadata = metadata;
+  factory _CrosspayPlayStorePurchasesSyncProduct.fromJson(
+          Map<String, dynamic> json) =>
+      _$CrosspayPlayStorePurchasesSyncProductFromJson(json);
+
+  @override
+  final String id;
+  @override
+  @JsonKey(name: "product_id")
+  final String productId;
+  @override
+  @JsonKey(name: "entitlement_id")
+  final String entitlementId;
+  @override
+  final String name;
+  @override
+  final String? description;
+  final Map<String, dynamic>? _metadata;
+  @override
+  @JsonKey(fromJson: _fromJsonMetadata, toJson: _toJsonMetadata)
+  Map<String, dynamic>? get metadata {
+    final value = _metadata;
+    if (value == null) return null;
+    if (_metadata is EqualUnmodifiableMapView) return _metadata;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(value);
+  }
+
+  @override
+  final String purchaseToken;
+
+  /// Create a copy of CrosspayPlayStorePurchasesSyncProduct
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$CrosspayPlayStorePurchasesSyncProductCopyWith<
+          _CrosspayPlayStorePurchasesSyncProduct>
+      get copyWith => __$CrosspayPlayStorePurchasesSyncProductCopyWithImpl<
+          _CrosspayPlayStorePurchasesSyncProduct>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$CrosspayPlayStorePurchasesSyncProductToJson(
+      this,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _CrosspayPlayStorePurchasesSyncProduct &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.productId, productId) ||
+                other.productId == productId) &&
+            (identical(other.entitlementId, entitlementId) ||
+                other.entitlementId == entitlementId) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            const DeepCollectionEquality().equals(other._metadata, _metadata) &&
+            (identical(other.purchaseToken, purchaseToken) ||
+                other.purchaseToken == purchaseToken));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      productId,
+      entitlementId,
+      name,
+      description,
+      const DeepCollectionEquality().hash(_metadata),
+      purchaseToken);
+
+  @override
+  String toString() {
+    return 'CrosspayPlayStorePurchasesSyncProduct(id: $id, productId: $productId, entitlementId: $entitlementId, name: $name, description: $description, metadata: $metadata, purchaseToken: $purchaseToken)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$CrosspayPlayStorePurchasesSyncProductCopyWith<$Res>
+    implements $CrosspayPlayStorePurchasesSyncProductCopyWith<$Res> {
+  factory _$CrosspayPlayStorePurchasesSyncProductCopyWith(
+          _CrosspayPlayStorePurchasesSyncProduct value,
+          $Res Function(_CrosspayPlayStorePurchasesSyncProduct) _then) =
+      __$CrosspayPlayStorePurchasesSyncProductCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String id,
+      @JsonKey(name: "product_id") String productId,
+      @JsonKey(name: "entitlement_id") String entitlementId,
+      String name,
+      String? description,
+      @JsonKey(fromJson: _fromJsonMetadata, toJson: _toJsonMetadata)
+      Map<String, dynamic>? metadata,
+      String purchaseToken});
+}
+
+/// @nodoc
+class __$CrosspayPlayStorePurchasesSyncProductCopyWithImpl<$Res>
+    implements _$CrosspayPlayStorePurchasesSyncProductCopyWith<$Res> {
+  __$CrosspayPlayStorePurchasesSyncProductCopyWithImpl(this._self, this._then);
+
+  final _CrosspayPlayStorePurchasesSyncProduct _self;
+  final $Res Function(_CrosspayPlayStorePurchasesSyncProduct) _then;
+
+  /// Create a copy of CrosspayPlayStorePurchasesSyncProduct
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? id = null,
+    Object? productId = null,
+    Object? entitlementId = null,
+    Object? name = null,
+    Object? description = freezed,
+    Object? metadata = freezed,
+    Object? purchaseToken = null,
+  }) {
+    return _then(_CrosspayPlayStorePurchasesSyncProduct(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      productId: null == productId
+          ? _self.productId
+          : productId // ignore: cast_nullable_to_non_nullable
+              as String,
+      entitlementId: null == entitlementId
+          ? _self.entitlementId
+          : entitlementId // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: freezed == description
+          ? _self.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      metadata: freezed == metadata
+          ? _self._metadata
+          : metadata // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+      purchaseToken: null == purchaseToken
+          ? _self.purchaseToken
+          : purchaseToken // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
 mixin _$CrosspayStorableEntitlement {
   String get id;
   @JsonKey(name: "product_id")

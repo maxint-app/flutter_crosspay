@@ -138,6 +138,25 @@ sealed class CrosspayProduct with _$CrosspayProduct {
 }
 
 @freezed
+sealed class CrosspayPlayStorePurchasesSyncProduct
+    with _$CrosspayPlayStorePurchasesSyncProduct {
+  factory CrosspayPlayStorePurchasesSyncProduct({
+    required String id,
+    @JsonKey(name: "product_id") required String productId,
+    @JsonKey(name: "entitlement_id") required String entitlementId,
+    required String name,
+    String? description,
+    @JsonKey(fromJson: _fromJsonMetadata, toJson: _toJsonMetadata)
+    Map<String, dynamic>? metadata,
+    required String purchaseToken,
+  }) = _CrosspayPlayStorePurchasesSyncProduct;
+
+  factory CrosspayPlayStorePurchasesSyncProduct.fromJson(
+          Map<String, dynamic> json) =>
+      _$CrosspayPlayStorePurchasesSyncProductFromJson(json);
+}
+
+@freezed
 sealed class CrosspayStorableEntitlement with _$CrosspayStorableEntitlement {
   factory CrosspayStorableEntitlement({
     required String id,

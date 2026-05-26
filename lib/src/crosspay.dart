@@ -22,6 +22,7 @@ class CrosspayEndpoints {
   final String stripeCheckoutSession;
   final String gocardlessBillingRequestFlow;
   final String purchasesStream;
+  final String playStoreSyncPurchases;
 
   const CrosspayEndpoints({
     required this.entitlements,
@@ -32,6 +33,7 @@ class CrosspayEndpoints {
     required this.gocardlessListProduct,
     required this.purchasesStream,
     required this.identifyCustomer,
+    required this.playStoreSyncPurchases,
   });
 }
 

@@ -201,7 +201,7 @@ class InAppPurchaseSubscriptionStore extends Store {
 
     final activeEntitlements = await getActiveEntitlements(customerEmail);
 
-    /// Subscription and non-consumable products should not be allowed to be purchased 
+    /// Subscription and non-consumable products should not be allowed to be purchased
     /// if the user already has an active entitlement for that product
     final isActive = activeEntitlements.any((e) =>
         entitlement.id == e.id &&
@@ -230,14 +230,27 @@ class InAppPurchaseSubscriptionStore extends Store {
       final oldActiveEntitlement = activeEntitlements
           .firstWhereOrNull((e) => e.productId == proratedProduct.productId);
 
+      final playStoreSyncedProducts = kIsAndroid
+          ? await syncPlayStorePurchases(
+              customerEmail,
+              oldPurchaseDetails.pastPurchases,
+            )
+          : null;
+
       final oldPurchase = oldPurchaseDetails.pastPurchases.firstWhereOrNull(
         (p) {
           if (kIsAndroid) {
+            final purchaseProduct = playStoreSyncedProducts?.firstWhereOrNull(
+                (s) =>
+                    s.purchaseToken ==
+                    p.verificationData.serverVerificationData);
             final oldPlayStoreProductInfo = oldActiveEntitlement == null
                 ? null
                 : unzipPlayStoreEntitlementProductId(oldActiveEntitlement);
 
-            return p.productID == oldPlayStoreProductInfo?.productId &&
+            return purchaseProduct != null &&
+                purchaseProduct.productId ==
+                    oldPlayStoreProductInfo?.productId &&
                 (p.status == PurchaseStatus.purchased ||
                     p.status == PurchaseStatus.restored);
           }
