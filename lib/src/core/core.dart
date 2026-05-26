@@ -146,22 +146,29 @@ abstract class Store {
     String customerEmail,
     List<PurchaseDetails> purchases,
   ) async {
-    final res =
-        await dio.post<Map<String, dynamic>?>(endpoints.playStoreSyncPurchases,
-            options: Options(
-              responseType: ResponseType.json,
-            ),
-            data: {
-          "customer_email": customerEmail,
-          "past_purchases": purchases
-              .map((p) => {
-                    "product_id": p.productID,
-                    "purchase_token": p.verificationData,
-                    "purchase_id": p.purchaseID,
-                    "transaction_date": p.transactionDate,
-                  })
-              .toList(),
-        });
+    if (purchases.isEmpty) {
+      return [];
+    }
+
+    final data = {
+      "customer_email": customerEmail,
+      "past_purchases": purchases
+          .map((p) => {
+                "product_id": p.productID,
+                "purchase_token": p.verificationData.serverVerificationData,
+                "purchase_id": p.purchaseID,
+                "transaction_date": p.transactionDate,
+              })
+          .toList(),
+    };
+
+    final res = await dio.post(
+      endpoints.playStoreSyncPurchases,
+      options: Options(
+        responseType: ResponseType.json,
+      ),
+      data: data,
+    );
 
     if (res.data?["data"] == null) {
       return [];

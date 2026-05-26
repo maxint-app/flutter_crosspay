@@ -30,6 +30,7 @@ sealed class SubscriptionStoreProduct with _$SubscriptionStoreProduct {
     required int? subscriptionRecurrenceDays,
     required String accessLevel,
     required EntitlementType productType,
+    required String entitlementId,
   }) = _SubscriptionStoreProduct;
 
   factory SubscriptionStoreProduct.fromJson(Map<String, dynamic> json) =>
@@ -148,7 +149,7 @@ sealed class CrosspayPlayStorePurchasesSyncProduct
     String? description,
     @JsonKey(fromJson: _fromJsonMetadata, toJson: _toJsonMetadata)
     Map<String, dynamic>? metadata,
-    required String purchaseToken,
+    required String receipt,
   }) = _CrosspayPlayStorePurchasesSyncProduct;
 
   factory CrosspayPlayStorePurchasesSyncProduct.fromJson(

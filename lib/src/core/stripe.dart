@@ -59,6 +59,7 @@ class StripeSubscriptionStore extends Store {
         store: CrosspayStore.stripe,
         subscriptionRecurrenceDays: entitlement.period?.inDays,
         productType: entitlement.entitlementType,
+        entitlementId: entitlement.id,
       );
     }).toList();
 

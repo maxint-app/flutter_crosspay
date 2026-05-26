@@ -24,6 +24,7 @@ mixin _$SubscriptionStoreProduct {
   int? get subscriptionRecurrenceDays;
   String get accessLevel;
   EntitlementType get productType;
+  String get entitlementId;
 
   /// Create a copy of SubscriptionStoreProduct
   /// with the given fields replaced by the non-null parameter values.
@@ -58,7 +59,9 @@ mixin _$SubscriptionStoreProduct {
             (identical(other.accessLevel, accessLevel) ||
                 other.accessLevel == accessLevel) &&
             (identical(other.productType, productType) ||
-                other.productType == productType));
+                other.productType == productType) &&
+            (identical(other.entitlementId, entitlementId) ||
+                other.entitlementId == entitlementId));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -74,11 +77,12 @@ mixin _$SubscriptionStoreProduct {
       store,
       subscriptionRecurrenceDays,
       accessLevel,
-      productType);
+      productType,
+      entitlementId);
 
   @override
   String toString() {
-    return 'SubscriptionStoreProduct(id: $id, name: $name, description: $description, price: $price, formattedPrice: $formattedPrice, currencyCode: $currencyCode, store: $store, subscriptionRecurrenceDays: $subscriptionRecurrenceDays, accessLevel: $accessLevel, productType: $productType)';
+    return 'SubscriptionStoreProduct(id: $id, name: $name, description: $description, price: $price, formattedPrice: $formattedPrice, currencyCode: $currencyCode, store: $store, subscriptionRecurrenceDays: $subscriptionRecurrenceDays, accessLevel: $accessLevel, productType: $productType, entitlementId: $entitlementId)';
   }
 }
 
@@ -98,7 +102,8 @@ abstract mixin class $SubscriptionStoreProductCopyWith<$Res> {
       CrosspayStore store,
       int? subscriptionRecurrenceDays,
       String accessLevel,
-      EntitlementType productType});
+      EntitlementType productType,
+      String entitlementId});
 }
 
 /// @nodoc
@@ -124,6 +129,7 @@ class _$SubscriptionStoreProductCopyWithImpl<$Res>
     Object? subscriptionRecurrenceDays = freezed,
     Object? accessLevel = null,
     Object? productType = null,
+    Object? entitlementId = null,
   }) {
     return _then(_self.copyWith(
       id: null == id
@@ -166,6 +172,10 @@ class _$SubscriptionStoreProductCopyWithImpl<$Res>
           ? _self.productType
           : productType // ignore: cast_nullable_to_non_nullable
               as EntitlementType,
+      entitlementId: null == entitlementId
+          ? _self.entitlementId
+          : entitlementId // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -271,7 +281,8 @@ extension SubscriptionStoreProductPatterns on SubscriptionStoreProduct {
             CrosspayStore store,
             int? subscriptionRecurrenceDays,
             String accessLevel,
-            EntitlementType productType)?
+            EntitlementType productType,
+            String entitlementId)?
         $default, {
     required TResult orElse(),
   }) {
@@ -288,7 +299,8 @@ extension SubscriptionStoreProductPatterns on SubscriptionStoreProduct {
             _that.store,
             _that.subscriptionRecurrenceDays,
             _that.accessLevel,
-            _that.productType);
+            _that.productType,
+            _that.entitlementId);
       case _:
         return orElse();
     }
@@ -319,7 +331,8 @@ extension SubscriptionStoreProductPatterns on SubscriptionStoreProduct {
             CrosspayStore store,
             int? subscriptionRecurrenceDays,
             String accessLevel,
-            EntitlementType productType)
+            EntitlementType productType,
+            String entitlementId)
         $default,
   ) {
     final _that = this;
@@ -335,7 +348,8 @@ extension SubscriptionStoreProductPatterns on SubscriptionStoreProduct {
             _that.store,
             _that.subscriptionRecurrenceDays,
             _that.accessLevel,
-            _that.productType);
+            _that.productType,
+            _that.entitlementId);
     }
   }
 
@@ -363,7 +377,8 @@ extension SubscriptionStoreProductPatterns on SubscriptionStoreProduct {
             CrosspayStore store,
             int? subscriptionRecurrenceDays,
             String accessLevel,
-            EntitlementType productType)?
+            EntitlementType productType,
+            String entitlementId)?
         $default,
   ) {
     final _that = this;
@@ -379,7 +394,8 @@ extension SubscriptionStoreProductPatterns on SubscriptionStoreProduct {
             _that.store,
             _that.subscriptionRecurrenceDays,
             _that.accessLevel,
-            _that.productType);
+            _that.productType,
+            _that.entitlementId);
       case _:
         return null;
     }
@@ -399,7 +415,8 @@ class _SubscriptionStoreProduct implements SubscriptionStoreProduct {
       required this.store,
       required this.subscriptionRecurrenceDays,
       required this.accessLevel,
-      required this.productType});
+      required this.productType,
+      required this.entitlementId});
   factory _SubscriptionStoreProduct.fromJson(Map<String, dynamic> json) =>
       _$SubscriptionStoreProductFromJson(json);
 
@@ -423,6 +440,8 @@ class _SubscriptionStoreProduct implements SubscriptionStoreProduct {
   final String accessLevel;
   @override
   final EntitlementType productType;
+  @override
+  final String entitlementId;
 
   /// Create a copy of SubscriptionStoreProduct
   /// with the given fields replaced by the non-null parameter values.
@@ -462,7 +481,9 @@ class _SubscriptionStoreProduct implements SubscriptionStoreProduct {
             (identical(other.accessLevel, accessLevel) ||
                 other.accessLevel == accessLevel) &&
             (identical(other.productType, productType) ||
-                other.productType == productType));
+                other.productType == productType) &&
+            (identical(other.entitlementId, entitlementId) ||
+                other.entitlementId == entitlementId));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -478,11 +499,12 @@ class _SubscriptionStoreProduct implements SubscriptionStoreProduct {
       store,
       subscriptionRecurrenceDays,
       accessLevel,
-      productType);
+      productType,
+      entitlementId);
 
   @override
   String toString() {
-    return 'SubscriptionStoreProduct(id: $id, name: $name, description: $description, price: $price, formattedPrice: $formattedPrice, currencyCode: $currencyCode, store: $store, subscriptionRecurrenceDays: $subscriptionRecurrenceDays, accessLevel: $accessLevel, productType: $productType)';
+    return 'SubscriptionStoreProduct(id: $id, name: $name, description: $description, price: $price, formattedPrice: $formattedPrice, currencyCode: $currencyCode, store: $store, subscriptionRecurrenceDays: $subscriptionRecurrenceDays, accessLevel: $accessLevel, productType: $productType, entitlementId: $entitlementId)';
   }
 }
 
@@ -504,7 +526,8 @@ abstract mixin class _$SubscriptionStoreProductCopyWith<$Res>
       CrosspayStore store,
       int? subscriptionRecurrenceDays,
       String accessLevel,
-      EntitlementType productType});
+      EntitlementType productType,
+      String entitlementId});
 }
 
 /// @nodoc
@@ -530,6 +553,7 @@ class __$SubscriptionStoreProductCopyWithImpl<$Res>
     Object? subscriptionRecurrenceDays = freezed,
     Object? accessLevel = null,
     Object? productType = null,
+    Object? entitlementId = null,
   }) {
     return _then(_SubscriptionStoreProduct(
       id: null == id
@@ -572,6 +596,10 @@ class __$SubscriptionStoreProductCopyWithImpl<$Res>
           ? _self.productType
           : productType // ignore: cast_nullable_to_non_nullable
               as EntitlementType,
+      entitlementId: null == entitlementId
+          ? _self.entitlementId
+          : entitlementId // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -2042,7 +2070,7 @@ mixin _$CrosspayPlayStorePurchasesSyncProduct {
   String? get description;
   @JsonKey(fromJson: _fromJsonMetadata, toJson: _toJsonMetadata)
   Map<String, dynamic>? get metadata;
-  String get purchaseToken;
+  String get receipt;
 
   /// Create a copy of CrosspayPlayStorePurchasesSyncProduct
   /// with the given fields replaced by the non-null parameter values.
@@ -2071,8 +2099,7 @@ mixin _$CrosspayPlayStorePurchasesSyncProduct {
             (identical(other.description, description) ||
                 other.description == description) &&
             const DeepCollectionEquality().equals(other.metadata, metadata) &&
-            (identical(other.purchaseToken, purchaseToken) ||
-                other.purchaseToken == purchaseToken));
+            (identical(other.receipt, receipt) || other.receipt == receipt));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -2085,11 +2112,11 @@ mixin _$CrosspayPlayStorePurchasesSyncProduct {
       name,
       description,
       const DeepCollectionEquality().hash(metadata),
-      purchaseToken);
+      receipt);
 
   @override
   String toString() {
-    return 'CrosspayPlayStorePurchasesSyncProduct(id: $id, productId: $productId, entitlementId: $entitlementId, name: $name, description: $description, metadata: $metadata, purchaseToken: $purchaseToken)';
+    return 'CrosspayPlayStorePurchasesSyncProduct(id: $id, productId: $productId, entitlementId: $entitlementId, name: $name, description: $description, metadata: $metadata, receipt: $receipt)';
   }
 }
 
@@ -2108,7 +2135,7 @@ abstract mixin class $CrosspayPlayStorePurchasesSyncProductCopyWith<$Res> {
       String? description,
       @JsonKey(fromJson: _fromJsonMetadata, toJson: _toJsonMetadata)
       Map<String, dynamic>? metadata,
-      String purchaseToken});
+      String receipt});
 }
 
 /// @nodoc
@@ -2130,7 +2157,7 @@ class _$CrosspayPlayStorePurchasesSyncProductCopyWithImpl<$Res>
     Object? name = null,
     Object? description = freezed,
     Object? metadata = freezed,
-    Object? purchaseToken = null,
+    Object? receipt = null,
   }) {
     return _then(_self.copyWith(
       id: null == id
@@ -2157,9 +2184,9 @@ class _$CrosspayPlayStorePurchasesSyncProductCopyWithImpl<$Res>
           ? _self.metadata
           : metadata // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>?,
-      purchaseToken: null == purchaseToken
-          ? _self.purchaseToken
-          : purchaseToken // ignore: cast_nullable_to_non_nullable
+      receipt: null == receipt
+          ? _self.receipt
+          : receipt // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -2265,7 +2292,7 @@ extension CrosspayPlayStorePurchasesSyncProductPatterns
             String? description,
             @JsonKey(fromJson: _fromJsonMetadata, toJson: _toJsonMetadata)
             Map<String, dynamic>? metadata,
-            String purchaseToken)?
+            String receipt)?
         $default, {
     required TResult orElse(),
   }) {
@@ -2273,7 +2300,7 @@ extension CrosspayPlayStorePurchasesSyncProductPatterns
     switch (_that) {
       case _CrosspayPlayStorePurchasesSyncProduct() when $default != null:
         return $default(_that.id, _that.productId, _that.entitlementId,
-            _that.name, _that.description, _that.metadata, _that.purchaseToken);
+            _that.name, _that.description, _that.metadata, _that.receipt);
       case _:
         return orElse();
     }
@@ -2302,14 +2329,14 @@ extension CrosspayPlayStorePurchasesSyncProductPatterns
             String? description,
             @JsonKey(fromJson: _fromJsonMetadata, toJson: _toJsonMetadata)
             Map<String, dynamic>? metadata,
-            String purchaseToken)
+            String receipt)
         $default,
   ) {
     final _that = this;
     switch (_that) {
       case _CrosspayPlayStorePurchasesSyncProduct():
         return $default(_that.id, _that.productId, _that.entitlementId,
-            _that.name, _that.description, _that.metadata, _that.purchaseToken);
+            _that.name, _that.description, _that.metadata, _that.receipt);
     }
   }
 
@@ -2335,14 +2362,14 @@ extension CrosspayPlayStorePurchasesSyncProductPatterns
             String? description,
             @JsonKey(fromJson: _fromJsonMetadata, toJson: _toJsonMetadata)
             Map<String, dynamic>? metadata,
-            String purchaseToken)?
+            String receipt)?
         $default,
   ) {
     final _that = this;
     switch (_that) {
       case _CrosspayPlayStorePurchasesSyncProduct() when $default != null:
         return $default(_that.id, _that.productId, _that.entitlementId,
-            _that.name, _that.description, _that.metadata, _that.purchaseToken);
+            _that.name, _that.description, _that.metadata, _that.receipt);
       case _:
         return null;
     }
@@ -2361,7 +2388,7 @@ class _CrosspayPlayStorePurchasesSyncProduct
       this.description,
       @JsonKey(fromJson: _fromJsonMetadata, toJson: _toJsonMetadata)
       final Map<String, dynamic>? metadata,
-      required this.purchaseToken})
+      required this.receipt})
       : _metadata = metadata;
   factory _CrosspayPlayStorePurchasesSyncProduct.fromJson(
           Map<String, dynamic> json) =>
@@ -2391,7 +2418,7 @@ class _CrosspayPlayStorePurchasesSyncProduct
   }
 
   @override
-  final String purchaseToken;
+  final String receipt;
 
   /// Create a copy of CrosspayPlayStorePurchasesSyncProduct
   /// with the given fields replaced by the non-null parameter values.
@@ -2424,8 +2451,7 @@ class _CrosspayPlayStorePurchasesSyncProduct
             (identical(other.description, description) ||
                 other.description == description) &&
             const DeepCollectionEquality().equals(other._metadata, _metadata) &&
-            (identical(other.purchaseToken, purchaseToken) ||
-                other.purchaseToken == purchaseToken));
+            (identical(other.receipt, receipt) || other.receipt == receipt));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -2438,11 +2464,11 @@ class _CrosspayPlayStorePurchasesSyncProduct
       name,
       description,
       const DeepCollectionEquality().hash(_metadata),
-      purchaseToken);
+      receipt);
 
   @override
   String toString() {
-    return 'CrosspayPlayStorePurchasesSyncProduct(id: $id, productId: $productId, entitlementId: $entitlementId, name: $name, description: $description, metadata: $metadata, purchaseToken: $purchaseToken)';
+    return 'CrosspayPlayStorePurchasesSyncProduct(id: $id, productId: $productId, entitlementId: $entitlementId, name: $name, description: $description, metadata: $metadata, receipt: $receipt)';
   }
 }
 
@@ -2463,7 +2489,7 @@ abstract mixin class _$CrosspayPlayStorePurchasesSyncProductCopyWith<$Res>
       String? description,
       @JsonKey(fromJson: _fromJsonMetadata, toJson: _toJsonMetadata)
       Map<String, dynamic>? metadata,
-      String purchaseToken});
+      String receipt});
 }
 
 /// @nodoc
@@ -2485,7 +2511,7 @@ class __$CrosspayPlayStorePurchasesSyncProductCopyWithImpl<$Res>
     Object? name = null,
     Object? description = freezed,
     Object? metadata = freezed,
-    Object? purchaseToken = null,
+    Object? receipt = null,
   }) {
     return _then(_CrosspayPlayStorePurchasesSyncProduct(
       id: null == id
@@ -2512,9 +2538,9 @@ class __$CrosspayPlayStorePurchasesSyncProductCopyWithImpl<$Res>
           ? _self._metadata
           : metadata // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>?,
-      purchaseToken: null == purchaseToken
-          ? _self.purchaseToken
-          : purchaseToken // ignore: cast_nullable_to_non_nullable
+      receipt: null == receipt
+          ? _self.receipt
+          : receipt // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }

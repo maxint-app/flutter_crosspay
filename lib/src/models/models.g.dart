@@ -20,6 +20,7 @@ _SubscriptionStoreProduct _$SubscriptionStoreProductFromJson(
           (json['subscriptionRecurrenceDays'] as num?)?.toInt(),
       accessLevel: json['accessLevel'] as String,
       productType: $enumDecode(_$EntitlementTypeEnumMap, json['productType']),
+      entitlementId: json['entitlementId'] as String,
     );
 
 Map<String, dynamic> _$SubscriptionStoreProductToJson(
@@ -35,6 +36,7 @@ Map<String, dynamic> _$SubscriptionStoreProductToJson(
       'subscriptionRecurrenceDays': instance.subscriptionRecurrenceDays,
       'accessLevel': instance.accessLevel,
       'productType': _$EntitlementTypeEnumMap[instance.productType]!,
+      'entitlementId': instance.entitlementId,
     };
 
 const _$CrosspayStoreEnumMap = {
@@ -130,7 +132,7 @@ _CrosspayPlayStorePurchasesSyncProduct
           name: json['name'] as String,
           description: json['description'] as String?,
           metadata: _fromJsonMetadata(json['metadata']),
-          purchaseToken: json['purchaseToken'] as String,
+          receipt: json['receipt'] as String,
         );
 
 Map<String, dynamic> _$CrosspayPlayStorePurchasesSyncProductToJson(
@@ -142,7 +144,7 @@ Map<String, dynamic> _$CrosspayPlayStorePurchasesSyncProductToJson(
       'name': instance.name,
       'description': instance.description,
       'metadata': _toJsonMetadata(instance.metadata),
-      'purchaseToken': instance.purchaseToken,
+      'receipt': instance.receipt,
     };
 
 _CrosspayStorableEntitlement _$CrosspayStorableEntitlementFromJson(

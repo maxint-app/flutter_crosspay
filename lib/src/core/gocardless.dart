@@ -59,6 +59,7 @@ class GocardlessSubscriptionStore extends Store {
         store: CrosspayStore.gocardless,
         subscriptionRecurrenceDays: entitlement.period?.inDays,
         productType: entitlement.entitlementType,
+        entitlementId: entitlement.id,
       );
     }).toList();
 
