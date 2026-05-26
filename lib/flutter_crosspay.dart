@@ -9,8 +9,6 @@ export 'src/models/models.dart'
         CrosspayExceptionType,
         CrosspayProduct,
         ProrationMode,
-        CrosspayQualifiedProductId,
-        CrosspayStorableEntitlementQualifiedProductId,
         CrosspayProducts,
         PurchaseEventType,
         PurchaseEvent,

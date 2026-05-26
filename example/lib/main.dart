@@ -82,9 +82,7 @@ class _MainAppState extends State<MainApp> {
                   final isActive = activeSubscription != null;
                   final storeProduct = products.firstWhereOrNull(
                     (product) =>
-                        entitlement.products[product.store]?.qualifiedProductId(
-                          entitlement.entitlementType,
-                        ) ==
+                        entitlement.products[product.store]?.productId ==
                         product.id,
                   );
                   return Card(

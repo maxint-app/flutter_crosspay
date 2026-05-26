@@ -71,10 +71,8 @@ class InAppPurchaseSubscriptionStore extends Store {
 
       for (final entitlement in entitlements) {
         for (var purchase in purchasesResult.pastPurchases) {
-          final productId = entitlement.products.playStore
-              ?.qualifiedProductId(entitlement.entitlementType);
-          final isMatchingProduct = purchase.productID == productId ||
-              productId?.startsWith(purchase.productID) == true;
+          final productId = entitlement.products.playStore?.productId;
+          final isMatchingProduct = purchase.productID == productId;
           if (isMatchingProduct &&
               entitlement.entitlementType == EntitlementType.consumable &&
               (purchase.status == PurchaseStatus.purchased ||
@@ -92,12 +90,9 @@ class InAppPurchaseSubscriptionStore extends Store {
     final productIds = entitlements
         .map((s) {
           if (kIsAndroid) {
-            return s.products.playStore?.qualifiedProductId(s.entitlementType);
-          } else if (kIsMacOS || kIsIOS) {
-            return s.products.appStore?.qualifiedProductId(s.entitlementType);
+            return unzipPlayStoreProductId(s.products.playStore!).productId;
           } else {
-            return s.products.stripe?.qualifiedProductId(s.entitlementType) ??
-                s.products.gocardless?.qualifiedProductId(s.entitlementType);
+            return s.products.appStore?.productId;
           }
         })
         .nonNulls
@@ -120,15 +115,32 @@ class InAppPurchaseSubscriptionStore extends Store {
     final platformProducts = await _queryPlatformProducts(entitlements);
 
     _storeProducts = platformProducts.map((platformProduct) {
+      final basePlans = kIsAndroid
+          ? (platformProduct as GooglePlayProductDetails)
+              .productDetails
+              .subscriptionOfferDetails
+              ?.toList()
+          : null;
+
       final entitlement = entitlements.firstWhere((e) {
         if (kIsAndroid) {
-          return e.products.playStore?.qualifiedProductId(e.entitlementType) == platformProduct.id;
+          final (:productId, :basePlanId) =
+              unzipPlayStoreProductId(e.products.playStore!);
+          final matchingBasePlanAndProductId = basePlans?.any((planId) =>
+                  planId.basePlanId == basePlanId &&
+                  platformProduct.id == productId) ??
+              false;
+          return matchingBasePlanAndProductId;
         }
-        return e.products.appStore?.qualifiedProductId(e.entitlementType) == platformProduct.id;
+        return e.products.appStore?.productId == platformProduct.id;
       });
 
+      final store =
+          kIsAndroid ? CrosspayStore.playStore : CrosspayStore.appStore;
+
       return SubscriptionStoreProduct(
-        id: platformProduct.id,
+        id: entitlement.products[store]!
+            .productId, // Use the original product ID (with base plan ID for subscriptions) as the store product ID
         name: platformProduct.title,
         accessLevel: entitlement.name,
         currencyCode: platformProduct.currencyCode,
@@ -159,25 +171,25 @@ class InAppPurchaseSubscriptionStore extends Store {
 
     final platformProduct = platformProducts.firstWhere(
       (p) {
-        if (kIsIOS || kIsMacOS) {
-          return p.id == entitlement.products.appStore?.qualifiedProductId(entitlement.entitlementType);
-        }
-        if (entitlement.entitlementType != EntitlementType.subscription) {
-          return p.id == entitlement.products.playStore?.qualifiedProductId(entitlement.entitlementType);
+        final store =
+            kIsAndroid ? CrosspayStore.playStore : CrosspayStore.appStore;
+        final product = entitlement.products[store];
+
+        /// Android product ids are productId:basePlanId for subscriptions
+        /// This extracts the product id and base plan id
+        if (kIsAndroid &&
+            entitlement.entitlementType == EntitlementType.subscription) {
+          final (:productId, :basePlanId) = unzipPlayStoreProductId(product!);
+
+          return (p as GooglePlayProductDetails)
+                  .productDetails
+                  .subscriptionOfferDetails
+                  ?.any((offer) =>
+                      offer.basePlanId == basePlanId && p.id == productId) ??
+              false;
         }
 
-        final playStoreParts =
-            entitlement.products.playStore?.productId.split(':') ?? [];
-        final productId =
-            playStoreParts.isNotEmpty ? playStoreParts.first : null;
-        final basePlanId = playStoreParts.length > 1 ? playStoreParts[1] : null;
-
-        return (p as GooglePlayProductDetails)
-                .productDetails
-                .subscriptionOfferDetails
-                ?.any((offer) =>
-                    offer.basePlanId == basePlanId && p.id == productId) ??
-            false;
+        return p.id == product?.productId;
       },
       orElse: () => throw Exception('Product not found'),
     );
@@ -188,6 +200,9 @@ class InAppPurchaseSubscriptionStore extends Store {
     );
 
     final activeEntitlements = await getActiveEntitlements(customerEmail);
+
+    /// Subscription and non-consumable products should not be allowed to be purchased 
+    /// if the user already has an active entitlement for that product
     final isActive = activeEntitlements.any((e) =>
         entitlement.id == e.id &&
         (entitlement.entitlementType == EntitlementType.subscription ||
@@ -200,7 +215,7 @@ class InAppPurchaseSubscriptionStore extends Store {
       );
     }
 
-    /// Automatically handling Google Play Store upgrade/downgrade
+    /// Handling Google Play Store upgrade/downgrade
     if (kIsAndroid && prorationMode != null && proratedProduct != null) {
       final billingClient = InAppPurchase.instance
           .getPlatformAddition<InAppPurchaseAndroidPlatformAddition>();
@@ -212,14 +227,25 @@ class InAppPurchaseSubscriptionStore extends Store {
         throw oldPurchaseDetails.error!;
       }
 
-      final oldActiveEntitlement =
-          activeEntitlements.firstWhereOrNull((e) => e.productId == proratedProduct.productId);
+      final oldActiveEntitlement = activeEntitlements
+          .firstWhereOrNull((e) => e.productId == proratedProduct.productId);
 
       final oldPurchase = oldPurchaseDetails.pastPurchases.firstWhereOrNull(
-        (p) =>
-            p.productID == oldActiveEntitlement?.qualifiedProductId() &&
-            (p.status == PurchaseStatus.purchased ||
-                p.status == PurchaseStatus.restored),
+        (p) {
+          if (kIsAndroid) {
+            final oldPlayStoreProductInfo = oldActiveEntitlement == null
+                ? null
+                : unzipPlayStoreEntitlementProductId(oldActiveEntitlement);
+
+            return p.productID == oldPlayStoreProductInfo?.productId &&
+                (p.status == PurchaseStatus.purchased ||
+                    p.status == PurchaseStatus.restored);
+          }
+
+          return p.productID == oldActiveEntitlement?.productId &&
+              (p.status == PurchaseStatus.purchased ||
+                  p.status == PurchaseStatus.restored);
+        },
       );
 
       if (oldPurchase != null) {

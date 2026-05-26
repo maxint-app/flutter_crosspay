@@ -137,18 +137,6 @@ sealed class CrosspayProduct with _$CrosspayProduct {
       _$CrosspayProductFromJson(json);
 }
 
-extension CrosspayQualifiedProductId on CrosspayProduct {
-  String? qualifiedProductId(EntitlementType entitlementType) {
-    if (kIsAndroid) {
-      return switch (entitlementType) {
-        EntitlementType.subscription => productId.split(":").first,
-        _ => productId,
-      };
-    }
-    return productId;
-  }
-}
-
 @freezed
 sealed class CrosspayStorableEntitlement with _$CrosspayStorableEntitlement {
   factory CrosspayStorableEntitlement({
@@ -177,15 +165,22 @@ sealed class CrosspayStorableEntitlement with _$CrosspayStorableEntitlement {
       _$CrosspayStorableEntitlementFromJson(json);
 }
 
-extension CrosspayStorableEntitlementQualifiedProductId
-    on CrosspayStorableEntitlement {
-  String? qualifiedProductId() {
-    if (kIsAndroid) {
-      return switch (entitlementType) {
-        EntitlementType.subscription => productId.split(":").first,
-        _ => productId,
-      };
-    }
-    return productId;
+({String productId, String basePlanId}) unzipPlayStoreProductId(
+  CrosspayProduct product,
+) {
+  final parts = product.productId.split(':');
+  if (parts.length == 2) {
+    return (productId: parts[0], basePlanId: parts[1]);
   }
+  return (productId: product.productId, basePlanId: '');
+}
+
+({String productId, String basePlanId}) unzipPlayStoreEntitlementProductId(
+  CrosspayStorableEntitlement product,
+) {
+  final parts = product.productId.split(':');
+  if (parts.length == 2) {
+    return (productId: parts[0], basePlanId: parts[1]);
+  }
+  return (productId: product.productId, basePlanId: '');
 }
